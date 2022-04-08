@@ -45,6 +45,9 @@
     5 - Ajustes no menu Empresas                                    --OK--
 
 //07/04/22
+    1 - Git engine                                                  --OK--
+        =>Criação de token                                          --Ok--
+        =>Configuração de credenciais do windows                    --OK--
 --Começar com session e passport...
 
 --Ver SubtleCrypto--
