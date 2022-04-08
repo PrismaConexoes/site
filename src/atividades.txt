@@ -1,0 +1,56 @@
+=> 23/03/22
+    1-Definição das principais tecnologias adotadas                 --OK--
+        => install express                                          --OK--
+        => install express-hadlebars                                --OK--
+        => install bootstrap                                        --OK--
+        => install express-session                                  --OK--
+        => install body-parser                                      --OK--
+        => install cookie-parser                                    --OK--
+        => install passport                                         --OK--
+        => install pg                                               --OK--
+        =>Estabelecimento de conexão com ElehantSQL                 --OK-- 
+        => install typeorm                                          --OK--
+        => install reflect-metadata                                 --OK--
+        => install @types/node --save-dev                           --OK--
+    2-Configuração da view engine com handlebars                    --OK--
+    3-Produção do main template com handlebars                      --OK--
+    4-Criação da rota principal(Acessando template principal)       --OK--
+
+//24/03/22
+    1 - Criar formulario e testar com wireshark()                   --Pendente--
+    2 - Configuração dos diretórios do handlebars                   --OK--
+        => Produção de templates em forma de partials               --OK--
+    3 - Configuração do diretório de arquivos públicos              --OK--
+    4 - Configuração do bootstrap local                             --OK--
+    5 - Criação de arquivo css externo                              --OK--
+
+//25/03/22
+    1 - Produção de template da barra de navegação                  --OK--
+        =>Ajustes na barra de navegação                             --OK--
+        =>Escrita da função para fixar e desafixar NavBar           --OK--
+
+//26/03/22
+    1 - Template footer                                             --OK--
+    2 - Ajustes no template                                         --OK--
+
+//03/04/22
+    1 - Ajustes no template                                         --OK--
+//04/04/22
+    1 - Codificação do rodapé                                       --OK--
+    2 - Criação dos links de contato                                --OK--
+
+//06/04/22
+    3 - Tornar rodapé responsívo                                    --OK--
+    4 - Montagem das paginas de cada empresa                        --OK--
+    5 - Ajustes no menu Empresas                                    --OK--
+
+//07/04/22
+--Começar com session e passport...
+
+--Ver SubtleCrypto--
+--ver typograph para textos e fontes--
+--Ver Off Canvas--
+--Ver Modal Dialog--
+--Ver Collapse--
+--Ver Toast--
+--Ver Ratio-- Inserir videos e quem sabe outros elementos externos

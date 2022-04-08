@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prisma Soluções</title>
+    <link href="styles/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="styles/styles_one.css" type="text/css" rel="stylesheet"/>
+
+</head>
+<body>
+    <div class="container-fluid">
+        {{{body}}}
+    </div>
+    <script>
+    setInterval(navFix, 250);
+
+    let barra = document.querySelector("#barraNav")
+    var fixed = false
+    function navFix(){
+        let top = window.scrollY
+        if(top >= 120 && !fixed){
+            barra.classList.add("fixed-top")
+            fixed = true   
+        }else if(top < 120 && fixed){
+            barra.classList.remove("fixed-top")
+            fixed = false
+        }
+    }
+    </script>
+    <script src="styles/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

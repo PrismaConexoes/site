@@ -1,0 +1,12 @@
+<div class="content-fluid m-5">
+  <nav style="--bs-breadcrumb-divider: '->';" aria-label="breadcrumb">
+    
+    <ol class="breadcrumb">
+      <li>VOCÊ ESTÁ AQUI: &NonBreakingSpace; </li>
+      {{#each caminho.visitadas}}
+      <li class="breadcrumb-item"><a href="{{link}}">{{pagina}}</a></li>
+      {{/each}}
+      <li class="breadcrumb-item active" aria-current="page">{{caminho.atual}}</li>
+    </ol>
+  </nav>
+</div>
