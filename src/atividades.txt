@@ -48,6 +48,19 @@
     1 - Git engine                                                  --OK--
         =>Criação de token                                          --Ok--
         =>Configuração de credenciais do windows                    --OK--
+//25/04/22
+    1 -> Estudo acerca do certificado ssl                           --Parcial--
+    2 -> Obtenção de certificado ssl de teste                       --OK--
+
+//26/04/22
+    1 -> Instalação do fs para acesso a arquivos                    --OK--
+    2 -> Instalação do https para servidor seguro                   --OK--
+        =>Configuração do certificado ssl/tsl de teste              --OK--
+        
+
+
+
+--Configurar requisição https-- 
 --Começar com session e passport...
 
 --Ver SubtleCrypto--

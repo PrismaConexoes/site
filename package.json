@@ -16,6 +16,8 @@
         "express": "^4.17.2",
         "express-handlebars": "^6.0.3",
         "express-session": "^1.17.2",
+        "fs": "0.0.1-security",
+        "https": "^1.0.0",
         "nodemon": "^2.0.15",
         "passport": "^0.5.2",
         "pg": "^8.4.0",

@@ -8,6 +8,9 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
+    const https = require('https')
+    const fs = require('fs')
+
     //Configuração do body-parser
     const bp = require('body-parser')
     app.use(bp.json())
@@ -21,7 +24,6 @@ AppDataSource.initialize().then(async () => {
 
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
-
 
     //Rotas
     //Rota Prisma
@@ -66,12 +68,17 @@ AppDataSource.initialize().then(async () => {
         res.render("next.hbs")
     })
 
-
+    //Configurando servidor Https
+    //OBS: Ler certificado e chave em utf8 para funcionar corretamente
+    let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
+    let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
+    let credential = {key: certKey, cert: certificate}
+    const httpsServer = https.createServer(credential, app);
 
     // start express server
     const PORT = process.env.PORT || 3000
-    app.listen(PORT, () => {
-      console.log('Server online')
+    httpsServer.listen(PORT, () => {
+      console.log('Servidor Online')
     })
 
     /**  insert new users for test
@@ -91,7 +98,7 @@ AppDataSource.initialize().then(async () => {
         })
     )*/
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
+    
 
 }).catch(error => console.log(error))
 
