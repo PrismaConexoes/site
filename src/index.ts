@@ -29,10 +29,8 @@ AppDataSource.initialize().then(async () => {
     app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele
         
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
-            console.log('entrou1')
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
         }else{ //Se a requisição não for segura (é HTTP)
-            console.log('entrou2')
             res.redirect(`https://${req.hostname}${req.url}`); //Redireciona a requisição para o mesmo host e url mas com HTTPS e termina a request
         }
     });
