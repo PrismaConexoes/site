@@ -25,6 +25,18 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
+
+    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele
+        
+        if (req.secure){ //Se a requisição feita é segura (é HTTPS)
+            console.log('entrou1')
+            next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
+        }else{ //Se a requisição não for segura (é HTTP)
+            console.log('entrou2')
+            res.redirect(`https://${req.hostname}${req.url}`); //Redireciona a requisição para o mesmo host e url mas com HTTPS e termina a request
+        }
+    });
+
     //Rotas
     //Rota Prisma
     app.get('/', (req, res) => {
@@ -74,12 +86,18 @@ AppDataSource.initialize().then(async () => {
     let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
     let credential = {key: certKey, cert: certificate}
     const httpsServer = https.createServer(credential, app);
+        
+    const PORT1 = process.env.PORT1 || 3000
+    app.listen(PORT1, () => {
+        console.log('Servidor Http Online')});
 
     // start express server
-    const PORT = process.env.PORT || 3000
+    const PORT = process.env.PORT || 443
     httpsServer.listen(PORT, () => {
-      console.log('Servidor Online')
-    })
+      console.log('Servidor Https Online')
+    });
+
+
 
     /**  insert new users for test
     await AppDataSource.manager.save(
