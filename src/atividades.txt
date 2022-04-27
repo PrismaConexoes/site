@@ -57,6 +57,9 @@
     2 -> Instalação do https para servidor seguro                   --OK--
         =>Configuração do certificado ssl/tsl de teste              --OK--
         =>Funcionamento https herokuApp certificado Automático      --OK--
+    3 -> Redirecionamento http para https                           --OK--
+    4 -> Template tela de login                                     --Parcial--
+    5 -> Template tela de Cadastro                                  --Parcial--
 
 
 
@@ -64,7 +67,6 @@
 
 
 
---Configurar requisição https-- 
 --Começar com session e passport...
 
 --Ver SubtleCrypto--

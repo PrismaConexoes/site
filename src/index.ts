@@ -26,12 +26,11 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
 
-    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele
-        
+    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
-        }else{ //Se a requisição não for segura (é HTTP)
-            res.redirect(`https://${req.hostname}${req.url}`); //Redireciona a requisição para o mesmo host e url mas com HTTPS e termina a request
+        }else{ 
+            res.redirect(`https://${req.hostname}${req.url}`); 
         }
     });
 
@@ -77,6 +76,16 @@ AppDataSource.initialize().then(async () => {
 
         res.render("next.hbs")
     })
+    //Rota Login
+    app.get('/login', (req, res) => {
+
+        res.render("login.hbs")
+    })
+    //Rota Cadastrar
+    app.get('/cadastrar', (req, res) => {
+
+        res.render("cadastrar.hbs")
+    })
 
     //Configurando servidor Https
     //OBS: Ler certificado e chave em utf8 para funcionar corretamente
@@ -97,16 +106,18 @@ AppDataSource.initialize().then(async () => {
 
 
 
-    /**  insert new users for test
+    /** insert new users for test
     await AppDataSource.manager.save(
         AppDataSource.manager.create(Userr, {
             firstName: "Eduardo",
             lastName: "Proto",
-            age: 27
+            age: 27,
+            email: "silvaproto@yahoo.com.br",
+            password: "thururu"
         })
     )
 
-    await AppDataSource.manager.save(
+   await AppDataSource.manager.save(
         AppDataSource.manager.create(Userr, {
             firstName: "Phantom",
             lastName: "Assassin",
