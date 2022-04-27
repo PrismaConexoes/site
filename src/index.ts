@@ -100,8 +100,8 @@ AppDataSource.initialize().then(async () => {
         console.log('Servidor Http Online')});
     
     // start express server
-    PORT = process.env.PORT || 443
-    httpsServer.listen(PORT, () => {
+    let PORT1 = process.env.PORT || 443
+    httpsServer.listen(PORT1, () => {
       console.log('Servidor Https Online')
     });
 
