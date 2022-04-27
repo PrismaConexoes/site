@@ -92,15 +92,17 @@ AppDataSource.initialize().then(async () => {
     let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
     let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
     let credential = {key: certKey, cert: certificate}
-    const httpsServer = https.createServer(credential, app);
+    
     
         
-    let PORT = process.env.PORT || 3000
+    let PORT = process.env.PORT || 80
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
     
+    
     // start express server
-    let PORT1 = process.env.PORT || 7700
+    const httpsServer = https.createServer(credential, app);
+    let PORT1 = process.env.PORT || 443
     httpsServer.listen(PORT1, () => {
       console.log('Servidor Https Online')
     });
