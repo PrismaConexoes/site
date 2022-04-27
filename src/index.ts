@@ -101,9 +101,9 @@ AppDataSource.initialize().then(async () => {
     */
     
     // start express server
-    const httpsServer = https.createServer(credential, app);
-    let PORT1 = process.env.PORT || 443
-    httpsServer.listen(PORT1, () => {
+    https.createServer(credential, app);
+    let PORT = process.env.PORT || 443
+    app.listen(PORT, () => {
       console.log('Servidor Https Online')
     });
 
