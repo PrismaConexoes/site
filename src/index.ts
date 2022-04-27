@@ -8,7 +8,7 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
-    const sslRedirect = require('heroku-ssl-redirect');
+    let sslRedirect = require('heroku-ssl-redirect');
     const https = require('https')
     const fs = require('fs')
 
@@ -26,7 +26,7 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-    app.use(sslRedirect)
+    
     /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
@@ -34,6 +34,23 @@ AppDataSource.initialize().then(async () => {
             res.redirect(`https://${req.hostname}${req.url}`); 
         }
     });*/
+    app.use((environments, status) => {
+        environments = environments || ['production'];
+        status = status || 302;
+        return function(req, res, next) {
+          if (environments.indexOf(process.env.NODE_ENV) >= 0) {
+            if (req.headers['x-forwarded-proto'] != 'https') {
+              res.redirect(status, 'https://' + req.hostname + req.originalUrl);
+            }
+            else {
+              next();
+            }
+          }
+          else {
+            next();
+          }
+        };
+      })
 
     //Rotas
     //Rota Prisma
@@ -96,14 +113,14 @@ AppDataSource.initialize().then(async () => {
     
     
         
-    let PORT = process.env.PORT || 80
+    let PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
     
     
     // start express server
     let secureServer = https.createServer(credential, app);
-    let PORT1 = process.env.PORT || 443
+    let PORT1 = process.env.PORT || 7700
     secureServer.listen(PORT1, () => {
       console.log('Servidor Https Online')
     });
