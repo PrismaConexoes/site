@@ -94,10 +94,10 @@ AppDataSource.initialize().then(async () => {
     let credential = {key: certKey, cert: certificate}
     const httpsServer = https.createServer(credential, app);
         
-    const PORT1 = process.env.PORT1 || 3000
+    /**const PORT1 = process.env.PORT1 || 3000
     app.listen(PORT1, () => {
         console.log('Servidor Http Online')});
-
+    */
     // start express server
     const PORT = process.env.PORT || 443
     httpsServer.listen(PORT, () => {
@@ -106,7 +106,7 @@ AppDataSource.initialize().then(async () => {
 
 
 
-    
+
     /** insert new users for test
     await AppDataSource.manager.save(
         AppDataSource.manager.create(Userr, {
