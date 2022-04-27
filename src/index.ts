@@ -26,13 +26,13 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
 
-    /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
+    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
         }else{ 
             res.redirect(`https://${req.hostname}${req.url}`); 
         }
-    });*/
+    });
 
     //Rotas
     //Rota Prisma
