@@ -68,11 +68,13 @@ AppDataSource.initialize().then(async () => {
 
         res.render("next.hbs")
     })
+
     //Rota Login
     app.get('/login', (req, res) => {
 
         res.render("login.hbs")
     })
+    
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
 
