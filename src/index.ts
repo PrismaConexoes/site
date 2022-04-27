@@ -27,30 +27,14 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
     
-    /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
+    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
         }else{ 
             res.redirect(`https://${req.hostname}${req.url}`); 
         }
-    });*/
-    app.use((environments, status) => {
-        environments = environments || ['production'];
-        status = status || 302;
-        return function(req, res, next) {
-          if (environments.indexOf(process.env.NODE_ENV) >= 0) {
-            if (req.headers['x-forwarded-proto'] != 'https') {
-              res.redirect(status, 'https://' + req.hostname + req.originalUrl);
-            }
-            else {
-              next();
-            }
-          }
-          else {
-            next();
-          }
-        };
-      })
+    });
+
 
     //Rotas
     //Rota Prisma
@@ -115,6 +99,7 @@ AppDataSource.initialize().then(async () => {
         
     let PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
+        sslRedirect()
         console.log('Servidor Http Online')});
     
     
