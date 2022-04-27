@@ -8,6 +8,7 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
+    const sslRedirect = require('heroku-ssl-redirect');
     const https = require('https')
     const fs = require('fs')
 
@@ -25,7 +26,7 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-
+    app.use(sslRedirect)
     /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado

@@ -61,6 +61,9 @@
     4 -> Template tela de login                                     --Parcial--
     5 -> Template tela de Cadastro                                  --Parcial--
 
+//27/04/22
+    1 -> Estudo para correção do redirecionamento https heroku      --
+
 
 
         
