@@ -26,13 +26,13 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
 
-    /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
+    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
         }else{ 
             res.redirect(`https://${req.hostname}${req.url}`); 
         }
-    });*/
+    });
 
     //Rotas
     //Rota Prisma
@@ -89,21 +89,21 @@ AppDataSource.initialize().then(async () => {
 
     //Configurando servidor Https
     //OBS: Ler certificado e chave em utf8 para funcionar corretamente
-    /**let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
+    let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
     let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
     let credential = {key: certKey, cert: certificate}
     const httpsServer = https.createServer(credential, app);
-    */
+    
         
-    const PORT = process.env.PORT || 3000
+    let PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
     
     // start express server
-    /**const PORT = process.env.PORT || 443
+    PORT = process.env.PORT || 443
     httpsServer.listen(PORT, () => {
       console.log('Servidor Https Online')
-    });*/
+    });
 
 
 
