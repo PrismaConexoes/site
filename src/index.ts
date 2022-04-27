@@ -96,15 +96,15 @@ AppDataSource.initialize().then(async () => {
     
     
         
-    /**let PORT = process.env.PORT || 80
+    let PORT = process.env.PORT || 80
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
-    */
+    
     
     // start express server
-    https.createServer(credential, app);
-    let PORT = process.env.PORT || 443
-    app.listen(PORT, () => {
+    let secureServer = https.createServer(credential, app);
+    let PORT1 = process.env.PORT || 443
+    secureServer.listen(PORT1, () => {
       console.log('Servidor Https Online')
     });
 
