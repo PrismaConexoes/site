@@ -8,9 +8,9 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
+    //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
-    const https = require('https')
-    const fs = require('fs')
+    app.use(sslRedirect())
 
     //Configuração do body-parser
     const bp = require('body-parser')
@@ -25,17 +25,6 @@ AppDataSource.initialize().then(async () => {
 
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
-
-    
-    app.use(sslRedirect())
-    /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
-        if (req.secure){ //Se a requisição feita é segura (é HTTPS)
-            next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
-        }else{ 
-            res.redirect(`https://${req.hostname}${req.url}`); 
-        }
-    });*/
-
 
     //Rotas
     //Rota Prisma
@@ -90,27 +79,10 @@ AppDataSource.initialize().then(async () => {
         res.render("cadastrar.hbs")
     })
 
-    //Configurando servidor Https
-    //OBS: Ler certificado e chave em utf8 para funcionar corretamente
-    /**let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
-    let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
-    let credential = {key: certKey, cert: certificate}
-    https.createServer(credential, app); //heroku reconhece automaticamente https em app
-    */
         
-    let PORT = process.env.PORT || 3000
+    const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
-    
-    
-    // start express server
-    
-    /**let PORT1 = process.env.PORT || 7700
-    secureServer.listen(PORT1, () => {
-      console.log('Servidor Https Online')
-    });*/
-
-
 
 
     /** insert new users for test

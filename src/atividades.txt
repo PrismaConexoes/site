@@ -17,7 +17,7 @@
     4-Criação da rota principal(Acessando template principal)       --OK--
 
 //24/03/22
-    1 - Criar formulario e testar com wireshark()                   --Pendente--
+    1 - Criar formulario e testar com wireshark()                   --Desnecessário--
     2 - Configuração dos diretórios do handlebars                   --OK--
         => Produção de templates em forma de partials               --OK--
     3 - Configuração do diretório de arquivos públicos              --OK--
@@ -49,7 +49,7 @@
         =>Criação de token                                          --Ok--
         =>Configuração de credenciais do windows                    --OK--
 //25/04/22
-    1 -> Estudo acerca do certificado ssl                           --Parcial--
+    1 -> Estudo acerca do certificado ssl                           --OK--
     2 -> Obtenção de certificado ssl de teste                       --OK--
 
 //26/04/22
@@ -62,7 +62,8 @@
     5 -> Template tela de Cadastro                                  --Parcial--
 
 //27/04/22
-    1 -> Estudo para correção do redirecionamento https heroku      --
+    1 -> Estudo para correção do redirecionamento https heroku      --OK--
+        Implementação de redirecionamento https heroku              --OK--
 
 
 
