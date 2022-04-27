@@ -8,7 +8,7 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
-    let sslRedirect = require('heroku-ssl-redirect');
+    const sslRedirect = require('heroku-ssl-redirect').default;
     const https = require('https')
     const fs = require('fs')
 
@@ -27,13 +27,14 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
     
-    app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
+    app.use(sslRedirect())
+    /**app.use((req, res, next) => { //Cria um middleware onde todas as requests passam por ele     
         if (req.secure){ //Se a requisição feita é segura (é HTTPS)
             next(); //Não precisa redirecionar, passa para os próximos middlewares que servirão com o conteúdo desejado
         }else{ 
             res.redirect(`https://${req.hostname}${req.url}`); 
         }
-    });
+    });*/
 
 
     //Rotas
@@ -94,21 +95,20 @@ AppDataSource.initialize().then(async () => {
     let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
     let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
     let credential = {key: certKey, cert: certificate}
-    
+    https.createServer(credential, app);
     
         
     let PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
-        sslRedirect()
         console.log('Servidor Http Online')});
     
     
     // start express server
-    let secureServer = https.createServer(credential, app);
-    let PORT1 = process.env.PORT || 7700
+    
+    /**let PORT1 = process.env.PORT || 7700
     secureServer.listen(PORT1, () => {
       console.log('Servidor Https Online')
-    });
+    });*/
 
 
 
