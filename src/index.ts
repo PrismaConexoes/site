@@ -8,7 +8,7 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
-    const sslRedirect = require('heroku-ssl-redirect').default;
+    const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
     const https = require('https')
     const fs = require('fs')
 
@@ -92,11 +92,11 @@ AppDataSource.initialize().then(async () => {
 
     //Configurando servidor Https
     //OBS: Ler certificado e chave em utf8 para funcionar corretamente
-    let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
+    /**let certKey = fs.readFileSync(__dirname+'/SSL/certificate.key', 'utf8')
     let certificate = fs.readFileSync(__dirname+'/SSL/certificate.crt','utf8')
     let credential = {key: certKey, cert: certificate}
-    https.createServer(credential, app);
-    
+    https.createServer(credential, app); //heroku reconhece automaticamente https em app
+    */
         
     let PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
