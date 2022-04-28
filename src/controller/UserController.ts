@@ -11,7 +11,12 @@ export class UserController {
     }*/
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.findOne(request.body.email)
+        return this.userRepository.findOne({
+            where: {
+                email : request.body.email,
+                password: request.body.password
+            }
+        })
     }
 
     async save(request: Request, response: Response, next: NextFunction) {

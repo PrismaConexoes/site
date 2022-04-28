@@ -3,6 +3,7 @@ import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { Request, Response } from "express"
 import { Userr } from "./entity/Userr"
+import { json } from "stream/consumers"
 
 AppDataSource.initialize().then(async () => {
 
@@ -75,15 +76,8 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Login
     app.get('/login',  (req: Request, res: Response , next: Function ) => {
-
-        const controler = (new (UserController))
-        const result = controler.one(req, res, next);
-
-        if(result instanceof Promise){
-            result.then(result => result !== null && result !== undefined ? res.send(result): undefined);
-        }else if(result !== null && result !== undefined){
-            res.json(result);
-        }
+        
+        res.render("login.hbs")
         
     })
     
@@ -108,8 +102,16 @@ AppDataSource.initialize().then(async () => {
     })
 
     //Rota Entrar
-    app.post('/entrar', (req, res) => {
-        console.log(req.body)
+    app.post('/entrar', (req: Request, res: Response , next: Function ) => {
+
+        const controler = (new (UserController))
+        const result = controler.one(req, res, next);
+
+        if(result instanceof Promise){
+            result.then(result => result !== null && result !== undefined ? res.send(result): undefined);
+        }else if(result !== null && result !== undefined){
+            res.json(result);
+        }
     } )
         
     const PORT = process.env.PORT || 3000
