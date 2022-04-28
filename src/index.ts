@@ -1,8 +1,12 @@
 
 import { AppDataSource } from "./data-source"
+import { UserController } from "./controller/UserController"
+import { Request, Response } from "express"
 import { Userr } from "./entity/Userr"
 
 AppDataSource.initialize().then(async () => {
+
+    const usrCtrl = require('./controller/UserController')
 
     //Configuração do express app
     const express = require('express')
@@ -70,9 +74,17 @@ AppDataSource.initialize().then(async () => {
     })
 
     //Rota Login
-    app.get('/login', (req, res) => {
+    app.get('/login',  (req: Request, res: Response , next: Function ) => {
 
-        res.render("login.hbs")
+        const controler = (new (UserController))
+        const result = controler.one(req, res, next);
+
+        if(result instanceof Promise){
+            result.then(result => result !== null && result !== undefined ? res.send(result): undefined);
+        }else if(result !== null && result !== undefined){
+            res.json(result);
+        }
+        
     })
     
     //Rota Cadastrar
@@ -81,6 +93,24 @@ AppDataSource.initialize().then(async () => {
         res.render("cadastrar.hbs")
     })
 
+    //Rota NewUser
+    app.post('/newUser', (req: Request, res: Response , next: Function ) => {
+
+        const controler = (new (UserController))
+        const result = controler.save(req, res, next);
+
+        if(result instanceof Promise){
+            result.then(result => result !== null && result !== undefined ? res.send(result): undefined);
+        }else if(result !== null && result !== undefined){
+            res.json(result);
+        }
+        
+    })
+
+    //Rota Entrar
+    app.post('/entrar', (req, res) => {
+        console.log(req.body)
+    } )
         
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {

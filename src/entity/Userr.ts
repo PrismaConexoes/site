@@ -10,7 +10,7 @@ export class Userr {
     lastName: string
 
     @Column()
-    age: number
+    age: Date
 
     @PrimaryColumn()
     email: string
