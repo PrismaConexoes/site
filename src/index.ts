@@ -129,7 +129,7 @@ AppDataSource.initialize().then(async () => {
         const result = controler.one(req, res, next);
 
         if(result instanceof Promise){
-            result.then(result => result !== null && result !== undefined ? res.send(result): res.send("Usuário não encontrado!"));
+            result.then(result => result !== null && result !== undefined ? res.send(result): res.send(<p>"Usuário não encontrado!" <a href="/login"><<< Login</a></p>));
         }else if(result !== null && result !== undefined){
             res.json(result);
         }
