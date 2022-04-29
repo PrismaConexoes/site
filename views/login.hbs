@@ -12,8 +12,8 @@
     <div class="flex-column ">
         <div class="d-flex justify-content-around border-bottom border-1">
         <form class="m-5 " action="/entrar" method="post">
-            <input type="grecaptcha" id="g-recaptcha-response" name="g-recaptcha-response">
-            <input type="grecaptcha" name="action" value="validate_captcha">
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <input type="hidden" name="action" value="validate_captcha">
             <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
