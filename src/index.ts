@@ -107,7 +107,7 @@ AppDataSource.initialize().then(async () => {
     //Rota Login
     app.get('/login', recaptcha.middleware.render,  (req: Request, res: Response , next: Function ) => {
 
-        res.render("login.hbs", { captcha: res.recaptcha })
+        res.render("login.hbs", { captcha: res.recaptcha, state: "" })
         
     })
 
@@ -115,14 +115,15 @@ AppDataSource.initialize().then(async () => {
     app.post('/entrar', (req: Request, res: Response , next: Function ) => {
         if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
         {
-          return res.json({"responseError" : "something goes to wrong"});
+          return res.render("login.hbs", { captcha: res.recaptcha, state: "Erro de Captcha"});
         }
         const secretKey = "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC";
         const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+        
         request(verificationURL,function(error,response,body) {
           body = JSON.parse(body);
           if(body.success !== undefined && !body.success) {
-            return res.json({"responseError" : "Failed captcha verification"});
+            return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
           }
         const controler = (new (UserController))
         const result = controler.one(req, res, next);

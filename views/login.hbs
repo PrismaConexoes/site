@@ -10,34 +10,34 @@
 <body>
     {{>especialHead}}
     <div class="flex-column ">
-        <div class="d-flex justify-content-around border-bottom border-1">
-        <form class="m-5 " action="/entrar" method="post">
-            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-            <input type="hidden" name="action" value="validate_captcha">
-            <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
-            </div>
-            <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-        </form>
+        <div class="d-flex justify-content-around">
+            <form class="m-5 " action="/entrar" method="post">
+                <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+                <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                <p class="text-danger">{{state}}</p>
+                <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                <input type="hidden" name="action" value="validate_captcha">
+            </form>
         </div>
-        <div class="d-flex justify-content-around m-2">
-            <a href="/cadastrar" class="btn btn-success btn-lg" role="button">Cadastrar</a>
+        <div class="d-flex justify-content-around m-5">
+            <p>Ainda não tem cadastro? <a href="/cadastrar" class="text-blue">Cadastrar-se</a></p>
+            
         </div>
+
     </div>
     <script src="https://www.google.com/recaptcha/api.js?render=6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC&hl=pt"></script>
     <script>
         grecaptcha.ready(function() {
-        // do request for recaptcha token
-        // response is promise with passed token
             grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action:'validate_captcha'})
-                    .then(function(token) {
-                // add token value to form
-                document.getElementById('g-recaptcha-response').value = token;
+            .then(function(token) {   
+                document.getElementById('g-recaptcha-response').value = token; //passando o valor de validate para recaptcha
             });
         });
     </script>  

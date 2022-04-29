@@ -78,6 +78,7 @@
         =>Chave_Site : "6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC"   --OK--
         =>Chave_secreta: "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC" --OK--
     2 -> instalação do express-reCaptcha                            --OK--
+        =>Implementação do reCaptcha na tela de login               --OK--
 
 
         
