@@ -57,7 +57,12 @@
                         </ul>
                         </h5>
                     </li>
-                    <h5>{{login}}</h5>    
+                    <h5>
+                        {{#if !login}}
+                            <a class="nav-link text-white" href="/login">Login</a>
+                        {{else}}
+                            {{user}}
+                    </h5>    
                 </div>
                 </div>
             </div>
