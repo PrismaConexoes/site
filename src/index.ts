@@ -43,7 +43,7 @@ AppDataSource.initialize().then(async () => {
     //Rota Prisma
     app.get('/', (req, res) => {
 
-        res.render("prisma.hbs", {use: "Login"}) //implementar sessão e reconfigurar
+        res.render("prisma.hbs", {user: "Login"}) //implementar sessão e reconfigurar
     })
 
     //Rota F&F
