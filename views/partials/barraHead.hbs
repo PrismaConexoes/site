@@ -58,10 +58,10 @@
                         </h5>
                     </li>
                     <h5>
-                        {{#if login == false}}
-                            <a class="nav-link text-white" href="/login">Login</a>
-                        {{else}}
+                        {{#if login}}
                             {{user}}
+                        {{else}}
+                            <a class="nav-link text-white" href="/login">Login</a>    
                     </h5>    
                 </div>
                 </div>
