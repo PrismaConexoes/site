@@ -105,7 +105,7 @@ AppDataSource.initialize().then(async () => {
     //Rota Login
     app.get('/login', recaptcha.middleware.render,  (req: Request, res: Response , next: Function ) => {
 
-        res.render("login.hbs", { captcha: res.recaptcha.render() })
+        res.render("login.hbs", { captcha: res.recaptcha })
         
     })
 
