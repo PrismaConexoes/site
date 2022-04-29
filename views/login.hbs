@@ -1,3 +1,44 @@
-{{>especialHead}}
-{{>loginBlock}}
-{{>barraFooter}}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    {{>especialHead}}
+    <div class="flex-column ">
+        <div class="d-flex justify-content-around border-bottom border-1">
+        <form class="m-5 " action="/entrar" method="post">
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <input type="hidden" name="action" value="validate_captcha">
+            <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+            </div>
+            <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
+            </div>
+            <button class="g-recaptcha btn btn-primary w-100" data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback="onSubmit">Entrar</button>
+        </form>
+        </div>
+        <div class="d-flex justify-content-around m-2">
+            <a href="/cadastrar" class="btn btn-success btn-lg" role="button">Cadastrar</a>
+        </div>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC&hl=pt"></script>
+    <script>
+        grecaptcha.ready(function() {
+        // do request for recaptcha token
+        // response is promise with passed token
+            grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action:'validate_captcha'})
+                    .then(function(token) {
+                // add token value to form
+                document.getElementById('g-recaptcha-response').value = token;
+            });
+        });
+    </script>  
+</body>
+</html>

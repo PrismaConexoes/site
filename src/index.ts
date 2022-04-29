@@ -5,6 +5,8 @@ import { Request, Response } from "express"
 
 AppDataSource.initialize().then(async () => {
 
+    const request = require('request')
+    
     //Configuração do express app
     const express = require('express')
     const app = express()
@@ -111,7 +113,21 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Entrar
     app.post('/entrar', (req: Request, res: Response , next: Function ) => {
-        recaptcha.verify(req,  function (error, data) {
+        if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
+        {
+          return res.json({"responseError" : "something goes to wrong"});
+        }
+        const secretKey = "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC";
+        const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+        request(verificationURL,function(error,response,body) {
+          body = JSON.parse(body);
+          if(body.success !== undefined && !body.success) {
+            return res.json({"responseError" : "Failed captcha verification"});
+          }
+          res.json({"responseSuccess" : "Sucess"});
+        });
+      });
+        /**recaptcha.verify(req,  function (error, data) {
             if (!error) {
                 const controler = (new (UserController))
                 const result = controler.one(req, res, next);
@@ -126,7 +142,7 @@ AppDataSource.initialize().then(async () => {
             }
         })
         
-    } )
+    } )*/
         
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
