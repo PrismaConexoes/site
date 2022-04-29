@@ -20,9 +20,14 @@ AppDataSource.initialize().then(async () => {
     
     //Configuração do reCaptcha
     const captcha = require('express-recaptcha').RecaptchaV3
-    const options = { hl: 'pt' }
+    const options = { 
+        hl: 'pt',
+        callback: testeF }
     const recaptcha = new captcha('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', options)
 
+    function testeF(req, res){
+        res.send(req.body)
+    }  
     //Engine express-handlebars
     const exphbs  = require('express-handlebars');
     //Configuração do handlebars
@@ -75,12 +80,7 @@ AppDataSource.initialize().then(async () => {
         res.render("next.hbs")
     })
 
-    //Rota Login
-    app.get('/login', recaptcha.middleware.render,  (req: Request, res: Response , next: Function ) => {
 
-        res.render("login.hbs", { captcha: res.recaptcha.render() })
-        
-    })
     
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
@@ -102,9 +102,16 @@ AppDataSource.initialize().then(async () => {
         
     })
 
+    //Rota Login
+    app.get('/login', recaptcha.middleware.render,  (req: Request, res: Response , next: Function ) => {
+
+        res.render("login.hbs", { captcha: res.recaptcha.render() })
+        
+    })
+
     //Rota Entrar
     app.post('/entrar', (req: Request, res: Response , next: Function ) => {
-        recaptcha.verify(req, res,  function (error, data) {
+        recaptcha.verify(req,  function (error, data) {
             if (!error) {
                 const controler = (new (UserController))
                 const result = controler.one(req, res, next);
