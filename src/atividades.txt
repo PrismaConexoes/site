@@ -3,7 +3,7 @@
         => install express                                          --OK--
         => install express-hadlebars                                --OK--
         => install bootstrap                                        --OK--
-        => install express-session                                  --OK--
+        => install express-session                                  --Desnecessário--
         => install body-parser                                      --OK--
         => install cookie-parser                                    --OK--
         => install passport                                         --OK--
@@ -65,6 +65,19 @@
     1 -> Estudo para correção do redirecionamento https heroku      --OK--
         Implementação de redirecionamento https heroku              --OK--
 
+//28/04/22
+    1 -> Ajuste na interface de login                               --OK--
+    2 -> Ajuste na interface de Cadastro                            --OK--
+    3 -> Conexão com banco para cadastro de usuário                 --OK--
+    4 -> Conexão com banco para busca de usuário                    --OK--
+    4 -> Escolha e instalação do cookie-session para sessão         --OK--
+
+//29/04/22
+    1 -> Aquisição de Site_key e Secret_Key reCaptcha               --OK--
+        Configurações para: appprisma.herokuapp.com                 --OK--            
+        =>Chave_Site : "6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC"   --OK--
+        =>Chave_secreta: "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC" --OK--
+    2 -> instalação do express-reCaptcha                            --OK--
 
 
         
