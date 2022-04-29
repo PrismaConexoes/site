@@ -124,19 +124,20 @@ AppDataSource.initialize().then(async () => {
           if(body.success !== undefined && !body.success) {
             return res.json({"responseError" : "Failed captcha verification"});
           }
-          res.json({"responseSuccess" : "Sucess"});
+        const controler = (new (UserController))
+        const result = controler.one(req, res, next);
+
+        if(result instanceof Promise){
+            result.then(result => result !== null && result !== undefined ? res.send(result): res.send("Usuário não encontrado!"));
+        }else if(result !== null && result !== undefined){
+            res.json(result);
+        }
+          //res.json({"responseSuccess" : "Sucess"});
         });
       });
         /**recaptcha.verify(req,  function (error, data) {
             if (!error) {
-                const controler = (new (UserController))
-                const result = controler.one(req, res, next);
-
-                if(result instanceof Promise){
-                    result.then(result => result !== null && result !== undefined ? res.send(result): res.send("Usuário não encontrado!"));
-                }else if(result !== null && result !== undefined){
-                    res.json(result);
-                }
+                
             } else {
                 res.send("Erro de recaptcha")
             }
