@@ -104,15 +104,21 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Entrar
     app.post('/entrar', (req: Request, res: Response , next: Function ) => {
+        recaptcha.verify(req, res,  function (error, data) {
+            if (!error) {
+                const controler = (new (UserController))
+                const result = controler.one(req, res, next);
 
-        const controler = (new (UserController))
-        const result = controler.one(req, res, next);
-
-        if(result instanceof Promise){
-            result.then(result => result !== null && result !== undefined ? res.send(result): res.send("Usuário não encontrado!"));
-        }else if(result !== null && result !== undefined){
-            res.json(result);
-        }
+                if(result instanceof Promise){
+                    result.then(result => result !== null && result !== undefined ? res.send(result): res.send("Usuário não encontrado!"));
+                }else if(result !== null && result !== undefined){
+                    res.json(result);
+                }
+            } else {
+                res.send("Erro de recaptcha")
+            }
+        })
+        
     } )
         
     const PORT = process.env.PORT || 3000
