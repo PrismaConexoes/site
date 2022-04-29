@@ -43,7 +43,7 @@ AppDataSource.initialize().then(async () => {
     //Rota Prisma
     app.get('/', (req, res) => {
 
-        res.render("prisma.hbs")
+        res.render("prisma.hbs", {use: "Login"}) //implementar sessão e reconfigurar
     })
 
     //Rota F&F
@@ -129,7 +129,7 @@ AppDataSource.initialize().then(async () => {
         const result = controler.one(req, res, next);
 
         if(result instanceof Promise){
-            result.then(result => result !== null && result !== undefined ? res.send(result): res.send(<p>"Usuário não encontrado!" <a href="/login"><<< Login</a></p>));
+            result.then(result => result !== null && result !== undefined ? res.render('prisma.hbs', {user : result.firstName} ): res.render('login.hbs', {state : "Usuário não encontrado"})); //configurar quando ajeitar sessão
         }else if(result !== null && result !== undefined){
             res.json(result);
         }
