@@ -14,11 +14,13 @@
                 <a href="tel:88988158311" class="text-white m-2 text-decoration-none"><img src="icons/phone_icon.png" class="img-fluid bg-white  border border-2 rounded-circle"/>(88)98815.8311</a>
                 <li class="nav-item dropdown">
                     <h5><a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{#if login}}
+                            <h5>Olá {{user}}!</h5>
+                        {{/if}}
                         <img src="icons/perfil_icon.png" class="bg-white rounded-circle">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{#if login}}
-                            <li>Olá {{user}}!</li>
                             <li><a class="dropdown-item" href="/sair">Sair</a></li>
                         {{else}}
                             <li><a class="dropdown-item" href="/login">Entrar</a></li>
