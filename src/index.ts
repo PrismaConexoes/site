@@ -129,7 +129,7 @@ AppDataSource.initialize().then(async () => {
         const result = controler.one(req, res, next);
 
         if(result instanceof Promise){
-            result.then(result => result !== null && result !== undefined ? res.render('prisma.hbs', {login : true, user: result.firstName} ): res.render('login.hbs', {state : "Usuário não encontrado"})); //configurar quando ajeitar sessão
+            result.then(result => result !== null && result !== undefined ? res.render('prisma.hbs', {login : true, firstName: result.firstName, lastName: result.lastName} ): res.render('login.hbs', {state : "Usuário não encontrado"})); //configurar quando ajeitar sessão
         }else if(result !== null && result !== undefined){
             res.json(result);
         }
