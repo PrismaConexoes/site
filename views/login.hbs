@@ -13,12 +13,16 @@
         <div class="d-flex justify-content-around">
             <form class="m-5 " action="/entrar" method="post">
                 <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
                 </div>
                 <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
+                    <label for="password" class="form-label">Password</label>
+                    <div class="d-flex flex-row" >
+                        <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
+                        <button type="button" class="btn border" onclick="olho()" id="btn_olho"><img src="icons/olho_a_icon.png" id="icon_olho"></button>
+                    </div>
+                    
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Entrar</button>
                 <p class="text-danger">{{state}}</p>
@@ -40,6 +44,19 @@
                 document.getElementById('g-recaptcha-response').value = token; //passando o valor de validate para recaptcha
             });
         });
+    </script>
+    <script>
+        function olho(){
+            let password = document.getElementById("password")
+            let olho = document.getElementById("icon_olho")
+            if(password.type == "password"){
+                password.type = "text"
+                olho.src = "icons/olho_f_icon.png"
+            }else{
+                password.type = "password"
+                olho.src = "icons/olho_a_icon.png"
+            }
+        }
     </script>  
 </body>
 </html>

@@ -80,6 +80,9 @@
     2 -> instalação do express-reCaptcha                            --OK--
         =>Implementação do reCaptcha na tela de login               --OK--
 
+//30/04/22
+    1 -> Implementação da visualização e ocultação de password      --OK--
+
 
         
 
