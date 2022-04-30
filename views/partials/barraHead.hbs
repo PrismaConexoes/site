@@ -20,12 +20,13 @@
                     <h5><a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="icons/perfil_icon.png" class="bg-white rounded-circle"> 
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
                             {{#if login}}
-                                <li>Olá {{user}}!</li>
-                                <li><a class="dropdown-item" href="/sair">Sair</a></li>
+                                <li class="text-white">Olá {{user}}!</li>
+                                <li><a class="dropdown-item text-white" href="/conta">Conta</a></li>
+                                <li><a class="dropdown-item text-white" href="/sair">Sair</a></li>
                             {{else}}
-                                <li><a class="dropdown-item" href="/login">Entrar</a></li>
+                                <li><a class="dropdown-item text-white" href="/login">Entrar</a></li>
                             {{/if}}
                         </ul>
                     </h5>
