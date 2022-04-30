@@ -15,9 +15,11 @@
                 <li class="nav-item dropdown">
                     <h5><a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{#if login}}
-                            <h5>Olá {{user}}!</h5>
+                            <h5>Olá {{user}}!<img src="icons/perfil_icon.png" class="bg-white rounded-circle"></h5>
+                        {{else}}
+                            <img src="icons/perfil_icon.png" class="bg-white rounded-circle">
                         {{/if}}
-                        <img src="icons/perfil_icon.png" class="bg-white rounded-circle">
+                        
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {{#if login}}
