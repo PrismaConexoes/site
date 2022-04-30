@@ -1,0 +1,13 @@
+<script>
+    function olho(){
+        let password = document.getElementById("password")
+        let olho = document.getElementById("icon_olho")
+        if(password.type == "password"){
+            password.type = "text"
+            olho.src = "icons/olho_f_icon.png"
+        }else{
+            password.type = "password"
+            olho.src = "icons/olho_a_icon.png"
+        }
+    }
+</script>

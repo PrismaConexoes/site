@@ -1,0 +1,9 @@
+<script src="https://www.google.com/recaptcha/api.js?render=6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC&hl=pt"></script>
+<script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action:'validate_captcha'})
+        .then(function(token) {   
+            document.getElementById('g-recaptcha-response').value = token; //passando o valor de validate para recaptcha
+        });
+    });
+</script>
