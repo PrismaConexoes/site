@@ -82,6 +82,7 @@
 
 //30/04/22
     1 -> Implementação da visualização e ocultação de password      --OK--
+    2 -> Ajustes no menu de login                                   --OK--
 
 
         
