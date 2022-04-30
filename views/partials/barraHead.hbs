@@ -16,24 +16,20 @@
         </div>
         <div class="col">
             <div class="d-flex justify-content-end">
-                <li class="nav-item dropdown">
+                <div class="nav-item dropdown">
                     <h5><a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{#if login}}
-                            <h5>Olá {{user}}!</h5>
-                        {{else}}
-                            <img src="icons/perfil_icon.png" class="bg-white rounded-circle">
-                        {{/if}}
-                        
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {{#if login}}
-                            <li><a class="dropdown-item" href="/sair">Sair</a></li>
-                        {{else}}
-                            <li><a class="dropdown-item" href="/login">Entrar</a></li>
-                        {{/if}}
-                    </ul>
+                        <img src="icons/perfil_icon.png" class="bg-white rounded-circle"> 
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {{#if login}}
+                                <li><h5>Olá {{user}}!</h5></li>
+                                <li><a class="dropdown-item" href="/sair">Sair</a></li>
+                            {{else}}
+                                <li><a class="dropdown-item" href="/login">Entrar</a></li>
+                            {{/if}}
+                        </ul>
                     </h5>
-                </li>
+                </div>
             </div>
         </div>
     </div>
