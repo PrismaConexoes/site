@@ -7,7 +7,7 @@ import { Session } from "./entity/Session"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "https://ec2-3-229-252-6.compute-1.amazonaws.com",
+    host: "ec2-3-229-252-6.compute-1.amazonaws.com",
     port: 5432,
     username: "dmipgolrmbdpvf",
     password: "7a5e3c1a09f37d1e14e458a98ed4b54b9092c50c808b6fc178ae934b26625640",
