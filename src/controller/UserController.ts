@@ -20,8 +20,16 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        //Implementar verificação de existência de usuário
-        return this.userRepository.save(request.body)
+        let user =  await this.userRepository.findOne({
+            where: {
+                email : request.body.email
+            }
+        })
+        if(user == null){
+            return this.userRepository.save(request.body)
+        }
+        return null
+        
     }
 
     /** Implementar remoção de conta
