@@ -18,6 +18,7 @@ export const AppDataSource = new DataSource({
     migrations: [],
     subscribers: [],
 })
+<<<<<<< HEAD
 //Configuração testada - conexão estabelecida com sucesso. (Ver política de troca de password)
 /**export const AppDataSource = new DataSource({
     type: "postgres",
@@ -32,3 +33,6 @@ export const AppDataSource = new DataSource({
     migrations: [],
     subscribers: [],
 })*/
+=======
+
+>>>>>>> 834781689f116d447a7c9590b30dea42c810152b
