@@ -4,15 +4,33 @@
         <div class="d-flex flex-column">
           <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="name" name="firstName" placeholder="Um dois" required>
+            <input type="text" class="form-control" id="name" name="firstName" placeholder="Maria" required>
           <div class="mb-3">
             <label for="sobrenome" class="form-label">Sobrenome</label>
-            <input type="text" class="form-control" id="sobrenome" name="lastName" placeholder="Tres de oliveira quatro" required>
+            <input type="text" class="form-control" id="sobrenome" name="lastName" placeholder="Pereira da Silva" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Genero: </label>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="gender" id="masculino" value="masculino" autocomplete="off" checked>
+              <label class="btn btn-outline-success" for="masculino">M</label>
+
+              <input type="radio" class="btn-check" name="gender" id="feminino" value="feminino" autocomplete="off">
+              <label class="btn btn-outline-success" for="feminino">F</label>
+            </div>
           </div>
           <div class="mb-3">
             <label for="date" class="form-label">Data de Nascimento</label>
             <input type="date" class="form-control" id="date" name="age"  required>
           </div>
+          <div class="mb-3">
+            <label for="telefone" class="form-label">Celular</label>
+            <input type="text" class="form-control" id="telefone" name="phone" placeholder="(88)99999-9999" pattern="[0-9()-]{13}$" required>
+            <div id="telefoneHelpBlock" class="form-text">
+              Digite apenas números
+            </div>
+          </div>
+          
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@gmail.com" required>
@@ -36,3 +54,20 @@
       </form>
     </div>
   </div>
+  <script>
+    setInterval(telefone, 150)
+    let auxTel = ""
+    function telefone(){
+      let tel = document.getElementById("telefone").value
+
+      if(tel.length == 10){
+        auxTel = tel
+      }
+      else if(tel.length == 11){
+        document.getElementById("telefone").value = "("+tel.substring(0,2)+")"+tel.substring(3,7)+"-"+tel.substring(7,11)
+      }
+      else if(tel.length == 12){
+        document.getElementById("telefone").value = auxTel
+      }
+    }
+  </script>

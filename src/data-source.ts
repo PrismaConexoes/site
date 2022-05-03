@@ -1,10 +1,25 @@
+
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Userr } from "./entity/Userr"
+import { Session } from "./entity/Session"
 
 
-//Configuração testada - conexão estabelecida com sucesso. (Ver política de troca de password)
 export const AppDataSource = new DataSource({
+    type: "postgres",
+    host: "motty.db.elephantsql.com (motty-01)",
+    port: 5432,
+    username: "fuibglyn",
+    password: "j2qZThUzxPhA-oMe4IDxTYIk9JYBzSl1",
+    database: "fuibglyn",
+    synchronize: true,
+    logging: false,
+    entities: [Userr, Session],
+    migrations: [],
+    subscribers: [],
+})
+//Configuração testada - conexão estabelecida com sucesso. (Ver política de troca de password)
+/**export const AppDataSource = new DataSource({
     type: "postgres",
     host: "motty.db.elephantsql.com",
     port: 5432,
@@ -13,7 +28,7 @@ export const AppDataSource = new DataSource({
     database: "fuibglyn",
     synchronize: true,
     logging: false,
-    entities: [Userr],
+    entities: [Userr, Session],
     migrations: [],
     subscribers: [],
-})
+})*/

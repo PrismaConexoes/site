@@ -26,11 +26,12 @@
                         </a>
                         <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
                             {{#if login}}
-                                <li class="text-white"><a class="dropdown-item text-white" href="/conta">{{firstName}} {{lastName}}</a></li>
+                                <li class="text-white"><a class="dropdown-item text-white" href="/conta">{{user}}</a></li>
                                 <li><a class="dropdown-item text-white" href="/conta">Conta</a></li>
                                 <li><a class="dropdown-item text-white" href="/sair">Sair</a></li>
                             {{else}}
                                 <li><a class="dropdown-item text-white" href="/login">Entrar</a></li>
+                                <li><a class="dropdown-item text-white" href="/cadastrar">Cadastrar-se</a></li>
                             {{/if}}
                         </ul>
                     </h5>
