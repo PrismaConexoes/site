@@ -14,17 +14,16 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
-    app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
+    //app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
 
 
     //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
     app.use(sslRedirect())
-    //app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
 
 
     //Configurações da sessao
-   /** let sessionRepository = AppDataSource.getRepository(Session)
+    let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
 
     app.use(
@@ -40,7 +39,7 @@ AppDataSource.initialize().then(async () => {
                     ttl: 8640000
                   }).connect(sessionRepository)
             })
-    )*/ 
+    )
 
     //Configuração do body-parser
     const bp = require('body-parser')
