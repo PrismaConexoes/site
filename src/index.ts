@@ -18,7 +18,7 @@ AppDataSource.initialize().then(async () => {
 
 
     //Configurações da sessao
-   let sessionRepository = AppDataSource.getRepository(Session)
+   /**let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
 
     app.use(
@@ -34,7 +34,7 @@ AppDataSource.initialize().then(async () => {
                     ttl: 8640000
                   }).connect(sessionRepository)
             })
-    )
+    )*/
 
     //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
@@ -71,65 +71,65 @@ AppDataSource.initialize().then(async () => {
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
-        if(!req.session.login){
+       /**  if(!req.session.login){
             req.session.user = ''
             req.session.login = false
         }
         req.session.relogin = false 
-        console.log(req.session)
+        console.log(req.session)*/
         
 
-        res.render("prisma.hbs", {login: req.session.login, user: req.session.user}) //implementar sessão e reconfigurar
+        res.render("prisma.hbs" /*, {login: req.session.login, user: req.session.user}*/) //implementar sessão e reconfigurar
     })
 
     //Rota F&F
     app.get('/fef', (req, res) => {
 
-        res.render("fef.hbs", {login: req.session.login, user: req.session.user})
+        res.render("fef.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
 
     //Rota DSOP
     app.get('/dsop', (req, res) => {
 
-        res.render("dsop.hbs", {login: req.session.login, user: req.session.user})
+        res.render("dsop.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
 
     //Rota Futurum
     app.get('/futurum', (req, res) => {
 
-        res.render("futurum.hbs", {login: req.session.login, user: req.session.user})
+        res.render("futurum.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
 
     //Rota Luz
     app.get('/luz', (req, res) => {
 
-        res.render("luz.hbs", {login: req.session.login, user: req.session.user})
+        res.render("luz.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
 
     //Rota MCI
     app.get('/mci', (req, res) => {
 
-        res.render("mci.hbs", {login: req.session.login, user: req.session.user})
+        res.render("mci.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
 
     //Rota F&F
     app.get('/next', (req, res) => {
 
-        res.render("next.hbs", {login: req.session.login, user: req.session.user})
+        res.render("next.hbs"/*, {login: req.session.login, user: req.session.user}*/)
     })
     
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
-        req.session.relogin = false 
+       /**  req.session.relogin = false 
         if(!req.session.login){
             req.session.user = ''
             req.session.login = false
         }
         if(req.session.login == true){
             res.render("userLogadoErr", {user: req.session.user})
-        }else{
+        }else{*/
             res.render("cadastrar.hbs")
-        } 
+        //} 
 
         
     })
@@ -155,12 +155,12 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Login
     app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
-        let login = req.session.login
-        if(login == false){
-            res.render("login.hbs", {relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
-        }else{
+        /**let login = req.session.login
+        if(login == false){*/
+            res.render("login.hbs"/*, {relogin: req.session.relogin}*/) //{ captcha: res.recaptcha, state: "" })
+        /** }else{
             res.render("userLogadoErr", {user: req.session.user})
-        }
+        }*/
        
         
     })
@@ -181,19 +181,26 @@ AppDataSource.initialize().then(async () => {
           if(body.success !== undefined && !body.success) {
             return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
           }
-        req.session.relogin = false  
+
+
+
+        //req.session.relogin = false 
+        
+        
+
+
         const controler = (new (UserController))
         const result = controler.one(req, res, next);
 
         if(result instanceof Promise){
             result.then((result) => {
                 if(result !== null && result !== undefined){
-                    req.session.login = true
+                    /**req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
-                    req.session.email = result.email
+                    req.session.email = result.email*/
                     res.redirect('/')
                  }else{
-                    req.session.relogin = true
+                    //req.session.relogin = true
                     res.render("login.hbs", {relogin: true})
                  }
             }); 
@@ -203,10 +210,10 @@ AppDataSource.initialize().then(async () => {
         });
     });
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
-        req.session.login = false
+        /**req.session.login = false
         req.session.relogin = false
         req.session.user = ""
-        req.session.email = ""
+        req.session.email = ""*/
         res.redirect('/')
     } )    
 
