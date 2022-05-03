@@ -24,7 +24,7 @@ AppDataSource.initialize().then(async () => {
 
 
     //Configurações da sessao
-    let sessionRepository = AppDataSource.getRepository(Session)
+   /** let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
 
     app.use(
@@ -40,7 +40,7 @@ AppDataSource.initialize().then(async () => {
                     ttl: 8640000
                   }).connect(sessionRepository)
             })
-    )
+    )*/ 
 
     //Configuração do body-parser
     const bp = require('body-parser')
