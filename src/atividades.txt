@@ -3,9 +3,9 @@
         => install express                                          --OK--
         => install express-hadlebars                                --OK--
         => install bootstrap                                        --OK--
-        => install express-session                                  --Desnecessário--
+        => install express-session                                  --Ok--
         => install body-parser                                      --OK--
-        => install cookie-parser                                    --OK--
+        => install cookie-parser                                    --Desnecessário--
         => install passport                                         --OK--
         => install pg                                               --OK--
         =>Estabelecimento de conexão com ElehantSQL                 --OK-- 
@@ -58,8 +58,8 @@
         =>Configuração do certificado ssl/tsl de teste              --OK--
         =>Funcionamento https herokuApp certificado Automático      --OK--
     3 -> Redirecionamento http para https                           --OK--
-    4 -> Template tela de login                                     --Parcial--
-    5 -> Template tela de Cadastro                                  --Parcial--
+    4 -> Template tela de login                                     --Ok--
+    5 -> Template tela de Cadastro                                  --Ok--
 
 //27/04/22
     1 -> Estudo para correção do redirecionamento https heroku      --OK--
@@ -83,6 +83,21 @@
 //30/04/22
     1 -> Implementação da visualização e ocultação de password      --OK--
     2 -> Ajustes no menu de login                                   --OK--
+    3 -> Implantação do captcha na tela de cadastro                 --OK--
+    4 -> Instalação e configuração do express-session               --Ok--
+    5 -> Configuração do uid-safe                                   --Ok--
+
+//01/05/22
+    1 -> Instalação e configuração do express-session               --Ok--
+    2 -> Implementação de rotinas que utilizam cookies              --Ok--
+
+//02/05/22
+    1 -> Implementação de controle de sessão LOGIN                  --OK--
+    1 -> Construção de telas e mensagens de erro                    --Ok--
+
+
+//ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade
+    
 
 
         

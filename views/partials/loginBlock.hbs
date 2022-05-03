@@ -1,27 +1,42 @@
 <div class="flex-column ">
-        <div class="d-flex justify-content-around">
-            <form class="m-5 " action="/entrar" method="post">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <div class="d-flex flex-row" >
-                        <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
-                        <button type="button" class="btn border" onclick="olho()" id="btn_olho"><img src="icons/olho_a_icon.png" id="icon_olho"></button>
-                    </div>
-                    
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                <p class="text-danger">{{state}}</p>
-                <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
-                <input type="hidden" name="action" value="validate_captcha">
-            </form>
-        </div>
-        <div class="d-flex justify-content-around m-5">
-            <p>Ainda não tem cadastro? <a href="/cadastrar" class="text-blue">Cadastrar-se</a></p>
-            
-        </div>
 
+    <div class="d-flex justify-content-around"> 
+        <form class="m-5 " action="/entrar" method="post">
+            {{#if relogin}}
+                <div class="alert alert-danger" role="alert" id="alerta">
+                    Usuário não encontrado!
+                </div>
+                <script>
+                    setTimeout(function(){
+
+                        var alert = document.getElementById("alerta");
+
+                        alert.style="display:none"
+
+
+                        }, 3000);
+                </script>
+            {{/if}}
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="d-flex flex-row" >
+                    <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="20" placeholder="Digite a sua senha" required>
+                    <button type="button" class="btn border" onclick="olho()" id="btn_olho"><img src="icons/olho_a_icon.png" id="icon_olho"></button>
+                </div>
+                
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <p class="text-danger">{{state}}</p>
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <input type="hidden" name="action" value="validate_captcha">
+        </form>
     </div>
+    <div class="d-flex justify-content-around m-5">
+        <p>Ainda não tem cadastro? <a href="/cadastrar" class="text-blue">Cadastrar-se</a></p>
+        
+    </div>
+</div>
