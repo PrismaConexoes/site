@@ -17,25 +17,6 @@ AppDataSource.initialize().then(async () => {
     app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
 
 
-    //Configurações da sessao
-    let sessionRepository = AppDataSource.getRepository(Session)
-    const session = require('express-session')
-
-    app.use(
-            session({
-                resave: false,
-                saveUnitialize: false,
-                cookie: {path: '/', httpOnly: true, sameSite: true, secure:'auto' , maxAge: 86400000 }, //configurações do cookie pasta, acessibilidade no documumento e utilização de https
-                unset: 'destroy', //será apagada quando encerrada a sessao
-                secret: "53Cr3TTp1RI5waApPiNh3r0cKu", // implementar Keygrip
-                store: new TypeormStore({
-                    cleanupLimit: 2,
-                    limitSubquery: false, // If using MariaDB.
-                    ttl: 8640000
-                  }).connect(sessionRepository)
-            })
-    )
-
     //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
     app.use(sslRedirect())
