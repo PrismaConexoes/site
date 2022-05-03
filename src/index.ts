@@ -14,11 +14,11 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
 
-    app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
+    //app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
 
 
     //Configurações da sessao
-    let sessionRepository = AppDataSource.getRepository(Session)
+   let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
 
     app.use(
@@ -46,7 +46,7 @@ AppDataSource.initialize().then(async () => {
     app.use(bp.urlencoded({extended: true}))
     
     //Configuração do reCaptcha
-    /**const captcha = require('express-recaptcha').RecaptchaV3
+    const captcha = require('express-recaptcha').RecaptchaV3
     const options = { 
         hl: 'pt',
         callback: testeF //Ver mais sobre a função de callback neste caso 
@@ -55,7 +55,7 @@ AppDataSource.initialize().then(async () => {
 
     function testeF(req, res){
         res.send(req.body)
-    }*/  
+    } 
     //Engine express-handlebars
     const exphbs  = require('express-handlebars');
     //Configuração do handlebars
@@ -117,8 +117,6 @@ AppDataSource.initialize().then(async () => {
 
         res.render("next.hbs", {login: req.session.login, user: req.session.user})
     })
-
-
     
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
@@ -169,7 +167,7 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
-        /**if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
+        if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
         {
           return res.render("login.hbs", { captcha: res.recaptcha, state: "Erro de Captcha"});
         }
@@ -182,7 +180,7 @@ AppDataSource.initialize().then(async () => {
           body = JSON.parse(body);
           if(body.success !== undefined && !body.success) {
             return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
-          }*/
+          }
         req.session.relogin = false  
         const controler = (new (UserController))
         const result = controler.one(req, res, next);
@@ -203,7 +201,7 @@ AppDataSource.initialize().then(async () => {
             res.json(result);
         }
         });
-   
+    });
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         req.session.login = false
         req.session.relogin = false
@@ -215,28 +213,7 @@ AppDataSource.initialize().then(async () => {
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
-
-
-    /** insert new users for test
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(Userr, {
-            firstName: "Eduardo",
-            lastName: "Proto",
-            age: 27,
-            email: "silvaproto@yahoo.com.br",
-            password: "thururu"
-        })
-    )
-
-   await AppDataSource.manager.save(
-        AppDataSource.manager.create(Userr, {
-            firstName: "Phantom",
-            lastName: "Assassin",
-            age: 24
-        })
-    )*/
-
-    
+   
 
 }).catch(error => console.log(error))
 
