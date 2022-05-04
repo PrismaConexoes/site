@@ -1,3 +1,21 @@
 div#navSup {
     height: 3rem;
 }
+
+.barraOne {
+    z-index: 1;
+}
+
+.barraNotPrint {
+    position: fixed;
+    z-index: 0;
+    opacity: 0;
+}
+
+.barraPrint {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    opacity: 1;
+    transition: all 4s linear;
+}

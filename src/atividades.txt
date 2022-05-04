@@ -113,3 +113,25 @@
 --Ver Collapse--
 --Ver Toast--
 --Ver Ratio-- Inserir videos e quem sabe outros elementos externos
+
+
+    setInterval(navFix, 250);
+
+    let barra = document.querySelector("#barraNav")
+    var fixed = false
+    function navFix(){
+        let top = window.scrollY
+        console.log(top)
+        if(top >= 200 && top <= 299 && !fixed){
+            barra.classList.add("menu")
+        }
+        else if(top >= 300 && !fixed){
+            barra.classList.remove("menu")
+            barra.classList.add("menu_trans")
+            fixed = true   
+        }else if(top < 200 && fixed){
+            barra.classList.remove("menu_trans")
+            fixed = false
+        }
+    }
+</script>
