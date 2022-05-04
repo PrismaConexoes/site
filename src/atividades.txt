@@ -95,6 +95,8 @@
     1 -> Implementação de controle de sessão LOGIN                  --OK--
     1 -> Construção de telas e mensagens de erro                    --Ok--
 
+//03/05/22
+    1 -> Ajustes no template                                        --Ok--
 
 //ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade
     

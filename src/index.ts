@@ -18,23 +18,25 @@ AppDataSource.initialize().then(async () => {
 
 
     //Configurações da sessao
-   /**let sessionRepository = AppDataSource.getRepository(Session)
+   let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
 
-    app.use(
-            session({
-                resave: false,
-                saveUnitialize: false,
-                cookie: {path: '/', httpOnly: true, sameSite: true, secure:'auto' , maxAge: 86400000 }, //configurações do cookie pasta, acessibilidade no documumento e utilização de https
-                unset: 'destroy', //será apagada quando encerrada a sessao
-                secret: "53Cr3TTp1RI5waApPiNh3r0cKu", // implementar Keygrip
-                store: new TypeormStore({
-                    cleanupLimit: 2,
-                    limitSubquery: false, // If using MariaDB.
-                    ttl: 8640000
-                  }).connect(sessionRepository)
-            })
-    )*/
+    app.use(async ()=>{
+       await session({
+            resave: false,
+            saveUnitialize: false,
+            cookie: {path: '/', httpOnly: true, sameSite: true, secure:'auto' , maxAge: 86400000 }, //configurações do cookie pasta, acessibilidade no documumento e utilização de https
+            unset: 'destroy', //será apagada quando encerrada a sessao
+            secret: "53Cr3TTp1RI5waApPiNh3r0cKu", // implementar Keygrip
+            store: new TypeormStore({
+                cleanupLimit: 2,
+                limitSubquery: false, // If using MariaDB.
+                ttl: 8640000
+              }).connect(sessionRepository)
+        })
+    }
+
+    )
 
     //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
@@ -71,15 +73,15 @@ AppDataSource.initialize().then(async () => {
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
-       /**  if(!req.session.login){
+         if(!req.session.login){
             req.session.user = ''
             req.session.login = false
         }
         req.session.relogin = false 
-        console.log(req.session)*/
+        console.log(req.session)
         
 
-        res.render("prisma.hbs" /*, {login: req.session.login, user: req.session.user}*/) //implementar sessão e reconfigurar
+        res.render("prisma.hbs" , {login: req.session.login, user: req.session.user}) //implementar sessão e reconfigurar
     })
 
     //Rota F&F
