@@ -89,51 +89,51 @@ AppDataSource.initialize().then(async () => {
     //Rota F&F
     app.get('/fef', (req, res) => {
 
-        res.render("fef.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("fef.hbs", {login: req.session.login, user: req.session.user})
     })
 
     //Rota DSOP
     app.get('/dsop', (req, res) => {
 
-        res.render("dsop.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("dsop.hbs", {login: req.session.login, user: req.session.user})
     })
 
     //Rota Futurum
     app.get('/futurum', (req, res) => {
 
-        res.render("futurum.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("futurum.hbs", {login: req.session.login, user: req.session.user})
     })
 
     //Rota Luz
     app.get('/luz', (req, res) => {
 
-        res.render("luz.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("luz.hbs", {login: req.session.login, user: req.session.user})
     })
 
     //Rota MCI
     app.get('/mci', (req, res) => {
 
-        res.render("mci.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("mci.hbs", {login: req.session.login, user: req.session.user})
     })
 
     //Rota F&F
     app.get('/next', (req, res) => {
 
-        res.render("next.hbs"/*, {login: req.session.login, user: req.session.user}*/)
+        res.render("next.hbs", {login: req.session.login, user: req.session.user})
     })
     
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
-       /**  req.session.relogin = false 
+        req.session.relogin = false 
         if(!req.session.login){
             req.session.user = ''
             req.session.login = false
         }
         if(req.session.login == true){
             res.render("userLogadoErr", {user: req.session.user})
-        }else{*/
+        }else{
             res.render("cadastrar.hbs")
-        //} 
+        } 
 
         
     })
@@ -159,12 +159,12 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Login
     app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
-        /**let login = req.session.login
-        if(login == false){*/
-            res.render("login.hbs"/*, {relogin: req.session.relogin}*/) //{ captcha: res.recaptcha, state: "" })
-        /** }else{
+        let login = req.session.login
+        if(login == false){
+            res.render("login.hbs", {relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
+        }else{
             res.render("userLogadoErr", {user: req.session.user})
-        }*/
+        }
        
         
     })
@@ -188,7 +188,7 @@ AppDataSource.initialize().then(async () => {
 
 
 
-        //req.session.relogin = false 
+        req.session.relogin = false 
         
         
 
@@ -214,10 +214,10 @@ AppDataSource.initialize().then(async () => {
         });
     });
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
-        /**req.session.login = false
+        req.session.login = false
         req.session.relogin = false
         req.session.user = ""
-        req.session.email = ""*/
+        req.session.email = ""
         res.redirect('/')
     } )    
 
