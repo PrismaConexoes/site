@@ -8,11 +8,11 @@ import {createConnection} from "typeorm";
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "ec2-3-229-11-55.compute-1.amazonaws.com",
+    host: "ec2-52-3-200-138.compute-1.amazonaws.com",
     port: 5432,
-    username: "kvzigtrpwxqcgo",
-    password: "452b9897486c976a67eba9d7c9d351bff5ce0d5acf839d7c8bf932239d8efa5b",
-    database: "d4ejjer24kuhf9",
+    username: "llqqsxgvaehqkl",
+    password: "af8ccf9f8c7f515e3d6b08963ce25ea657752922d9a3f1843c9b46eb1e21a83a",
+    database: "d4m4a06ldg6d6a",
     synchronize: true,
     logging: false,
     entities: [Userr, Session],
