@@ -5,6 +5,7 @@ import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
 import { json } from "body-parser"
+import { Repository } from "typeorm"
 
 AppDataSource.initialize().then(async () => {
 
@@ -18,25 +19,27 @@ AppDataSource.initialize().then(async () => {
 
 
     //Configurações da sessao
-   let sessionRepository = AppDataSource.getRepository(Session)
+    let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
+    let sessionConect = 
+    
 
-    app.use(async ()=>{
-       await session({
+    app.use(
+        session({
             resave: false,
-            saveUnitialize: false,
+            saveUnitialize: true,
             cookie: {path: '/', httpOnly: true, sameSite: true, secure:'auto' , maxAge: 86400000 }, //configurações do cookie pasta, acessibilidade no documumento e utilização de https
             unset: 'destroy', //será apagada quando encerrada a sessao
             secret: "53Cr3TTp1RI5waApPiNh3r0cKu", // implementar Keygrip
             store: new TypeormStore({
                 cleanupLimit: 2,
                 limitSubquery: false, // If using MariaDB.
+                onError: (s: TypeormStore, e: Error) => console.log(s),
                 ttl: 8640000
               }).connect(sessionRepository)
         })
-    }
-
     )
+
 
     //Configurar utilização de servidor seguro
     const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
