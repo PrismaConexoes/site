@@ -13,6 +13,7 @@ export const AppDataSource = new DataSource({
     username: "llqqsxgvaehqkl",
     password: "af8ccf9f8c7f515e3d6b08963ce25ea657752922d9a3f1843c9b46eb1e21a83a",
     database: "d4m4a06ldg6d6a",
+    ssl: { rejectUnauthorized: false },
     synchronize: true,
     logging: false,
     entities: [Userr, Session],
