@@ -199,9 +199,9 @@ AppDataSource.initialize().then(async () => {
         if(result instanceof Promise){
             result.then((result) => {
                 if(result !== null && result !== undefined){
-                    /**req.session.login = true
+                    req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
-                    req.session.email = result.email*/
+                    req.session.email = result.email
                     res.redirect('/')
                  }else{
                     //req.session.relogin = true
