@@ -69,9 +69,6 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-
-
-
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
@@ -133,9 +130,7 @@ AppDataSource.initialize().then(async () => {
             res.render("userLogadoErr", {user: req.session.user})
         }else{
             res.render("cadastrar.hbs")
-        } 
-
-        
+        }       
     })
 
     //Rota NewUser
@@ -164,9 +159,7 @@ AppDataSource.initialize().then(async () => {
             res.render("login.hbs", {relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
         }else{
             res.render("userLogadoErr", {user: req.session.user})
-        }
-       
-        
+        }           
     })
 
     //Rota Entrar
@@ -204,7 +197,7 @@ AppDataSource.initialize().then(async () => {
                     req.session.email = result.email
                     res.redirect('/')
                  }else{
-                    //req.session.relogin = true
+                    req.session.relogin = true
                     res.render("login.hbs", {relogin: true})
                  }
             }); 
