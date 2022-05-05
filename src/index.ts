@@ -21,9 +21,7 @@ AppDataSource.initialize().then(async () => {
     //Configurações da sessao
     let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
-    let sessionConect = 
     
-
     app.use(
         session({
             resave: false,
@@ -34,7 +32,7 @@ AppDataSource.initialize().then(async () => {
             store: new TypeormStore({
                 cleanupLimit: 2,
                 limitSubquery: false, // If using MariaDB.
-                onError: (s: TypeormStore, e: Error) => console.log(s),
+                onError: (s: TypeormStore, e: Error) => console.log(e),
                 ttl: 8640000
               }).connect(sessionRepository)
         })
