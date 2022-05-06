@@ -17,5 +17,9 @@ div#navSup {
     z-index: 2;
     top: 0px;
     opacity: 1;
-    transition: all 4s linear;
+    transition: opacity 4s linear;
+}
+
+.paragraph {
+    text-align: justify;
 }
