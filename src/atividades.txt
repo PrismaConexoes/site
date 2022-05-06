@@ -101,6 +101,7 @@
 //05/05/03
     1 -> Mundança do banco de dados Elephant para AWS               --OK--
     2 -> Inserção de informações na tela principal                  --OK--
+    2 -> Ajstes na barra de navegação                               --OK--
 
 //ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade
     
