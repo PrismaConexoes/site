@@ -26,7 +26,6 @@ div#navSup {
 
 .whatsapp {
     position: fixed;
-    right: 5%;
-    bottom: 1%;
-    float: right;
+    bottom: 20px;
+    right: 30px
 }
