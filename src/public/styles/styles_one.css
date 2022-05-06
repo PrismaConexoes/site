@@ -23,3 +23,9 @@ div#navSup {
 .paragraph {
     text-align: justify;
 }
+
+.whatsapp {
+    position: fixed;
+    bottom: 0%;
+    right: 5%;
+}

@@ -212,7 +212,11 @@ AppDataSource.initialize().then(async () => {
         req.session.user = ""
         req.session.email = ""
         res.redirect('/')
-    } )    
+    } )
+    
+    app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
+        res.render("copyrights.hbs")
+    })
 
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {

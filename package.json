@@ -19,8 +19,6 @@
         "express-recaptcha": "^5.1.0",
         "express-session": "^1.17.2",
         "heroku-ssl-redirect": "^0.1.1",
-        "nodemon": "^2.0.15",
-        "passport": "^0.5.2",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",
         "request": "^2.88.2",
