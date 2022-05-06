@@ -98,6 +98,10 @@
 //03/05/22
     1 -> Ajustes no template                                        --Ok--
 
+//05/05/03
+    1 -> Mundança do banco de dados Elephant para AWS               --OK--
+    2 -> Inserção de informações na tela principal                  --OK--
+
 //ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade
     
 
