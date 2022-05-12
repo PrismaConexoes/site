@@ -197,7 +197,7 @@ AppDataSource.initialize().then(async () => {
                     req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
                     req.session.email = result.email
-                    adms.forEach(email => {
+                    adms.array.forEach(email => {
                         if(req.session.email == email){
                             req.session.administrador = true;
                         }
