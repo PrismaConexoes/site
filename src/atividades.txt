@@ -106,6 +106,12 @@
 //06/05/03
     1 -> Pesquisa de Copyright                                      --OK--
     2 -> Criação de página de Copyrights                            --OK--
+
+OBS: Criar tabela para link das imagens(7 links)
+    Criar página para atualizar os links
+    Postar imagens no driver e gerar os links
+    substituir os links através da página criada
+    carregar as imagens no handlebars
     
 
 //ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade

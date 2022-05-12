@@ -1,0 +1,11 @@
+<div class="flex-col">
+{{#each fotos}}
+    <div class="row">
+        <form class="m-5 " action="/removeImage" method="post">
+            <img src="{{link}}" class="img-fluid">
+            <input type="text" value="{{link}}">
+            <button type="submit" class="btn-danger">Excluir</button>
+        </form>
+    </div>
+{{/each}}
+</div>

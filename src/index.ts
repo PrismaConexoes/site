@@ -41,7 +41,7 @@ AppDataSource.initialize().then(async () => {
         })
     )
 
-
+   
 
 
     //Configuração do body-parser
@@ -69,6 +69,8 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
+    let adms = require('adm.json');
+    //let adms =  express.static(__dirname+'/public/adm.json');
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
@@ -195,6 +197,10 @@ AppDataSource.initialize().then(async () => {
                     req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
                     req.session.email = result.email
+                    if(req.session.email in adms){
+                        req.session.administrador = true;
+                    }
+                    console.log(req.session);
                     res.redirect('/')
                  }else{
                     req.session.relogin = true
@@ -216,6 +222,12 @@ AppDataSource.initialize().then(async () => {
     
     app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
         res.render("copyrights.hbs")
+    })
+
+    app.post('/removeImage', (req: any, res: any , next: NextFunction ) => {
+        if(req.sessin.administrador == true){
+
+        }
     })
 
     const PORT = process.env.PORT || 3000
