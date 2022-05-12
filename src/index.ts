@@ -80,11 +80,14 @@ AppDataSource.initialize().then(async () => {
             req.session.user = ''
             req.session.login = false
         }
+        if(!req.session.administrador){
+            req.session.administrador = false
+        }
         req.session.relogin = false 
         console.log(req.session)
         
 
-        res.render("prisma.hbs" , {login: req.session.login, user: req.session.user}) //implementar sessão e reconfigurar
+        res.render("prisma.hbs" , {login: req.session.login, user: req.session.user, adm: req.session.administrador}) //implementar sessão e reconfigurar
     })
 
     //Rota F&F
@@ -177,40 +180,40 @@ AppDataSource.initialize().then(async () => {
         console.log(recaptcha.middleware.render)
         const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
         
-        request(verificationURL,function(error,response,body) { //Colocar esta verificação dentro da função de callback( construir uma classe para fornecer este serviço???)
-          body = JSON.parse(body);
-          if(body.success !== undefined && !body.success) {
+        request(verificationURL,function(error,response,body) { 
+            body = JSON.parse(body);
+            if(body.success !== undefined && !body.success) {
             return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
-          }
+            }
 
-        req.session.relogin = false 
+            req.session.relogin = false 
 
-        const controler = (new (UserController))
-        const result = controler.one(req, res, next);
+            const controler = (new (UserController))
+            const result = controler.one(req, res, next);
 
-        if(result instanceof Promise){
-            result.then((result) => {
-                if(result !== null && result !== undefined){
-                    req.session.login = true
-                    req.session.user =  result.firstName +" "+ result.lastName
-                    req.session.email = result.email
+            if(result instanceof Promise){
+                result.then((result) => {
+                    if(result !== null && result !== undefined){
+                        req.session.login = true
+                        req.session.user =  result.firstName +" "+ result.lastName
+                        req.session.email = result.email
 
-                    adms.emails.forEach((email) => {
-                        if(req.session.email == email){
-                            req.session.administrador = true;
-                        }
-                    });
+                        adms.emails.forEach((email) => {
+                            if(req.session.email == email){
+                                req.session.administrador = true;
+                            }
+                        });
 
-                    console.log(req.session);
-                    res.redirect('/')
-                 }else{
-                    req.session.relogin = true
-                    res.render("login.hbs", {relogin: true})
-                 }
-            }); 
-        }else if(result !== null && result !== undefined){
-            res.json(result);
-        }
+                        console.log(req.session);
+                        res.redirect('/')
+                    }else{
+                        req.session.relogin = true
+                        res.render("login.hbs", {relogin: true})
+                    }
+                }); 
+            }else if(result !== null && result !== undefined){
+                res.json(result);
+            }
         });
     });
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
