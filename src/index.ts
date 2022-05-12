@@ -70,6 +70,7 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
     const adms = require(__dirname+'/public/adm.json');
+    console.log(adms.emails)
     //let adms =  express.static(__dirname+'/public/adm.json');
     //Rotas
     //Rota Prisma
@@ -193,7 +194,7 @@ AppDataSource.initialize().then(async () => {
                     req.session.user =  result.firstName +" "+ result.lastName
                     req.session.email = result.email
                     console.log(adms)
-                    for(let email in adms){
+                    for(let email in adms.emails){
                         console.log(email)
                         console.log(req.session.email)
                         console.log(req.session.email == email)
