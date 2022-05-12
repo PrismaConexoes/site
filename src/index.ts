@@ -194,6 +194,9 @@ AppDataSource.initialize().then(async () => {
                     req.session.email = result.email
                     console.log(adms)
                     for(let email in adms){
+                        console.log(email)
+                        console.log(req.session.email)
+                        console.log(req.session.email == email)
                         if(req.session.email == email){
                             req.session.administrador = true;
                         }
