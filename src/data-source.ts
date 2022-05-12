@@ -3,8 +3,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Userr } from "./entity/Userr"
 import { Session } from "./entity/Session"
-import { Publicacao } from "./entity/publicacao"
-import {createConnection} from "typeorm";
+import { Publicacao } from "./entity/Publicacao"
 
 
 export const AppDataSource = new DataSource({
