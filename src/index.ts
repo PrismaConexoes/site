@@ -69,7 +69,7 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-    let adms = require('adm.json');
+    let adms = require(__dirname+'/public/adm.json');
     //let adms =  express.static(__dirname+'/public/adm.json');
     //Rotas
     //Rota Prisma
