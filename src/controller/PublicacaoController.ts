@@ -1,6 +1,6 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
-import { Publicacao } from "../entity/publicacao"
+import { Publicacao } from "../entity/Publicacao"
 
 export class PublicacaoController {
 
