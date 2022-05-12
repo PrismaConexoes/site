@@ -197,9 +197,12 @@ AppDataSource.initialize().then(async () => {
                     req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
                     req.session.email = result.email
-                    if(req.session.email in adms.email){
-                        req.session.administrador = true;
-                    }
+                    adms.forEach(email => {
+                        if(req.session.email == email){
+                            req.session.administrador = true;
+                        }
+                    });
+
                     console.log(req.session);
                     res.redirect('/')
                  }else{
