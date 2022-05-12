@@ -235,7 +235,7 @@ AppDataSource.initialize().then(async () => {
         }
     })
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
-        if(req.sessin.administrador == true){
+        if(req.session.administrador == true){
             const controller = new PublicacaoController
             let publications = controller.all(req, res, next)
             res.render("atualizaSite.hbs", {publicacoes: publications})
