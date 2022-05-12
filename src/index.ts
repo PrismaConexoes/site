@@ -69,7 +69,7 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-    let adms = require(__dirname+'/public/adm.json');
+    const adms = require(__dirname+'/public/adm.json');
     //let adms =  express.static(__dirname+'/public/adm.json');
     //Rotas
     //Rota Prisma
@@ -181,12 +181,7 @@ AppDataSource.initialize().then(async () => {
             return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
           }
 
-
-
         req.session.relogin = false 
-        
-        
-
 
         const controler = (new (UserController))
         const result = controler.one(req, res, next);
@@ -197,11 +192,12 @@ AppDataSource.initialize().then(async () => {
                     req.session.login = true
                     req.session.user =  result.firstName +" "+ result.lastName
                     req.session.email = result.email
-                    adms.map((email,i) => {
+                    console.log(adms)
+                    for(let email in adms){
                         if(req.session.email == email){
                             req.session.administrador = true;
                         }
-                    });
+                    }
 
                     console.log(req.session);
                     res.redirect('/')
