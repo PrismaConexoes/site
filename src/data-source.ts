@@ -3,6 +3,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Userr } from "./entity/Userr"
 import { Session } from "./entity/Session"
+import { Publicacao } from "./entity/publicacao"
 import {createConnection} from "typeorm";
 
 
@@ -16,7 +17,7 @@ export const AppDataSource = new DataSource({
     ssl: { rejectUnauthorized: false },
     synchronize: true,
     logging: false,
-    entities: [Userr, Session],
+    entities: [Userr, Session, Publicacao],
     migrations: [],
     subscribers: [],
 })

@@ -98,14 +98,22 @@
 //03/05/22
     1 -> Ajustes no template                                        --Ok--
 
-//05/05/03
+//05/05/22
     1 -> Mundança do banco de dados Elephant para AWS               --OK--
     2 -> Inserção de informações na tela principal                  --OK--
     2 -> Ajstes na barra de navegação                               --OK--
 
-//06/05/03
+//06/05/22
     1 -> Pesquisa de Copyright                                      --OK--
     2 -> Criação de página de Copyrights                            --OK--
+
+//12/05/22
+    1 -> Criação de arquivo para gerenciar administradores          --OK--
+    2 -> Configuração de rotas para atualizar Site                  --OK--
+    3 -> Criação de página para atualizar imagens                   --Parcial--
+
+Link teste Images:
+https://drive.google.com/file/d/1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n/view?usp=sharing
 
 OBS: Criar tabela para link das imagens(7 links)
     Criar página para atualizar os links

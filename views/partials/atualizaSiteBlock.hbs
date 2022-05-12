@@ -1,0 +1,52 @@
+<div class="flex-col">
+{{#each publicacoes}}
+    <div class="row">
+        <form class="m-5 " action="/removeImage" method="post">
+            <img src="{{linkimg}}" class="img-fluid">
+            <label class="form-label" >{{titulo}}</label>
+            <label class="form-label" >{{empresa}}</label>
+            <button type="submit" class="btn-danger">Excluir</button>
+        </form>
+    </div>
+{{/each}}
+</div>
+<div class="d-fex justify-content-center">
+    <form class="m-5 " action="/newUser" method="post">
+    <div class="d-flex flex-column">
+        <div class="mb-3">
+            <label class="form-label">Empresa: </label>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="empresa" id="Prisma" value="Prisma" autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="Prisma">Prisma</label>
+
+                <input type="radio" class="btn-check" name="empresa" id="F&F" value="F&F" autocomplete="off">
+                <label class="btn btn-outline-success" for="F&F">F&F</label>
+
+                <input type="radio" class="btn-check" name="empresa" id="Luz" value="Luz" autocomplete="off">
+                <label class="btn btn-outline-success" for="Luz">Luz</label>
+
+                <input type="radio" class="btn-check" name="empresa" id="Dsop" value="Dsop" autocomplete="off">
+                <label class="btn btn-outline-success" for="Dsop">Dsop</label>
+
+                <input type="radio" class="btn-check" name="empresa" id="Next" value="Next" autocomplete="off">
+                <label class="btn btn-outline-success" for="Next">Next</label>
+
+                <input type="radio" class="btn-check" name="empresa" id="Futurum" value="Futurum" autocomplete="off">
+                <label class="btn btn-outline-success" for="Futurum">Futurum</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="mb-3">
+            <label for="linkimg" class="form-label">Link da Imagem</label>
+            <input type="text" class="form-control" id="linkimg" name="linkimg" required>
+        </div>
+        <div class="mb-3">
+            <label for="texto" class="form-label">Texto</label>
+            <input type="date" class="form-control" id="texto" name="texto"  required>
+        </div>
+    </div>
+    </form>
+</div>

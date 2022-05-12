@@ -1,6 +1,7 @@
 
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
+import { PublicacaoController } from "./controller/PublicacaoController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
@@ -188,7 +189,7 @@ AppDataSource.initialize().then(async () => {
 
             req.session.relogin = false 
 
-            const controler = (new (UserController))
+            const controler = new UserController
             const result = controler.one(req, res, next);
 
             if(result instanceof Promise){
@@ -231,6 +232,13 @@ AppDataSource.initialize().then(async () => {
     app.post('/removeImage', (req: any, res: any , next: NextFunction ) => {
         if(req.sessin.administrador == true){
 
+        }
+    })
+    app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
+        if(req.sessin.administrador == true){
+            const controller = new PublicacaoController
+            let publications = controller.all(req, res, next)
+            res.render("atualizaSite.hbs", {publicacoes: publications})
         }
     })
 
