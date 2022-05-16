@@ -27,8 +27,10 @@ export class UserController {
         })
         if(user == null){
             const result = await this.userRepository.save(request.body)
+            console.log("O conteúdo de result: ")
+            console.log(result)
             result.then((resultado) => {
-                console.log(resultado)
+                
                 if(resultado !== null && resultado !== undefined){
                     response.render("successCadastro.hbs", {user : resultado.firstName +" "+ resultado.lastName})
                 }
