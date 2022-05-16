@@ -25,12 +25,12 @@ export class UserController {
                 email : request.body.email
             }
         })
+        console.log(request.body)
         if(user == null){
+
             await this.userRepository.save(request.body).then((result)=> {
                 console.log(result)
-            })
-  
-            
+            })        
     }
 }
         
