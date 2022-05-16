@@ -71,9 +71,9 @@ AppDataSource.initialize().then(async () => {
     app.use(express.static(__dirname+'/public'));
 
     const adms = require(__dirname+'/public/adm.json');
-    //console.log(adms.emails[0])
 
-    //let adms =  express.static(__dirname+'/public/adm.json');
+    const userControler = new UserController
+ 
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
@@ -142,23 +142,7 @@ AppDataSource.initialize().then(async () => {
     })
 
     //Rota NewUser
-    app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
-
-        const controler = new UserController
-        const result = controler.save(req, res, next);
-
-        if(result instanceof Promise){
-            result.then((result) => {
-                if(result !== null && result !== undefined){
-                    res.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
-                }else{
-                    res.render("userCadastrarErr.hbs", {email: req.body.email})
-                } 
-            })
-        }else if(result !== null && result !== undefined){
-            res.json(result);
-        }       
-    })
+    app.post('/newUser', userControler.save)
 
     //Rota Login
     app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
@@ -229,11 +213,6 @@ AppDataSource.initialize().then(async () => {
         res.render("copyrights.hbs")
     })
 
-    app.post('/removeImage', (req: any, res: any , next: NextFunction ) => {
-        if(req.sessin.administrador == true){
-
-        }
-    })
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
             const controller = new PublicacaoController
@@ -241,7 +220,25 @@ AppDataSource.initialize().then(async () => {
             res.render("atualizaSite.hbs", {publicacoes: publications})
         }
     })
+    app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+            const controller = new PublicacaoController
+            const result = controller.save(req, res, next);
+            if(result instanceof Promise){
+                result.then((result) => {
+                    if(result !== null && result !== undefined){
+                        //Mensagem de sucesso
+                    }else{
+                        //Mensagem de erro( possível existencia de publicação com
+                                            //mesmo título e empresa)
+                    }
+                });
+            }else{
+                //Mensagem de erro ao conectar com BD
+            }
 
+        }
+    })
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});

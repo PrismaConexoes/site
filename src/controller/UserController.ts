@@ -25,11 +25,22 @@ export class UserController {
                 email : request.body.email
             }
         })
-        if(user == null){
-            return this.userRepository.save(request.body)
-        }
-        return null
         
+        if(user == null){
+            const result = await this.userRepository.save(request.body)
+            if(result instanceof Promise){
+                result.then((result) => {
+                    if(result !== null && result !== undefined){
+                        response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+                    }else{
+                        response.send("Não foi Possível salvar usuário."); //criar tela para este erro
+                    }
+                })
+            } 
+        }else{
+            response.render("userCadastrarErr.hbs", {email: request.body.email})
+        }
+  
     }
 
     /** Implementar remoção de conta

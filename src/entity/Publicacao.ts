@@ -20,4 +20,7 @@ export class Publicacao {
     @Column()
     texto: string
 
+    @Column()
+    campo: string
+
 }

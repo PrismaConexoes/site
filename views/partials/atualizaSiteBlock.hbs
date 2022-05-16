@@ -11,7 +11,7 @@
 {{/each}}
 </div>
 <div class="d-fex justify-content-center">
-    <form class="m-5 " action="/newUser" method="post">
+    <form class="m-5 " action="/newPublicacao" method="post">
     <div class="d-flex flex-column">
         <div class="mb-3">
             <label class="form-label">Empresa: </label>
@@ -35,6 +35,16 @@
                 <label class="btn btn-outline-success" for="Futurum">Futurum</label>
             </div>
         </div>
+                <div class="mb-3">
+            <label class="form-label">Campo: </label>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="carrossel" id="carrossel" value="carrossel" autocomplete="off" checked>
+                <label class="btn btn-outline-success" for="carrossel">Carrossel</label>
+
+                <input type="radio" class="btn-check" name="corpo" id="corpo" value="corpo" autocomplete="off">
+                <label class="btn btn-outline-success" for="corpo">Corpo</label>
+            </div>
+        </div>
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="titulo" required>
@@ -45,8 +55,9 @@
         </div>
         <div class="mb-3">
             <label for="texto" class="form-label">Texto</label>
-            <input type="date" class="form-control" id="texto" name="texto"  required>
+            <input type="text" class="form-control" id="texto" name="texto"  required>
         </div>
+        <button type="submit" class="btn-primary w-100">Publicar</button>
     </div>
     </form>
 </div>
