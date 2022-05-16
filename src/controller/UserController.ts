@@ -30,7 +30,7 @@ export class UserController {
             result = JSON.parse(result)
             console.log("O conteúdo de result: ")
             console.log(result)
-            result.then((resultado) => {
+           /**  result.then((resultado) => {
                 
                 if(resultado !== null && resultado !== undefined){
                     response.render("successCadastro.hbs", {user : resultado.firstName +" "+ resultado.lastName})
@@ -38,7 +38,7 @@ export class UserController {
             })       
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
-        }
+        }*/
     }
         
 
