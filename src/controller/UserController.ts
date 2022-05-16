@@ -30,12 +30,14 @@ export class UserController {
             const result = await this.userRepository.save(request.body)
             if(result instanceof Promise){
                 result.then((result) => {
-                    if(result !== null && result !== undefined){
+                    if(result !== null){
                         response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
                     }else{
                         response.send("Não foi Possível salvar usuário."); //criar tela para este erro
                     }
                 })
+            }else{
+                response.send("Não foi Possível salvar usuário."); //criar tela para este erro 
             } 
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
