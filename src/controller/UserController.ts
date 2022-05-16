@@ -26,7 +26,8 @@ export class UserController {
             }
         })
         if(user == null){
-            const result = await this.userRepository.save(request.body)
+            let result = await this.userRepository.save(request.body)
+            result = JSON.parse(result)
             console.log("O conteúdo de result: ")
             console.log(result)
             result.then((resultado) => {
