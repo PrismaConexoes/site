@@ -25,25 +25,23 @@ export class UserController {
                 email : request.body.email
             }
         })
-        
         if(user == null){
-            const result = await this.userRepository.save(request.body)
+            const result = this.userRepository.save(request.body)
+
             if(result instanceof Promise){
                 result.then((result) => {
-                    if(result !== null){
+                    if(result !== null && result !== undefined){
                         response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
-                    }else{
-                        response.send("Não foi Possível salvar usuário."); //criar tela para este erro
                     }
                 })
-            }else{
-                response.send("Não foi Possível salvar usuário."); //criar tela para este erro 
-            } 
+            }else if(result !== null && result !== undefined){
+                response.json(result);
+            }       
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }
-  
     }
+        
 
     /** Implementar remoção de conta
     async remove(request: Request, response: Response, next: NextFunction) {

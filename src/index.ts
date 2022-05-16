@@ -73,7 +73,10 @@ AppDataSource.initialize().then(async () => {
     const adms = require(__dirname+'/public/adm.json');
 
     const userControler = new UserController
- 
+
+    //Rota NewUser
+    app.post('/newUser', userControler.save)
+    
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
@@ -141,8 +144,7 @@ AppDataSource.initialize().then(async () => {
         }       
     })
 
-    //Rota NewUser
-    app.post('/newUser', userControler.save)
+
 
     //Rota Login
     app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
