@@ -75,7 +75,9 @@ AppDataSource.initialize().then(async () => {
     const userControler = new UserController
 
     //Rota NewUser
-    app.post('/newUser', userControler.save)
+    app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
+        userControler.save(req, res, next);
+    })
     
     //Rotas
     //Rota Prisma

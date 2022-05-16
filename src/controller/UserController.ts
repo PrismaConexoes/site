@@ -20,17 +20,18 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
+        console.log(request.body)
         let user =  await this.userRepository.findOne({
             where: {
                 email : request.body.email
             }
         })
-        console.log(request.body)
+        
         if(user == null){
 
-            await this.userRepository.save(request.body).then((result)=> {
-                console.log(result)
-            })        
+            const result = await this.userRepository.save(request.body)
+            console.log(result)
+                
     }
 }
         
