@@ -40,6 +40,7 @@ export class UserController {
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }*/
     }
+}
         
 
     /** Implementar remoção de conta
