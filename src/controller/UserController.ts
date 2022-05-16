@@ -27,17 +27,12 @@ export class UserController {
         })
         if(user == null){
             const result = await this.userRepository.save(request.body)
-
-            if(result instanceof Promise){
-                result.then((result) => {
-                    console.log(result)
-                    if(result !== null && result !== undefined){
-                        response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
-                    }
-                })
-            }else if(result !== null && result !== undefined){
-                response.json(result);
-            }       
+            result.then((result) => {
+                console.log(result)
+                if(result !== null && result !== undefined){
+                    response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+                }
+            })       
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }
