@@ -27,10 +27,10 @@ export class UserController {
         })
         if(user == null){
             const result = await this.userRepository.save(request.body)
-            result.then((result) => {
-                console.log(result)
-                if(result !== null && result !== undefined){
-                    response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+            result.then((resultado) => {
+                console.log(resultado)
+                if(resultado !== null && resultado !== undefined){
+                    response.render("successCadastro.hbs", {user : resultado.firstName +" "+ resultado.lastName})
                 }
             })       
         }else{
