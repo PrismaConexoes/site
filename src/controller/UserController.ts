@@ -62,11 +62,13 @@ export class UserController {
                         });
                         response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
                     }else{
+                        console.log("primeiro")
                         request.session.relogin = false
-                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
+                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: false});
                     }
                 }); 
             }else if(user !== null && user !== undefined){
+                console.log("segundo")
                 request.session.relogin = false
                 response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: false});
             }
