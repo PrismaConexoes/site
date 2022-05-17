@@ -28,8 +28,8 @@
                     <button type="button" class="btn border" onclick="olho()" id="btn_olho"><img src="icons/olho_a_icon.png" id="icon_olho"></button>
                 </div>          
             </div>
-            <div id="g-recaptcha"></div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            <div id="g-recaptcha-concreto"></div>
+            <button class="g-recaptcha" data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit'>Entrar</button>
             {{#if captchaErr}}
                 <div class="alert alert-danger" role="alert" id="alerta2">
                     {{status}}

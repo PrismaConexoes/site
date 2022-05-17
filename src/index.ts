@@ -67,16 +67,10 @@ AppDataSource.initialize().then(async () => {
     app.engine('hbs', exphbs.engine({extname: '.hbs'})); //configurando a extenção para .hbs invés de .handlebars
     app.set('view engine', 'hbs');                //Definindo handlebars como motor de visão do express
 
-
-
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-   
-
     const userControler = new UserController
-
-
     
     //Rotas
     //Rota Prisma
