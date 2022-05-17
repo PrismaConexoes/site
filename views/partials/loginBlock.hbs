@@ -1,7 +1,7 @@
 <div class="flex-column ">
 
     <div class="d-flex justify-content-around"> 
-        <form class="m-5 " action="/entrar" method="post">
+        <form class="m-5 " action="/entrar" method="post" id="formulario">
             {{#if relogin}}
                 <div class="alert alert-danger" role="alert" id="alerta">
                     Usuário não encontrado!
@@ -28,7 +28,6 @@
                     <button type="button" class="btn border" onclick="olho()" id="btn_olho"><img src="icons/olho_a_icon.png" id="icon_olho"></button>
                 </div>          
             </div>
-            <div id="g-recaptcha-concreto"></div>
             <button class="g-recaptcha btn btn-primary w-100" data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback='onSubmit' data-action='submit'>Entrar</button>
             {{#if captchaErr}}
                 <div class="alert alert-danger" role="alert" id="alerta2">
