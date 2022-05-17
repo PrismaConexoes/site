@@ -49,6 +49,7 @@ export class UserController {
         if(user !== null){        
             if(user instanceof Promise){
                 user.then((user) => {
+                    console.log(user)
                     if(user !== null && user !== undefined){
                         request.session.login = true
                         request.session.user =  user.firstName +" "+ user.lastName
@@ -60,17 +61,14 @@ export class UserController {
                                 request.session.administrador = true;
                             }
                         });
+                        //Login Efetuado Com Sucesso
                         response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
                     }else{
-                        console.log("primeiro")
+                        //Usuário Não Encontrado
                         request.session.relogin = true
-                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, status: "", relogin: true});
+                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
                     }
                 }); 
-            }else if(user !== null && user !== undefined){
-                console.log("segundo")
-                request.session.relogin = false
-                response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: false});
             }
         }else{
             request.session.relogin = true
