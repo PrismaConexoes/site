@@ -45,7 +45,8 @@ export class UserController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
         let user =  this.one(request, response, next)
-        if(user == null){        
+
+        if(user !== null){        
             if(user instanceof Promise){
                 user.then((user) => {
                     if(user !== null && user !== undefined){
@@ -71,7 +72,7 @@ export class UserController {
             }
         }else{
             request.session.relogin = true
-            response.render("userCadastrarErr.hbs", {email: request.body.email})
+            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, status: "", relogin: true});
         }
     }
         

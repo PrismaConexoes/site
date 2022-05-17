@@ -166,12 +166,9 @@ AppDataSource.initialize().then(async () => {
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
-            console.log(error)
             if (!error) {
-                console.log("!error")
                 userControler.logar(req, res, next, recaptcha)
             } else {
-                console.log("error")
                 req.session.relogin = false
                 res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
             }
