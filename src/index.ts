@@ -181,7 +181,6 @@ AppDataSource.initialize().then(async () => {
             }
         })
     });
-
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         req.session.login = false
         req.session.relogin = false
