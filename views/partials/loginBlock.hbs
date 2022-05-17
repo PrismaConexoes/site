@@ -31,13 +31,13 @@
             <div id="g-recaptcha"></div>
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
             {{#if captchaErr}}
-                <div class="alert alert-danger" role="alert" id="alerta">
+                <div class="alert alert-danger" role="alert" id="alerta2">
                     {{status}}
                 </div>
                 <script>
                     setTimeout(function(){
 
-                        var alert = document.getElementById("alerta");
+                        var alert = document.getElementById("alerta2");
 
                         alert.style="display:none"
 

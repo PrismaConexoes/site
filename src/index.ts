@@ -176,8 +176,8 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 userControler.logar(req, res, next, recaptcha)
             } else {
-                req.session.relogin = true
-                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: true});
+                req.session.relogin = false
+                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
             }
         })
     });
