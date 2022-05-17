@@ -152,21 +152,21 @@ AppDataSource.initialize().then(async () => {
         }           
     })
 
-        //Rota NewUser
-        app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
-            recaptcha.verify(req, function (error, data) {
-                if (!error) {
-                    userControler.save(req, res, next)
-                } else {
-                    res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
-                }
-            })
-        
-            
-        })
+    //Rota NewUser
+    app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                userControler.save(req, res, next)
+            } else {
+                res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
+            }
+        })        
+    })
+
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
+            console.log(data)
             if (!error) {
                 userControler.logar(req, res, next, recaptcha)
             } else {
@@ -175,6 +175,8 @@ AppDataSource.initialize().then(async () => {
             }
         })
     });
+
+    //Rota Desalogar    
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         req.session.login = false
         req.session.relogin = false
