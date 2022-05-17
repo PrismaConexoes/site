@@ -11,7 +11,7 @@ export class UserController {
     }*/
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.findOne({
+        return await this.userRepository.findOne({
             where: {
                 email : request.body.email,
                 password: request.body.password
@@ -25,8 +25,6 @@ export class UserController {
                 email : request.body.email
             }
         })
-        console.log(user)
-
         if(user == null){        
             const result = await this.userRepository.save(request.body)
 
@@ -40,6 +38,37 @@ export class UserController {
                     }
                 })
             }  
+        }else{
+            response.render("userCadastrarErr.hbs", {email: request.body.email})
+        }
+    }
+
+    async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
+        let user =  this.one(request, response, next)
+        if(user == null){        
+            if(user instanceof Promise){
+                user.then((user) => {
+                    if(user !== null && user !== undefined){
+                        request.session.login = true
+                        request.session.user =  user.firstName +" "+ user.lastName
+                        request.session.email = user.email
+
+                        const adms = require(__dirname+'/public/adm.json');
+                        adms.emails.forEach((email) => {
+                            if(request.session.email == email){
+                                request.session.administrador = true;
+                            }
+                        });
+                        response.render('/')
+                    }else{
+                        request.session.relogin = true
+                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: true});
+                    }
+                }); 
+            }else if(user !== null && user !== undefined){
+                request.session.relogin = true
+                response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: true});
+            }
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }

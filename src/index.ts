@@ -72,24 +72,11 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
-    const adms = require(__dirname+'/public/adm.json');
+   
 
     const userControler = new UserController
 
-    //Rota NewUser
-    app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
-        recaptcha.verify(req, function (error, data) {
-            if (!error) {
-                console.log("data: ")
-                console.log(data)
-                userControler.save(req, res, next)
-            } else {
-                res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
-            }
-        })
-    
-        
-    })
+
     
     //Rotas
     //Rota Prisma
@@ -165,60 +152,36 @@ AppDataSource.initialize().then(async () => {
     app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
         let login = req.session.login
         if(login == false){
-            res.render("login.hbs", {relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
+            res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
         }else{
             res.render("userLogadoErr", {user: req.session.user})
         }           
     })
 
+        //Rota NewUser
+        app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
+            recaptcha.verify(req, function (error, data) {
+                if (!error) {
+                    userControler.save(req, res, next)
+                } else {
+                    res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
+                }
+            })
+        
+            
+        })
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
-        if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
-        {
-            
-          return res.render("login.hbs", { captcha: res.recaptcha, state: "Erro de Captcha"});
-        }
-        
-        const secretKey = "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC";
-        const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-        
-        request(verificationURL,function(error,response,body) { 
-            body = JSON.parse(body);
-            console.log(res.recaptcha)
-            if(body.success !== undefined && !body.success) {
-            return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                userControler.logar(req, res, next, recaptcha)
+            } else {
+                req.session.relogin = true
+                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: true});
             }
-
-            req.session.relogin = false 
-
-            const controler = new UserController
-            const result = controler.one(req, res, next);
-
-            if(result instanceof Promise){
-                result.then((result) => {
-                    if(result !== null && result !== undefined){
-                        req.session.login = true
-                        req.session.user =  result.firstName +" "+ result.lastName
-                        req.session.email = result.email
-
-                        adms.emails.forEach((email) => {
-                            if(req.session.email == email){
-                                req.session.administrador = true;
-                            }
-                        });
-
-                        console.log(req.session);
-                        res.redirect('/')
-                    }else{
-                        req.session.relogin = true
-                        res.render("login.hbs", {relogin: true})
-                    }
-                }); 
-            }else if(result !== null && result !== undefined){
-                res.json(result);
-            }
-        });
+        })
     });
+
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         req.session.login = false
         req.session.relogin = false
