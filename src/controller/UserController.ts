@@ -60,7 +60,7 @@ export class UserController {
                                 request.session.administrador = true;
                             }
                         });
-                        response.render('/')
+                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
                     }else{
                         request.session.relogin = false
                         response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
