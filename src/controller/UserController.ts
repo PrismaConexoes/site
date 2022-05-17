@@ -54,7 +54,7 @@ export class UserController {
                         request.session.user =  user.firstName +" "+ user.lastName
                         request.session.email = user.email
 
-                        const adms = require(__dirname+'/public/adm.json');
+                        const adms = require('../public/adm.json');
                         adms.emails.forEach((email) => {
                             if(request.session.email == email){
                                 request.session.administrador = true;
