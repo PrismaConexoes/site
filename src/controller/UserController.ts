@@ -61,15 +61,16 @@ export class UserController {
                         });
                         response.render('/')
                     }else{
-                        request.session.relogin = true
-                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: true});
+                        request.session.relogin = false
+                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
                     }
                 }); 
             }else if(user !== null && user !== undefined){
-                request.session.relogin = true
-                response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: true});
+                request.session.relogin = false
+                response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no Login", relogin: false});
             }
         }else{
+            request.session.relogin = true
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }
     }
