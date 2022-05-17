@@ -62,9 +62,11 @@
           </div>
           <div class="d-flex justify-content-center">
             <button type="submit" class="btn-primary w-100">Cadastrar</button>
+              
+            <div id="g-recaptcha"></div>
             <script type="text/javascript">
               var onloadCallback = function() {
-                grecaptcha.render('html_element', {
+                grecaptcha.render('g-recaptcha', {
                   'sitekey' : '6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC'
                 });
               };
