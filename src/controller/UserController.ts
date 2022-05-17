@@ -20,20 +20,30 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        console.log(request.body)
         let user =  await this.userRepository.findOne({
             where: {
                 email : request.body.email
             }
         })
-        
-        if(user == null){
+        console.log(user)
 
+        if(user == null){        
             const result = await this.userRepository.save(request.body)
-            console.log(result)
-                
+
+            if(result instanceof Promise){
+                result.then((result) => {
+                    if(result !== null && result !== undefined){
+                        response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+                    }else{
+                        console.log("Erro ao realizar cadastro")
+                        //Redirecionar para página de cadastro
+                    }
+                })
+            }  
+        }else{
+            response.render("userCadastrarErr.hbs", {email: request.body.email})
+        }
     }
-}
         
 
     /** Implementar remoção de conta

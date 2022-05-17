@@ -29,7 +29,21 @@
                 </div>          
             </div>
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            <p class="text-danger">{{state}}</p>
+            {{#if captcha}}
+                <div class="alert alert-danger" role="alert" id="alerta">
+                    {{status}}
+                </div>
+                <script>
+                    setTimeout(function(){
+
+                        var alert = document.getElementById("alerta");
+
+                        alert.style="display:none"
+
+
+                        }, 3000);
+                </script>
+            {{/if}}
             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
             <input type="hidden" name="action" value="validate_captcha">
         </form>

@@ -6,7 +6,7 @@ import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
 import { json } from "body-parser"
-import { Repository } from "typeorm"
+
 
 AppDataSource.initialize().then(async () => {
 
@@ -43,29 +43,31 @@ AppDataSource.initialize().then(async () => {
     )
 
    
+    //Configuração do reCaptcha
+    const Recaptcha = require('express-recaptcha').RecaptchaV3
+    const options = { 
+        hl: 'pt',
+        callback: gResponse
+    }  
+    const recaptcha = new Recaptcha('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', options)
 
+    function gResponse(res){
+        console.log(res)
 
+    }
     //Configuração do body-parser
     const bp = require('body-parser')
     app.use(bp.json())
     app.use(bp.urlencoded({extended: true}))
     
-    //Configuração do reCaptcha
-    const captcha = require('express-recaptcha').RecaptchaV3
-    const options = { 
-        hl: 'pt',
-        callback: testeF //Ver mais sobre a função de callback neste caso 
-    }  
-    const recaptcha = new captcha('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', options)
 
-    function testeF(req, res){
-        res.send(req.body)
-    } 
     //Engine express-handlebars
     const exphbs  = require('express-handlebars');
     //Configuração do handlebars
     app.engine('hbs', exphbs.engine({extname: '.hbs'})); //configurando a extenção para .hbs invés de .handlebars
     app.set('view engine', 'hbs');                //Definindo handlebars como motor de visão do express
+
+
 
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
@@ -76,12 +78,23 @@ AppDataSource.initialize().then(async () => {
 
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
-        userControler.save(req, res, next);
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                console.log("data: ")
+                console.log(data)
+                userControler.save(req, res, next)
+            } else {
+                res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
+            }
+        })
+    
+        
     })
     
     //Rotas
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
+       
          if(!req.session.login){
             req.session.user = ''
             req.session.login = false
@@ -142,7 +155,7 @@ AppDataSource.initialize().then(async () => {
         if(req.session.login == true){
             res.render("userLogadoErr", {user: req.session.user})
         }else{
-            res.render("cadastrar.hbs")
+            res.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
         }       
     })
 
@@ -162,15 +175,16 @@ AppDataSource.initialize().then(async () => {
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
         if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
         {
+            
           return res.render("login.hbs", { captcha: res.recaptcha, state: "Erro de Captcha"});
         }
+        
         const secretKey = "6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC";
-        console.log(recaptcha)
-        console.log(recaptcha.middleware.render)
         const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
         
         request(verificationURL,function(error,response,body) { 
             body = JSON.parse(body);
+            console.log(res.recaptcha)
             if(body.success !== undefined && !body.success) {
             return res.render("login.hbs", { captcha: res.recaptcha, state: "Falha no captcha"});
             }

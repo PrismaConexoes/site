@@ -113,7 +113,11 @@
     3 -> Criação de página para atualizar imagens                   --Parcial--
 
 //16/05/22
-    2 -> Ajuste na arquitetura                                      --
+    1 -> Ajuste na arquitetura                                      --Partial--
+    2 -> Mensagem de erro no captcha  cadastro                      --OK--
+
+17/05/22
+    1 -> Manutenção do google captcha (cadastro)                     --                              
 
 Link teste Images:
 https://drive.google.com/file/d/1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n/view?usp=sharing
