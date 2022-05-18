@@ -2,7 +2,7 @@
 {{#each publicacoes}}
     <div class="row">
         <form class="m-5 " action="/removeImage" method="post">
-            <img src="https://docs.google.com/uc?id="+{{linkimg}}" class="img-fluid">
+            <img src="https://docs.google.com/uc?id={{linkimg}}" class="img-fluid">
             <label class="form-label" >{{titulo}}</label>
             <label class="form-label" >{{empresa}}</label>
             <button type="submit" class="btn-danger">Excluir</button>
