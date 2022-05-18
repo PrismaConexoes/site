@@ -7,7 +7,18 @@ export class PublicacaoController {
     private publicacaoRepository = AppDataSource.getRepository(Publicacao)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return await this.publicacaoRepository.find()
+        const result = await this.publicacaoRepository.find()
+        if(result instanceof Promise){
+            result.then((result) => {
+                if(result !== null && result !== undefined){
+                    response.render("atualizaSite.hbs", {publicacoes: result})
+                }else{
+                    response.render("atualizaSite.hbs", {publicacoes: null})
+                }
+            });
+        }else{
+            response.render("atualizaSite.hbs", {publicacoes: null})
+        }        
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
