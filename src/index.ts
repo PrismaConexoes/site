@@ -191,6 +191,8 @@ AppDataSource.initialize().then(async () => {
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             let publications = publicacaoController.all(req, res, next)
+            console.log("publicacoes")
+            console.log(publications)
             res.render("atualizaSite.hbs", {publicacoes: publications})
         }else{
             res.redirect('/')
