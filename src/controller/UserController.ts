@@ -27,9 +27,10 @@ export class UserController {
         })
         console.log(user)
         console.log(request.body)
-        if(user == null){        
+        if(user == null){
+            console.log("Entrou")        
             const result = await this.userRepository.save(request.body)
-            
+            console.log(result)  
             if(result instanceof Promise){
                 result.then((result) => {
                     console.log(result)
