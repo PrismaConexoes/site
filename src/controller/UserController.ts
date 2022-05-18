@@ -25,6 +25,8 @@ export class UserController {
                 email : request.body.email
             }
         })
+        console.log(user)
+        console.log(request.body)
         if(user == null){        
             const result = await this.userRepository.save(request.body)
             
