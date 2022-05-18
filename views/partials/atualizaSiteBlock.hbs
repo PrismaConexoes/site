@@ -4,14 +4,17 @@
         <form class="m-5 " action="/removeImage" method="post">
             <div class="flex-column">
                 <div class="mb-1"><img src="https://docs.google.com/uc?id={{linkimg}}" class="img-fluid"></div>
-                <div class="mt-1"><label class="form-label" >Empresa: <strong>{{empresa}}</strong></label></div>
-                <div><label class="form-label" >Título: {{titulo}}</label></div>
+                <div class="mt-1"><label class="form-label" ><strong>Empresa: </strong>{{empresa}}</label></div>
+                <div><label class="form-label" ><strong>Título: </strong>{{titulo}}</label></div>
                 <div><button type="submit" class="btn-danger">Excluir Publicação</button></div>    
             </div>
         </form>
     </div>
 {{/each}}
 </div>
+<hr class="mt-5"/>
+<h3>Nova Publicação</h3>
+<hr/>
 <div class="d-fex justify-content-center">
     <form class="m-5 " action="/newPublicacao" method="post">
     <div class="d-flex flex-column">
