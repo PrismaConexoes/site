@@ -1,11 +1,20 @@
+<hr class="mt-5"/>
+<h3>Publicações</h3>
+<hr/>
 <div class="flex-col">
 {{#each publicacoes}}
     <div class="row">
-        <form class="m-5 " action="/removeImage" method="post">
+        <form class="m-5 " action="/removePublicacao" method="post">
             <div class="flex-column">
                 <div class="mb-1"><img src="https://docs.google.com/uc?id={{linkimg}}" class="img-fluid"></div>
-                <div class="mt-1"><label class="form-label" ><strong>Empresa: </strong>{{empresa}}</label></div>
-                <div><label class="form-label" ><strong>Título: </strong>{{titulo}}</label></div>
+                <div class="mt-1">
+                    <label class="form-label" ><strong>Empresa: </strong>{{empresa}}</label>
+                    <input type="hidden" name="empresa" value="{{empresa}}"/>
+                </div>
+                <div>
+                    <label class="form-label" ><strong>Título: </strong>{{titulo}}</label>
+                    <input type="hidden" name="titulo" value="{{titulo}}"/>    
+                </div>
                 <div><button type="submit" class="btn-danger">Excluir Publicação</button></div>    
             </div>
         </form>

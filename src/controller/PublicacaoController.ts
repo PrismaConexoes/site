@@ -22,7 +22,7 @@ export class PublicacaoController {
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return await this.publicacaoRepository.findOne({
+        return this.publicacaoRepository.findOne({
             where: {
                 titulo : request.body.titulo,
                 empresa: request.body.empresa
@@ -31,7 +31,7 @@ export class PublicacaoController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        let publicacao =  await this.publicacaoRepository.findOne({
+        let publicacao = this.publicacaoRepository.findOne({
             where: {
                 titulo : request.body.titulo,
                 empresa: request.body.empresa
@@ -57,15 +57,33 @@ export class PublicacaoController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let publicacao =  await this.publicacaoRepository.findOne({
+        let result = this.publicacaoRepository.findOne({
             where: {
                 titulo : request.body.titulo,
                 empresa: request.body.empresa
             }
         })
-        if(publicacao == null){
-            return null
+        if(result instanceof Promise){
+            result.then((result) => {
+                if(result !== null && result !== undefined){
+                    let res = this.publicacaoRepository.remove(result)
+                    if(res instanceof Promise){
+                        res.then((res) => {
+                            if(res !== null && res !== undefined){
+                                response.render('sucessoPublicacaoRemovida.hbs')
+                            }else{
+                                response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
+                            }
+                        });
+                    }else{
+                        response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
+                    }
+                }else{
+                    response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
+                }
+            });
+        }else{
+            response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
         }
-        await this.publicacaoRepository.remove(publicacao)
-    }
-}
+    }    
+}   

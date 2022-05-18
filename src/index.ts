@@ -196,9 +196,16 @@ AppDataSource.initialize().then(async () => {
         }
     })
     app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
-        console.log(req.body)
         if(req.session.administrador == true){
            publicacaoController.save(req, res, next);
+        }else{
+            res.redirect('/')
+        }
+    })
+    app.post('/removePublicacao', (req: any, res: any , next: NextFunction ) => {
+        console.log(req.body)
+        if(req.session.administrador == true){
+           publicacaoController.remove(req, res, next);
         }else{
             res.redirect('/')
         }

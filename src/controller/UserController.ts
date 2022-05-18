@@ -11,7 +11,7 @@ export class UserController {
     }*/
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return await this.userRepository.findOne({
+        return this.userRepository.findOne({
             where: {
                 email : request.body.email,
                 password: request.body.password
@@ -20,7 +20,7 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
-        let user =  await this.userRepository.findOne({
+        let user = this.userRepository.findOne({
             where: {
                 email : request.body.email
             }
