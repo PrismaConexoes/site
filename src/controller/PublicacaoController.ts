@@ -27,9 +27,22 @@ export class PublicacaoController {
             }
         })
         if(publicacao == null){
-            return await this.publicacaoRepository.save(request.body)
+            const result = this.publicacaoRepository.save(request.body)
+            if(result instanceof Promise){
+                result.then((result) => {
+                    if(result !== null && result !== undefined){
+                       
+                        response.render('sucessoPublicacao.hbs')
+                    }else{
+                        response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+                    }
+                });
+            }else{
+                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+            }
+
         }
-        return null     
+        response.render('publicacaoErr.hbs', {status : "Já existe uma publicação para esta empresa com o mesmo título"})   
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {

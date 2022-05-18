@@ -121,6 +121,10 @@
     2 -> Ajuste do google captcha (login)                            --OK--
     3 -> Criação do controlador de login                             --OK--
 
+//18/05/22
+    1 -> Criação do controlador de cadastro de usuário              --OK--
+    2 -> Ajuste na arquitetura                                      --Partial--
+
 //Criar Controlador de cadastro                              
 
 Link teste Images:

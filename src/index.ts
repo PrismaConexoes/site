@@ -70,7 +70,9 @@ AppDataSource.initialize().then(async () => {
     //configurando o express para usar arquivos de pastas
     app.use(express.static(__dirname+'/public'));
 
+    //controladores
     const userControler = new UserController
+    const publicacaoController = new PublicacaoController
     
     //Rotas
     //Rota Prisma
@@ -154,7 +156,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
-                userControler.save(req, res, next)
+                userControler.save(req, res, next, recaptcha)
             } else {
                 res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
             }
@@ -187,29 +189,18 @@ AppDataSource.initialize().then(async () => {
     })
 
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
-        if(req.session.administrador == true){
-            const controller = new PublicacaoController
-            let publications = controller.all(req, res, next)
+        if(req.session.administrador == true){    
+            let publications = publicacaoController.all(req, res, next)
             res.render("atualizaSite.hbs", {publicacoes: publications})
+        }else{
+            res.redirect('/')
         }
     })
     app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-            const controller = new PublicacaoController
-            const result = controller.save(req, res, next);
-            if(result instanceof Promise){
-                result.then((result) => {
-                    if(result !== null && result !== undefined){
-                        //Mensagem de sucesso
-                    }else{
-                        //Mensagem de erro( possível existencia de publicação com
-                                            //mesmo título e empresa)
-                    }
-                });
-            }else{
-                //Mensagem de erro ao conectar com BD
-            }
-
+            const result = publicacaoController.save(req, res, next);
+        }else{
+            res.redirect('/')
         }
     })
     const PORT = process.env.PORT || 3000

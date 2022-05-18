@@ -19,7 +19,7 @@ export class UserController {
         })
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
+    async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
         let user =  await this.userRepository.findOne({
             where: {
                 email : request.body.email
@@ -41,8 +41,7 @@ export class UserController {
                     if(result !== null && result !== undefined){
                         response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
                     }else{
-                        console.log("Erro ao realizar cadastro")
-                        //Redirecionar para página de cadastro
+                        response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
                     }
                 })
             }  
