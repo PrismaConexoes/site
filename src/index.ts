@@ -197,8 +197,9 @@ AppDataSource.initialize().then(async () => {
         }
     })
     app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
+        console.log(req.body)
         if(req.session.administrador == true){
-            const result = publicacaoController.save(req, res, next);
+           publicacaoController.save(req, res, next);
         }else{
             res.redirect('/')
         }
