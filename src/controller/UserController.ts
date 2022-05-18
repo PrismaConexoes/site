@@ -33,7 +33,7 @@ export class UserController {
 
             console.log(usuario)
                 
-            const result = await this.userRepository.save(usuario)
+            const result = this.userRepository.save(usuario)
          
             if(result instanceof Promise){
                 result.then((result) => {
