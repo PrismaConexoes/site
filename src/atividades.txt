@@ -118,7 +118,10 @@
 
 17/05/22
     1 -> Ajuste do google captcha (cadastro)                         --OK--
-    2 -> Ajuste do google captcha (login)                            --OK--                              
+    2 -> Ajuste do google captcha (login)                            --OK--
+    3 -> Criação do controlador de login                             --OK--
+
+//Criar Controlador de cadastro                              
 
 Link teste Images:
 https://drive.google.com/file/d/1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n/view?usp=sharing

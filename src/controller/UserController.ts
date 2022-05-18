@@ -27,9 +27,10 @@ export class UserController {
         })
         if(user == null){        
             const result = await this.userRepository.save(request.body)
-
+            
             if(result instanceof Promise){
                 result.then((result) => {
+                    console.log(result)
                     if(result !== null && result !== undefined){
                         response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
                     }else{
@@ -49,7 +50,6 @@ export class UserController {
         if(user !== null){        
             if(user instanceof Promise){
                 user.then((user) => {
-                    console.log(user)
                     if(user !== null && user !== undefined){
                         request.session.login = true
                         request.session.user =  user.firstName +" "+ user.lastName
@@ -70,9 +70,6 @@ export class UserController {
                     }
                 }); 
             }
-        }else{
-            request.session.relogin = true
-            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, status: "", relogin: true});
         }
     }
         

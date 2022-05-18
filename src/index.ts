@@ -84,9 +84,7 @@ AppDataSource.initialize().then(async () => {
             req.session.administrador = false
         }
         req.session.relogin = false 
-        console.log(req.session)
         
-
         res.render("prisma.hbs" , {login: req.session.login, user: req.session.user, adm: req.session.administrador}) //implementar sessão e reconfigurar
     })
 
