@@ -30,7 +30,8 @@ export class UserController {
         if(user == null){
             let usuario = new Userr
             usuario = request.body
-            console.log(usuario)       
+            delete usuario['g-recaptcha-response']
+            console.log(usuario)    
             const result = await this.userRepository.save(request.body)
             console.log(result)  
             if(result instanceof Promise){
