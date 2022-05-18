@@ -28,12 +28,12 @@ export class UserController {
         console.log(user)
         console.log(request.body)
         if(user == null){
-            let usuario = new Userr
-            usuario = request.body
+            
+            let usuario = request.body
             delete usuario['g-recaptcha-response']
-            console.log(usuario)    
-            const result = await this.userRepository.save(request.body)
-            console.log(result)  
+                
+            const result = await this.userRepository.save(usuario)
+         
             if(result instanceof Promise){
                 result.then((result) => {
                     console.log(result)
