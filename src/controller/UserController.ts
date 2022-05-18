@@ -25,12 +25,13 @@ export class UserController {
                 email : request.body.email
             }
         })
-        console.log(user)
-        console.log(request.body)
+    
         if(user == null){
             
             let usuario = request.body
             delete usuario['g-recaptcha-response']
+
+            console.log(usuario)
                 
             const result = await this.userRepository.save(usuario)
          
