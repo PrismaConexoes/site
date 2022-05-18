@@ -28,7 +28,9 @@ export class UserController {
         console.log(user)
         console.log(request.body)
         if(user == null){
-            console.log("Entrou")        
+            let usuario = new Userr
+            usuario = request.body
+            console.log(usuario)       
             const result = await this.userRepository.save(request.body)
             console.log(result)  
             if(result instanceof Promise){
