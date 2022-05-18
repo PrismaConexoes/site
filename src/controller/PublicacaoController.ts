@@ -31,29 +31,34 @@ export class PublicacaoController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        let publicacao = this.publicacaoRepository.findOne({
+        let result = this.publicacaoRepository.findOne({
             where: {
                 titulo : request.body.titulo,
                 empresa: request.body.empresa
             }
         })
-        if(publicacao == null){
-            const result = this.publicacaoRepository.save(request.body)
-            if(result instanceof Promise){
-                result.then((result) => {
-                    if(result !== null && result !== undefined){
-                       
-                        response.render('sucessoPublicacao.hbs')
+        if(result instanceof Promise){
+            result.then((result) => {
+                if(result !== null && result !== undefined){
+                    const res = this.publicacaoRepository.save(request.body)
+                    if(res instanceof Promise){
+                        res.then((res) => {
+                            if(res !== null && res !== undefined){
+                                response.render('sucessoPublicacao.hbs')
+                            }else{
+                                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+                            }
+                        });
                     }else{
                         response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
                     }
-                });
-            }else{
-                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
-            }
-
-        }
-        response.render('publicacaoErr.hbs', {status : "Já existe uma publicação para esta empresa com o mesmo título"})   
+                }else{
+                    response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+                }
+            });
+        }else{
+            response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+        }      
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
