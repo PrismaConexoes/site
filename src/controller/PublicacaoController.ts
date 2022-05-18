@@ -7,7 +7,7 @@ export class PublicacaoController {
     private publicacaoRepository = AppDataSource.getRepository(Publicacao)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        const result = await this.publicacaoRepository.find()
+        const result = this.publicacaoRepository.find()
         if(result instanceof Promise){
             result.then((result) => {
                 if(result !== null && result !== undefined){
