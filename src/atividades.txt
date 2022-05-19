@@ -127,6 +127,10 @@
     3 -> Ajustes na criação de publicações                          --OK--
     4 -> Controlador para remover publicação                        --OK--
 
+//19/05/22
+    1 -> Estudo acerca de Promisse e async/await                    --Ok--
+    2 -> Ajuste dos controladores Na resolução de Promisse          --OK-- 
+
 //Criar Controlador de cadastro                              
 
 Link teste Images:

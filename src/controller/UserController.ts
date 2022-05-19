@@ -44,10 +44,9 @@ export class UserController {
     }
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
+
         let user =  await this.one(request, response, next)
         
-        //if(user instanceof Promise){
-        //    user.then((user) => {
         if(user !== null && user !== undefined){
             request.session.login = true
             request.session.user =  user.firstName +" "+ user.lastName
@@ -59,6 +58,7 @@ export class UserController {
                     request.session.administrador = true;
                 }
             });
+
             //Login Efetuado Com Sucesso
             response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
         }else{
@@ -66,9 +66,6 @@ export class UserController {
             request.session.relogin = true
             response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
         }
-         //   }); 
-       // }
-       // }
     }
         
 
