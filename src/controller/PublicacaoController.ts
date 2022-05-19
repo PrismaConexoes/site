@@ -69,9 +69,9 @@ export class PublicacaoController {
             }
         })
         if(result instanceof Promise){
-            result.then((result) => {
+            result.then( async (result) => {
                 if(result !== null && result !== undefined){
-                    let res = this.publicacaoRepository.remove(result)
+                    let res = await this.publicacaoRepository.remove(result)
                     if(res instanceof Promise){
                         res.then((res) => {
                             if(res !== null && res !== undefined){
