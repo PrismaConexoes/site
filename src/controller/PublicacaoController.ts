@@ -22,7 +22,7 @@ export class PublicacaoController {
                 campo: "carrossel"
             }
         })
-        return result    
+        return await result    
     }
     async one(request: Request, response: Response, next: NextFunction) {
         return this.publicacaoRepository.findOne({
