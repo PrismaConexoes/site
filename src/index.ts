@@ -89,12 +89,17 @@ AppDataSource.initialize().then(async () => {
         
         let carrossel = publicacaoController.allPrisma()
         console.log(carrossel)
-        
-        res.render("prisma.hbs" , {
-            login: req.session.login, 
-            user: req.session.user, 
-            adm: req.session.administrador,
-            carousel: carrossel}) 
+        if(carrossel instanceof Promise){
+            carrossel.then((car)=>{
+                res.render("prisma.hbs" , {
+                    login: req.session.login, 
+                    user: req.session.user, 
+                    adm: req.session.administrador,
+                    carousel: car}) 
+            })
+
+        }
+
     })
 
     //Rota F&F
