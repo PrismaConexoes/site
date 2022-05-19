@@ -88,6 +88,7 @@ AppDataSource.initialize().then(async () => {
         req.session.relogin = false
         
         let carrossel = publicacaoController.allCarrouselPrisma()
+        console.log(carrossel)
         
         res.render("prisma.hbs" , {
             login: req.session.login, 
