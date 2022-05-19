@@ -20,7 +20,7 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
-        let user = this.userRepository.findOne({
+        let user = await this.userRepository.findOne({
             where: {
                 email : request.body.email
             }
@@ -33,18 +33,18 @@ export class UserController {
 
             console.log(usuario)
                 
-            const result = this.userRepository.save(usuario)
+            const result = await this.userRepository.save(usuario)
          
-            if(result instanceof Promise){
-                result.then((result) => {
-                    console.log(result)
-                    if(result !== null && result !== undefined){
-                        response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
-                    }else{
-                        response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
-                    }
-                })
-            }  
+            //if(result instanceof Promise){
+            //    result.then((result) => {
+            console.log(result)
+            if(result !== null && result !== undefined){
+                response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+            }else{
+                response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
+            }
+            //    })
+            //}  
         }else{
             response.render("userCadastrarErr.hbs", {email: request.body.email})
         }
@@ -53,30 +53,30 @@ export class UserController {
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
         let user =  this.one(request, response, next)
 
-        if(user !== null){        
-            if(user instanceof Promise){
-                user.then((user) => {
-                    if(user !== null && user !== undefined){
-                        request.session.login = true
-                        request.session.user =  user.firstName +" "+ user.lastName
-                        request.session.email = user.email
+        //if(user !== null){        
+        if(user instanceof Promise){
+            user.then((user) => {
+                if(user !== null && user !== undefined){
+                    request.session.login = true
+                    request.session.user =  user.firstName +" "+ user.lastName
+                    request.session.email = user.email
 
-                        const adms = require('../public/adm.json');
-                        adms.emails.forEach((email) => {
-                            if(request.session.email == email){
-                                request.session.administrador = true;
-                            }
-                        });
-                        //Login Efetuado Com Sucesso
-                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
-                    }else{
-                        //Usuário Não Encontrado
-                        request.session.relogin = true
-                        response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
-                    }
-                }); 
-            }
+                    const adms = require('../public/adm.json');
+                    adms.emails.forEach((email) => {
+                        if(request.session.email == email){
+                            request.session.administrador = true;
+                        }
+                    });
+                    //Login Efetuado Com Sucesso
+                    response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+                }else{
+                    //Usuário Não Encontrado
+                    request.session.relogin = true
+                    response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
+                }
+            }); 
         }
+       // }
     }
         
 
