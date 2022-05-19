@@ -1,8 +1,8 @@
 
 <div id="mainCarousel" class="carousel slide m-5" data-bs-ride="carousel">
   <div class="carousel-inner ">
-    
-    {{#echo carousel}}
+
+    {{#each carousel}}
       <div class="carousel-item active ">
         <img src="https://docs.google.com/uc?id={{linkimg}}" class="d-block w-100">
         <div class="carousel-caption d-none d-md-block">
@@ -10,7 +10,7 @@
           <p>{{texto}}</p>
         </div>
       </div>
-    {{/echo}}
+    {{/each}}
 
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
