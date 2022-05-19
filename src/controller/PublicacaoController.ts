@@ -15,14 +15,12 @@ export class PublicacaoController {
             response.render("atualizaSite.hbs", {publicacoes: null})
         }  
     }
-    async allCarrouselPrisma() {
-        const result = await this.publicacaoRepository.find({
-            where:{
+    async allPrisma() {
+        const result = await this.publicacaoRepository.findBy({
                 empresa: "Prisma",
                 campo: "carrossel"
-            }
         })
-        return await result    
+        return result    
     }
     async one(request: Request, response: Response, next: NextFunction) {
         return this.publicacaoRepository.findOne({

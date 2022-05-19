@@ -87,7 +87,7 @@ AppDataSource.initialize().then(async () => {
         }
         req.session.relogin = false
         
-        let carrossel = publicacaoController.allCarrouselPrisma()
+        let carrossel = publicacaoController.allPrisma()
         console.log(carrossel)
         
         res.render("prisma.hbs" , {
