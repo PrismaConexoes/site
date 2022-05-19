@@ -85,9 +85,15 @@ AppDataSource.initialize().then(async () => {
         if(!req.session.administrador){
             req.session.administrador = false
         }
-        req.session.relogin = false 
+        req.session.relogin = false
         
-        res.render("prisma.hbs" , {login: req.session.login, user: req.session.user, adm: req.session.administrador}) //implementar sessão e reconfigurar
+        let carrossel = publicacaoController.allCarrouselPrisma()
+        
+        res.render("prisma.hbs" , {
+            login: req.session.login, 
+            user: req.session.user, 
+            adm: req.session.administrador,
+            carousel: carrossel}) 
     })
 
     //Rota F&F

@@ -135,6 +135,19 @@
 
 Link teste Images:
 https://drive.google.com/file/d/1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n/view?usp=sharing
+1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n
+https://drive.google.com/file/d/1e5oAi1sBEC9x3NdM2IEbV3GCGeHHDkC8/view?usp=sharing
+1e5oAi1sBEC9x3NdM2IEbV3GCGeHHDkC8
+https://drive.google.com/file/d/1_-D2akWL9v1-lT-1QATWAH_IhhrZaURD/view?usp=sharing
+1_-D2akWL9v1-lT-1QATWAH_IhhrZaURD
+
+
+//Botoes do carrossel
+<div class="carousel-indicators">
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+<button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+</div>
 
 OBS: Criar tabela para link das imagens(7 links)
     Criar página para atualizar os links
