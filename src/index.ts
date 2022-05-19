@@ -91,10 +91,13 @@ AppDataSource.initialize().then(async () => {
         console.log(carrossel)
         if(carrossel instanceof Promise){
             carrossel.then((car)=>{
+                let car1 = car[0]
+                delete car[0]
                 res.render("prisma.hbs" , {
                     login: req.session.login, 
                     user: req.session.user, 
                     adm: req.session.administrador,
+                    ativo: car1,
                     carousel: car}) 
             })
 
