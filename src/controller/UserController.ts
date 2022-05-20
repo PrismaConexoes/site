@@ -32,11 +32,19 @@ export class UserController {
         }
     }
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
-        let user = request.body
-        console.log(user)
-        if(user !== null && user !== undefined){
-            let result = await this.userRepository.update({ email: request.session.email }, request.body)
-            console.log(result.affected)
+        let dados = request.body
+        console.log(dados)
+        if(dados !== null && dados !== undefined){
+            let result = await this.userRepository.update({ email: request.session.email }, dados)
+            if(result.affected == 1){
+                request.session.email = dados.email
+                let usuario = await this.userRepository.findOne({
+                    where: {
+                        email : dados.email
+                    }
+                })
+                response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login})
+            }
         }else{
             console.log("Ocorreu um erro.") //criar page
         }
