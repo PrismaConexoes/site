@@ -34,11 +34,12 @@ export class UserController {
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
         let user = request.body
         console.log(user)
-        /*if(user !== null && user !== undefined){
-            response.render("conta.hbs", {user : user})
+        if(user !== null && user !== undefined){
+            let result = await this.userRepository.update({ email: request.session.email }, request.body)
+            console.log(result)
         }else{
-            console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
-        }*/
+            console.log("Ocorreu um erro.") //criar page
+        }
     }
 
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
