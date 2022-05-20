@@ -36,7 +36,7 @@ export class UserController {
         console.log(user)
         if(user !== null && user !== undefined){
             let result = await this.userRepository.update({ email: request.session.email }, request.body)
-            console.log(result)
+            console.log(result.affected)
         }else{
             console.log("Ocorreu um erro.") //criar page
         }
