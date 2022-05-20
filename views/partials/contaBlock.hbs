@@ -1,46 +1,46 @@
 
 <div class="container-fluid">
-    <form class="m-5 " action="/atualizarConta" method="post" id="formulario">
-        <div class="d-flex flex-column">
-            <div class="mb-3">
-                <label for="name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="name" name="firstName" placeholder="{{user.firstName}}">
-            <div class="mb-3">
-                <label for="sobrenome" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="sobrenome" name="lastName" placeholder="{{user.lastName}}">
-            </div>
-            <div class="mb-3">
-                <label for="date" class="form-label">Data de Nascimento</label>
-                <input type="date" class="form-control" id="date" name="age" placeholder="{{user.age}}">
-            </div>
-            <div class="mb-3">
-                <label for="telefone" class="form-label">Celular</label>
-                <input type="text" class="form-control" id="telefone" name="phone" placeholder="{{user.phone}}" pattern="[0-9()-]{13}$">
-                <div id="telefoneHelpBlock" class="form-text">
-                Digite apenas números
+    <div class="d-flex justify-content-center">
+        <form class="m-5 " action="/atualizarConta" method="post" id="formulario">
+            <div class="d-flex flex-column">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" name="firstName" placeholder="{{user.firstName}}">
+                <div class="mb-3">
+                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" id="sobrenome" name="lastName" placeholder="{{user.lastName}}">
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="date" name="age" placeholder="{{user.age}}">
+                </div>
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Celular</label>
+                    <input type="text" class="form-control" id="telefone" name="phone" placeholder="{{user.phone}}" pattern="[0-9()-]{13}$">
+                    <div id="telefoneHelpBlock" class="form-text">
+                    Digite apenas números
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="{{user.email}}">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="{{user.password}}" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" >
+                    <div id="passwordHelpBlock" class="form-text">
+                    Caracteres [a-z][A-Z][0-9][#$%&*+-/]
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary w-100">Atualizar</button>     
                 </div>
             </div>
-            
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="{{user.email}}">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="{{user.password}}" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" >
-                <div id="passwordHelpBlock" class="form-text">
-                Caracteres [a-z][A-Z][0-9][#$%&*+-/]
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-            
-                <button type="submit" class="btn btn-primary w-100">Atualizar</button>
-                    
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div> 
-<div class="container-fluid">
+<div class="container-fluid m-5">
     <p>Deseja remover sua conta? <a href="/removerConta" class="text-blue">Apagar Conta</a>.</p>
     <spam class="text-secondary">Ao clicar em apagar conta, não será possível fazer a recuperação da mesma.</spam>
 </div>  
