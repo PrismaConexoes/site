@@ -26,7 +26,7 @@ export class UserController {
         })
         console.log(user)
         if(user !== null && user !== undefined){
-            response.render("conta.hbs", {user : user})
+            response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login})
         }else{
             console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
         }
