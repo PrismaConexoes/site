@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="telefone" name="phone" placeholder="{{user.phone}}" value="{{user.phone}}" pattern="[0-9()-]{13}$">
+                    <input type="text" class="form-control" id="telefone" name="phone" value="{{user.phone}}" pattern="[0-9()-]{13}$">
                     <div id="telefoneHelpBlock" class="form-text">
                     Digite apenas números
                     </div>
@@ -21,11 +21,11 @@
                 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="{{user.email}}" value="{{user.email}}">
+                    <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="{{user.password}}" value={{user.password}}pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" >
+                    <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" value={{user.password}}pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" >
                     <div id="passwordHelpBlock" class="form-text">
                     Caracteres [a-z][A-Z][0-9][#$%&*+-/]
                     </div>
