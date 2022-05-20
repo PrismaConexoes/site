@@ -1,6 +1,6 @@
 <div class="flex-column ">
 
-    <div class="d-flex justify-content-around"> 
+    <div class="d-flex justify-content-center"> 
         <form class="m-5 " action="/atualizarConta" method="post" id="formulario">
             <div class="d-flex flex-column">
                 <div class="mb-3">
@@ -12,7 +12,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="date" name="age" value="{{user.age}}">
+                    <input type="date" class="form-control" id="date" name="age" placeholder="{{user.age}}">
                 </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Celular</label>
@@ -41,7 +41,7 @@
             </div>
         </form>
     </div>
-    <div class="d-flex justify-content-around m-5">
+    <div class="d-flex flex-column justify-content-around m-5">
         <p>Deseja remover sua conta? <a href="/removerConta" class="text-blue">Apagar Conta</a></p>
         <p><spam>Ao clicar em apagar conta, não será possível fazer a recuperação da mesma.</spam></p>
         
