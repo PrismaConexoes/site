@@ -196,6 +196,7 @@ AppDataSource.initialize().then(async () => {
         req.session.relogin = false
         req.session.user = ""
         req.session.email = ""
+        req.session.administrador = false
         res.redirect('/')
     } )
     
