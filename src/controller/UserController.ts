@@ -30,7 +30,15 @@ export class UserController {
         }else{
             console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
         }
-
+    }
+    async atualizarConta(request: Request, response: Response, next: NextFunction) {
+        let user = request.body
+        console.log(user)
+        /*if(user !== null && user !== undefined){
+            response.render("conta.hbs", {user : user})
+        }else{
+            console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
+        }*/
     }
 
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
