@@ -3,11 +3,13 @@
     <div class="d-flex justify-content-center">
         <form class="m-5 " action="/atualizarConta" method="post" id="formulario">
             <div class="d-flex flex-column">
-                <div class="d-flex flex-row mb-3">
-                    <h5>Nome: </h5> {{user.firstName}}
+                <div class="mb-3">
+                    <label>Nome:</label>
+                    <h5>{{user.firstName}}</h5> 
                 </div>
-                <div class="d-flex flex-row mb-3">
-                    <h5>Sobrenome: </h5> {{user.lastName}}
+                <div class="mb-3">
+                    <label>Sobrenome:</label>
+                    <h5>{{user.lastName}}</h5> 
                 </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Celular</label>
