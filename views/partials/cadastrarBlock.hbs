@@ -69,20 +69,3 @@
       </form>
     </div>
   </div>
-  <script>
-    setInterval(telefone, 150)
-    let auxTel = ""
-    function telefone(){
-      let tel = document.getElementById("telefone").value
-
-      if(tel.length == 10){
-        auxTel = tel
-      }
-      else if(tel.length == 11){
-        document.getElementById("telefone").value = "("+tel.substring(0,2)+")"+tel.substring(3,7)+"-"+tel.substring(7,11)
-      }
-      else if(tel.length == 12){
-        document.getElementById("telefone").value = auxTel
-      }
-    }
-  </script>

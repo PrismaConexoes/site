@@ -225,6 +225,15 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
+
+    app.get('/conta', (req: any, res: any , next: NextFunction ) => {
+        
+        if(req.session.login == true){
+           userControler.conta(req, res, next)
+        }else{
+            res.redirect('/login')
+        }
+    })
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
