@@ -225,7 +225,6 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
-
     app.get('/conta', (req: any, res: any , next: NextFunction ) => {
         
         if(req.session.login == true){
