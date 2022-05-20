@@ -24,6 +24,7 @@ export class UserController {
                 email : request.session.email
             }
         })
+        console.log(user)
         if(user !== null && user !== undefined){
             response.render("conta.hbs", {user : user})
         }else{
