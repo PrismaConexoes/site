@@ -19,10 +19,12 @@
         "express-recaptcha": "^5.1.0",
         "express-session": "^1.17.2",
         "heroku-ssl-redirect": "^0.1.1",
+        "nodemailer": "^6.7.5",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",
         "request": "^2.88.2",
-        "typeorm": "0.3.3"
+        "typeorm": "0.3.3",
+        "uuid": "^8.3.2"
     },
     "scripts": {
         "start": "ts-node src/index.ts",

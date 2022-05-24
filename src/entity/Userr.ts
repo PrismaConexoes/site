@@ -9,7 +9,7 @@ export class Userr {
     @Column()
     lastName: string
 
-    @PrimaryColumn()
+    @Column()
     gender: string
 
     @Column()
@@ -18,10 +18,13 @@ export class Userr {
     @PrimaryColumn()
     email: string
 
-    @PrimaryColumn()
+    @Column()
     phone: string
 
     @Column()
     password: string
+
+    @Column()
+    check: boolean
 
 }

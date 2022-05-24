@@ -130,9 +130,23 @@
 //19/05/22
     1 -> Estudo acerca de Promisse e async/await                    --Ok--
     2 -> Ajuste dos controladores Na resolução de Promisse          --OK--
-    3 -> Ajuste no template do carrossel para publicação            --OK-- 
+    3 -> Ajuste no template do carrossel para publicação            --OK--
 
-//Criar Controlador de cadastro                              
+//20/05/22
+    1 -> Criação da página de atualização cadastral                 --OK--
+    2 -> Criação da rota de atualizacão cadastral                   --OK--
+    3 -> Construção da função de atualização cadastral no controller--OK-- 
+
+//24/05/22
+    1 -> Instalação do nodemailer                                   --OK--
+    2 -> Estudo acerca do nodemailer                                --Parcial--
+    3 -> Implementação do nodemailer de teste                       --OK--
+    4 -> Instalação do node uuid                                    --Ok--
+    5 -> Criação do controlador de validação                        --OK--
+
+
+
+REFATORAÇÃO DE CÓDIGO                          
 
 Link teste Images:
 https://drive.google.com/file/d/1hXRwaNbqUo9oWuZzlnoHtUi8S0zYMC1n/view?usp=sharing

@@ -1,10 +1,13 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
 import { Userr } from "../entity/Userr"
+import { AcountValidatorController } from "./AcountValidatorController"
+import { v4 as uuidv4 } from 'uuid';
 
 export class UserController {
 
     private userRepository = AppDataSource.getRepository(Userr)
+    private acountValidator = new AcountValidatorController
 
     /**async all(request: Request, response: Response, next: NextFunction) {
         return this.userRepository.find()
@@ -60,12 +63,18 @@ export class UserController {
         if(user == null){    
 
             let usuario = request.body
-            delete usuario['g-recaptcha-response']  
+            delete usuario['g-recaptcha-response']
+            usuario.check = false  
 
             const result = await this.userRepository.save(usuario)
       
             if(result !== null && result !== undefined){
-                response.render("successCadastro.hbs", {user : result.firstName +" "+ result.lastName})
+                //gerarchaveaqui
+                let uid = uuidv4()
+                console.log("uid: "+uid)
+                //AcountValidator
+                this.acountValidator.saveSecret(usuario, uid, response)
+                response.render("validarConta.hbs", {nome: usuario.firstName+" "+usuario.lastName})
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
             }
@@ -79,19 +88,24 @@ export class UserController {
         let user =  await this.one(request, response, next)
         
         if(user !== null && user !== undefined){
-            request.session.login = true
-            request.session.user =  user.firstName +" "+ user.lastName
-            request.session.email = user.email
+            if(user.check == true){
+                request.session.login = true
+                request.session.user =  user.firstName +" "+ user.lastName
+                request.session.email = user.email
+    
+                const adms = require('../public/adm.json');
+                adms.emails.forEach((email) => {
+                    if(request.session.email == email){
+                        request.session.administrador = true;
+                    }
+                });
+    
+                //Login Efetuado Com Sucesso
+                response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+            }else{
+                //Avisar para o usuário checar conta
+            }
 
-            const adms = require('../public/adm.json');
-            adms.emails.forEach((email) => {
-                if(request.session.email == email){
-                    request.session.administrador = true;
-                }
-            });
-
-            //Login Efetuado Com Sucesso
-            response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
         }else{
             //Usuário Não Encontrado
             request.session.relogin = true

@@ -5,6 +5,7 @@ import { PublicacaoController } from "./controller/PublicacaoController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
+
 import { json } from "body-parser"
 
 
@@ -42,7 +43,6 @@ AppDataSource.initialize().then(async () => {
         })
     )
 
-   
     //Configuração do reCaptcha
     const Recaptcha = require('express-recaptcha').RecaptchaV3
     const options = { 
@@ -73,6 +73,7 @@ AppDataSource.initialize().then(async () => {
     //controladores
     const userControler = new UserController
     const publicacaoController = new PublicacaoController
+   
     
     //Rotas
     //Rota Prisma
