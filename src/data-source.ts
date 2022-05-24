@@ -4,6 +4,7 @@ import { DataSource } from "typeorm"
 import { Userr } from "./entity/Userr"
 import { Session } from "./entity/Session"
 import { Publicacao } from "./entity/Publicacao"
+import { AcountValidator } from "./entity/AcountValidator"
 
 
 export const AppDataSource = new DataSource({
@@ -16,7 +17,7 @@ export const AppDataSource = new DataSource({
     ssl: { rejectUnauthorized: false },
     synchronize: true,
     logging: false,
-    entities: [Userr, Session, Publicacao],
+    entities: [Userr, Session, Publicacao, AcountValidator],
     migrations: [],
     subscribers: [],
 })
