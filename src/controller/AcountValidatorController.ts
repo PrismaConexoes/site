@@ -24,7 +24,8 @@ export class AcountValidatorController {
             if(result !== null && result !== undefined){
                 //Renderizar aviso para checagem de email
                 console.log("validador: "+result)
-                response.render("validarConta.hbs", {nome : user.firstName +" "+ user.lastName})
+                response.render("validarConta.hbs", {nome : user.firstName})
+                
             }else{
                 console.log("Ocorreu um erro ao salvar a validação no banco")
             }
