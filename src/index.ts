@@ -167,7 +167,6 @@ AppDataSource.initialize().then(async () => {
             res.render("userLogadoErr", {user: req.session.user})
         }           
     })
-
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {

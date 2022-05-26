@@ -86,7 +86,7 @@ export class UserController {
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
 
         let user =  await this.one(request, response, next)
-        
+        console.log(user)
         if(user !== null && user !== undefined){
             if(user.check == true){
                 request.session.login = true

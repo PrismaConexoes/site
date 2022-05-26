@@ -143,6 +143,16 @@
     3 -> Implementação do nodemailer de teste                       --OK--
     4 -> Instalação do node uuid                                    --Ok--
     5 -> Criação do controlador de validação                        --OK--
+    6 -> Criação de página com mensagem de validação                --Parcial--
+
+
+
+Implementar deleção da conta
+            criação de link para enviar por email
+            criação de rota de verificação do link
+            liberação de sessão após checagem de link
+            
+
 
 
 
