@@ -25,6 +25,6 @@ export class Userr {
     password: string
 
     @Column()
-    check: boolean
+    valid: boolean
 
 }

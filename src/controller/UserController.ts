@@ -64,7 +64,7 @@ export class UserController {
 
             let usuario = request.body
             delete usuario['g-recaptcha-response']
-            usuario.check = false  
+            usuario.valid = false  
 
             const result = await this.userRepository.save(usuario)
       
@@ -88,7 +88,7 @@ export class UserController {
         let user =  await this.one(request, response, next)
         console.log(user)
         if(user !== null && user !== undefined){
-            if(user.check == true){
+            if(user.valid == true){
                 request.session.login = true
                 request.session.user =  user.firstName +" "+ user.lastName
                 request.session.email = user.email
@@ -103,6 +103,7 @@ export class UserController {
                 //Login Efetuado Com Sucesso
                 response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
             }else{
+                console.log("Deve-se checar a conta.")
                 //Avisar para o usuário checar conta
             }
 
