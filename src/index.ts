@@ -2,7 +2,7 @@
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
-import { AcountValidatorController, AcountValidatorController } from "./controller/AcountValidatorController"
+import { AcountValidatorController } from "./controller/AcountValidatorController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
