@@ -248,7 +248,7 @@ AppDataSource.initialize().then(async () => {
 
         let validador = acountValidatorController.one(req, res, next)
         console.log("validator: "+validador)
-        res.send("Página em construção")
+        res.send(validador)
 
         //Ver se existe uma pendencia para este secret
         //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
