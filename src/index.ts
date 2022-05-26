@@ -247,7 +247,7 @@ AppDataSource.initialize().then(async () => {
         req.session.secret = secret
 
         let validador = acountValidatorController.one(req, res, next)
-        console.log(validador)
+        console.log("validator: "+validador)
         res.send("Página em construção")
 
 
