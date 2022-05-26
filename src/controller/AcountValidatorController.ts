@@ -25,10 +25,9 @@ export class AcountValidatorController {
             //Elaborar uma menssagem melhor
             let htmlMessage = '<div>Prezado cliente, recebemos o seu pedido de cadastramento em nossa plataforma. Pedimos que acesse o link a seguir para concluir o seu cadastro.</div><div><a href="'+link+'">Validar Cadastro</a></div>';
             this.emailController.enviar(htmlMessage, "Cadastro na plataforma Prisma Conexão", user.email)
-            console.log("result: "+result)
+
             if(result !== null && result !== undefined){
-                //Renderizar aviso para checagem de email
-                console.log("validador: "+result)
+                console.log("firstName: "+user.firstName)
                 response.render("validarConta.hbs", {nome : user.firstName})
                 
             }else{
