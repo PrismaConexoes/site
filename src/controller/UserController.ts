@@ -13,11 +13,10 @@ export class UserController {
         return this.userRepository.find()
     }*/
 
-    async one(request: Request, response: Response, next: NextFunction) {
+    async one(request: Request) {
         return this.userRepository.findOne({
             where: {
-                email : request.body.email,
-                password: request.body.password
+                email : request.body.email
             }
         })
     }
@@ -85,28 +84,30 @@ export class UserController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
 
-        let user =  await this.one(request, response, next)
-        console.log(user)
-        if(user !== null && user !== undefined){
-            if(user.valid == true){
-                request.session.login = true
-                request.session.user =  user.firstName +" "+ user.lastName
-                request.session.email = user.email
-    
-                const adms = require('../public/adm.json');
-                adms.emails.forEach((email) => {
-                    if(request.session.email == email){
-                        request.session.administrador = true;
-                    }
-                });
-    
-                //Login Efetuado Com Sucesso
-                response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
-            }else{
-                console.log("Deve-se checar a conta.")
-                //Avisar para o usuário checar conta
-            }
+        let user = this.one(request.body.email)
 
+        if(user !== null && user !== undefined){
+            user.then((user)=>{
+                if(user.password == request.body.password){
+                    if(user.valid == true){
+                        request.session.login = true
+                        request.session.user =  user.firstName +" "+ user.lastName
+                        request.session.email = user.email
+            
+                        const adms = require('../public/adm.json');
+                        adms.emails.forEach((email) => {
+                            if(request.session.email == email){
+                                request.session.administrador = true;
+                            }
+                        });
+                        //Login Efetuado Com Sucesso
+                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+                    }else{
+                        console.log("Deve-se checar a conta.")
+                        //Avisar para o usuário checar conta
+                    }
+                }    
+            })     
         }else{
             //Usuário Não Encontrado
             request.session.relogin = true

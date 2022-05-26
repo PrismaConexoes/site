@@ -10,8 +10,8 @@ export class AcountValidatorController {
     private validatorRepository = AppDataSource.getRepository(AcountValidator)
     private emailController = new EmailController
 
-    async one(request: Request, response: Response, next: NextFunction) {
-        let result = await this.validatorRepository.findOne({
+    async one(request: Request) {
+        let result = this.validatorRepository.findOne({
             where: {
                 parameter : request.params.secret
             }
