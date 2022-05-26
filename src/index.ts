@@ -3,11 +3,12 @@ import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
 import { AcountValidatorController } from "./controller/AcountValidatorController"
+import { AcountValidator } from "./entity/AcountValidator"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
-
 import { json } from "body-parser"
+
 
 
 AppDataSource.initialize().then(async () => {
@@ -247,8 +248,11 @@ AppDataSource.initialize().then(async () => {
         req.session.secret = secret
 
         let validador = acountValidatorController.one(req, res, next)
-        console.log("validator: "+validador)
-        res.send(validador)
+        validador.then((validador)=>{
+            res.send(validador)
+        })
+        
+    
 
         //Ver se existe uma pendencia para este secret
         //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado

@@ -16,18 +16,10 @@ export class AcountValidatorController {
                 parameter : request.params.secret
             }
         })
-        console.log("secret: "+request.params.secret)
-        console.log("result: "+result.data+result.email+result.parameter)
-        //Adotar este modelo nas outras
-        if(result instanceof Promise){
-            if(result !== null && result !== undefined){
-                result.then((entry)=>{
-                    console.log("entry: "+entry)
-                    return entry
-                })
+        if(result !== null && result !== undefined){
+                return result
             }
-        return null
-        }
+        return null    
     }
     async saveSecret(user: Userr, secret: string, response: Response){
         let previous = await this.validatorRepository.findOne({
