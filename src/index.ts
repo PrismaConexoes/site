@@ -2,6 +2,7 @@
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
+import { AcountValidatorController, AcountValidatorController } from "./controller/AcountValidatorController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
@@ -73,6 +74,7 @@ AppDataSource.initialize().then(async () => {
     //controladores
     const userControler = new UserController
     const publicacaoController = new PublicacaoController
+    const acountValidatorController = new AcountValidatorController
    
     
     //Rotas
@@ -192,11 +194,7 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Desalogar    
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
-        req.session.login = false
-        req.session.relogin = false
-        req.session.user = ""
-        req.session.email = ""
-        req.session.administrador = false
+        req.session.destroy
         res.redirect('/')
     } )
     
@@ -245,7 +243,24 @@ AppDataSource.initialize().then(async () => {
 
     //Rota para validação de conta
     app.get('/validarUsuario/:secret',  (req: any, res: any , next: NextFunction ) => {
-        res.send(req.params.secret)
+        let secret = req.params.secret
+        req.session.secret = secret
+
+        let validador = acountValidatorController.one(req, res, next)
+        console.log(validador)
+        res.send("Página em construção")
+
+
+        //Ver se existe uma pendencia para este secret
+        //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
+        //Se o secret existir, ver se a data é maior que 1 hora
+        //pegar email a partir de secret
+        //pegar senha do usuário
+        //pedir senha do usuário
+        //Se a senha do usuário for válida, atualizar o campo valid para true e apagar a entrada em acount_valid juntamente com todas as entradas expiradas(Para manter a tabela limpa)
+        
+
+
     })
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
