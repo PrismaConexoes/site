@@ -27,7 +27,7 @@ export class AcountValidatorController {
             this.emailController.enviar(htmlMessage, "Cadastro na plataforma Prisma Conexão", user.email)
 
             if(result !== null && result !== undefined){
-                console.log("firstName: "+user.firstName)
+               
                 response.render("validarConta.hbs", {nome : user.firstName})
                 
             }else{

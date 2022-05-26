@@ -74,7 +74,7 @@ export class UserController {
                 console.log("uid: "+uid)
                 //AcountValidator
                 this.acountValidator.saveSecret(usuario, uid, response)
-                response.render("validarConta.hbs", {nome: usuario.firstName+" "+usuario.lastName})
+                //response.render("validarConta.hbs", {nome: usuario.firstName+" "+usuario.lastName})
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
             }
