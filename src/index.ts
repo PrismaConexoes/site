@@ -250,7 +250,6 @@ AppDataSource.initialize().then(async () => {
         console.log("validator: "+validador)
         res.send("Página em construção")
 
-
         //Ver se existe uma pendencia para este secret
         //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
         //Se o secret existir, ver se a data é maior que 1 hora

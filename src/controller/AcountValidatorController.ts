@@ -11,11 +11,12 @@ export class AcountValidatorController {
     private emailController = new EmailController
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return await this.validatorRepository.findOne({
+        let entry = await this.validatorRepository.findOne({
             where: {
                 parameter : request.params.secret
             }
         })
+        return await entry
     }
     async saveSecret(user: Userr, secret: string, response: Response){
         let previous = await this.validatorRepository.findOne({
