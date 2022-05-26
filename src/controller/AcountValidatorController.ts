@@ -19,7 +19,14 @@ export class AcountValidatorController {
         if(previous == null){
             let entry = {email: user.email, parameter: secret, data: new Date()}
             let result = await this.validatorRepository.save(entry)
-            this.emailController.enviar("<h3>Teste de envio nº2</h3>", "Teste", "silvaproto@yahoo.com.br")
+
+            let link = 'https://appprisma.herokuapp.com/validarUsuario/'+secret
+
+            //Elaborar uma menssagem melhor
+            let htmlMessage = '<div><p>Prezado cliente, recebemos o seu pedido de cadastramento em nossa plataforma.'+
+                              +' Pedimos que acesse o link a seguir para concluir o seu cadastro.'+
+                              +'</p><p><a href="'+link+'">Validar Cadastro</a></p></div>'+
+            this.emailController.enviar(htmlMessage, "Cadastro na plataforma Prisma Conexão", user.email)
 
             if(result !== null && result !== undefined){
                 //Renderizar aviso para checagem de email

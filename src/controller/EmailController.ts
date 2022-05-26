@@ -4,7 +4,7 @@ export class EmailController {
 
     private nodemailer = require('nodemailer');
 
-    async enviar(htmlMessage: String, subject: String, receiver: String ){
+    async enviar(htmlMessage: String, subject: String, receiver: String){
 
         let mailTransporter = this.nodemailer.createTransport({
             service: 'gmail',

@@ -242,6 +242,11 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/login')
         }
     })
+
+    //Rota para validação de conta
+    app.get('/validarUsuario/:secret',  (req: any, res: any , next: NextFunction ) => {
+        res.send(req.params.secret)
+    })
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
