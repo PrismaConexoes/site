@@ -11,7 +11,7 @@ export class AcountValidatorController {
     private emailController = new EmailController
 
     async one(request: Request, response: Response, next: NextFunction) {
-        let result = this.validatorRepository.findOne({
+        let result = await this.validatorRepository.findOne({
             where: {
                 parameter : request.params.secret
             }
@@ -20,6 +20,7 @@ export class AcountValidatorController {
         if(result instanceof Promise){
             if(result !== null && result !== undefined){
                 result.then((entry)=>{
+                    console.log("entry: "+entry)
                     return entry
                 })
             }
