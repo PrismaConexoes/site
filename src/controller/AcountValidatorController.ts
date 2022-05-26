@@ -17,6 +17,7 @@ export class AcountValidatorController {
             }
         })
         console.log("secret: "+request.params.secret)
+        console.log("result: "+result)
         //Adotar este modelo nas outras
         if(result instanceof Promise){
             if(result !== null && result !== undefined){
