@@ -24,6 +24,7 @@ export class AcountValidatorController {
 
     async updateAccount(user: Userr){
         user.valid = true
+        console.log("user-valid: "+user.valid)
         let validator = await this.validatorRepository.findOneBy({ email : user.email });
         let result = await this.validatorRepository.remove(validator)
         console.log("result: "+result)
