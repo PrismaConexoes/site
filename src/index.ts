@@ -255,7 +255,7 @@ AppDataSource.initialize().then(async () => {
                 req.session.email = validador.email
                 req.session.validating = true
             
-                res.render("validarSecret.hbs", {captcha : recaptcha.render()})
+                res.send("validarSecret.html", {captcha : recaptcha.render()})
                 
             }else{
                 req.session.destroy
