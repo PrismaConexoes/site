@@ -283,8 +283,9 @@ AppDataSource.initialize().then(async () => {
                        if(senha == user.password){
                             //implementar controlador
                             acountValidatorController.updateAccount(user).then((result)=>{
-                                console.log(result.email)
-                                res.send("Usuario validado")
+                                if(result){
+                                    res.send("Usuario validado")
+                                }
                             }) 
 
                        } 

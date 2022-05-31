@@ -33,6 +33,13 @@ export class UserController {
             console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
         }
     }
+    async updateValid(user: Userr){
+        let result = await this.userRepository.update({ email: user.email }, user)  
+        if(result.affected == 1){
+            return true 
+        }
+        return false
+    }
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
         let dados = request.body
         console.log(dados)
