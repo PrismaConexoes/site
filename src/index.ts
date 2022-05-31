@@ -253,8 +253,7 @@ AppDataSource.initialize().then(async () => {
         validador.then((validador)=>{
             if(validador !== null){
                 req.session.email = validador.email
-                req.session.validating = true
-            
+                req.session.validating = true      
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()})
                 
             }else{
@@ -265,9 +264,6 @@ AppDataSource.initialize().then(async () => {
         })
         
     
-
-        //Ver se existe uma pendencia para este secret
-        //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
         //Se o secret existir, ver se a data é maior que 1 hora
         //pegar email a partir de secret
         //pegar senha do usuário
@@ -285,9 +281,12 @@ AppDataSource.initialize().then(async () => {
                     usuario.then((user)=>{
                     if(user.email == req.session.email && req.session.validating){
                        if(senha == user.password){
-                            //implementar controlador 
-                           console.log('Validado')
-                           res.send("Usuario validado")
+                            //implementar controlador
+                            acountValidatorController.updateAccount(user).then((result)=>{
+                                console.log('Validado')
+                                res.send("Usuario validado")
+                            }) 
+
                        } 
                     }
                 })

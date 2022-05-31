@@ -21,6 +21,15 @@ export class AcountValidatorController {
             }
         return null    
     }
+
+    async updateAccount(user: Userr){
+        user.valid = true
+        let validator = await this.validatorRepository.findOneBy({ email : user.email });
+        let result = await this.validatorRepository.remove(validator)
+        console.log("result: "+result)
+        return result
+    }
+
     async saveSecret(user: Userr, secret: string, response: Response){
         let previous = await this.validatorRepository.findOne({
             where:{
