@@ -92,7 +92,7 @@ export class UserController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any) {
 
-        let user = this.one(request.body.email)
+        let user = this.one(request)
 
         if(user !== null && user !== undefined){
             user.then((user)=>{

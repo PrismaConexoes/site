@@ -284,7 +284,7 @@ AppDataSource.initialize().then(async () => {
                             //implementar controlador
                             userControler.updateValid(user).then((result)=>{
                                 if(result){
-                                    res.send("Usuario validado")
+                                    res.send(req.session)
                                 }
                             }) 
 
