@@ -254,7 +254,8 @@ AppDataSource.initialize().then(async () => {
             if(validador !== null){
                 req.session.email = validador.email
                 req.session.validating = true
-                res.render("validarSecret.hbs", {captcha : recaptcha.render()})
+                let diretorio = __dirname
+                res.render("validarSecret.hbs", {captcha : recaptcha.render(), dir: diretorio})
                 
             }else{
                 req.session.destroy
