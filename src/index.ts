@@ -195,7 +195,7 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Desalogar    
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
-        req.session.destroy
+        req.session.destroy //VER SE DEVE SER DESTRUIDA OU SETADO OS PARAMETROS
         res.redirect('/')
     } )
     
@@ -253,15 +253,12 @@ AppDataSource.initialize().then(async () => {
         validador.then((validador)=>{
             if(validador !== null){
                 req.session.email = validador.email
+                req.session.validating = true
                 res.render("validarSecret.hbs", {captcha: recaptcha.render()})
-                //let usuario = userControler.one(req)
-                //usuario.then((user)=>{
-                    //if(user.email == validador.email){
-
-                   // }
-                //})
+                
             }else{
                 req.session.destroy
+                res.redirect('/')
             
             }
         })
@@ -276,9 +273,58 @@ AppDataSource.initialize().then(async () => {
         //pedir senha do usuário
         //Se a senha do usuário for válida, atualizar o campo valid para true e apagar a entrada em acount_valid juntamente com todas as entradas expiradas(Para manter a tabela limpa)
         
-
-
     })
+
+        //Rota complementat para validação de conta
+        app.get('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
+            recaptcha.verify(req, function (error, data) {
+                if (!error) {
+                    let senha = req.body.password
+                    let usuario = userControler.one(req)
+                    usuario.then((user)=>{
+                    if(user.email == req.session.email && req.session.validating){
+                       if(senha == user.password){
+                           res.send("Usuário validado!")
+                       } 
+                    }
+                })
+                } else {
+                    req.session.destroy() //VER COMPORTAMENTO E RASTREAR TODOS
+                    res.redirect('/')
+                }
+            })
+
+            let validador = acountValidatorController.one(req)
+            validador.then((validador)=>{
+                if(validador !== null){
+                    req.session.email = validador.email
+                    res.render("validarSecret.hbs", {captcha: recaptcha.render()})
+                    //let usuario = userControler.one(req)
+                    //usuario.then((user)=>{
+                        //if(user.email == validador.email){
+    
+                       // }
+                    //})
+                }else{
+                    req.session.destroy
+                    res.redirect('/')
+                
+                }
+            })
+            
+        
+    
+            //Ver se existe uma pendencia para este secret
+            //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
+            //Se o secret existir, ver se a data é maior que 1 hora
+            //pegar email a partir de secret
+            //pegar senha do usuário
+            //pedir senha do usuário
+            //Se a senha do usuário for válida, atualizar o campo valid para true e apagar a entrada em acount_valid juntamente com todas as entradas expiradas(Para manter a tabela limpa)
+            
+    
+    
+        })
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
