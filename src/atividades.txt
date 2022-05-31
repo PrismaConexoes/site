@@ -221,3 +221,8 @@ OBS: Criar tabela para link das imagens(7 links)
         }
     }
 </script>
+
+{{>validarSecretBlock}}
+{{>olho_f}}
+{{>captcha_f}}
+{{>olhoEdge_f}}
