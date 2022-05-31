@@ -34,6 +34,7 @@ export class UserController {
         }
     }
     async updateValid(user: Userr){
+        user.valid = true
         let result = await this.userRepository.update({ email: user.email }, user)  
         if(result.affected == 1){
            return this.acountValidator.updateAccount(user)
