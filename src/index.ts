@@ -282,11 +282,11 @@ AppDataSource.initialize().then(async () => {
                     let senha = req.body.password
                     let usuario = userControler.one(req)
                     usuario.then((user)=>{
-                    console.log("user: "+ user)
-                    console.log(user.email == req.session.email && req.session.validating)
                     if(user.email == req.session.email && req.session.validating){
                        if(senha == user.password){
-                           res.send("Usuário validado!")
+
+                           console.log('Validado')
+                           res.send("Usuario validado")
                        } 
                     }
                 })
@@ -295,36 +295,6 @@ AppDataSource.initialize().then(async () => {
                     res.redirect('/')
                 }
             })
-
-            let validador = acountValidatorController.one(req)
-            validador.then((validador)=>{
-                if(validador !== null){
-                    req.session.email = validador.email
-                    res.render("validarSecret.hbs", {captcha: recaptcha.render()})
-                    //let usuario = userControler.one(req)
-                    //usuario.then((user)=>{
-                        //if(user.email == validador.email){
-    
-                       // }
-                    //})
-                }else{
-                    req.session.destroy
-                    res.redirect('/')
-                
-                }
-            })
-            
-        
-    
-            //Ver se existe uma pendencia para este secret
-            //Se não existir o secret destroy a sessao e redireciona para / ou indica que o usuário já está validado
-            //Se o secret existir, ver se a data é maior que 1 hora
-            //pegar email a partir de secret
-            //pegar senha do usuário
-            //pedir senha do usuário
-            //Se a senha do usuário for válida, atualizar o campo valid para true e apagar a entrada em acount_valid juntamente com todas as entradas expiradas(Para manter a tabela limpa)
-            
-    
     
         })
     const PORT = process.env.PORT || 3000
