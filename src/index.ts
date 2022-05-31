@@ -254,7 +254,7 @@ AppDataSource.initialize().then(async () => {
             if(validador !== null){
                 req.session.email = validador.email
                 req.session.validating = true
-                res.render("validarSecret.hbs", {captcha: recaptcha.render()})
+                res.render("validarSecret.hbs", {captcha : recaptcha.render()})
                 
             }else{
                 req.session.destroy
@@ -284,7 +284,7 @@ AppDataSource.initialize().then(async () => {
                     usuario.then((user)=>{
                     if(user.email == req.session.email && req.session.validating){
                        if(senha == user.password){
-
+                            //implementar controlador 
                            console.log('Validado')
                            res.send("Usuario validado")
                        } 
