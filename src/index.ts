@@ -162,7 +162,7 @@ AppDataSource.initialize().then(async () => {
 
 
     //Rota Login
-    app.get('/login',(req: Request, res: Response , next: Function ) => { // recaptcha.middleware.render,  (req: any, res: any , next: Function ) => {
+    app.get('/login',(req: Request, res: Response , next: Function ) => { 
         let login = req.session.login
         if(login == false){
             res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
@@ -282,6 +282,8 @@ AppDataSource.initialize().then(async () => {
                     let senha = req.body.password
                     let usuario = userControler.one(req)
                     usuario.then((user)=>{
+                    console.log("user: "+ user)
+                    console.log(user.email == req.session.email && req.session.validating)
                     if(user.email == req.session.email && req.session.validating){
                        if(senha == user.password){
                            res.send("Usuário validado!")
