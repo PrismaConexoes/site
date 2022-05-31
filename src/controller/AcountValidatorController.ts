@@ -3,14 +3,13 @@ import { NextFunction, Request, Response } from "express"
 import { AcountValidator } from "../entity/AcountValidator"
 import { Userr } from "../entity/Userr"
 import { EmailController } from "../controller/EmailController"
-import { UserController } from "./UserController"
 
 
 export class AcountValidatorController {
 
     private validatorRepository = AppDataSource.getRepository(AcountValidator)
     private emailController = new EmailController
-    private userController = new UserController
+
 
     async one(request: Request) {
         let result = this.validatorRepository.findOne({
@@ -25,16 +24,15 @@ export class AcountValidatorController {
     }
 
     async updateAccount(user: Userr){
-        let update = await this.userController.updateValid(user)
-        if(update){
-            console.log("user-valid: "+user.valid)
-            let validator = await this.validatorRepository.findOneBy({ email : user.email });
-            let result = await this.validatorRepository.remove(validator)
-            console.log("result: "+result)
-            if(result instanceof AcountValidator){
-                return true
-            }
+       
+        console.log("user-valid: "+user.valid)
+        let validator = await this.validatorRepository.findOneBy({ email : user.email });
+        let result = await this.validatorRepository.remove(validator)
+        console.log("result: "+result)
+        if(result instanceof AcountValidator){
+            return true
         }
+    
         return false
 
     }
