@@ -151,6 +151,7 @@ Implementar deleção da conta
             criação de link para enviar por email
             criação de rota de verificação do link
             liberação de sessão após checagem de link
+            colocar timer para desabilitar botão de reenvio de link para email por 3 minutos
             
 
 
