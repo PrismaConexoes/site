@@ -186,6 +186,7 @@ AppDataSource.initialize().then(async () => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
                 let user = userControler.one(req)
+                console.log("user: "+user)
                 if(user instanceof Userr){
                     sessionController.logar(req, res, next, recaptcha, user)
                 }else{
