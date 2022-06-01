@@ -7,6 +7,7 @@ import { SessionController } from "./controller/SessionController"
 import { ContaController } from "./controller/ContaController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
+import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
 import { EmailController } from "./controller/EmailController"
@@ -185,7 +186,12 @@ AppDataSource.initialize().then(async () => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
                 let user = userControler.one(req)
-                sessionController.logar(req, res, next, recaptcha, user)
+                if(user instanceof Userr){
+                    sessionController.logar(req, res, next, recaptcha, user)
+                }else{
+                    sessionController.loginSess(request, null, true)
+                    res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
+                }   
             } else {
                 req.session.relogin = false
                 res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});

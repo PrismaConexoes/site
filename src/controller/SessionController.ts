@@ -59,31 +59,25 @@ export class SessionController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
 
-        if(user !== null && user !== undefined){
-            user.then((user)=>{
-                if(user.password == request.body.password){
-                    if(user.valid == true){
+        user.then((user)=>{
+            if(user.password == request.body.password){
+                if(user.valid == true){
 
-                        this.loginSess(request, user, false)
-            
-                        const adms = this.admController.all(request, response, next)
-                        .then((adms)=>{
-                            adms.forEach((adm) => {
-                                    if(request.session.email == adm.email){ this.admSess(request) }
-                                })
-                        }).then(()=>{
-                            response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
-                        })
-                    }else{
-                        response.render('avisoDeChecagem.hbs')
-                    }
-                }    
-            })     
-        }else{
+                    this.loginSess(request, user, false)
         
-            this.loginSess(request, null, true)
-            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
-        }
+                    const adms = this.admController.all(request, response, next)
+                    .then((adms)=>{
+                        adms.forEach((adm) => {
+                                if(request.session.email == adm.email){ this.admSess(request) }
+                            })
+                    }).then(()=>{
+                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+                    })
+                }else{
+                    response.render('avisoDeChecagem.hbs')
+                }
+            }    
+        })     
     }
 
  
