@@ -145,6 +145,16 @@
     5 -> Criação do controlador de validação                        --OK--
     6 -> Criação de página com mensagem de validação                --Parcial--
 
+//30/05/22
+    1 -> Configuração da página de validação com css( Conflito handlebar ou session??) --OK--
+    2 -> Teste de validação por email                               --OK--
+
+//01/06/22
+    1 -> Implementação da remoção de cadastro                       --OK--
+    2 -> Implemenração do controlador de sessão                     --OK--
+    3 -> Implementação da Entidade adm                              --OK--
+    4 -> Implementação do controlador de adm                        --OK--
+
 
 
 Implementar deleção da conta

@@ -1,8 +1,10 @@
 import { AppDataSource } from "../data-source" 
-import { NextFunction, Request, Response } from "express"
+import { Request, Response } from "express"
+import { v4 as uuidv4 } from 'uuid';
 import { AcountValidator } from "../entity/AcountValidator"
 import { Userr } from "../entity/Userr"
 import { EmailController } from "../controller/EmailController"
+
 
 
 export class AcountValidatorController {
@@ -22,6 +24,17 @@ export class AcountValidatorController {
             }
         return null    
     }
+    async oneByEmail(request: Request) {
+        let result = this.validatorRepository.findOne({
+            where: {
+                email : request.params.email
+            }
+        })
+        if(result !== null && result !== undefined){
+                return result
+            }
+        return null    
+    }
 
     async updateAccount(user: Userr){
        
@@ -33,25 +46,23 @@ export class AcountValidatorController {
         return false
     }
 
-    async saveSecret(user: Userr, secret: string, response: Response){
+    async saveSecret(user: Userr, response: Response){
         let previous = await this.validatorRepository.findOne({
             where:{
                 email: user.email,
             }              
         })
         if(previous == null){
+
+            let secret = uuidv4()
             let entry = {email: user.email, parameter: secret, data: new Date()}
             let result = await this.validatorRepository.save(entry)
 
-            let link = 'https://appprisma.herokuapp.com/validarUsuario/'+secret
-
-            //Elaborar uma menssagem melhor
-            let htmlMessage = '<div>Prezado cliente, recebemos o seu pedido de cadastramento em nossa plataforma. Pedimos que acesse o link a seguir para concluir o seu cadastro.</div><div><a href="'+link+'">Validar Cadastro</a></div>';
-            this.emailController.enviar(htmlMessage, "Cadastro na plataforma Prisma Conexão", user.email)
+            this.emailController.enviar(user.email, secret)
 
             if(result !== null && result !== undefined){
                
-                response.render("validarConta.hbs", {nome : user.firstName})
+                response.render("avisoDeChecagem.hbs")
                 
             }else{
                 console.log("Ocorreu um erro ao salvar a validação no banco")

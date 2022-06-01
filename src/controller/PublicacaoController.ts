@@ -15,7 +15,7 @@ export class PublicacaoController {
             response.render("atualizaSite.hbs", {publicacoes: null})
         }  
     }
-    //IMPLEMENTAR OS CONTROLADORES PARA AS OUTRAS EMPRESAS( Implementar em arquivos diferentes? )
+   
     async allPrisma() {
         const result = await this.publicacaoRepository.findBy({
                 empresa: "Prisma",

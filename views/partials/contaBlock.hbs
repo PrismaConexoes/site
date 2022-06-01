@@ -38,8 +38,33 @@
     </div>
 </div> 
 <div class="container-fluid m-5">
-    <p>Deseja remover sua conta? <a href="/removerConta" class="text-blue">Apagar Conta</a>.</p>
-    <spam class="text-secondary">Ao clicar em apagar conta, não será possível fazer a recuperação da mesma.</spam>
-</div>  
+    <p>Deseja remover sua conta? <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmModal">Remover Conta</button>
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                     <form class="m-5 " action="/removerConta" method="post" id="formulario">
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="8-20 caracteres" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" required> 
+                         </div>
+                        <button type="submit" class="btn btn-secondary">Apagar Conta</button>
+                     </form>
+                </div>
+                <div class="modal-footer">
+                    <spam class="text-secondary">Ao clicar em apagar conta, não será possível cancelar a operação.</spam>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </p>
+</div>
+
+
 
 

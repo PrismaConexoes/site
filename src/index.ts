@@ -1,98 +1,112 @@
-
+/////////////////////////////////////IMPORTS///////////////////////////////////////
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
 import { AcountValidatorController } from "./controller/AcountValidatorController"
-import { AcountValidator } from "./entity/AcountValidator"
+import { SessionController } from "./controller/SessionController"
+import { ContaController } from "./controller/ContaController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
 import { TypeormStore } from "connect-typeorm"
-import { json } from "body-parser"
+import { AcountValidator } from "./entity/AcountValidator"
+import { EmailController } from "./controller/EmailController"
+///////////////////////////////////////////////////////////////////////////////////
 
 
 
 AppDataSource.initialize().then(async () => {
 
-    const request = require('request')
 
-    //Configuração do express app
+    /////////////IMPORTS///////////////
     const express = require('express')
     const app = express()
+    const request = require('request')
+    ///////////////////////////////////
 
-    //app.set('trust proxy', 1) //Ver se essa configuração não está dando erro no Elephant SQL
-   
-    //Configurar utilização de servidor seguro
-    const sslRedirect = require('heroku-ssl-redirect').default; //Usar Default para não dar erro
+    
+    ////////////////////////SSL-HEROKU//////////////////////////
+    const sslRedirect = require('heroku-ssl-redirect').default; 
     app.use(sslRedirect())
+    ///////////////////////////////////////////////////////////
 
-    //Configurações da sessao
+  
+    /////////////////////EXPRESS-SESSION//////////////////////////
     let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
-    
     app.use(
         session({
             resave: false,
             saveUnitialize: true,
-            cookie: {path: '/', httpOnly: true, sameSite: true, secure:'auto' , maxAge: 86400000 }, //configurações do cookie pasta, acessibilidade no documumento e utilização de https
-            unset: 'destroy', //será apagada quando encerrada a sessao
-            secret: "53Cr3TTp1RI5waApPiNh3r0cKu", // implementar Keygrip
+            cookie: {
+                path: '/', 
+                httpOnly: true, 
+                sameSite: true, 
+                secure:'auto' , 
+                maxAge: 86400000 }, 
+            unset: 'destroy', 
+            secret: "53Cr3TTp1RI5waApPiNh3r0cKu",
             store: new TypeormStore({
                 cleanupLimit: 2,
-                limitSubquery: false, // If using MariaDB.
+                limitSubquery: false,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
                 ttl: 8640000
               }).connect(sessionRepository)
-        })
-    )
+        }));
+    //////////////////////////////////////////////////////////////////
 
-    //Configuração do reCaptcha
+
+    ///////////////////GOOGLE-RECAPTCHA////////////////////////
     const Recaptcha = require('express-recaptcha').RecaptchaV3
     const options = { 
         hl: 'pt',
         callback: gResponse
     }  
-    const recaptcha = new Recaptcha('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', options)
+    const recaptcha = new Recaptcha(
+        '6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', 
+        '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', 
+        options)
 
-    function gResponse(res){
-        console.log(res)
+    function gResponse(res){ console.log(res) }
+    //////////////////////////////////////////////////////////
 
-    }
-    //Configuração do body-parser
+   
+    /////////////BODY-PARSER////////////////
     const bp = require('body-parser')
     app.use(bp.json())
     app.use(bp.urlencoded({extended: true}))
-    
+    ////////////////////////////////////////
 
-    //Engine express-handlebars
+    ////////////////////HANDLEBARS////////////////////
     const exphbs  = require('express-handlebars');
-    //Configuração do handlebars
-    app.engine('hbs', exphbs.engine({extname: '.hbs'})); //configurando a extenção para .hbs invés de .handlebars
-    app.set('view engine', 'hbs');                //Definindo handlebars como motor de visão do express
+    app.engine('hbs', exphbs.engine({extname: '.hbs'})); 
+    app.set('view engine', 'hbs');                
+    //////////////////////////////////////////////////
 
-    //configurando o express para usar arquivos de pastas
+    /////////////ARQUIVOS ESTÁTICOS//////////////
     app.use(express.static(__dirname+'/public'));
+    /////////////////////////////////////////////
 
-    //controladores
+    /////////////////////////CONTROLADORES/////////////////////////////
     const userControler = new UserController
     const publicacaoController = new PublicacaoController
     const acountValidatorController = new AcountValidatorController
+    const sessionController = new SessionController
+    const contaController = new ContaController
+    const emailController = new EmailController
+    //////////////////////////////////////////////////////////////////
    
     
-    //Rotas
+    /////////////////////////////////////////////////////////////////////////
+    //////////////////////////ROTAS DE NAVEGAÇÃO/////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
        
-         if(!req.session.login){
-            req.session.user = ''
-            req.session.login = false
-        }
-        if(!req.session.administrador){
-            req.session.administrador = false
-        }
-        req.session.relogin = false
-        
+        sessionController.prismaSess(req)
+        console.log(req.session)
         let carrossel = publicacaoController.allPrisma()
-        console.log(carrossel)
+    
         if(carrossel instanceof Promise){
             carrossel.then((car)=>{
                 let car1 = car[0]
@@ -104,9 +118,7 @@ AppDataSource.initialize().then(async () => {
                     ativo: car1,
                     carousel: car}) 
             })
-
         }
-
     })
 
     //Rota F&F
@@ -144,22 +156,19 @@ AppDataSource.initialize().then(async () => {
 
         res.render("next.hbs", {login: req.session.login, user: req.session.user})
     })
-    
-    //Rota Cadastrar
-    app.get('/cadastrar', (req, res) => {
-        req.session.relogin = false 
-        if(!req.session.login){
-            req.session.user = ''
-            req.session.login = false
-        }
-        if(req.session.login == true){
-            res.render("userLogadoErr", {user: req.session.user})
-        }else{
-            res.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
-        }       
-    })
+
+    //Rota Sair    
+    app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
+        sessionController.sairSess(req)
+        res.redirect('/')
+    } )
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
 
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////ROTAS RELACIONADAS A CONTAS//////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////// 
 
     //Rota Login
     app.get('/login',(req: Request, res: Response , next: Function ) => { 
@@ -170,6 +179,32 @@ AppDataSource.initialize().then(async () => {
             res.render("userLogadoErr", {user: req.session.user})
         }           
     })
+
+    //Rota Entrar
+    app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                let user = userControler.one(req)
+                sessionController.logar(req, res, next, recaptcha, user)
+            } else {
+                req.session.relogin = false
+                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
+            }
+        })
+    });
+
+    //Rota Cadastrar
+    app.get('/cadastrar', (req, res) => {
+
+        sessionController.cadastrarSess(req)
+
+        if(req.session.login == true){
+            res.render("userLogadoErr", {user: req.session.user})
+        }else{
+            res.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
+        }       
+    })
+
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
@@ -181,28 +216,103 @@ AppDataSource.initialize().then(async () => {
         })        
     })
 
-    //Rota Entrar
-    app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
-        recaptcha.verify(req, function (error, data) {
-            if (!error) {
-                userControler.logar(req, res, next, recaptcha)
-            } else {
-                req.session.relogin = false
-                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
-            }
-        })
-    });
-
-    //Rota Desalogar    
-    app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
-        req.session.destroy //VER SE DEVE SER DESTRUIDA OU SETADO OS PARAMETROS
-        res.redirect('/')
-    } )
-    
-    app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
-        res.render("copyrights.hbs")
+    //Rotas Administrar Conta
+    app.get('/conta', (req: any, res: any , next: NextFunction ) => {
+        
+        if(req.session.login == true){
+           contaController.admConta(req, res, next)
+        }else{
+            res.redirect('/login')
+        }
     })
 
+    //Rota Atualizar Conta
+    app.post('/atualizarConta', (req: any, res: any , next: NextFunction ) => {
+        
+        if(req.session.login == true){
+           contaController.atualizarConta(req, res, next)
+        }else{
+            res.redirect('/login')
+        }
+    })
+
+    //Rota para validação de conta
+    app.get('/validarUsuario/:secret',  (req: any, res: any , next: NextFunction ) => {
+
+        //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
+        //usar getTime() diff 3,6 x10^6 
+
+        let validador = acountValidatorController.one(req)
+        validador.then((validador)=>{
+            if(validador !== null){
+                sessionController.validatingSess(req, validador.email)    
+                res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
+            }else{
+                res.redirect('/sair')
+            }
+        })
+    })
+
+    //Rota complementar para validação de conta
+    app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                let senha = req.body.password
+                let usuario = userControler.one(req)
+                usuario.then((user)=>{
+                if(user.email == req.session.email && req.session.validating){
+                    if(senha == user.password){
+                        contaController.validarConta(user).then((result)=>{
+                            if(result){
+                                req.session.validating = false
+                                res.send("Página em construção")
+                                //Construir mensagem de sucesso
+                            }
+                        }) 
+                    } 
+                }
+            })
+            } else {
+                res.redirect('/sair')
+            }
+        })})
+    
+    app.post('/removerConta', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.login == true){
+            let remove = userControler.removeUser(req, res, next)
+            if(remove){
+                //Construir página de sucesso
+                res.redirect('/sair')
+            }else{
+                res.send("Usuário não removido")//CRIAR MENSAGEM
+            }
+         }else{
+             res.redirect('/sair')
+         }
+    })
+
+    app.get('/reenviarEmail', (req, res, next) => {
+
+        //Remover tokens vencidos aqui
+        let validador = acountValidatorController.oneByEmail(req)
+        validador.then((token)=>{
+            if(token instanceof AcountValidator){
+                emailController.enviar(token.email, token.parameter)
+            }
+        }).then(()=>{
+            res.render("avisoDeChecagem.hbs")
+        })
+    })
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    ///////////////////ROTAS RELACIONADAS A ADMINISTRAÇÃO DO SITE///////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+
+    //Página Pricipal de atualização
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             publicacaoController.all(req, res, next)
@@ -210,6 +320,8 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
+
+    //Salvar nova publicação
     app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
            publicacaoController.save(req, res, next);
@@ -217,6 +329,8 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
+
+    //Deletar publicação
     app.post('/removePublicacao', (req: any, res: any , next: NextFunction ) => {
         console.log(req.body)
         if(req.session.administrador == true){
@@ -225,82 +339,21 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
-    app.get('/conta', (req: any, res: any , next: NextFunction ) => {
-        
-        if(req.session.login == true){
-           userControler.conta(req, res, next)
-        }else{
-            res.redirect('/login')
-        }
-    })
-    app.post('/atualizarConta', (req: any, res: any , next: NextFunction ) => {
-        
-        if(req.session.login == true){
-           userControler.atualizarConta(req, res, next)
-        }else{
-            res.redirect('/login')
-        }
-    })
 
-    //Rota para validação de conta
-    app.get('/validarUsuario/:secret',  (req: any, res: any , next: NextFunction ) => {
-        let secret = req.params.secret
-        req.session.secret = secret
-
-        //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
-        //usar getTime() diff 3,6 x10^6 
-        let validador = acountValidatorController.one(req)
-        validador.then((validador)=>{
-            if(validador !== null){
-                req.session.email = validador.email
-                req.session.validating = true      
-                res.render("validarSecret.hbs", {captcha : recaptcha.render()})
-                
-            }else{
-                req.session.destroy
-                res.redirect('/')
-            
-            }
-        })
-        
+    //Rota de créditos
+    app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
+        res.render("copyrights.hbs")
+    })
     
-        //Se o secret existir, ver se a data é maior que 1 hora
-        //pegar email a partir de secret
-        //pegar senha do usuário
-        //pedir senha do usuário
-        //Se a senha do usuário for válida, atualizar o campo valid para true e apagar a entrada em acount_valid juntamente com todas as entradas expiradas(Para manter a tabela limpa)
-        
-    })
+    ///////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
-        //Rota complementat para validação de conta
-        app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
-            recaptcha.verify(req, function (error, data) {
-                if (!error) {
-                    let senha = req.body.password
-                    let usuario = userControler.one(req)
-                    usuario.then((user)=>{
-                    if(user.email == req.session.email && req.session.validating){
-                       if(senha == user.password){
-                            //implementar controlador
-                            userControler.updateValid(user).then((result)=>{
-                                if(result){
-                                    res.send(req.session)
-                                }
-                            }) 
 
-                       } 
-                    }
-                })
-                } else {
-                    req.session.destroy() //VER COMPORTAMENTO E RASTREAR TODOS
-                    res.redirect('/')
-                }
-            })
-    
-        })
+    ////////////////UP SERVICE///////////////////
     const PORT = process.env.PORT || 3000
     app.listen(PORT, () => {
         console.log('Servidor Http Online')});
+    /////////////////////////////////////////////
    
 
 }).catch(error => console.log(error))
