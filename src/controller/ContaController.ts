@@ -23,9 +23,10 @@ export class ContaController {
 
     async validarConta(user: Userr){
         user.valid = true
-        let result = await this.userRepository.update({ email: user.email }, user)  
+        let result = await this.userRepository.update({ email: user.email }, user)
+        console.log(result)  
         if(result.affected == 1){
-        return this.acountValidator.updateAccount(user)
+            return this.acountValidator.updateAccount(user)
         }
         return false
     }
