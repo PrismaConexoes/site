@@ -199,6 +199,7 @@ AppDataSource.initialize().then(async () => {
         })
     });
 
+    
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
 
