@@ -189,7 +189,7 @@ AppDataSource.initialize().then(async () => {
                 if(user instanceof Userr){
                     sessionController.logar(req, res, next, recaptcha, user)
                 }else{
-                    sessionController.loginSess(request, null, true)
+                    sessionController.loginSess(req, null, true)
                     res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
                 }   
             } else {
@@ -199,7 +199,7 @@ AppDataSource.initialize().then(async () => {
         })
     });
 
-    
+
     //Rota Cadastrar
     app.get('/cadastrar', (req, res) => {
 
