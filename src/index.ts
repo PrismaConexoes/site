@@ -268,7 +268,7 @@ AppDataSource.initialize().then(async () => {
                         console.log("user: "+user.password)
                         contaController.validarConta(user).then((result)=>{
                             if(result){
-                                req.session.validating = false
+                                sessionController.validatingEndSess(req)
                                 res.render('cadastroValidado.hbs')
                             }
                         }) 

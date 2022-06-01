@@ -22,7 +22,8 @@ export class SessionController {
         request.session.relogin = false
         request.session.user = ''
         request.session.validating = false
-        request.session.administrador = false   
+        request.session.administrador = false
+        request.session.secret = ''   
     }
     async loginSess(request : Request, user: Userr, relogin: boolean){
         if(relogin){
@@ -50,6 +51,10 @@ export class SessionController {
         request.session.secret = request.params.secret
         request.session.email = email
         request.session.validating = true  
+    }
+    async validatingEndSess(request : Request){
+        request.session.validating = false
+        request.session.secret = ''
     }
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
