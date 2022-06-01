@@ -51,6 +51,7 @@ export class SessionController {
         request.session.secret = request.params.secret
         request.session.email = email
         request.session.validating = true  
+        request.session.login = false
     }
     async validatingEndSess(request : Request){
         request.session.validating = false
