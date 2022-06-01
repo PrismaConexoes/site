@@ -9,7 +9,7 @@ import { Adm } from "./entity/Adm"
 
 
 
-/*export const AppDataSource = new DataSource({
+export const AppDataSource = new DataSource({
     type: "postgres",
     host: "ec2-52-3-200-138.compute-1.amazonaws.com",
     port: 5432,
@@ -22,8 +22,8 @@ import { Adm } from "./entity/Adm"
     entities: [Userr, Session, Publicacao, AcountValidator],
     migrations: [],
     subscribers: [],
-})*/
-export const AppDataSource = new DataSource({
+})
+/*export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -36,7 +36,7 @@ export const AppDataSource = new DataSource({
     entities: [Userr, Session, Publicacao, AcountValidator, Adm],
     migrations: [],
     subscribers: [],
-})
+})*/
 
 
 
