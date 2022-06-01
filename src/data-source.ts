@@ -19,7 +19,7 @@ export const AppDataSource = new DataSource({
     ssl: { rejectUnauthorized: false },
     synchronize: true,
     logging: false,
-    entities: [Userr, Session, Publicacao, AcountValidator],
+    entities: [Userr, Session, Publicacao, AcountValidator, Adm],
     migrations: [],
     subscribers: [],
 })
