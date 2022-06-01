@@ -60,25 +60,24 @@ export class SessionController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
 
-        user.then((user)=>{
-            if(user.password == request.body.password){
-                if(user.valid == true){
+        if(user.password == request.body.password){
+            if(user.valid == true){
 
-                    this.loginSess(request, user, false)
-        
-                    const adms = this.admController.all(request, response, next)
-                    .then((adms)=>{
-                        adms.forEach((adm) => {
-                                if(request.session.email == adm.email){ this.admSess(request) }
-                            })
-                    }).then(()=>{
-                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
-                    })
-                }else{
-                    response.render('avisoDeChecagem.hbs')
-                }
-            }    
-        })     
+                this.loginSess(request, user, false)
+    
+                const adms = this.admController.all(request, response, next)
+                .then((adms)=>{
+                    adms.forEach((adm) => {
+                            if(request.session.email == adm.email){ this.admSess(request) }
+                        })
+                }).then(()=>{
+                    response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+                })
+            }else{
+                response.render('avisoDeChecagem.hbs')
+            }
+        }    
+           
     }
 
  
