@@ -260,22 +260,16 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 let senha = req.body.password
 
-                //Forma incorreta de recuperar o usuário
                 let usuario = userControler.oneBySession(req)
+
                 usuario.then((user)=>{
-                console.log(req.session.validating)
-                console.log(user.email)
-                console.log(req.session.email)
-                console.log(req.session.validating)
-                
                 if(req.session.validating){
                     if(senha == user.password){
                         console.log("user: "+user.password)
                         contaController.validarConta(user).then((result)=>{
                             if(result){
                                 req.session.validating = false
-                                res.send("Página em construção")
-                                //Construir mensagem de sucesso
+                                res.render('cadastroValidado.hbs')
                             }
                         }) 
                     } 
