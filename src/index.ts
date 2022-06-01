@@ -185,14 +185,15 @@ AppDataSource.initialize().then(async () => {
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
-                let user = userControler.one(req)
-                console.log("user: "+user)
-                if(user instanceof Userr){
-                    sessionController.logar(req, res, next, recaptcha, user)
-                }else{
-                    sessionController.loginSess(req, null, true)
-                    res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
-                }   
+                let result = userControler.one(req)
+                result.then((user)=>{
+                    if(user instanceof Userr){
+                        sessionController.logar(req, res, next, recaptcha, user)
+                    }else{
+                        sessionController.loginSess(req, null, true)
+                        res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
+                    }   
+                })  
             } else {
                 req.session.relogin = false
                 res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
