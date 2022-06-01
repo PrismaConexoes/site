@@ -38,15 +38,11 @@ export class AcountValidatorController {
 
     async updateAccount(user: Userr){
        
-        this.validatorRepository.findOneBy({ email : user.email })
-        .then((validator)=>{
-            let removed = this.validatorRepository.remove(validator)
-            removed.then((result)=>{
-                if(result instanceof AcountValidator){
-                    return true
-                }
-            })
-        })
+        let validator = await this.validatorRepository.findOneBy({ email : user.email })
+        let result = await this.validatorRepository.remove(validator)
+        if(result instanceof AcountValidator){
+            return true
+        }
         return false
     }
 

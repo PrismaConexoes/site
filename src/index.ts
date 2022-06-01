@@ -245,6 +245,7 @@ AppDataSource.initialize().then(async () => {
         let validador = acountValidatorController.one(req)
         validador.then((validador)=>{
             if(validador !== null){
+                console.log("validador_email: "+validador.email)
                 sessionController.validatingSess(req, validador.email)    
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
@@ -258,13 +259,16 @@ AppDataSource.initialize().then(async () => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
                 let senha = req.body.password
-                let usuario = userControler.one(req)
+
+                //Forma incorreta de recuperar o usuário
+                let usuario = userControler.oneBySession(req)
                 usuario.then((user)=>{
-                console.log(user.email == req.session.email && req.session.validating)
+                console.log(req.session.validating)
                 console.log(user.email)
                 console.log(req.session.email)
                 console.log(req.session.validating)
-                if(user.email == req.session.email && req.session.validating){
+                
+                if(req.session.validating){
                     if(senha == user.password){
                         console.log("user: "+user.password)
                         contaController.validarConta(user).then((result)=>{

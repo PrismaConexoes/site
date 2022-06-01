@@ -16,6 +16,13 @@ export class UserController {
             }
         })
     }
+    async oneBySession(request: Request) {
+        return this.userRepository.findOne({
+            where: {
+                email : request.session.email
+            }
+        })
+    }
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
         let user = await this.userRepository.findOne({
             where: {
