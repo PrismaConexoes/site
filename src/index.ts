@@ -355,7 +355,6 @@ AppDataSource.initialize().then(async () => {
         console.log('Servidor Http Online')});
     /////////////////////////////////////////////
    
-
 }).catch(error => console.log(error))
 
 
