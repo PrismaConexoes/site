@@ -260,7 +260,10 @@ AppDataSource.initialize().then(async () => {
                 let senha = req.body.password
                 let usuario = userControler.one(req)
                 usuario.then((user)=>{
-                
+                console.log(user.email == req.session.email && req.session.validating)
+                console.log(user.email)
+                console.log(req.session.email)
+                console.log(req.session.validating)
                 if(user.email == req.session.email && req.session.validating){
                     if(senha == user.password){
                         console.log("user: "+user.password)
