@@ -27,10 +27,10 @@ export class AcountValidatorController {
     async remove(validador: AcountValidator) {
         await this.validatorRepository.remove(validador)
     }   
-    async oneByEmail(request: Request) {
+    async oneBySession(request: Request) {
         let result = this.validatorRepository.findOne({
             where: {
-                email : request.body.email
+                email : request.session.email
             }
         })
         if(result !== null && result !== undefined){

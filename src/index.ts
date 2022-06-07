@@ -311,7 +311,7 @@ AppDataSource.initialize().then(async () => {
     app.get('/reenviarEmail', (req, res, next) => {
 
         //Remover tokens vencidos aqui
-        let validador = acountValidatorController.oneByEmail(req)
+        let validador = acountValidatorController.oneBySession(req)
         validador.then((token)=>{
             if(token instanceof AcountValidator){
                 console.log("email: "+req.session.email)
