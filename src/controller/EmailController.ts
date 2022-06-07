@@ -11,11 +11,21 @@ export class EmailController {
         let mailTransporter = this.nodemailer.createTransport({
             //Obs:Advinhação => Mascarar é CrImE. Autorizar junto ao serviço de email o envio por aplicativos apenas com usuário e senha
             //Ver política do google que previa mudança para 30/05/22
-            service: 'gmail',
+            host: 'smtp.mail.yahoo.com',
+            port: 465,
+            service:'yahoo',
+            //secure: false,
+            auth: {
+               user: 'silvaproto@yahoo.com.br',
+               pass: 'uqomckcujuibfpzk'
+            },
+            debug: false,
+            logger: true 
+            /*service: 'gmail',
             auth: {
                 user: 'testeprisma503@gmail.com',
                 pass: 'tE$t3prisma'
-            },
+            }*/,
             tls: {
                 rejectUnauthorized: false,
             }
