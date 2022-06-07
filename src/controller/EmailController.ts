@@ -14,7 +14,7 @@ export class EmailController {
             host: 'smtp.mail.yahoo.com',
             port: 465,
             service:'yahoo',
-            //secure: false,
+            secure: false,
             auth: {
                user: 'silvaproto@yahoo.com.br',
                pass: 'uqomckcujuibfpzk'
