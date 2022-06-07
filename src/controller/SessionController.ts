@@ -77,6 +77,7 @@ export class SessionController {
                 })
             }else{
                 request.session.email = request.body.email
+                console.log("Milestone")
                 response.render('avisoDeChecagem.hbs')
             }
         }    
