@@ -30,7 +30,7 @@ export class AcountValidatorController {
     async oneByEmail(request: Request) {
         let result = this.validatorRepository.findOne({
             where: {
-                email : request.params.email
+                email : request.body.email
             }
         })
         if(result !== null && result !== undefined){
