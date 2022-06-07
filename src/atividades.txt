@@ -154,14 +154,29 @@
     2 -> Implemenração do controlador de sessão                     --OK--
     3 -> Implementação da Entidade adm                              --OK--
     4 -> Implementação do controlador de adm                        --OK--
+    5 -> Mensagem de email                                          --OK--
+    6 -> Telas de avisos                                            --Ok--
+
+//07/06/22
+    1 -> retorno de menssagem de erros                              --OK--
+    2 -> projeto de nova mensagem de verificação de email           --OK--
+    3 -> Imlementação de entity troca de email                      --OK--
+    4 -> Implementação do controlador de trocaEmail                 --OK--
+    5 -> Definição da lógica para atualização do email              --
+    6 -> implementação de verificação de atualização de email       --
+
+
+    //Atualizar copyright com novos módulos
+    //rever partes html que se tornaram desnecessárias
+    //rever mensagem de envio de email
+    //implementar temporizadores (precisa de temporizador na atualização??)
+    //colocar flag na entity user sobre mudança de email
 
 
 
-Implementar deleção da conta
-            criação de link para enviar por email
-            criação de rota de verificação do link
-            liberação de sessão após checagem de link
-            colocar timer para desabilitar botão de reenvio de link para email por 3 minutos
+
+
+Implementar os temporizadores
             
 
 

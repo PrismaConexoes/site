@@ -21,10 +21,14 @@ export class Userr {
     @Column()
     phone: string
 
+//Criar entity Conta??
     @Column()
     password: string
 
     @Column()
     valid: boolean
+
+    @Column()
+    atualizarEmail: boolean
 
 }

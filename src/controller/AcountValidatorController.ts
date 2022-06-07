@@ -1,5 +1,5 @@
 import { AppDataSource } from "../data-source" 
-import { Request, Response } from "express"
+import { Request, Response, NextFunction } from "express"
 import { v4 as uuidv4 } from 'uuid';
 import { AcountValidator } from "../entity/AcountValidator"
 import { Userr } from "../entity/Userr"
@@ -24,6 +24,9 @@ export class AcountValidatorController {
             }
         return null    
     }
+    async remove(validador: AcountValidator) {
+        await this.validatorRepository.remove(validador)
+    }   
     async oneByEmail(request: Request) {
         let result = this.validatorRepository.findOne({
             where: {
@@ -36,7 +39,7 @@ export class AcountValidatorController {
         return null    
     }
 
-    async updateAccount(user: Userr){
+    async validarAccount(user: Userr){
        
         let validator = await this.validatorRepository.findOneBy({ email : user.email })
         let result = await this.validatorRepository.remove(validator)
@@ -46,7 +49,7 @@ export class AcountValidatorController {
         return false
     }
 
-    async saveSecret(user: Userr, response: Response){
+    async saveSecret(user: Userr, response: Response, novaConta: boolean){
         let previous = await this.validatorRepository.findOne({
             where:{
                 email: user.email,
@@ -55,20 +58,20 @@ export class AcountValidatorController {
         if(previous == null){
 
             let secret = uuidv4()
-            let entry = {email: user.email, parameter: secret, data: new Date()}
+            let entry = {email: user.email, parameter: secret, data: new Date(), newAcount : novaConta}
             let result = await this.validatorRepository.save(entry)
 
-            this.emailController.enviar(user.email, secret)
+            this.emailController.enviar(user.email, secret, novaConta)
 
             if(result !== null && result !== undefined){
                
                 response.render("avisoDeChecagem.hbs")
                 
             }else{
-                console.log("Ocorreu um erro ao salvar a validação no banco")
+                response.render("errSolicitacao.hbs")
             }
         }else{
-            console.log("O seguinte dado de validação está no banco: "+previous )
+            response.render("errSolicitacao.hbs")
         }
     } 
 }

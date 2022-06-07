@@ -1,18 +1,19 @@
 import { Entity, Column, PrimaryColumn } from "typeorm"
 
 @Entity()
-export class AcountValidator {
+export class TrocaEmail {
 
     @PrimaryColumn()
-    email: string
+    emailAtual: string
 
     @Column()
-    parameter: string
+    emailNovo: string
 
     @Column()
-    data: Date
+    newPhone: string
 
     @Column()
-    newAcount: boolean
+    newPassword: string
+
     
 }

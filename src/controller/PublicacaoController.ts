@@ -7,13 +7,17 @@ export class PublicacaoController {
     private publicacaoRepository = AppDataSource.getRepository(Publicacao)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        const result = await this.publicacaoRepository.find()
+        /*const result = await this.publicacaoRepository.find()
 
         if(result !== null && result !== undefined){
             response.render("atualizaSite.hbs", {publicacoes: result})
         }else{
             response.render("atualizaSite.hbs", {publicacoes: null})
-        }  
+        }*/ //Ver o comportamento desta forma
+        this.publicacaoRepository.find().then((result)=>{
+            response.render("atualizaSite.hbs", {publicacoes: result})
+        })
+        
     }
    
     async allPrisma() {
@@ -45,7 +49,7 @@ export class PublicacaoController {
             if(result1 !== null && result1 !== undefined){
                 response.render('sucessoPublicacao.hbs')
             }else{
-                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro"})
+                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro ao salvar a publicação"})
             }
     
         }else{
@@ -66,11 +70,11 @@ export class PublicacaoController {
             if(result1 !== null && result1 !== undefined){
                 response.render('sucessoPublicacaoRemovida.hbs')
             }else{
-                response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
+                response.render('publicacaoErr.hbs', {status: "Ocorreu um erro ao remover publicação"})
             }
 
         }else{
-            response.render('publicacaoRemovidaErr.hbs', {status: "Ocorreu um erro"})
+            response.render('publicacaoErr.hbs', {status: "Ocorreu um erro ao remover publicação"})
         }
     }    
 }   

@@ -252,16 +252,18 @@ AppDataSource.initialize().then(async () => {
         //usar getTime() diff 3,6 x10^6 
 
         let validador = acountValidatorController.one(req)
+        
         validador.then((validador)=>{
             if(validador !== null){
                 console.log("validador_email: "+validador.email)
-                sessionController.validatingSess(req, validador.email)    
+                sessionController.validatingSess(req, validador.email, validador.newAcount) //ver necessidade do newAcount   
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
                 res.redirect('/sair')
             }
         })
     })
+
 
     //Rota complementar para validação de conta
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
@@ -272,7 +274,10 @@ AppDataSource.initialize().then(async () => {
                 let usuario = userControler.oneBySession(req)
 
                 usuario.then((user)=>{
-                if(req.session.validating){
+                if(user.atualizarEmail){
+                    contaController.efetiveAtualizacao(req, res, next)
+                }
+                else if(req.session.validating){
                     if(senha == user.password){
                         console.log("user: "+user.password)
                         contaController.validarConta(user).then((result)=>{
@@ -309,7 +314,7 @@ AppDataSource.initialize().then(async () => {
         let validador = acountValidatorController.oneByEmail(req)
         validador.then((token)=>{
             if(token instanceof AcountValidator){
-                emailController.enviar(token.email, token.parameter)
+                emailController.enviar(token.email, token.parameter, token.newAcount)
             }
         }).then(()=>{
             res.render("avisoDeChecagem.hbs")

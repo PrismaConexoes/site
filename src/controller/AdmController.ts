@@ -7,4 +7,7 @@ export class AdmController {
     async all(request: Request, response: Response, next: NextFunction) {
         return this.admsRepository.find()
     }
+    async save(adm: Adm) {
+        this.admsRepository.save(adm)
+    }
 }

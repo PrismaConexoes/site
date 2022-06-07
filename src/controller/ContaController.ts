@@ -2,11 +2,16 @@ import { AppDataSource } from "../data-source"
 import { NextFunction, Request, Response } from "express"
 import { Userr } from "../entity/Userr"
 import { AcountValidatorController } from "./AcountValidatorController"
+import { TrocaEmailController } from "./TrocaEmailController"
+import { TrocaEmail } from "../entity/TrocaEmail"
+import { AcountValidator } from "../entity/AcountValidator"
 
 export class ContaController {
 
-    private userRepository = AppDataSource.getRepository(Userr)
+    private userRepository = AppDataSource.getRepository(Userr) //Centralizar no userController??
     private acountValidator = new AcountValidatorController
+    private trocaEmailController = new TrocaEmailController
+
 
     async admConta(request: Request, response: Response, next: NextFunction) {
         let user = await this.userRepository.findOne({
@@ -17,7 +22,7 @@ export class ContaController {
         if(user instanceof Userr){
             response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login})
         }else{
-            console.log("Ocorreu um erro ao recuperar o usuário no BD.") //criar page
+            response.render("errSolicitacao.hbs")
         }
     }
 
@@ -26,26 +31,69 @@ export class ContaController {
         let result = await this.userRepository.update({ email: user.email }, user)
         console.log(result)  
         if(result.affected == 1){
-            return this.acountValidator.updateAccount(user)
+            return this.acountValidator.validarAccount(user)
         }
         return false
     }
+    
+    async efetiveAtualizacao(request: Request, response: Response, next: NextFunction) {
+     
+        this.acountValidator.one(request).then((validador)=>{
+            if(validador instanceof AcountValidator){
+                if(!validador.newAcount){
+                    this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
+                        if(trocaEmail instanceof TrocaEmail){
+                            this.userRepository.findOneBy({email: validador.email}).then((user)=>{
+                                if(user instanceof Userr){
+                                    user.email = trocaEmail.emailNovo
+                                    user.phone = trocaEmail.newPhone
+                                    user.password = trocaEmail.newPassword
+                                    this.userRepository.update({ email: validador.email }, user)
+                                    this.acountValidator.remove(validador)
+                                    this.trocaEmailController.remove(trocaEmail)
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    }
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
         let dados = request.body
-        console.log(dados)
         if(dados !== null && dados !== undefined){
-            let result = await this.userRepository.update({ email: request.session.email }, dados)
-            if(result.affected == 1){
-                request.session.email = dados.email
+           
+            if(request.session.email == request.body.email){
+                this.efetiveAtualizacao(request, response, next)
+            }else{
+
+                //Salvando um objeto do tipo TrocaEmail
+                let trocaEmail = new TrocaEmail
+                trocaEmail.emailAtual = request.session.email
+                trocaEmail.emailNovo = request.body.email
+                await this.trocaEmailController.save(trocaEmail)
+
+                //Recuperar usuário
                 let usuario = await this.userRepository.findOne({
                     where: {
-                        email : dados.email
+                        email : request.session.email
                     }
                 })
-                response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login})
+
+                //atualização do usuário
+                usuario.atualizarEmail = true
+                let result = await this.userRepository.update({ email: usuario.email }, usuario)
+                
+                if(result.affected == 1){
+                    
+                    await this.acountValidator.saveSecret(usuario, response, false)
+
+                }else{
+                    response.render("errSolicitacao.hbs")
+                }
             }
         }else{
-            console.log("Ocorreu um erro.") //criar page
+            response.render("errSolicitacao.hbs")
         }
     }
 }

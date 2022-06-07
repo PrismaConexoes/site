@@ -34,13 +34,14 @@ export class UserController {
 
             let usuario = request.body
             delete usuario['g-recaptcha-response']
-            usuario.valid = false  
+            usuario.valid = false
+            usuario.atualizarEmail = false  
 
             const result = await this.userRepository.save(usuario)
       
             if(result !== null && result !== undefined){
                 
-                this.acountValidator.saveSecret(usuario, response)
+                this.acountValidator.saveSecret(usuario, response, true)
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
             }

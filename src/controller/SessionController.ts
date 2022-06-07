@@ -47,15 +47,17 @@ export class SessionController {
             request.session.login = false
         }
     }
-    async validatingSess(request : Request, email: string){
+    async validatingSess(request : Request, email: string, newAcount: boolean){
         request.session.secret = request.params.secret
+        request.session.newAcount = newAcount
         request.session.email = email
         request.session.validating = true  
         request.session.login = false
     }
     async validatingEndSess(request : Request){
         request.session.validating = false
-        request.session.secret = ''
+        request.session.secret = null
+        request.session.newAcount = null
     }
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
