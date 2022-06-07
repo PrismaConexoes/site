@@ -246,7 +246,7 @@ AppDataSource.initialize().then(async () => {
     })
 
     //Rota para validação de conta
-    app.get('/validarUsuario/:secret',  (req: any, res: any , next: NextFunction ) => {
+    app.get('/validarUsuario/:secret/:newAcount',  (req: any, res: any , next: NextFunction ) => {
 
         //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
         //usar getTime() diff 3,6 x10^6 
