@@ -35,7 +35,12 @@ export class EmailController {
         };
         
         mailTransporter.sendMail(sendEmail, await function(err, data) {
-                null //Não é necessária nenhuma ação  porque em caso de erro o usuário tem a opção de reenviar o email  
+            if(err){
+                console.log("err: "+err)
+            }else if(data){
+                console.log("data: "+JSON.parse(data))
+            }
+                //null Não é necessária nenhuma ação  porque em caso de erro o usuário tem a opção de reenviar o email  
         });
     }  
 }
