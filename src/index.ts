@@ -175,7 +175,7 @@ AppDataSource.initialize().then(async () => {
     app.get('/login',(req: Request, res: Response , next: Function ) => { 
         let login = req.session.login
         if(login == false){
-            res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) //{ captcha: res.recaptcha, state: "" })
+            res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) 
         }else{
             res.render("userLogadoErr", {user: req.session.user})
         }           
@@ -314,6 +314,7 @@ AppDataSource.initialize().then(async () => {
         let validador = acountValidatorController.oneByEmail(req)
         validador.then((token)=>{
             if(token instanceof AcountValidator){
+                sessionController.validatingSess(req, req.session.email, false)
                 emailController.enviar(token.email, token.parameter, token.newAcount)
             }
         }).then(()=>{

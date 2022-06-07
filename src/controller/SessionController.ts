@@ -76,6 +76,7 @@ export class SessionController {
                     response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
                 })
             }else{
+                request.session.email = request.body.email
                 response.render('avisoDeChecagem.hbs')
             }
         }    

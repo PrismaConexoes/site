@@ -40,7 +40,7 @@ export class EmailController {
         let htmlMessage = email(link, msg)
         
         let sendEmail = {
-            from: 'testeprisma503@gmail.com',
+            from: 'silvaproto@yahoo.com.br',
             to: userEmail,
             subject: "Cadastro Prisma Conexão",
             html: htmlMessage
