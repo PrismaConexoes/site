@@ -26,12 +26,12 @@ export class SessionController {
         request.session.secret = ''   
     }
     async loginSess(request : Request, user: any, relogin: boolean){
+        request.session.email = user.email
         if(relogin){
             request.session.relogin = true
         }else{
             request.session.login = true
             request.session.user =  user.firstName +" "+ user.lastName
-            request.session.email = user.email
         }
 
        
