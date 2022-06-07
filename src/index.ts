@@ -315,7 +315,7 @@ AppDataSource.initialize().then(async () => {
         validador.then((token)=>{
             if(token instanceof AcountValidator){
                 sessionController.validatingSess(req, token.email, false)
-                console.log("body: "+req.body)
+                console.log("body: "+JSON.stringify(req.body))
                 console.log("validador:"+JSON.stringify(token))
                 emailController.enviar(token.email, token.parameter, token.newAcount)
             }
