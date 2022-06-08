@@ -66,8 +66,8 @@ export class SessionController {
             if(user.valid == true){
 
                 this.loginSess(request, user, false)
-    
-                const adms = this.admController.all(request, response, next)
+                console.log("session: "+request.session)
+                this.admController.all(request, response, next)
                 .then((adms)=>{
                     adms.forEach((adm) => {
                             if(request.session.email == adm.email){ this.admSess(request) }
@@ -78,8 +78,6 @@ export class SessionController {
             }else{
 
                 request.session.email = request.body.email
-                console.log("Milestone")
-                
                 response.render('avisoDeChecagem.hbs')
             }
         }    
