@@ -41,7 +41,7 @@ export class UserController {
       
             if(result !== null && result !== undefined){
                 
-                this.acountValidator.saveSecret(usuario, response, true)
+                this.acountValidator.saveSecret(usuario,request, response, true)
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
             }

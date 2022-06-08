@@ -49,7 +49,7 @@ export class AcountValidatorController {
         return false
     }
 
-    async saveSecret(user: Userr, response: Response, novaConta: boolean){
+    async saveSecret(user: Userr, request: Request, response: Response, novaConta: boolean){
         let previous = await this.validatorRepository.findOne({
             where:{
                 email: user.email,
@@ -60,7 +60,12 @@ export class AcountValidatorController {
             let secret = uuidv4()
             let entry = {email: user.email, parameter: secret, data: new Date(), newAcount : novaConta}
             let result = await this.validatorRepository.save(entry)
-
+            let email = ''
+            if(novaConta){
+                email = user.email
+            }else{
+                email = request.body.email
+            }
             this.emailController.enviar(user.email, secret, novaConta)
 
             if(result !== null && result !== undefined){

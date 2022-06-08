@@ -107,14 +107,14 @@ export class ContaController {
                     }
                 })
 
-                
+
                 //atualização do usuário
                 usuario.atualizarEmail = true
                 let result = await this.userRepository.update({ email: usuario.email }, usuario)
                 
                 if(result.affected == 1){
                     
-                    await this.acountValidator.saveSecret(usuario, response, false)
+                    await this.acountValidator.saveSecret(usuario, request, response, false)
 
                 }else{
                     response.render("errSolicitacao.hbs")
