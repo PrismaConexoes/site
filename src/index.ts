@@ -257,7 +257,7 @@ AppDataSource.initialize().then(async () => {
         
         validador.then((validador)=>{
             if(validador !== null){
-                sessionController.validatingSess(req, validador.email, validador.newAcount) //ver necessidade do newAcount   
+                sessionController.validatingSess(req, validador.email, validador.newEmail, validador.newAcount) //ver necessidade do newAcount   
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
                 res.redirect('/sair')
@@ -277,6 +277,7 @@ AppDataSource.initialize().then(async () => {
                 usuario.then((user)=>{
                 
                 if(user.atualizarEmail){
+                    console.log("sessionNew: "+request.session.newEmail)
                     contaController.efetiveAtualizacao(req, res, next)
                 }
                 else if(req.session.validating){
