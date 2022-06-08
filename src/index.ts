@@ -260,6 +260,7 @@ AppDataSource.initialize().then(async () => {
                 sessionController.validatingSess(req, validador.email, validador.newEmail, validador.newAcount) //ver necessidade do newAcount   
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
+                console.log("sair1")
                 res.redirect('/sair')
             }
         })
@@ -289,11 +290,13 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
+                        console.log("sair2")
                         res.redirect('/sair')
                     } 
                 }
             })
             } else {
+                console.log("sair3")
                 res.redirect('/sair')
             }
         })})
