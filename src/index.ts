@@ -275,7 +275,7 @@ AppDataSource.initialize().then(async () => {
                 let usuario = userControler.oneBySession(req)
                 
                 usuario.then((user)=>{
-                console.log("user: "+JSON.stringify(user))
+                
                 if(user.atualizarEmail){
                     contaController.efetiveAtualizacao(req, res, next)
                 }
@@ -287,6 +287,8 @@ AppDataSource.initialize().then(async () => {
                                 res.render('cadastroValidado.hbs')
                             }
                         }) 
+                    }else{
+                        res.redirect('/sair')
                     } 
                 }
             })
