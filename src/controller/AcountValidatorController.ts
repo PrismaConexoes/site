@@ -14,6 +14,7 @@ export class AcountValidatorController {
 
 
     async one(request: Request) {
+        
         let result = this.validatorRepository.findOne({
             where: {
                 parameter : request.params.secret
