@@ -10,6 +10,7 @@ export class UserController {
     private acountValidator = new AcountValidatorController
 
     async one(request: Request) {
+        console.log("userControlerOne")
         return this.userRepository.findOne({
             where: {
                 email : request.body.email

@@ -255,7 +255,6 @@ AppDataSource.initialize().then(async () => {
         
         validador.then((validador)=>{
             if(validador !== null){
-                console.log("validador_email: "+validador.email)
                 sessionController.validatingSess(req, validador.email, validador.newAcount) //ver necessidade do newAcount   
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
@@ -279,7 +278,6 @@ AppDataSource.initialize().then(async () => {
                 }
                 else if(req.session.validating){
                     if(senha == user.password){
-                        console.log("user: "+user.password)
                         contaController.validarConta(user).then((result)=>{
                             if(result){
                                 sessionController.validatingEndSess(req)
