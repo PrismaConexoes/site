@@ -87,6 +87,8 @@ export class ContaController {
         let dados = request.body
         if(dados !== null && dados !== undefined){
            
+            console.log("session: "+request.session.email)
+            console.log("body: "+request.body.email)
             if(request.session.email == request.body.email){
                 console.log("milestone1")
                 this.efetiveAtualizacao(request, response, next)
