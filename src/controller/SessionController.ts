@@ -66,7 +66,6 @@ export class SessionController {
             if(user.valid == true){
 
                 this.loginSess(request, user, false)
-                console.log("session: "+request.session)
                 this.admController.all(request, response, next)
                 .then((adms)=>{
                     adms.forEach((adm) => {

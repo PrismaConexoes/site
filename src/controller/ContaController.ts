@@ -37,33 +37,46 @@ export class ContaController {
     }
     
     async efetiveAtualizacao(request: Request, response: Response, next: NextFunction) {
-     
-        this.acountValidator.one(request).then((validador)=>{
-            if(validador instanceof AcountValidator){
-                if(!validador.newAcount){
-                    this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
-                        if(trocaEmail instanceof TrocaEmail){
-                            this.userRepository.findOneBy({email: validador.email}).then((user)=>{
-                                if(user instanceof Userr){
-                                    user.email = trocaEmail.emailNovo
-                                    user.phone = trocaEmail.newPhone
-                                    user.password = trocaEmail.newPassword
-                                    this.userRepository.update({ email: validador.email }, user)
-                                    this.acountValidator.remove(validador)
-                                    this.trocaEmailController.remove(trocaEmail)
-                                }
-                            })
-                        }
-                    })
-                }
+        let usuario = await this.userRepository.findOne({
+            where: {
+                email : request.session.email
             }
-        })
+        })       
+        if(usuario.atualizarEmail == false){
+            usuario.phone = request.body.phone
+            usuario.password = request.body.password //Implementar Retype password
+            this.userRepository.update({ email: request.session.email }, usuario)      
+        }else{
+            this.acountValidator.one(request).then((validador)=>{
+                if(validador instanceof AcountValidator){
+                    if(!validador.newAcount){
+                        this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
+                            if(trocaEmail instanceof TrocaEmail){
+                                this.userRepository.findOneBy({email: validador.email}).then((user)=>{
+                                    if(user instanceof Userr){
+                                        user.email = trocaEmail.emailNovo
+                                        user.phone = trocaEmail.newPhone
+                                        user.password = trocaEmail.newPassword
+                                        user.atualizarEmail = false
+                                        this.userRepository.update({ email: validador.email }, user)
+                                        this.acountValidator.remove(validador)
+                                        this.trocaEmailController.remove(trocaEmail)
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+        }
+
     }
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
         let dados = request.body
         if(dados !== null && dados !== undefined){
            
             if(request.session.email == request.body.email){
+                console.log("milestone1")
                 this.efetiveAtualizacao(request, response, next)
             }else{
 
