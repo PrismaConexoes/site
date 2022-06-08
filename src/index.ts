@@ -313,16 +313,20 @@ AppDataSource.initialize().then(async () => {
 
     app.get('/reenviarEmail', (req, res, next) => {
 
-        //Remover tokens vencidos aqui
+        //Remover acValidador vencidos aqui
         let validador = acountValidatorController.oneBySession(req)
-        validador.then((token)=>{
-            if(token instanceof AcountValidator){
+        validador.then((acValidador)=>{
+            if(acValidador instanceof AcountValidator){
                 console.log("email: "+req.session.email)
-                sessionController.validatingSess(req, token.email, false)
+                sessionController.validatingSess(req, acValidador.email, false)
                 console.log("email: "+req.session.email)
                 console.log("body: "+JSON.stringify(req.body))
-                console.log("validador:"+JSON.stringify(token))
-                emailController.enviar(token.email, token.parameter, token.newAcount)
+                console.log("validador:"+JSON.stringify(acValidador))
+                if(acValidador.newAcount){
+                    emailController.enviar(acValidador.email, acValidador.parameter, acValidador.newAcount)
+                }else{
+                    emailController.enviar(acValidador.newEmail, acValidador.parameter, acValidador.newAcount)
+                }   
             }
         }).then(()=>{
             res.render("avisoDeChecagem.hbs")

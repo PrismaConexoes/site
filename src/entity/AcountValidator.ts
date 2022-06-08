@@ -7,6 +7,9 @@ export class AcountValidator {
     email: string
 
     @Column()
+    newEmail: string
+
+    @Column()
     parameter: string
 
     @Column()

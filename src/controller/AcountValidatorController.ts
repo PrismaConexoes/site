@@ -58,15 +58,22 @@ export class AcountValidatorController {
         if(previous == null){
 
             let secret = uuidv4()
-            let entry = {email: user.email, parameter: secret, data: new Date(), newAcount : novaConta}
-            let result = await this.validatorRepository.save(entry)
-            let email = ''
-            if(novaConta){
-                email = user.email
-            }else{
-                email = request.body.email
+
+            let email = user.email
+            let newEmail = ''
+            if(novaConta == false){
+                newEmail = request.body.email
             }
-            this.emailController.enviar(user.email, secret, novaConta)
+            let entry = {email: email, newEmail: newEmail, parameter: secret, data: new Date(), newAcount : novaConta}
+            let result = await this.validatorRepository.save(entry)
+
+
+            if(novaConta){
+                this.emailController.enviar(email, secret, novaConta)
+            }else{
+                this.emailController.enviar(newEmail, secret, novaConta)   
+            }
+            
 
             if(result !== null && result !== undefined){
                
