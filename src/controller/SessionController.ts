@@ -53,9 +53,8 @@ export class SessionController {
         request.session.email = email
         request.session.validating = true  
         request.session.login = false
-        if(newAcount){
-            request.session.newEmail =newEmail
-        }
+        request.session.newEmail =newEmail
+        
     }
     async validatingEndSess(request : Request){
         request.session.validating = false

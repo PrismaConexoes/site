@@ -319,7 +319,7 @@ AppDataSource.initialize().then(async () => {
         validador.then((acValidador)=>{
             if(acValidador instanceof AcountValidator){
                 console.log("email: "+req.session.email)
-                sessionController.validatingSess(req, acValidador.email, false)
+                sessionController.validatingSess(req, acValidador.email, acValidador.newEmail, false)
                 console.log("email: "+req.session.email)
                 console.log("body: "+JSON.stringify(req.body))
                 console.log("validador:"+JSON.stringify(acValidador))
