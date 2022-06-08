@@ -277,7 +277,7 @@ AppDataSource.initialize().then(async () => {
                 usuario.then((user)=>{
                 
                 if(user.atualizarEmail){
-                    console.log("sessionNew: "+request.session.newEmail)
+                    console.log("sessionNew: "+req.session.newEmail)
                     contaController.efetiveAtualizacao(req, res, next)
                 }
                 else if(req.session.validating){
