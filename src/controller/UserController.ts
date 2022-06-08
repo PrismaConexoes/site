@@ -11,6 +11,7 @@ export class UserController {
 
     async one(request: Request) {
         console.log("userControlerOne")
+        console.log("email: "+request.body.email)
         return this.userRepository.findOne({
             where: {
                 email : request.body.email
