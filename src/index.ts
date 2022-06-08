@@ -188,6 +188,7 @@ AppDataSource.initialize().then(async () => {
                 let result = userControler.one(req)
                 result.then((user)=>{
                     if(user instanceof Userr){
+                        console.log("milestone00")
                         sessionController.logar(req, res, next, recaptcha, user)
                     }else{
                         sessionController.loginSess(req, null, true)
@@ -197,6 +198,7 @@ AppDataSource.initialize().then(async () => {
                 })  
             } else {
                 req.session.relogin = false
+                console.log("milestone22")
                 res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
             }
         })
