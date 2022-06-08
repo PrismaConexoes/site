@@ -52,7 +52,7 @@ export class ContaController {
             ctrl = true      
         }else{
             this.acountValidator.one(request).then((validador)=>{
-                if(validador instanceof AcountValidator){
+                if(validador !== null){
                     if(!validador.newAcount){
                         this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
                             if(trocaEmail instanceof TrocaEmail){

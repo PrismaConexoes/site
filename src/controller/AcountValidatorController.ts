@@ -14,16 +14,13 @@ export class AcountValidatorController {
 
 
     async one(request: Request) {
-        
-        let result = this.validatorRepository.findOne({
+
+        let result = await this.validatorRepository.findOne({
             where: {
                 parameter : request.params.secret
             }
         })
-        if(result !== null && result !== undefined){
-                return result
-            }
-        return null    
+        return result    
     }
     async remove(validador: AcountValidator) {
         await this.validatorRepository.remove(validador)
