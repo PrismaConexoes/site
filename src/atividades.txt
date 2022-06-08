@@ -162,8 +162,12 @@
     2 -> projeto de nova mensagem de verificação de email           --OK--
     3 -> Imlementação de entity troca de email                      --OK--
     4 -> Implementação do controlador de trocaEmail                 --OK--
-    5 -> Definição da lógica para atualização do email              --
-    6 -> implementação de verificação de atualização de email       --
+    5 -> Definição da lógica para atualização do email              --OK--
+    6 -> implementação de verificação de atualização de email       --OK--
+
+//08/06/22
+    1 -> Correções e ajustes no login                               --OK--
+    2 -> Correções e ajustes na atualizacão de conta                --OK--
 
 
     //Atualizar copyright com novos módulos
