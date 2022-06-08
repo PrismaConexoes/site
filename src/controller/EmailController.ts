@@ -7,16 +7,14 @@ export class EmailController {
     private nodemailer = require('nodemailer');
 
     async enviar(userEmail: string, secret: string, newAcount: boolean){
-        console.log("user email: "+userEmail)
-        console.log("secret: "+secret)
-        console.log("newAcount: "+newAcount)
+
         let mailTransporter = this.nodemailer.createTransport({
             //Obs:Advinhação => Mascarar é CrImE. Autorizar junto ao serviço de email o envio por aplicativos apenas com usuário e senha
             //Ver política do google que previa mudança para 30/05/22
             host: 'smtp.mail.yahoo.com',
             port: 465,
             service:'yahoo',
-            secure: false,
+            secure: true,
             auth: {
                user: 'silvaproto@yahoo.com.br',
                pass: 'uqomckcujuibfpzk'
