@@ -20,6 +20,9 @@ export class AcountValidatorController {
                 parameter : request.params.secret
             }
         })
+        console.log("one")
+        console.log("param:"+request.params.secret)
+        console.log("result: "+JSON.stringify(result))
         return result    
     }
     async remove(validador: AcountValidator) {
