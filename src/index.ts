@@ -192,13 +192,12 @@ AppDataSource.initialize().then(async () => {
                         sessionController.logar(req, res, next, recaptcha, user)
                     }else{
                         sessionController.loginSess(req, null, true)
-                        console.log("milestone11")
+                      
                         res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
                     }   
                 })  
             } else {
                 req.session.relogin = false
-                console.log("milestone22")
                 res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
             }
         })
