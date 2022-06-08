@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express"
+import { AcountValidator } from "../entity/AcountValidator"
 import { Userr } from "../entity/Userr"
 import { AdmController } from "./AdmController"
 
@@ -47,13 +48,13 @@ export class SessionController {
             request.session.login = false
         }
     }
-    async validatingSess(request : Request, email: string, newEmail: string, newAcount: boolean){
-        request.session.secret = request.params.secret
-        request.session.newAcount = newAcount
-        request.session.email = email
-        request.session.validating = true  
+    async validatingSess(request : Request, validador: AcountValidator){
+        request.session.secret = validador.parameter
+        request.session.newAcount = validador.newAcount
+        request.session.email = validador.email
+        if(validador.newAcount){ request.session.validating = true  }
         request.session.login = false
-        request.session.newEmail =newEmail
+        request.session.newEmail = validador.newEmail
         
     }
     async validatingEndSess(request : Request){

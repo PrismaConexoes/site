@@ -252,12 +252,13 @@ AppDataSource.initialize().then(async () => {
 
         //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
         //usar getTime() diff 3,6 x10^6 
-
+        
         let validador = acountValidatorController.one(req)
         
         validador.then((validador)=>{
+            console.log("validador: "+JSON.stringify(validador))
             if(validador !== null){
-                sessionController.validatingSess(req, validador.email, validador.newEmail, validador.newAcount) //ver necessidade do newAcount   
+                sessionController.validatingSess(req, validador)
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
                 console.log("sair1")
