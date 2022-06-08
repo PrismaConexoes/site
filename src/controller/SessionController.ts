@@ -80,6 +80,9 @@ export class SessionController {
                 request.session.email = request.body.email
                 response.render('avisoDeChecagem.hbs')
             }
+        }else{
+            request.session.relogin = true
+            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Usuário não encontrado", relogin: true});
         }    
            
     }
