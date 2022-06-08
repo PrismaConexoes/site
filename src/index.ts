@@ -273,8 +273,9 @@ AppDataSource.initialize().then(async () => {
                 let senha = req.body.password
 
                 let usuario = userControler.oneBySession(req)
-
+                
                 usuario.then((user)=>{
+                console.log("user: "+JSON.stringify(user))
                 if(user.atualizarEmail){
                     contaController.efetiveAtualizacao(req, res, next)
                 }
