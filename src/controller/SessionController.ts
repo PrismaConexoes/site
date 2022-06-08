@@ -82,7 +82,7 @@ export class SessionController {
             }
         }else{
             request.session.relogin = true
-            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Usuário não encontrado", relogin: true});
+            response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, status: "", relogin: true});
         }    
            
     }
