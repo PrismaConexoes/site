@@ -62,6 +62,7 @@ export class ContaController {
                                         user.phone = trocaEmail.newPhone
                                         user.password = trocaEmail.newPassword
                                         user.atualizarEmail = false
+                                        request.session.email = trocaEmail.emailNovo //Acompanhar
                                         this.userRepository.update({ email: validador.email }, user)
                                         this.acountValidator.remove(validador)
                                         this.trocaEmailController.remove(trocaEmail)
@@ -95,6 +96,8 @@ export class ContaController {
                 let trocaEmail = new TrocaEmail
                 trocaEmail.emailAtual = request.session.email
                 trocaEmail.emailNovo = request.body.email
+                trocaEmail.newPhone = request.body.phone
+                trocaEmail.newPassword = request.body.password
                 await this.trocaEmailController.save(trocaEmail)
 
                 //Recuperar usuário
@@ -104,6 +107,7 @@ export class ContaController {
                     }
                 })
 
+                
                 //atualização do usuário
                 usuario.atualizarEmail = true
                 let result = await this.userRepository.update({ email: usuario.email }, usuario)
