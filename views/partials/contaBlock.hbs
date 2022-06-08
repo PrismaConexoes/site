@@ -2,6 +2,21 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-center">
         <form class="m-5 " action="/atualizarConta" method="post" id="formulario">
+            {{#if atualizacao}}
+                <div class="alert alert-success" role="alert" id="alerta">
+                    Atualização efetivada com sucesso!
+                </div>
+                <script>
+                    setTimeout(function(){
+
+                        var alert = document.getElementById("alerta");
+
+                        alert.style="display:none"
+
+
+                        }, 3000);
+                </script>
+            {{/if}}
             <div class="d-flex flex-column">
                 <div class="mb-3">
                     <label>Nome:</label>
