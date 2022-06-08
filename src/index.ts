@@ -188,6 +188,7 @@ AppDataSource.initialize().then(async () => {
                 let result = userControler.one(req)
                 result.then((user)=>{
                     if(user instanceof Userr){
+                        console.log("user: "+JSON.stringify(user))
                         sessionController.logar(req, res, next, recaptcha, user)
                     }else{
                         sessionController.loginSess(req, null, true)
