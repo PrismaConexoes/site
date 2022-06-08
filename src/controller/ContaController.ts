@@ -20,7 +20,7 @@ export class ContaController {
             }
         })
         if(user instanceof Userr){
-            response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login})
+            response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : false})
         }else{
             response.render("errSolicitacao.hbs")
         }
@@ -41,11 +41,15 @@ export class ContaController {
             where: {
                 email : request.session.email
             }
-        })       
+        })
+        
+        let ctrl = false
+             
         if(usuario.atualizarEmail == false){
             usuario.phone = request.body.phone
             usuario.password = request.body.password //Implementar Retype password
-            this.userRepository.update({ email: request.session.email }, usuario)      
+            this.userRepository.update({ email: request.session.email }, usuario)
+            ctrl = true      
         }else{
             this.acountValidator.one(request).then((validador)=>{
                 if(validador instanceof AcountValidator){
@@ -61,6 +65,7 @@ export class ContaController {
                                         this.userRepository.update({ email: validador.email }, user)
                                         this.acountValidator.remove(validador)
                                         this.trocaEmailController.remove(trocaEmail)
+                                        ctrl = true
                                     }
                                 })
                             }
@@ -68,6 +73,12 @@ export class ContaController {
                     }
                 }
             })
+        }
+
+        if(ctrl){
+            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
+        }else{
+            response.render("errSolicitacao.hbs")
         }
 
     }
