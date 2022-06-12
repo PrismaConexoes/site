@@ -26,6 +26,19 @@ export class AcountValidatorController {
         console.log("result: "+JSON.stringify(result))
         return result    
     }
+    async oneBySessionSecret(request: Request) {
+
+        let result = await this.validatorRepository.findOne({
+            where: {
+                parameter : request.session.secret
+            }
+        })
+        console.log("onebysession")
+        console.log("param:"+request.params.secret)
+        console.log("session_param: "+request.session.secret)
+        console.log("result: "+JSON.stringify(result))
+        return result    
+    }
     async remove(validador: AcountValidator) {
         await this.validatorRepository.remove(validador)
     }   

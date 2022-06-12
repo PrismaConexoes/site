@@ -48,8 +48,12 @@ export class SessionController {
             request.session.login = false
         }
     }
+    async secretSess(request : Request){
+        request.session.secret = request.params.secret
+    }
+
     async validatingSess(request : Request, validador: AcountValidator){
-        request.session.secret = validador.parameter
+        
         request.session.newAcount = validador.newAcount
         request.session.email = validador.email
         if(validador.newAcount){ request.session.validating = true  }
