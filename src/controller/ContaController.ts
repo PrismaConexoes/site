@@ -4,13 +4,14 @@ import { Userr } from "../entity/Userr"
 import { AcountValidatorController } from "./AcountValidatorController"
 import { TrocaEmailController } from "./TrocaEmailController"
 import { TrocaEmail } from "../entity/TrocaEmail"
-import { AcountValidator } from "../entity/AcountValidator"
+import { SessionController } from "./SessionController"
 
 export class ContaController {
 
     private userRepository = AppDataSource.getRepository(Userr) //Centralizar no userController??
     private acountValidator = new AcountValidatorController
     private trocaEmailController = new TrocaEmailController
+    private sessionCtrl = new SessionController
 
 
     async admConta(request: Request, response: Response, next: NextFunction) {
@@ -66,6 +67,7 @@ export class ContaController {
                                         this.userRepository.update({ email: validador.email }, user)
                                         this.acountValidator.remove(validador)
                                         this.trocaEmailController.remove(trocaEmail)
+                                        this.sessionCtrl.sairSess(request)
                                         response.render('atualizacaoSucess.hbs')
                                     }else{
                                         response.render('errSolicitacao.hbs')
