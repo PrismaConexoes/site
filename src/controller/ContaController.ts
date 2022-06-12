@@ -43,13 +43,12 @@ export class ContaController {
             }
         })
         
-        let ctrl = false
              
         if(usuario.atualizarEmail == false){
             usuario.phone = request.body.phone
             usuario.password = request.body.password //Implementar Retype password
             this.userRepository.update({ email: request.session.email }, usuario)
-            ctrl = true      
+                 
         }else{
             this.acountValidator.oneBySessionSecret(request).then((validador)=>{
                 if(validador !== null){
@@ -66,7 +65,6 @@ export class ContaController {
                                         this.userRepository.update({ email: validador.email }, user)
                                         this.acountValidator.remove(validador)
                                         this.trocaEmailController.remove(trocaEmail)
-                                        ctrl = true
                                     }
                                 })
                             }
@@ -75,12 +73,8 @@ export class ContaController {
                 }
             })
         }
+        response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
 
-        if(ctrl){
-            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
-        }else{
-            response.render("errSolicitacao.hbs")
-        }
 
     }
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
