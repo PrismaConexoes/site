@@ -51,7 +51,7 @@ export class ContaController {
             this.userRepository.update({ email: request.session.email }, usuario)
             ctrl = true      
         }else{
-            this.acountValidator.one(request).then((validador)=>{
+            this.acountValidator.oneBySessionSecret(request).then((validador)=>{
                 if(validador !== null){
                     if(!validador.newAcount){
                         this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
