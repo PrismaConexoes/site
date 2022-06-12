@@ -252,7 +252,7 @@ AppDataSource.initialize().then(async () => {
 
         //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
         //usar getTime() diff 3,6 x10^6 
-        console.log("secret: "+req.params.secret)
+        console.log("secret: '"+req.params.secret+"'")
         let validador = acountValidatorController.one(req)
         
         validador.then((validador)=>{
