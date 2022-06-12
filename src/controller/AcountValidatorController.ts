@@ -22,6 +22,7 @@ export class AcountValidatorController {
         })
         console.log("one")
         console.log("param:"+request.params.secret)
+        console.log("session_param: "+request.session.secret)
         console.log("result: "+JSON.stringify(result))
         return result    
     }
