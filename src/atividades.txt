@@ -169,12 +169,15 @@
     1 -> Correções e ajustes no login                               --OK--
     2 -> Correções e ajustes na atualizacão de conta                --OK--
 
+//12/06/22
+    1 -> Ajustes na atualizacão da conta                            --OK--
+
 
     //Atualizar copyright com novos módulos
     //rever partes html que se tornaram desnecessárias
     //rever mensagem de envio de email
     //implementar temporizadores (precisa de temporizador na atualização??)
-    //colocar flag na entity user sobre mudança de email
+   
 
 
 
