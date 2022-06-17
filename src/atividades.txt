@@ -171,11 +171,13 @@
 
 //12/06/22
     1 -> Ajustes na atualizacão da conta                            --OK--
+    2 -> Ajuste nos créditos                                        --Ok--
 
 
-    //Atualizar copyright com novos módulos
+
     //rever partes html que se tornaram desnecessárias
-    //rever mensagem de envio de email
+    //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
+
     //implementar temporizadores (precisa de temporizador na atualização??)
    
 
