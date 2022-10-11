@@ -17,7 +17,7 @@
     4-Criação da rota principal(Acessando template principal)       --OK--
 
 //24/03/22
-    1 - Criar formulario e testar com wireshark()                   --Desnecessário--
+  
     2 - Configuração dos diretórios do handlebars                   --OK--
         => Produção de templates em forma de partials               --OK--
     3 - Configuração do diretório de arquivos públicos              --OK--
@@ -175,6 +175,9 @@
 
 
 
+//11/10/22
+    1 -> Reformulação da barra superior
+    2 -> Reformulação do carrossel
     //rever partes html que se tornaram desnecessárias
     //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
 
@@ -218,7 +221,7 @@ OBS: Criar tabela para link das imagens(7 links)
 
 //ver typeorm class-validator (para evitar erro em send direto) --Ver necessidade
     
-
+// restart app => heroku ps:restart --app appprisma  
 
         
 

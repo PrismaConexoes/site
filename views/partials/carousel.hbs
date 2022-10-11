@@ -1,24 +1,36 @@
 
-<div id="mainCarousel" class="carousel slide m-5" data-bs-ride="carousel">
+<div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" style="height: 15px; width: 15px;" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" style="height: 15px; width: 15px;" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" style="height: 15px; width: 15px;" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
   <div class="carousel-inner ">
     <div class="carousel-item active">
-      <img src="https://docs.google.com/uc?id={{ativo.linkimg}}" class="d-block w-100" alt="{{ativo.linkimg}}">
-    </div>
-    {{#each carousel}}
-      <div class="carousel-item">
-        <img src="https://docs.google.com/uc?id={{linkimg}}" class="d-block w-100" alt="{{linkimg}}">
+      <img src="images/carrosel1Teste.jpg" class="d-block w-100" alt="teste1">
+      <div class="carousel-caption d-none d-md-block ">
+        <h1><b>Conectar pessoas, encontrar soluções.</b></h1>
+        <h5>Nós cuidamos da burocracia. Você cuida do seu negócio!</h5>
+        <button type="button" style ="border-radius: 50px;" class="btn btn-success">CONTATO</button>
       </div>
-    {{/each}}
-
+    </div>
+    <div class="carousel-item">
+      <img src="images/carrosel2Teste.jpg" class="d-block w-100" alt="teste2">
+      <div class="carousel-caption d-none d-md-block ">
+        <h1><b>Conectar pessoas, encontrar soluções.</b></h1>
+        <h5>Nós cuidamos da burocracia. Você cuida do seu negócio!</h5>
+        <button type="button" style ="border-radius: 50px;" class="btn btn-success">CONTATO</button>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="images/carrosel3Teste.jpg" class="d-block w-100" alt="teste3">
+      <div class="carousel-caption d-none d-md-block ">
+        <h1><b>Conectar pessoas, encontrar soluções.</b></h1>
+        <h5>Nós cuidamos da burocracia. Você cuida do seu negócio!</h5>
+        <button type="button" style ="border-radius: 50px;" class="btn btn-success">CONTATO</button>
+      </div>
+    </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Próxima</span>
-  </button>
 </div>
 
 

@@ -29,3 +29,20 @@ div#navSup {
     bottom: 20px;
     right: 70px
 }
+
+#mainCarousel .carousel-caption {
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+}
+
+#mainCarousel .btn {
+    width: 200px;
+    height: 50px;
+    border: 0px;
+    background-color: rgb(84, 202, 153);
+}
