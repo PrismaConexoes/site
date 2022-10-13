@@ -1,47 +1,67 @@
 
 <div class="container-fluid text-white bg-black" >
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
-        <div class="d-flex flex-column justify-content-around align-items-center">
-            <h5 class="m-2">Venha nos visitar!</h5>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1979.0167224538268!2d-39.40877454023298!3d-7.237024888641796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a18483440519e9%3A0x3902fd5c75e82122!2sAv.%20Duque%20de%20Caxias%2C%20187%20-%20Centro%2C%20Crato%20-%20CE%2C%2063100-390!5e0!3m2!1spt-BR!2sbr!4v1649099670478!5m2!1spt-BR!2sbr" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-       
-        <div class="d-flex flex-column justify-content-around align-items-center">
-            <address>
-                <p><h5 class="m-2">Onde estamos:</h5></p>
-                <p>Av. Duque de Caixias, 187</p>
-                <p>Centro | Crato - CE</p>
-                <p>CEP: 63100-390</p>
-            </address>
-        </div>
-        <div class="d-flex flex-column justify-content-around align-items-center">
-            <address>
-                <p><h5 class="m-2">Entre em contato:</h5></p>
-                <p><a href="mailto:prismaconexoes@gmail.com" class="text-white text-decoration-none"><img src="icons/email_icon.png" class="img-fluid bg-white rounded-circle border border-2"/>prismaconexoes@gmail.com</a></p>
-                <p><a href="tel:88988158311" class="text-white text-decoration-none"><img src="icons/phone_icon.png" class="img-fluid bg-white rounded-circle border border-2"/>(88)98815.8311</a></p>
-            </address>
-        </div>
-       
-    </div>
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2">
-               
-        <div class="d-flex flex-column justify-content-around align-items-center ">
-            <div class="felx-row">
-                <p>
-                    <h5 class="m-2">Siga-nos:
-                    <a href="/home" class="text-white  m-2"><img src="icons/face_icon.png" class="img-fluid bg-white rounded-circle"/></a>
-                    <a href="/home" class="text-white m-2"><img src="icons/insta_icon.png" class="img-fluid bg-white  border border-2 rounded-circle"/></a>
-                    <a href="/home" class="text-white m-2"><img src="icons/linked_icon.png" class="img-fluid bg-white rounded-circle"/></a>
-                    </h5>
+
+        <div class="d-flex justify-content-center align-items-end">
+            <div class="d-flex flex-column justify-content-end">
+                <a href="/" class="mt-5" ><img src="images/logo_footer.png" /></a>
+                <p class="text-white-50 mt-3">Resumo sobre as empresas</p>
+                <p class="text-white-50">Resumo sobre as empresas</p>
+                <p class="text-white-50">Resumo sobre as empresas</p>
+                <p class="mt-3"><img src="icons/endereco_icon.png">Endereço: Av. Duque de Caixias, 187 | Crato-CE </img></p>
+                <p><a href="tel:88988158311" class="text-white text-decoration-none"><img src="icons/telefone_icon.png"/>Telefone: (88)98815.8311</a></p>
+                <p><a href="mailto:prismaconexoes@gmail.com" class="text-white text-decoration-none"><img src="icons/email_icon.png"/>E-mail: prismaconexoes@gmail.com</a></p>
+                <p class="mt-3">
+                    
+                    <a href="/home" class="text-white m-2"><img src="icons/insta_icon.png" /></a>
+                    <a href="/home" class="text-white  m-2"><img src="icons/face_icon.png" /></a>
+                    <a href="/home" class="text-white m-2"><img src="icons/linked_icon.png" /></a>
                 </p>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-end ">
-            <p>© Prisma Conexão</p>
+
+        <div class="d-flex justify-content-center align-items-start ">
+                <div class="d-flex flex-column justify-content-start ">
+                    <p><h5 class="mt-2">ÚLTIMAS NOTÍCIAS:</h5></p>
+                    <hr width="40px" size="7px" style="color:  rgb(119, 238, 188);" /> 
+                </div>
+
+        
+          
         </div>
+
+        <div class="d-flex justify-content-around align-items-center">
+            
+                
+                <form id="rodapeMensagem">
+                    <p><h5 class="m-2">CONTATO:</h5></p>
+                    <hr width="40px" size="7px" style="color:  rgb(119, 238, 188);" />   
+                    <div class="form-group">
+                        <input type="text" class="form-control text-white" id="menNome" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control text-white" id="menEmail" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control text-white" id="menAssunto" placeholder="Assunto">
+                    </div>
+                    <div class="form-group" >
+                        <input type="text" style="height: 100px; border-radius: 20px;" class="form-control text-white" id="menMensagem" placeholder="Mensagem">
+                    </div>
+                    <div class="d-flex justify-content-end m-2">
+           
+                        <button class="g-recaptcha btn btn-primary w-50" data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback='onSubmit' data-action='submit'>ENVIAR</button>
+                
+                    </div>
+                </form>   
+        </div>
+       
     </div>
+    
+    <div class="d-flex justify-content-center align-items-end ">
+        <p>© Prisma Conexão</p>
+    </div>
+
 </div>
 
 

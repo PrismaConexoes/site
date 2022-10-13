@@ -44,5 +44,26 @@ div#navSup {
     width: 200px;
     height: 50px;
     border: 0px;
+    border-radius: 50px;
     background-color: rgb(84, 202, 153);
+}
+
+#rodapeMensagem .form-control {
+    height: 50px;
+    margin-top: 15px;
+    width: 300px;
+    border: 0px;
+    border-radius: 50px;
+    background-color: rgb(32, 31, 31);
+}
+
+#rodapeMensagem .btn {
+    height: 50px;
+    border: 0px;
+    border-radius: 50px;
+    background-color: rgb(84, 202, 153);
+}
+
+.faleConoscoPrisma {
+    background-color: rgb(56, 54, 54);
 }
