@@ -11,6 +11,7 @@ import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
 import { EmailController } from "./controller/EmailController"
+import { json } from "body-parser"
 ///////////////////////////////////////////////////////////////////////////////////
 
 
@@ -22,6 +23,9 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
     const request = require('request')
+
+    let Parser = require('rss-parser');
+    let parser = new Parser();
     ///////////////////////////////////
 
     
@@ -101,26 +105,63 @@ AppDataSource.initialize().then(async () => {
     //////////////////////////ROTAS DE NAVEGAÇÃO/////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
+    app.get('/feed', (req: Request, res: Response, next: NextFunction ) => {
+       
+        (async () => {
+
+            let feed = await parser.parseURL('http://g1.globo.com/dynamo/brasil/rss2.xml');
+            console.log(feed);
+          
+         
+          
+          })();
+    })
+
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
        
         sessionController.prismaSess(req)
         console.log(req.session)
         let carrossel = publicacaoController.allPrisma()
-    
+        
         if(carrossel instanceof Promise){
             carrossel.then((car)=>{
-                let car1 = car[0]
-                delete car[0]
-                res.render("prisma.hbs" , {
-                    login: req.session.login, 
-                    user: req.session.user, 
-                    adm: req.session.administrador,
-                    ativo: car1,
-                    carousel: car}) 
-            })
-        }
-    })
+                let car1 = car[0];
+                delete car[0];
+
+                (async () => {
+
+                    let feed = await parser.parseURL('http://g1.globo.com/dynamo/brasil/rss2.xml');
+
+                    let feed0 = JSON.parse(JSON.stringify(feed.items[0]));
+                    let img0 = feed0.content.split("<br />")[0].split('"')[1];
+                    let date0 = feed0.pubDate.split("-")[0];
+                    let feed1 = JSON.parse(JSON.stringify(feed.items[1]));
+                    let date1 = feed1.pubDate.split("-")[0];
+                    let img1 = feed1.content.split("<br />")[0].split('"')[1];
+                    let feed2 = JSON.parse(JSON.stringify(feed.items[2]));
+                    let date2 = feed2.pubDate.split("-")[0];
+                    let img2 = feed2.content.split("<br />")[0].split('"')[1];
+                  
+                    res.render("prisma.hbs" , {
+                        login: req.session.login, 
+                        user: req.session.user, 
+                        adm: req.session.administrador,
+                        ativo: car1,
+                        carousel: car,
+                        rss0 : feed0,
+                        img0 : img0,
+                        date0 : date0,
+                        rss1 : feed1,
+                        img1 : img1,
+                        date1 : date1,
+                        rss2 : feed2,
+                        img2 : img2,
+                        date2: date2,
+                       })                  
+                  })();
+                })
+            }})
 
     //Rota F&F
     app.get('/fef', (req, res) => {

@@ -85,3 +85,7 @@ div#navSup {
     border-radius: 50px;
     background-color: rgb(84, 202, 153);
 }
+
+.img_noticias {
+    height: 200px;
+}
