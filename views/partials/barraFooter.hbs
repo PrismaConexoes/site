@@ -20,21 +20,58 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-center align-items-start ">
-                <div class="d-flex flex-column justify-content-start ">
-                    <p><h5 class="mt-2">ÚLTIMAS NOTÍCIAS:</h5></p>
-                    <hr style="opacity: 1; color:  rgb(119, 238, 188);"  width="40px" size="7px"  /> 
-                </div>
+        <div class="d-flex align-items-center ">
+            <div class="d-flex flex-column justify-content-start ">
+                <p><h5 class="mt-2">ÚLTIMAS NOTÍCIAS:</h5></p>
+                <hr style="opacity: 1; color:  rgb(119, 238, 188);"  width="40px" size="7px"  /> 
 
-        
-          
+                <div class="row  flex-row mt-2">                    
+                    <div class="col-3">
+                        <img class="w-75" style="height: 75px;" src="{{img0}}" alt="Notícia">
+                    </div>
+                    <div class="col-9">
+                        <a class="text-decoration-none" href="{{rss0.link}}">
+                            <div class="d-flex flex-column">
+                                <p class="paragraph text-white">{{rss0.title}}</p>
+                                <b class="text-white-50">{{date0}}</b>                   
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row flex-row mt-2">                    
+                    <div class="col-3">
+                        <img class=" w-75" style="height: 75px;"  src="{{img1}}" alt="Notícia">
+                    </div>
+                    <div class="col-9">
+                        <a class="text-decoration-none" href="{{rss1.link}}">
+                            <div class="d-flex flex-column">
+                                <p class="paragraph text-white">{{rss1.title}}</p>
+                                <b class="text-white-50">{{date1}}</b>                   
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row  flex-row mt-2" >                    
+                    <div class="col-3">
+                        <img class="w-75" style="height: 75px;"  src="{{img2}}" alt="Notícia">
+                    </div>
+                    <div class="col-9">
+                        <a class="text-decoration-none" href="{{rss2.link}}">
+                            <div class="d-flex flex-column">
+                                <p class="paragraph text-white">{{rss2.title}}</p>
+                                <b class="text-white-50">{{date2}}</b>                   
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="d-flex justify-content-around align-items-center">
             
                 
                 <form id="rodapeMensagem">
-                    <p><h5 class="m-2">CONTATO:</h5></p>
+                    <p><h5 class="mt-2">CONTATO:</h5></p>
                     <hr style="opacity: 1; color:  rgb(119, 238, 188);" width="40px" size="7px" />   
                     <div class="form-group">
                         <input type="text" class="form-control text-white" id="menNome" placeholder="Nome">
