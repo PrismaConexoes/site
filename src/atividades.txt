@@ -187,6 +187,7 @@
 //18/10/22
     1 - vídeo
     2 - sobre nós
+    3 - parceiros
     //rever partes html que se tornaram desnecessárias
     //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
 
