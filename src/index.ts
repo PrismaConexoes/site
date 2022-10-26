@@ -131,17 +131,18 @@ AppDataSource.initialize().then(async () => {
 
                 (async () => {
 
-                    let feed = await parser.parseURL('http://g1.globo.com/dynamo/brasil/rss2.xml');
-
+                    let feed = await parser.parseURL('https://adrenaline.com.br/rss');
+                    
                     let feed0 = JSON.parse(JSON.stringify(feed.items[0]));
-                    let img0 = feed0.content.split("<br />")[0].split('"')[1];
-                    let date0 = feed0.pubDate.split("-")[0];
+                    let img0 = feed0.enclosure.url;
+                    console.log(img0);
+                    let date0 = feed0.pubDate.split("+")[0];
                     let feed1 = JSON.parse(JSON.stringify(feed.items[1]));
-                    let date1 = feed1.pubDate.split("-")[0];
-                    let img1 = feed1.content.split("<br />")[0].split('"')[1];
+                    let date1 = feed1.pubDate.split("+")[0];
+                    let img1 = feed1.enclosure.url;
                     let feed2 = JSON.parse(JSON.stringify(feed.items[2]));
-                    let date2 = feed2.pubDate.split("-")[0];
-                    let img2 = feed2.content.split("<br />")[0].split('"')[1];
+                    let date2 = feed2.pubDate.split("+")[0];
+                    let img2 = feed2.enclosure.url;
                   
                     res.render("prisma.hbs" , {
                         login: req.session.login, 
