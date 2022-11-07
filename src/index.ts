@@ -129,13 +129,13 @@ AppDataSource.initialize().then(async () => {
                 let car1 = car[0];
                 delete car[0];
 
+                //Colocar em uma função para ser acessado por outras páginas sem precisar reescrever
                 (async () => {
 
                     let feed = await parser.parseURL('https://adrenaline.com.br/rss');
                     
                     let feed0 = JSON.parse(JSON.stringify(feed.items[0]));
                     let img0 = feed0.enclosure.url;
-                    console.log(img0);
                     let date0 = feed0.pubDate.split("+")[0];
                     let feed1 = JSON.parse(JSON.stringify(feed.items[1]));
                     let date1 = feed1.pubDate.split("+")[0];

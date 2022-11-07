@@ -51,7 +51,7 @@ div#navSup {
 #rodapeMensagem .form-control {
     height: 50px;
     margin-top: 15px;
-    width: 300px;
+    width: 250px;
     border: 0px;
     border-radius: 50px;
     background-color: rgb(32, 31, 31);
@@ -87,6 +87,11 @@ div#navSup {
 }
 
 .img_noticias {
-    height: 200px;
+    height: 300px;
+    width: 400px;
     border-radius: 20px;
+}
+
+.body_noticias {
+    max-width: 400px;
 }

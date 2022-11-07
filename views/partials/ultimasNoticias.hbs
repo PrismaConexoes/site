@@ -1,39 +1,34 @@
- <div class="col d-flex flex-column justify-content-around m-5" >
     <div class="col d-flex flex-column justify-content-center align-items-center" >
         <h1 class="text-black"><b>Últimas Notícias</b></h1>
         <hr style="opacity: 1; color: black;" width="75px" size="7px" /> 
     </div>
-    <div class="row flex-row justify-content-around row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-4 m-5">
-
-        <div class="col flex-column justify-content-center " style="width: 25rem;">
-           
-            <img class="img-fluid img_noticias w-100" src="{{img0}}" alt="Notícia">
-         
+    <div class="row flex-row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 mt-5 mb-5">
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+            <img class="img-fluid img_noticias" src="{{img0}}" alt="Notícia">
             <a class="text-decoration-none" href="{{rss0.link}}">
-                <div class="card-body">
+                <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{date0}}</b>
                     <p class="card-text text-black-50 paragraph">{{rss0.title}}</p>                   
                 </div>
-            </a>
+            </a>   
         </div>
-        <div class="col flex-column justify-content-center " style="width: 25rem;">
-            <img class="img-fluid img_noticias w-100" src="{{img1}}" alt="Notícia">
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+            <img class="img-fluid img_noticias" src="{{img1}}" alt="Notícia">
             <a class="text-decoration-none" href="{{rss1.link}}"> 
-                <div class="card-body">
+                <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{date1}}</b>
                     <p class="card-text text-black-50 paragraph">{{rss1.title}}</p>      
                 </div>
-            </a>
+            </a>  
         </div>
-        <div class="col flex-column justify-content-center " style="width: 25rem;">
-            <img class="img-fluid img_noticias w-100" src="{{img2}}" alt="Notícia">
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+            <img class="img-fluid img_noticias" src="{{img2}}" alt="Notícia">
             <a class="text-decoration-none" href="{{rss2.link}}">              
-                <div class="card-body">
+                <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{date2}}</b>
-                    <p class="card-text text-black-50 paragraph">{{rss2.title}}</p>
-                    
+                    <p class="card-text text-black-50 paragraph">{{rss2.title}}</p>                   
                 </div>
-            </a>
+            </a> 
         </div>
     </div>
-</div>
+
