@@ -207,6 +207,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
         
         recaptcha.verify(req, function (error, data) {
+            console.log(data)
             if (!error) {
                 let result = fcController.save(req, res);
                 result.then((fc)=>{
