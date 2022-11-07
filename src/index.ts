@@ -205,7 +205,7 @@ AppDataSource.initialize().then(async () => {
 
     //Rota FaleConosco
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
-        console.log(req.body)
+        
         recaptcha.verify(req, function (error, data) {
             if (!error) {
                 let result = fcController.save(req, res);
@@ -215,8 +215,9 @@ AppDataSource.initialize().then(async () => {
                     }else{
                         res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
                     }   
-                })  
+                })   
             } else {
+                console.log(error)
                 res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
         })
