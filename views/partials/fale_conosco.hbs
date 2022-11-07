@@ -1,24 +1,25 @@
-<form class="faleConoscoPrisma " action="/faleConosco" method="post" id="formulario"></form>>
-  <div class="d-flex justify-content-center m-3 text-white"><h3 class="m-5">Fale Conosco</h3></div>
- 
-  <div class="row d-flex flex-row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-3">
-    <div class="col ">
-      <input type="text" class="form-control mt-3" placeholder="Nome:">
+<div class="faleConoscoPrisma mb-5">
+  <form  action="/faleConosco" method="post" id="formulario"></form>>
+    <div class="d-flex justify-content-center m-3 text-white"><h3 class="m-5">Fale Conosco</h3></div>
+  
+    <div class="row d-flex flex-row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-3">
+      <div class="col ">
+        <input type="text" class="form-control mt-3" placeholder="Nome:">
+      </div>
+      <div class="col ">
+        <input type="text" class="form-control mt-3" placeholder="Sobrenome:">
+      </div>
+      <div class="col ">
+        <input type="text" class="form-control mt-3" placeholder="Telefone/Whats:">
+      </div>
+    </div>  
+    <div class="d-flex m-4">
+          <input type="text" style="height: 100px;" class="form-control mb-5 " placeholder="Mensagem:">
     </div>
-    <div class="col ">
-      <input type="text" class="form-control mt-3" placeholder="Sobrenome:">
+    <div class="row ">
+      <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+          <button class="g-recaptcha btn btn-success" style="width: 200px;" data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback='onSubmit' data-action='submit'>ENVIAR</button>
+      </div>
     </div>
-    <div class="col ">
-      <input type="text" class="form-control mt-3" placeholder="Telefone/Whats:">
-    </div>
-  </div>  
-  <div class="d-flex m-4">
-        <input type="text" style="height: 100px;" class="form-control mb-5 " placeholder="Mensagem:">
-  </div>
-  <div class="row ">
-    <div class="d-flex flex-column justify-content-center align-items-center mb-5">
-        <button class="g-recaptcha btn btn-success" style="width: 200px;" data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback='onSubmit' data-action='submit'>ENVIAR</button>
-    </div>
-  </div>
-
-</form>
+  </form>
+</div>
