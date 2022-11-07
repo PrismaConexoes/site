@@ -1,6 +1,6 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
-import { Contato } from "../entity/contato"
+import { Contato } from "../entity/Contato"
 
 
 export class ContatoController {
