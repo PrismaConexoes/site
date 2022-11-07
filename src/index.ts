@@ -3,6 +3,7 @@ import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
 import { FaleConoscoController } from "./controller/FaleConoscoController"
+import { ContatoController, ContatoController } from "./controller/ContatoController"
 import { AcountValidatorController } from "./controller/AcountValidatorController"
 import { SessionController } from "./controller/SessionController"
 import { ContaController } from "./controller/ContaController"
@@ -12,6 +13,7 @@ import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
 import { FaleConosco } from "./entity/FaleConosco"
+import { Contato } from "./entity/contato"
 import { EmailController } from "./controller/EmailController"
 import { json } from "body-parser"
 import getFeed from "./feed" 
@@ -99,6 +101,7 @@ AppDataSource.initialize().then(async () => {
     const contaController = new ContaController
     const emailController = new EmailController
     const fcController = new FaleConoscoController
+    const contatoController = new ContatoController
     //////////////////////////////////////////////////////////////////
    
     
@@ -188,6 +191,27 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 let result = fcController.save(req, res);
                 result.then((fc)=>{ 
+                    let feed  = getFeed();
+                    feed.then((feed)=>{          
+                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                    }) 
+                })   
+            } else {
+                let feed  = getFeed();
+                feed.then((feed)=>{
+                    res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde.", rss: feed})
+                })
+            }
+        })
+    })
+
+    //Rota Contato
+    app.post('/Contato', (req: any, res: any , next: NextFunction) => {
+    
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                let result = contatoController.save(req, res);
+                result.then((contato)=>{ 
                     let feed  = getFeed();
                     feed.then((feed)=>{          
                         res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})

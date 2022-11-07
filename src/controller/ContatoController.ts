@@ -1,14 +1,14 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
-import { FaleConosco } from "../entity/FaleConosco"
+import { Contato } from "../entity/contato"
 
 
-export class FaleConoscoController {
+export class ContatoController {
 
-    private FCRepository = AppDataSource.getRepository(FaleConosco)
+    private ContatoRepository = AppDataSource.getRepository(Contato)
 
     async one(request: Request) {
-        return this.FCRepository.findOne({
+        return this.ContatoRepository.findOne({
             where: {
                 id : request.body.id
             }
@@ -17,10 +17,10 @@ export class FaleConoscoController {
 
     async save(request: Request, response: Response) {  
 
-            let fconosco = request.body
-            delete fconosco['g-recaptcha-response'] 
+            let contato = request.body
+            delete contato['g-recaptcha-response'] 
 
-            const result = await this.FCRepository.save(fconosco)
+            const result = await this.ContatoRepository.save(contato)
       
             if(result !== null && result !== undefined){
                 return result;
@@ -30,9 +30,9 @@ export class FaleConoscoController {
     }
         
     async removefaleConosco(request: Request, response: Response, next: NextFunction) {
-        let FCToRemove = await this.FCRepository.findOneBy({ id: request.body.id })
-        let fc  = await this.FCRepository.remove(FCToRemove)
-        if(fc instanceof FaleConosco){
+        let contatoToRemove = await this.ContatoRepository.findOneBy({ id: request.body.id })
+        let contato  = await this.ContatoRepository.remove(contatoToRemove)
+        if(contato instanceof Contato){
             return true
         }
         return false

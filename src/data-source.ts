@@ -8,6 +8,7 @@ import { AcountValidator } from "./entity/AcountValidator"
 import { Adm } from "./entity/Adm"
 import { TrocaEmail } from "./entity/TrocaEmail"
 import { FaleConosco } from "./entity/FaleConosco"
+import { Contato } from "./entity/contato"
 
 
 
@@ -21,7 +22,7 @@ export const AppDataSource = new DataSource({
     ssl: { rejectUnauthorized: false },
     synchronize: true,
     logging: false,
-    entities: [Userr, Session, Publicacao, AcountValidator, Adm, TrocaEmail, FaleConosco],
+    entities: [Userr, Session, Publicacao, AcountValidator, Adm, TrocaEmail, FaleConosco, Contato],
     migrations: [],
     subscribers: [],
 })
