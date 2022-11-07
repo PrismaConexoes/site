@@ -254,7 +254,10 @@ AppDataSource.initialize().then(async () => {
         if(req.session.login == true){
             res.render("userLogadoErr", {user: req.session.user})
         }else{
-            res.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
+            let feed  = getFeed();
+            feed.then((feed)=>{
+                res.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false, rss: feed})
+            })
         }       
     })
 

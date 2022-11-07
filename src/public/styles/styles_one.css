@@ -48,7 +48,7 @@ div#navSup {
     background-color: rgb(84, 202, 153);
 }
 
-#rodapeMensagem .form-control {
+.formRodape {
     height: 50px;
     margin-top: 15px;
     width: 250px;
@@ -57,7 +57,7 @@ div#navSup {
     background-color: rgb(32, 31, 31);
 }
 
-#rodapeMensagem .btn {
+.btnFormRodape {
     height: 50px;
     border: 0px;
     border-radius: 50px;
