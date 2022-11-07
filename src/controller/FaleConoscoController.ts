@@ -18,16 +18,8 @@ export class FaleConoscoController {
     async save(request: Request, response: Response) {  
 
             let fconosco = request.body 
-
             const result = await this.FCRepository.save(fconosco)
-      
-            if(result !== null && result !== undefined){
-                
-                return result;
-
-            }else{
-                response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
-            }
+            return result; 
     }
         
     async removefaleConosco(request: Request, response: Response, next: NextFunction) {
