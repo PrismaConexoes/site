@@ -208,7 +208,7 @@ AppDataSource.initialize().then(async () => {
 
         recaptcha.verify(req, function (error, data) {
             if (!error) {
-                let result = fcController.save(req);
+                let result = fcController.save(req, res);
                 result.then((fc)=>{
                     if(fc instanceof FaleConosco){               
                         res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. "})

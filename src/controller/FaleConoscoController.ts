@@ -15,7 +15,7 @@ export class FaleConoscoController {
         })
     }
 
-    async save(request: Request) {  
+    async save(request: Request, response: Response) {  
 
             let fconosco = request.body 
 
@@ -26,7 +26,7 @@ export class FaleConoscoController {
                 return result;
 
             }else{
-                response.redirect("/") //Avisar usuário que houve um erro???
+                response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
     }
         
