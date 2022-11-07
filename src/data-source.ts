@@ -8,7 +8,7 @@ import { AcountValidator } from "./entity/AcountValidator"
 import { Adm } from "./entity/Adm"
 import { TrocaEmail } from "./entity/TrocaEmail"
 import { FaleConosco } from "./entity/FaleConosco"
-import { Contato } from "./entity/contato"
+import { Contato } from "./entity/Contato"
 
 
 
