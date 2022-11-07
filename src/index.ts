@@ -211,7 +211,8 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 let result = fcController.save(req, res);
                 result.then((fc)=>{
-                    console.log(fc)
+
+                    console.log(typeof(fc))
                     if(fc instanceof FaleConosco){               
                         res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. "})
                     }else{
@@ -220,7 +221,6 @@ AppDataSource.initialize().then(async () => {
                     }   
                 })   
             } else {
-                console.log("1111")
                 res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
         })
