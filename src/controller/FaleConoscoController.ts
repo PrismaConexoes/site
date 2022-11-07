@@ -22,11 +22,8 @@ export class FaleConoscoController {
             const result = await this.FCRepository.save(fconosco)
       
             if(result !== null && result !== undefined){
-                console.log("0000")
                 return result;
-
             }else{
-                console.log("1111")
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
     }
