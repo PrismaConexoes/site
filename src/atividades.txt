@@ -200,6 +200,7 @@
     -Entidade Fale conosco
     -backend faleConosco
     -feed do rodapé
+    -contato de rodape backend
     //rever partes html que se tornaram desnecessárias
     //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
 
