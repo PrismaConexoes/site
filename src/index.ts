@@ -14,6 +14,7 @@ import { AcountValidator } from "./entity/AcountValidator"
 import { FaleConosco } from "./entity/FaleConosco"
 import { EmailController } from "./controller/EmailController"
 import { json } from "body-parser"
+import getFeed from "./feed" 
 ///////////////////////////////////////////////////////////////////////////////////
 
 
@@ -25,9 +26,6 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
     const request = require('request')
-
-    let Parser = require('rss-parser');
-    let parser = new Parser();
     ///////////////////////////////////
 
     
@@ -108,17 +106,6 @@ AppDataSource.initialize().then(async () => {
     //////////////////////////ROTAS DE NAVEGAÇÃO/////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
-    app.get('/feed', (req: Request, res: Response, next: NextFunction ) => {
-       
-        (async () => {
-
-            let feed = await parser.parseURL('http://g1.globo.com/dynamo/brasil/rss2.xml');
-            console.log(feed);
-          
-         
-          
-          })();
-    })
 
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
@@ -132,89 +119,85 @@ AppDataSource.initialize().then(async () => {
                 let car1 = car[0];
                 delete car[0];
 
-                //Colocar em uma função para ser acessado por outras páginas sem precisar reescrever
-                (async () => {
-
-                    let feed = await parser.parseURL('https://adrenaline.com.br/rss');
-                    
-                    let feed0 = JSON.parse(JSON.stringify(feed.items[0]));
-                    let img0 = feed0.enclosure.url;
-                    let date0 = feed0.pubDate.split("+")[0];
-                    let feed1 = JSON.parse(JSON.stringify(feed.items[1]));
-                    let date1 = feed1.pubDate.split("+")[0];
-                    let img1 = feed1.enclosure.url;
-                    let feed2 = JSON.parse(JSON.stringify(feed.items[2]));
-                    let date2 = feed2.pubDate.split("+")[0];
-                    let img2 = feed2.enclosure.url;
-                  
+                let feed  = getFeed();
+                feed.then((feed)=>{
                     res.render("prisma.hbs" , {
                         login: req.session.login, 
                         user: req.session.user, 
                         adm: req.session.administrador,
                         ativo: car1,
                         carousel: car,
-                        rss0 : feed0,
-                        img0 : img0,
-                        date0 : date0,
-                        rss1 : feed1,
-                        img1 : img1,
-                        date1 : date1,
-                        rss2 : feed2,
-                        img2 : img2,
-                        date2: date2,
-                       })                  
-                  })();
+                        rss: feed
+                       }) 
+                })  
                 })
             }})
 
     //Rota F&F
     app.get('/fef', (req, res) => {
-
-        res.render("fef.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("fef.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota DSOP
     app.get('/dsop', (req, res) => {
-
-        res.render("dsop.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("dsop.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota Futurum
     app.get('/futurum', (req, res) => {
-
-        res.render("futurum.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("futurum.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota Luz
     app.get('/luz', (req, res) => {
-
-        res.render("luz.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("luz.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota MCI
     app.get('/mci', (req, res) => {
-
-        res.render("mci.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("mci.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota F&F
     app.get('/next', (req, res) => {
-
-        res.render("next.hbs", {login: req.session.login, user: req.session.user})
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("next.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
     })
 
     //Rota FaleConosco
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
         
         recaptcha.verify(req, function (error, data) {
-            console.log(data)
             if (!error) {
                 let result = fcController.save(req, res);
-                result.then((fc)=>{           
-                    res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. "}) 
+                result.then((fc)=>{ 
+                    let feed  = getFeed();
+                    feed.then((feed)=>{          
+                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                    }) 
                 })   
             } else {
-                res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
+                let feed  = getFeed();
+                feed.then((feed)=>{
+                    res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde.", rss: feed})
+                })
             }
         })
     })
