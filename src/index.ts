@@ -220,7 +220,7 @@ AppDataSource.initialize().then(async () => {
                     }   
                 })   
             } else {
-                console.log("0000")
+                console.log("1111")
                 res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
         })
