@@ -2,6 +2,7 @@
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
 import { PublicacaoController } from "./controller/PublicacaoController"
+import { FaleConoscoController } from "./controller/FaleConoscoController"
 import { AcountValidatorController } from "./controller/AcountValidatorController"
 import { SessionController } from "./controller/SessionController"
 import { ContaController } from "./controller/ContaController"
@@ -10,6 +11,7 @@ import { Session } from "./entity/Session"
 import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
+import { FaleConosco } from "./entity/FaleConosco"
 import { EmailController } from "./controller/EmailController"
 import { json } from "body-parser"
 ///////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +100,7 @@ AppDataSource.initialize().then(async () => {
     const sessionController = new SessionController
     const contaController = new ContaController
     const emailController = new EmailController
+    const fcController = new FaleConoscoController
     //////////////////////////////////////////////////////////////////
    
     
@@ -200,6 +203,25 @@ AppDataSource.initialize().then(async () => {
         res.render("next.hbs", {login: req.session.login, user: req.session.user})
     })
 
+    //Rota FaleConosco
+    app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
+
+        recaptcha.verify(req, function (error, data) {
+            if (!error) {
+                let result = fcController.save(req);
+                result.then((fc)=>{
+                    if(fc instanceof FaleConosco){               
+                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. "})
+                    }else{
+                        res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
+                    }   
+                })  
+            } else {
+                res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
+            }
+        })
+    })
+
     //Rota Sair    
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         sessionController.sairSess(req)
@@ -229,12 +251,10 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 let result = userControler.one(req)
                 result.then((user)=>{
-                    if(user instanceof Userr){
-                     
+                    if(user instanceof Userr){               
                         sessionController.logar(req, res, next, recaptcha, user)
                     }else{
                         sessionController.loginSess(req, null, true)
-                      
                         res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
                     }   
                 })  

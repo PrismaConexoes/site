@@ -191,7 +191,13 @@
 
 //25-26/10/22
     - Soluções
-    - Últimas Notícias 
+    - Últimas Notícias
+
+//01/11/22
+    -Ajuste rodapé
+    -Ajuste últimas Notícias
+    -Ajuste Fale conosco
+    -Entidade Fale conosco
     //rever partes html que se tornaram desnecessárias
     //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
 
