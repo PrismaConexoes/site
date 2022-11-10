@@ -4,7 +4,8 @@
     function onClick1(e) {
         e.preventDefault();
         grecaptcha.ready(function() {
-            grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: '/faleConosco'}).then(function(token) {
+            console.log("primeiro")
+            grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: 'faleConosco'}).then(function(token) {
                 console.log(token)
                 document.getElementById('g-recaptcha-response').value=token;
                 document.getElementById("formulario").submit();
@@ -15,7 +16,8 @@
         
         e.preventDefault();
         grecaptcha.ready(function() {
-            grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: '/Contato'}).then(function(token) {
+            console.log("segundo")
+            grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: 'Contato'}).then(function(token) {
                 console.log(token)
                 document.getElementById('g-recaptcha-response').value=token;
                 document.getElementById("formulario2").submit();
