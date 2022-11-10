@@ -1,20 +1,9 @@
  <script src="https://www.google.com/recaptcha/api.js"></script>
  <script>
-    let formulario = "formulario";
-    let fale_conosco = getElementById("bt-form1");
-    let contato = getElementById("bt-form2");
-    fale_conosco.addEventListener("click", (e) => {
-      foumulario = "formulario";
-    }
-    contato.addEventListener("click", (e) => {
-      foumulario = "formulario2";
-    }
-
+    let form1 = document.getElementById("formulario");
+    let form2 = document.getElementById("formulario2"); 
     function onSubmit(token) {
-
-          form1 = document.getElementById("formulario");
-          form2 = document.getElementById("formulario2");  
-          console.log(token)    
+      console.log(token)
       }
 
  </script>
