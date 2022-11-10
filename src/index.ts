@@ -209,6 +209,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/Contato', (req: any, res: any , next: NextFunction) => {
     
         recaptcha.verify(req, function (error, data) {
+            console.log(data)
             if (!error) {
                 let result = contatoController.save(req, res);
                 result.then((contato)=>{ 
