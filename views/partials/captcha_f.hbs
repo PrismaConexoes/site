@@ -1,29 +1,7 @@
  <script src="https://www.google.com/recaptcha/api.js"></script>
  <script>
     function onSubmit(token) {
-
-      let nome = document.getElementById("fc-nome").value
-      let sobre = document.getElementById("fc-sobrenome").value
-      let tel = document.getElementById("fc-telefone").value
-      let men = document.getElementById("fc-mensagem").value
-      console.log(nome.length > 0)
-      console.log(sobre.length > 0)
-      console.log(tel.length > 0)
-      console.log(men.length > 0)
-
-      console.log((nome.length > 0) && (sobre.length > 0) && (tel.length > 0) && (men.length > 0))
-      if(nome.length > 0 & sobre.length > 0 & tel.length > 0 & men.length > 0){
         document.getElementById("formulario").submit();
       }
-      else{
-        console.log("campo inválido")
-      }
-      
-   }
 
-    function onSubmit2(token) {
-      console.log("func2")
-     document.getElementById("formulario2").submit();
-   }
-   
  </script>

@@ -1,0 +1,34 @@
+<script src="https://www.google.com/recaptcha/api.js"></script>
+ <script>
+    function onSubmit(token) {
+
+        let nome = document.getElementById("fc-nome").value
+        let sobre = document.getElementById("fc-sobrenome").value
+        let tel = document.getElementById("telefone").value
+        let men = document.getElementById("fc-mensagem").value
+
+        if(nome.length > 0 & sobre.length > 0 & tel.length > 0 & men.length > 0){
+            document.getElementById("formulario").submit();
+        }
+        else{
+            //implementar alerta
+            console.log("campo inválido")
+      }  
+   }
+    function onSubmit2(token) {
+
+        let nome = document.getElementById("c-nome").value
+        let email = document.getElementById("c-email").value
+        let assunto = document.getElementById("c-assunto").value
+        let men = document.getElementById("c-mensagem").value
+
+        if(nome.length > 0 & email.length > 0 & assunto.length > 0 & men.length > 0){
+            document.getElementById("formulario2").submit();
+        }
+        else{
+             //implementar alerta
+            console.log("campo inválido")           
+        }
+        
+   }
+ </script>
