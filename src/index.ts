@@ -226,6 +226,14 @@ AppDataSource.initialize().then(async () => {
         })
     })
 
+    //Rota Contactar   
+    app.get('/contactar', (req: Request, res: Response , next: NextFunction ) => {
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("contato.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
+    } )
+
     //Rota Sair    
     app.get('/sair', (req: Request, res: Response , next: NextFunction ) => {
         sessionController.sairSess(req)
