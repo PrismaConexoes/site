@@ -2,7 +2,6 @@
 
 <script>
     function onClick1(e) {
-        console.log("entrou na 1")
         e.preventDefault();
         grecaptcha.ready(function() {
             grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: 'submit'}).then(function(token) {
@@ -12,7 +11,7 @@
         });
     }
     function onClick2(e) {
-        console.log("entrou na 2")
+        
         e.preventDefault();
         grecaptcha.ready(function() {
             grecaptcha.execute('6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', {action: 'submit'}).then(function(token) {
