@@ -11,8 +11,9 @@
             document.getElementById("formulario").submit();
         }
         else{
-            //implementar alerta
-            console.log("campo inválido")
+
+            var alert = document.getElementById("alerta");
+            alert.style="display:true"
       }  
    }
     function onSubmit2(token) {
@@ -31,4 +32,12 @@
         }
         
    }
+
+   setTimeout(function(){
+
+    var alert = document.getElementById("alerta");
+    alert.style="display:none"
+    }, 3000);
+
  </script>
+
