@@ -3,9 +3,16 @@
     function onSubmit(token) {
 
       let nome = document.getElementById("fc-nome").value
-      console.log("número de caracteres: "+nome.length) 
-      console.log(nome)   
-      document.getElementById("formulario").submit();
+      let sobre = document.getElementById("fc-sobrenome").value
+      let tel = document.getElementById("fc-telefone").value
+      let men = document.getElementById("fc-mensagem").value
+      if(nome.length > 0 && sobre.length > 0 and tel.lenth > 0 and men.length > 0){
+        document.getElementById("formulario").submit();
+      }
+      else{
+        console.log("campo inválido")
+      }
+      
    }
 
     function onSubmit2(token) {
