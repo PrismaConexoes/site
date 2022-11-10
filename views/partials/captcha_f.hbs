@@ -6,7 +6,11 @@
       let sobre = document.getElementById("fc-sobrenome").value
       let tel = document.getElementById("fc-telefone").value
       let men = document.getElementById("fc-mensagem").value
-      console.log(nome + " , "+sobre+" , "+tel+" , "+men)
+      console.log(nome.length)
+      console.log(sobre.length)
+      console.log(tel.length)
+      console.log(men.length)
+      console.log(nome.length > 0 && sobre.length > 0 && tel.lenth > 0 && men.length > 0)
       if(nome.length > 0 && sobre.length > 0 && tel.lenth > 0 && men.length > 0){
         document.getElementById("formulario").submit();
       }
