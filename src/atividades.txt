@@ -208,6 +208,8 @@
 //11/11/22
     -Ajuste na função tel_f
     -Ajuste de expressões regulares
+    -Ajuste tela de Login
+    -Botões de contato
 
 
     //rever partes html que se tornaram desnecessárias
