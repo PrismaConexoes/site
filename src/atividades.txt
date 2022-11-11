@@ -201,6 +201,15 @@
     -backend faleConosco
     -feed do rodapé
     -contato de rodape backend
+
+//10/11/22
+    -Ajustes nos formulários de contato
+
+//11/11/22
+    -Ajuste na função tel_f
+    -Ajuste de expressões regulares
+
+
     //rever partes html que se tornaram desnecessárias
     //implementar criptografia com typeorm-encrypted (https://www.npmjs.com/package/typeorm-encrypted)
 

@@ -186,46 +186,27 @@ AppDataSource.initialize().then(async () => {
 
     //Rota FaleConosco
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
-        
-        recaptcha.verify(req, function (error, data) {
-            console.log(data)
-            if (!error) {
-                let result = fcController.save(req, res);
-                result.then((fc)=>{ 
-                    let feed  = getFeed();
-                    feed.then((feed)=>{          
-                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-                    }) 
-                })   
-            } else {
-                let feed  = getFeed();
-                feed.then((feed)=>{
-                    res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde.", rss: feed})
-                })
-            }
-        })
-    })
+    
+
+        let result = fcController.save(req, res);
+        result.then((fc)=>{ 
+            let feed  = getFeed();
+            feed.then((feed)=>{          
+                res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+            }) 
+        })   
+    }) 
 
     //Rota Contato
     app.post('/Contato', (req: any, res: any , next: NextFunction) => {
     
-        recaptcha.verify(req, function (error, data) {
-            console.log(data)
-            if (!error) {
-                let result = contatoController.save(req, res);
-                result.then((contato)=>{ 
-                    let feed  = getFeed();
-                    feed.then((feed)=>{          
-                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-                    }) 
-                })   
-            } else {
-                let feed  = getFeed();
-                feed.then((feed)=>{
-                    res.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde.", rss: feed})
-                })
-            }
-        })
+        let result = contatoController.save(req, res);
+        result.then((contato)=>{ 
+            let feed  = getFeed();
+            feed.then((feed)=>{          
+                res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+            }) 
+        })   
     })
 
     //Rota Contactar   

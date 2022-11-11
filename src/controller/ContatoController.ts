@@ -18,7 +18,6 @@ export class ContatoController {
     async save(request: Request, response: Response) {  
 
             let contato = request.body
-            delete contato['g-recaptcha-response'] 
 
             const result = await this.ContatoRepository.save(contato)
       

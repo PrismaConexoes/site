@@ -4,13 +4,17 @@
     function telefone(){
       let tel = document.getElementById("telefone").value
 
-      if(tel.length == 10){
-        auxTel = tel
+     if(tel.length == 11){
+        document.getElementById("telefone").value = "("+tel.substring(0,2)+")"+tel.substring(2,7)+"-"+tel.substring(7,11)
+        auxTel = document.getElementById("telefone").value
       }
-      else if(tel.length == 11){
-        document.getElementById("telefone").value = "("+tel.substring(0,2)+")"+tel.substring(3,7)+"-"+tel.substring(7,11)
+      else if(tel.length == 13){
+        console.log(tel.substring(1,3))
+        console.log(tel.substring(4,9))
+        console.log(tel.substring(10,13))
+        document.getElementById("telefone").value = tel.substring(1,3)+tel.substring(4,9)+tel.substring(10,13)
       }
-      else if(tel.length == 12){
+      else if(tel.length >= 15){
         document.getElementById("telefone").value = auxTel
       }
     }

@@ -66,14 +66,14 @@
             </div>
         </div>
         <div class="d-flex justify-content-around align-items-baseline">              
-                <form name="form2"  action="/Contato" method="post">
+                <form action="/Contato" method="post">
                     <p><h5 class="mt-2">CONTATO:</h5></p>
                     <hr style="opacity: 1; color:  rgb(119, 238, 188);" width="40px" size="7px" />   
                     <div class="form-group">
                         <input type="text" class="form-control formRodape text-warning" id="c-nome" name="nome" placeholder="Nome" required />
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control formRodape text-warning" id="c-email" name="email" placeholder="Email" required />
+                        <input type="text" class="form-control formRodape text-warning" id="c-email" name="email" placeholder="Email" pattern="[a-zA-Z0-9._-]{1,127}[@]{1}[a-zA-Z0-9.]{1,128}" required />
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control  formRodape text-warning" id="c-assunto" name="assunto" placeholder="Assunto" required />
@@ -82,7 +82,7 @@
                         <input type="text" style="height: 100px; border-radius: 20px;" class="form-control formRodape text-warning" name="mensagem" id="c-mensagem" placeholder="Mensagem" required />
                     </div>
                     <div class="d-flex justify-content-end m-2">
-                        <button id="bt-form2" name="btn-form2" class="g-recaptcha w-50 btnFormRodape"  data-sitekey="6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC" data-callback='onSubmit' data-action='submit'>ENVIAR</button>        
+                        <input type="submit" class="w-50 btnFormRodape" value="ENVIAR" />        
                     </div>
                 </form>   
         </div>      

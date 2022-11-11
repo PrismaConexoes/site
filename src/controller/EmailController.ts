@@ -9,8 +9,7 @@ export class EmailController {
     async enviar(userEmail: string, secret: string, newAcount: boolean){
 
         let mailTransporter = this.nodemailer.createTransport({
-            //Obs:Advinhação => Mascarar é CrImE. Autorizar junto ao serviço de email o envio por aplicativos apenas com usuário e senha
-            //Ver política do google que previa mudança para 30/05/22
+
             host: 'smtp.mail.yahoo.com',
             port: 465,
             service:'yahoo',
@@ -49,8 +48,7 @@ export class EmailController {
                 console.log("err: "+err)
             }else if(data){
                 console.log("data: "+JSON.parse(data))
-            }
-                //null Não é necessária nenhuma ação  porque em caso de erro o usuário tem a opção de reenviar o email  
+            } 
         });
     }  
 }

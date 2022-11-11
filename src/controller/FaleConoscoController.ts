@@ -18,7 +18,6 @@ export class FaleConoscoController {
     async save(request: Request, response: Response) {  
 
             let fconosco = request.body
-            delete fconosco['g-recaptcha-response'] 
 
             const result = await this.FCRepository.save(fconosco)
       

@@ -40,7 +40,7 @@
           </div>
           <div class="mb-3">
             <label for="telefone" class="form-label">Celular</label>
-            <input type="text" class="form-control" id="telefone" name="phone" placeholder="(88)99999-9999" pattern="[0-9()-]{13}$" required>
+            <input type="text" class="form-control" id="telefone" name="phone" placeholder="(88)99999-9999" pattern="[0-9()-]{14}$" required>
             <div id="telefoneHelpBlock" class="form-text">
               Digite apenas números
             </div>
@@ -48,7 +48,7 @@
           
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@gmail.com" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@gmail.com" pattern="[a-zA-Z0-9._-]{1,127}[@]{1}[a-zA-Z0-9.]{1,128}" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
