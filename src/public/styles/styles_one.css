@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Metropolis';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url('./metropolis-all-400-normal.woff2') format('woff2'), url('./metropolis-all-400-normal.woff') format('woff');
+}
+
+body {
+    font-family: "Metropolis", sans-serif;
+}
+
 div#navSup {
     height: 3rem;
 }

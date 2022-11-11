@@ -16,7 +16,7 @@ import { FaleConosco } from "./entity/FaleConosco"
 import { Contato } from "./entity/Contato"
 import { EmailController } from "./controller/EmailController"
 import { json } from "body-parser"
-import getFeed from "./feed" 
+import getFeed from "./feed"
 ///////////////////////////////////////////////////////////////////////////////////
 
 

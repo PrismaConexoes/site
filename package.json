@@ -9,6 +9,7 @@
         "typescript": "4.5.2"
     },
     "dependencies": {
+        "@fontsource/metropolis": "^4.5.3",
         "@popperjs/core": "^2.11.4",
         "@types/express-session": "^1.17.0",
         "body-parser": "^1.19.2",
