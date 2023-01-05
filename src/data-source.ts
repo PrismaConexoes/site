@@ -12,7 +12,7 @@ import { Contato } from "./entity/Contato"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "postgres-ag-br1-3.conteige.cloud:54157",
+    host: "postgres-ag-br1-3.conteige.cloud",
     port: 54157,
     username: "lfmlzw_dtsrvhjkp",
     password: "hu&yt5MMj$lm",
