@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "description": "Awesome project developed with TypeORM.",
     "type": "commonjs",
+    "author": "Eduardo Proto ecpsproto@gmail.com",
+    "licence": "",
     "devDependencies": {
         "ts-node": "10.4.0",
         "@types/node": "^16.11.10",
