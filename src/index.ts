@@ -32,8 +32,8 @@ AppDataSource.initialize().then(async () => {
 
     
     ////////////////////////SSL-HEROKU//////////////////////////
-    const sslRedirect = require('heroku-ssl-redirect').default; 
-    app.use(sslRedirect())
+    //const sslRedirect = require('heroku-ssl-redirect').default; 
+    //app.use(sslRedirect())
     ///////////////////////////////////////////////////////////
 
   
