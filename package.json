@@ -13,15 +13,14 @@
     "dependencies": {
         "@fontsource/metropolis": "^4.5.3",
         "@popperjs/core": "^2.11.4",
-        "@types/express-session": "^1.17.0",
+        "@types/express-session": "^1.17.5",
         "body-parser": "^1.19.2",
         "bootstrap": "^5.1.3",
         "connect-typeorm": "^2.0.0",
         "express": "^4.17.2",
         "express-handlebars": "^6.0.3",
         "express-recaptcha": "^5.1.0",
-        "express-session": "^1.17.2",
-        "heroku-ssl-redirect": "^0.1.1",
+        "express-session": "^1.17.3",
         "nodemailer": "^6.7.5",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",
@@ -29,7 +28,6 @@
         "rss-parser": "^3.12.0",
         "typeorm": "^0.3.11",
         "uuid": "^8.3.2"
-
     },
     "scripts": {
         "start": "ts-node src/index.ts",
