@@ -19,6 +19,21 @@ import { json } from "body-parser"
 import getFeed from "./feed"
 ///////////////////////////////////////////////////////////////////////////////////
 
+declare module "express-session" {
+    interface Session {
+        login: boolean;
+        user: string;
+        email: string;
+        secret: string;
+        administrador: boolean;
+        relogin: boolean;
+        validating: boolean;
+        newAcount: boolean;
+        newEmail: string;
+
+    }
+  }
+
 
 
 AppDataSource.initialize().then(async () => {
@@ -40,6 +55,7 @@ AppDataSource.initialize().then(async () => {
     /////////////////////EXPRESS-SESSION//////////////////////////
     let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
+
     app.use(
         session({
             resave: false,

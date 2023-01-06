@@ -19,7 +19,7 @@ export class SessionController {
     }
     async sairSess(request : Request){
         request.session.login = false
-        request.session.email = false
+        request.session.email = ''
         request.session.relogin = false
         request.session.user = ''
         request.session.validating = false
