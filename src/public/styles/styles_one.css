@@ -118,3 +118,8 @@ div#navSup {
     background-color: rgb(84, 202, 153);
     border: 0px;
 }
+
+.btn_nome_time {
+    height: 50px;
+    width: 350px;
+}
