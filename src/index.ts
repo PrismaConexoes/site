@@ -152,6 +152,15 @@ AppDataSource.initialize().then(async () => {
                 })
             }})
 
+        
+    //Rota PrismaInfo
+    app.get('/prismaInfo', (req, res) => {
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("prismaPage.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+        })
+    })
+
     //Rota F&F
     app.get('/fef', (req, res) => {
         let feed  = getFeed();
@@ -453,7 +462,10 @@ AppDataSource.initialize().then(async () => {
 
     //Rota de créditos
     app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
-        res.render("copyrights.hbs")
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("copyrights.hbs" , {rss: feed})
+        })
     })
     
     ///////////////////////////////////////////////////////////////////////////////
