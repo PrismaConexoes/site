@@ -23,10 +23,14 @@
                 <p><h5 class="mt-2">ÚLTIMAS NOTÍCIAS:</h5></p>
                 <hr style="opacity: 1; color:  rgb(119, 238, 188);"  width="40px" size="7px"  /> 
 
-                <div class="row  flex-row mt-2">                    
+                <div class="row  flex-row mt-2">
+                    {{#if rss.pres0}}                    
                     <div class="col-3">
+                        
                         <img class="w-75" style="height: 75px;" src="{{rss.img0}}" alt="Notícia">
+                        
                     </div>
+                    {{/if}}
                     <div class="col-9">
                         <a class="text-decoration-none" href="{{rss.link0}}">
                             <div class="d-flex flex-column">
@@ -36,10 +40,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="row flex-row mt-2">                    
+                <div class="row flex-row mt-2">
+                    {{#if rss.pres1}}                    
                     <div class="col-3">
+                        
                         <img class=" w-75" style="height: 75px;"  src="{{rss.img1}}" alt="Notícia">
+                        
                     </div>
+                    {{/if}}
                     <div class="col-9">
                         <a class="text-decoration-none" href="{{rss.link1}}">
                             <div class="d-flex flex-column">
@@ -49,10 +57,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="row  flex-row mt-2" >                    
+                <div class="row  flex-row mt-2" > 
+                    {{#if rss.pres2}}                   
                     <div class="col-3">
+                        
                         <img class="w-75" style="height: 75px;"  src="{{rss.img2}}" alt="Notícia">
+                        
                     </div>
+                    {{/if}}
                     <div class="col-9">
                         <a class="text-decoration-none" href="{{rss.link2}}">
                             <div class="d-flex flex-column">

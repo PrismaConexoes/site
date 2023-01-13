@@ -3,30 +3,48 @@
         <hr style="opacity: 1; color: black;" width="75px" size="7px" /> 
     </div>
     <div class="row flex-row justify-content-center row-cols-1 row-cols-md-2 row-cols-lg-3 mt-5 mb-5">
-        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">
+            {{#if rss.pres0}}     
             <img class="img-fluid img_noticias" src="{{rss.img0}}" alt="Notícia">
+            {{/if}}
             <a class="text-decoration-none" href="{{rss.link0}}">
                 <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{rss.pubData0}}</b>
-                    <p class="card-text text-black-50 paragraph">{{rss.title0}}</p>                   
+                    {{#if rss.pres0}} 
+                    <p class="card-text text-black-50 paragraph">{{rss.title0}}</p>
+                    {{else}}
+                    <p class="card-text text-black-50 paragraph"><h4>{{rss.title0}}</h4></p>
+                    {{/if}}                   
                 </div>
             </a>   
         </div>
-        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5"> 
+            {{#if rss.pres1}}     
             <img class="img-fluid img_noticias" src="{{rss.img1}}" alt="Notícia">
+            {{/if}}
             <a class="text-decoration-none" href="{{rss.link1}}"> 
                 <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{rss.pubData1}}</b>
-                    <p class="card-text text-black-50 paragraph">{{rss.title1}}</p>      
+                    {{#if rss.pres1}} 
+                    <p class="card-text text-black-50 paragraph">{{rss.title1}}</p>
+                    {{else}}
+                    <p class="card-text text-black-50 paragraph"><h4>{{rss.title1}}</h4></p>
+                    {{/if}}      
                 </div>
             </a>  
         </div>
-        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">     
+        <div class="d-flex col flex-column align-items-center justify-content-center mt-5">
+            {{#if rss.pres2}}      
             <img class="img-fluid img_noticias" src="{{rss.img2}}" alt="Notícia">
+            {{/if}}
             <a class="text-decoration-none" href="{{rss.link2}}">              
                 <div class="d-flex col flex-column body_noticias">
                     <b class="text-black">{{rss.pubData2}}</b>
-                    <p class="card-text text-black-50 paragraph">{{rss.title2}}</p>                   
+                    {{#if rss.pres2}} 
+                    <p class="card-text text-black-50 paragraph">{{rss.title2}}</p>
+                    {{else}}
+                    <p class="card-text text-black-50 paragraph"><h4>{{rss.title2}}</h4></p>
+                    {{/if}}                   
                 </div>
             </a> 
         </div>
