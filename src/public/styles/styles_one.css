@@ -43,11 +43,11 @@ div#navSup {
 }
 
 #mainCarousel .carousel-caption {
-    color: white;
+    color: rgb(139, 232, 255);
     justify-content: center;
     align-items: center;
     text-align: center;
-    top: 50%;
+    top: 85%;
     transform: translateY(-50%);
     bottom: initial;
 }
