@@ -85,8 +85,8 @@ AppDataSource.initialize().then(async () => {
         callback: gResponse
     }  
     const recaptcha = new Recaptcha(
-        '6LciB7AfAAAAAMKT3Nlr-Ch2oCIWetsL58dMkCUC', 
-        '6LciB7AfAAAAAP2Z5z2iGzsk3nug44E3sJFjwRvC', 
+        '6LdFP-4kAAAAADDlz8t23azcitK-oQSrEDD1nFvu', 
+        '6LdFP-4kAAAAAJ8YBdZeIKH0g_mQtw7Al1C92Kwl', 
         options)
 
     function gResponse(res){ console.log(res) }
