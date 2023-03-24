@@ -31,7 +31,7 @@ export class EmailController {
             secure: true,
             secureConnection: false, // TLS requires secureConnection to be false
             tls: {
-                ciphers:'SSLv3'
+                ciphers:'sslvSSLv3'
             },
             requireTLS:true,
             port: 465,
