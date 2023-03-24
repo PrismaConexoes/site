@@ -8,7 +8,7 @@ export class EmailController {
 
     async enviar(userEmail: string, secret: string, newAcount: boolean){
 
-        let mailTransporter = this.nodemailer.createTransport({
+      /*  let mailTransporter = this.nodemailer.createTransport({
 
             host: 'smtp.mail.yahoo.com',
             port: 465,
@@ -23,6 +23,22 @@ export class EmailController {
             tls: {
                 rejectUnauthorized: false,
             }
+        });*/
+
+        let mailTransport = this.nodemailer.createTransport({    
+            host: "smtpout.secureserver.net",  
+            secure: true,
+            secureConnection: false, // TLS requires secureConnection to be false
+            tls: {
+                ciphers:'SSLv3'
+            },
+            requireTLS:true,
+            port: 465,
+            debug: true,
+            auth: {
+                user: "sou@prismaconexoes.com",
+                pass: "PrismaCNL" 
+            }
         });
 
         let msg = 'atualização'
@@ -32,13 +48,13 @@ export class EmailController {
         let htmlMessage = email(link, msg)
         
         let sendEmail = {
-            from: 'silvaproto@yahoo.com.br',
+            from: 'sou@prismaconexoes.com',
             to: userEmail,
             subject: "Cadastro Prisma Conexão",
             html: htmlMessage
         };
         
-        mailTransporter.sendMail(sendEmail, await function(err, data) {
+        mailTransport.sendMail(sendEmail, await function(err, data) {
             if(err){
                 console.log("err: "+err)
             }else if(data){
