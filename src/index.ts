@@ -299,9 +299,9 @@ AppDataSource.initialize().then(async () => {
         recaptcha.verify(req, function (error, data) {
            
             if (!error) {
-                res.render('testepage.hbs', {dados: data})
                 userControler.save(req, res, next, recaptcha)
             } else {
+                res.render('testepage.hbs', {dados: error})
                 res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
             }
         })        
