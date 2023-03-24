@@ -302,7 +302,7 @@ AppDataSource.initialize().then(async () => {
                 userControler.save(req, res, next, recaptcha)
             } else {
                 res.render('testepage.hbs', {dados: error})
-                res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
+                //res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
             }
         })        
     })
