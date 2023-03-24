@@ -80,6 +80,8 @@ AppDataSource.initialize().then(async () => {
     const recaptcha = new Recaptcha(
         '6LdFP-4kAAAAADDlz8t23azcitK-oQSrEDD1nFvu', 
         '6LdFP-4kAAAAAJ8YBdZeIKH0g_mQtw7Al1C92Kwl', 
+
+        
         options)
 
     function gResponse(res){ console.log(res) }
@@ -260,7 +262,9 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
+        
         recaptcha.verify(req, function (error, data) {
+         
             if (!error) {
                 let result = userControler.one(req)
                 result.then((user)=>{
@@ -297,12 +301,11 @@ AppDataSource.initialize().then(async () => {
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
-           
+            
             if (!error) {
                 userControler.save(req, res, next, recaptcha)
             } else {
-                res.render('testepage.hbs', {dados: error})
-                //res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
+                res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
             }
         })        
     })
@@ -387,10 +390,10 @@ AppDataSource.initialize().then(async () => {
         if(req.session.login == true){
             let remove = userControler.removeUser(req, res, next)
             if(remove){
-                //Construir página de sucesso
+                
                 res.redirect('/sair')
             }else{
-                res.send("Usuário não removido")//CRIAR MENSAGEM
+                res.send("Usuário não removido")
             }
          }else{
              res.redirect('/sair')
