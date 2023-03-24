@@ -29,13 +29,7 @@ export class EmailController {
             service: 'Godaddy',  
             host: "smtpout.secureserver.net",  
             secure: true,
-            secureConnection: false, // TLS requires secureConnection to be false
-            tls: {
-                ciphers:'sslvSSLv3'
-            },
-            requireTLS:true,
             port: 465,
-            debug: true,
             auth: {
                 user: "sou@prismaconexoes.com",
                 pass: "PrismaCNL" 
