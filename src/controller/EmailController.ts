@@ -25,7 +25,8 @@ export class EmailController {
             }
         });*/
 
-        let mailTransport = this.nodemailer.createTransport({    
+        let mailTransport = this.nodemailer.createTransport({  
+            service: 'Godaddy',  
             host: "smtpout.secureserver.net",  
             secure: true,
             secureConnection: false, // TLS requires secureConnection to be false
