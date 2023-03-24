@@ -297,8 +297,9 @@ AppDataSource.initialize().then(async () => {
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
-            console.log(data)
+           
             if (!error) {
+                res.render('testepage.hbs', {dados: data})
                 userControler.save(req, res, next, recaptcha)
             } else {
                 res.render('cadastrar.hbs', { captcha: recaptcha.render(), status : "Falha no captcha", captchaErr : true })
