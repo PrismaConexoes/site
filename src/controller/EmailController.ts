@@ -27,7 +27,7 @@ export class EmailController {
 
         let mailTransport = this.nodemailer.createTransport({  
             service: 'Godaddy',  
-            host: "smtpout.secureserver.net",  
+            host: "smtp.office365.com",  
             secure: true,
             port: 465,
             auth: {
