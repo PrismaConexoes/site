@@ -2,18 +2,18 @@ import { AppDataSource } from "../data-source"
 import { NextFunction, Request, Response } from "express"
 import { Publicacao } from "../entity/Publicacao"
 
+
+
+//REVER ESTA CLASSE
+
+
+
 export class PublicacaoController {
 
     private publicacaoRepository = AppDataSource.getRepository(Publicacao)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        /*const result = await this.publicacaoRepository.find()
 
-        if(result !== null && result !== undefined){
-            response.render("atualizaSite.hbs", {publicacoes: result})
-        }else{
-            response.render("atualizaSite.hbs", {publicacoes: null})
-        }*/ //Ver o comportamento desta forma
         this.publicacaoRepository.find().then((result)=>{
             response.render("atualizaSite.hbs", {publicacoes: result})
         })

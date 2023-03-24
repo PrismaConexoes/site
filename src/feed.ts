@@ -4,7 +4,6 @@ export default async function getFeed(){
     let parser = new Parser();
     
     let feed = await parser.parseURL('https://res.stj.jus.br/hrestp-c-portalp/RSS.xml');
-    //let feed = await parser.parseURL('https://adrenaline.com.br/rss');
     let jfeed = JSON.parse(JSON.stringify(feed.items));
 
     let rss = {

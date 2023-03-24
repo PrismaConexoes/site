@@ -20,10 +20,7 @@ export class AcountValidatorController {
                 parameter : request.params.secret
             }
         })
-        console.log("one")
-        console.log("param:"+request.params.secret)
-        console.log("session_param: "+request.session.secret)
-        console.log("result: "+JSON.stringify(result))
+
         return result    
     }
     async oneBySessionSecret(request: Request) {
@@ -33,10 +30,7 @@ export class AcountValidatorController {
                 parameter : request.session.secret
             }
         })
-        console.log("onebysession")
-        console.log("param:"+request.params.secret)
-        console.log("session_param: "+request.session.secret)
-        console.log("result: "+JSON.stringify(result))
+
         return result    
     }
     async remove(validador: AcountValidator) {

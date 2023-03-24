@@ -12,10 +12,10 @@ import { Session } from "./entity/Session"
 import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
-import { FaleConosco } from "./entity/FaleConosco"
-import { Contato } from "./entity/Contato"
+//import { FaleConosco } from "./entity/FaleConosco"
+//import { Contato } from "./entity/Contato"
 import { EmailController } from "./controller/EmailController"
-import { json } from "body-parser"
+//import { json } from "body-parser"
 import getFeed from "./feed"
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -45,13 +45,6 @@ AppDataSource.initialize().then(async () => {
     const request = require('request')
     ///////////////////////////////////
 
-    
-    ////////////////////////SSL-HEROKU//////////////////////////
-    //const sslRedirect = require('heroku-ssl-redirect').default; 
-    //app.use(sslRedirect())
-    ///////////////////////////////////////////////////////////
-
-  
     /////////////////////EXPRESS-SESSION//////////////////////////
     let sessionRepository = AppDataSource.getRepository(Session)
     const session = require('express-session')
@@ -130,7 +123,7 @@ AppDataSource.initialize().then(async () => {
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
        
         sessionController.prismaSess(req)
-        console.log(req.session)
+        
         let carrossel = publicacaoController.allPrisma()
         
         if(carrossel instanceof Promise){
@@ -304,6 +297,7 @@ AppDataSource.initialize().then(async () => {
     //Rota NewUser
     app.post('/newUser', (req: Request, res: Response, next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
+            console.log(data)
             if (!error) {
                 userControler.save(req, res, next, recaptcha)
             } else {
@@ -337,17 +331,17 @@ AppDataSource.initialize().then(async () => {
 
         //remover validadores expirados juntamente com os respectivos cadastros aqui(implementar função no controlador)
         //usar getTime() diff 3,6 x10^6 
-        console.log("secret: '"+req.params.secret+"'")
+        
         sessionController.secretSess(req)
         let validador = acountValidatorController.oneBySessionSecret(req)
         
         validador.then((validador)=>{
-            console.log("validador: "+JSON.stringify(validador))
+           
             if(validador !== null){
                 sessionController.validatingSess(req, validador)
                 res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
             }else{
-                console.log("sair1")
+              
                 res.redirect('/sair')
             }
         })
@@ -365,7 +359,7 @@ AppDataSource.initialize().then(async () => {
                 usuario.then((user)=>{
                 
                 if(user.atualizarEmail){
-                    console.log("sessionNew: "+req.session.newEmail)
+                   
                     contaController.efetiveAtualizacao(req, res, next)
                 }
                 else if(req.session.validating){
@@ -377,13 +371,13 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
-                        console.log("sair2")
+                      
                         res.redirect('/sair')
                     } 
                 }
             })
             } else {
-                console.log("sair3")
+                
                 res.redirect('/sair')
             }
         })})
@@ -408,11 +402,8 @@ AppDataSource.initialize().then(async () => {
         let validador = acountValidatorController.oneBySession(req)
         validador.then((acValidador)=>{
             if(acValidador instanceof AcountValidator){
-                console.log("email: "+req.session.email)
+                
                 sessionController.validatingSess(req, acValidador)
-                console.log("email: "+req.session.email)
-                console.log("body: "+JSON.stringify(req.body))
-                console.log("validador:"+JSON.stringify(acValidador))
                 if(acValidador.newAcount){
                     emailController.enviar(acValidador.email, acValidador.parameter, acValidador.newAcount)
                 }else{
@@ -452,7 +443,7 @@ AppDataSource.initialize().then(async () => {
 
     //Deletar publicação
     app.post('/removePublicacao', (req: any, res: any , next: NextFunction ) => {
-        console.log(req.body)
+        
         if(req.session.administrador == true){
            publicacaoController.remove(req, res, next);
         }else{

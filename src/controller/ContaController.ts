@@ -30,7 +30,7 @@ export class ContaController {
     async validarConta(user: Userr){
         user.valid = true
         let result = await this.userRepository.update({ email: user.email }, user)
-        console.log(result)  
+  
         if(result.affected == 1){
             return this.acountValidator.validarAccount(user)
         }
@@ -93,10 +93,8 @@ export class ContaController {
         let dados = request.body
         if(dados !== null && dados !== undefined){
            
-            console.log("session: "+request.session.email)
-            console.log("body: "+request.body.email)
             if(request.session.email == request.body.email){
-                console.log("milestone1")
+              
                 this.efetiveAtualizacao(request, response, next)
             }else{
 

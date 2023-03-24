@@ -19,12 +19,7 @@ export class EmailController {
                pass: 'uqomckcujuibfpzk'
             },
             debug: false,
-            logger: true 
-            /*service: 'gmail',
-            auth: {
-                user: 'testeprisma503@gmail.com',
-                pass: 'tE$t3prisma'
-            }*/,
+            logger: true ,
             tls: {
                 rejectUnauthorized: false,
             }
