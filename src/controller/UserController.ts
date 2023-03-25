@@ -43,12 +43,13 @@ export class UserController {
             // Encrypt
             var ciphertext = await this.AES.encrypt(usuario.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
             usuario.password = ciphertext
-            
+
             const result = await this.userRepository.save(usuario)
       
             if(result !== null && result !== undefined){
                 
                 this.acountValidator.saveSecret(usuario,request, response, true)
+                
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})
             }
