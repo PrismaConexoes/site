@@ -17,7 +17,7 @@ export const AppDataSource = new DataSource({
     username: "bclunv_r8xmgwwdj",
     password: "NyuMx]FD++Zb$t8C",
     database: "bclunv_4rndsqqmg",
-    //ssl: { rejectUnauthorized: false },
+    
     synchronize: true,
     logging: false,
     entities: [Userr, Session, Publicacao, AcountValidator, Adm, TrocaEmail, FaleConosco, Contato],
