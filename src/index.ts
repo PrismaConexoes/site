@@ -361,32 +361,34 @@ AppDataSource.initialize().then(async () => {
                 let pass = req.body.password
 
                 // Decrypt
-                let bytes  = CryptoJS.AES.decrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
-                let senha = bytes.toString(CryptoJS.enc.Utf8);
+                let bytes  = CryptoJS.AES.decrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i')
 
-
-                let usuario = userControler.oneBySession(req)
+                bytes.then((cif)=>{
+                    let senha = bytes.toString(CryptoJS.enc.Utf8);
+                    let usuario = userControler.oneBySession(req)
                 
-                usuario.then((user)=>{
+                    usuario.then((user)=>{
+                    
+                    if(user.atualizarEmail){
+                       
+                        contaController.efetiveAtualizacao(req, res, next)
+                    }
+                    else if(req.session.validating){
+                        if(senha == user.password){
+                            contaController.validarConta(user).then((result)=>{
+                                if(result){
+                                    sessionController.validatingEndSess(req)
+                                    res.render('cadastroValidado.hbs')
+                                }
+                            }) 
+                        }else{
+                          
+                            res.redirect('/sair')
+                        } 
+                    }
+                })
+            });
                 
-                if(user.atualizarEmail){
-                   
-                    contaController.efetiveAtualizacao(req, res, next)
-                }
-                else if(req.session.validating){
-                    if(senha == user.password){
-                        contaController.validarConta(user).then((result)=>{
-                            if(result){
-                                sessionController.validatingEndSess(req)
-                                res.render('cadastroValidado.hbs')
-                            }
-                        }) 
-                    }else{
-                      
-                        res.redirect('/sair')
-                    } 
-                }
-            })
             } else {
                 
                 res.redirect('/sair')
