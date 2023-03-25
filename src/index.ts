@@ -364,7 +364,7 @@ AppDataSource.initialize().then(async () => {
                 let bytes  = CryptoJS.AES.decrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i')
 
                 bytes.then((cif)=>{
-                    let senha = bytes.toString(CryptoJS.enc.Utf8);
+                    let senha = cif.toString(CryptoJS.enc.Utf8);
                     let usuario = userControler.oneBySession(req)
                 
                     usuario.then((user)=>{
