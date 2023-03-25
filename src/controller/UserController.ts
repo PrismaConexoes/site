@@ -10,6 +10,7 @@ export class UserController {
     private userRepository = AppDataSource.getRepository(Userr)
     private admRepository = AppDataSource.getRepository(Adm)
     private acountValidator = new AcountValidatorController
+    private AES = require("crypto-js/aes");
 
     async one(request: Request) {
         return this.userRepository.findOne({
@@ -39,6 +40,10 @@ export class UserController {
             usuario.valid = false
             usuario.atualizarEmail = false  
 
+            // Encrypt
+            var ciphertext = await this.AES.encrypt(usuario.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+            usuario.password = ciphertext
+            
             const result = await this.userRepository.save(usuario)
       
             if(result !== null && result !== undefined){

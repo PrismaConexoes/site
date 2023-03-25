@@ -263,6 +263,7 @@ AppDataSource.initialize().then(async () => {
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
         
+        
         recaptcha.verify(req, function (error, data) {
          
             if (!error) {
