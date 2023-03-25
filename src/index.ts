@@ -43,6 +43,7 @@ AppDataSource.initialize().then(async () => {
     const express = require('express')
     const app = express()
     const request = require('request')
+    const CryptoJS = require("crypto-js");
     ///////////////////////////////////
 
     /////////////////////EXPRESS-SESSION//////////////////////////
@@ -357,7 +358,12 @@ AppDataSource.initialize().then(async () => {
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
         recaptcha.verify(req, function (error, data) {
             if (!error) {
-                let senha = req.body.password
+                let pass = req.body.password
+
+                // Decrypt
+                let bytes  = CryptoJS.AES.decrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
+                let senha = bytes.toString(CryptoJS.enc.Utf8);
+
 
                 let usuario = userControler.oneBySession(req)
                 
