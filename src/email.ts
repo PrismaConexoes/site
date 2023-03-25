@@ -1,7 +1,6 @@
 
 export default function email(link, msg){
-
-    
+   
     let mensagem = '<div style="background-color: gray;"}>'+
                     '<div style="margin-top: 50px; color: white;">Prezado(a) Cliente,<div>'+
                     '<div style="color: white;">recebemos o seu pedido de '+msg+' em nossa plataforma!<div>'+
