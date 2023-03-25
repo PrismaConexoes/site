@@ -356,12 +356,12 @@ AppDataSource.initialize().then(async () => {
 
     //Rota complementar para validação de conta
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
-        recaptcha.verify(req, function (error, data) {
+        recaptcha.verify(req, async function (error, data) {
             if (!error) {
                 let pass = req.body.password
 
                 // Encrypt
-                var senha =  CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+                var senha = await CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
               
                 let usuario = userControler.oneBySession(req)
             
