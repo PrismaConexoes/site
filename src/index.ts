@@ -361,33 +361,31 @@ AppDataSource.initialize().then(async () => {
                 let pass = req.body.password
 
                 // Encrypt
-                var ciphertext =  CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+                var senha =  CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+              
+                let usuario = userControler.oneBySession(req)
             
-                ciphertext.then((senha)=>{
-                  
-                    let usuario = userControler.oneBySession(req)
+                usuario.then((user)=>{
                 
-                    usuario.then((user)=>{
+                if(user.atualizarEmail){
                     
-                    if(user.atualizarEmail){
-                       
-                        contaController.efetiveAtualizacao(req, res, next)
-                    }
-                    else if(req.session.validating){
-                        if(senha == user.password){
-                            contaController.validarConta(user).then((result)=>{
-                                if(result){
-                                    sessionController.validatingEndSess(req)
-                                    res.render('cadastroValidado.hbs')
-                                }
-                            }) 
-                        }else{
-                          
-                            res.redirect('/sair')
-                        } 
-                    }
-                })
-            });
+                    contaController.efetiveAtualizacao(req, res, next)
+                }
+                else if(req.session.validating){
+                    if(senha == user.password){
+                        contaController.validarConta(user).then((result)=>{
+                            if(result){
+                                sessionController.validatingEndSess(req)
+                                res.render('cadastroValidado.hbs')
+                            }
+                        }) 
+                    }else{
+                        
+                        res.redirect('/sair')
+                    } 
+                }
+            })
+           
                 
             } else {
                 
