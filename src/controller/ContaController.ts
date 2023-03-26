@@ -45,7 +45,8 @@ export class ContaController {
         let result = await this.userRepository.update({ email: user.email }, refreshUser)
   
         if(result.affected == 1){
-            return true
+            
+            return this.acountValidator.validarAccount(refreshUser)
         }
         return false
     }
