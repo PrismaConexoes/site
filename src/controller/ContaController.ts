@@ -66,10 +66,8 @@ export class ContaController {
             let encryptUsr = await this.cifrador.encryptUser(usuario)
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
-            
-            if( usuario instanceof Userr){
-                response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
-            }
+
+             response.render("conta.hbs", {usuario : await usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
             
                  
         }else{
