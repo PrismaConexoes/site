@@ -55,14 +55,14 @@ AppDataSource.initialize().then(async () => {
                 httpOnly: true, 
                 sameSite: true, 
                 secure:'auto' , 
-                maxAge: 360 }, 
+                maxAge: 86400000 }, 
             unset: 'destroy', 
             secret: "53Cr3TTp1RI5waApPiNc0nT@yg3",
             store: new TypeormStore({
                 cleanupLimit: 2,
                 limitSubquery: false,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
-                ttl: 360
+                ttl: 8640000
               }).connect(sessionRepository)
         }));
     //////////////////////////////////////////////////////////////////
