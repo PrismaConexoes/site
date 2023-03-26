@@ -78,8 +78,7 @@ export class AcountValidatorController {
 
 
             if(novaConta){
-                response.render('testepage.hbs', {ciph1: secret, ciph2: email})
-                //this.emailController.enviar(email, secret, novaConta)
+                this.emailController.enviar(email, secret, novaConta)
             }else{
                 this.emailController.enviar(newEmail, secret, novaConta)   
             }
