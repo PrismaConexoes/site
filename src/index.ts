@@ -367,7 +367,7 @@ AppDataSource.initialize().then(async () => {
             
                 usuario.then((user)=>{
                 
-                res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                
                 if(user.atualizarEmail){
                     
                     contaController.efetiveAtualizacao(req, res, next)
@@ -382,16 +382,16 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
-                        
-                        res.redirect('/sair')
+                        res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                       // res.redirect('/sair')
                     } 
                 }
             })
            
                 
             } else {
-                res.render('testepage.hbs', {ciph1: error, ciph2: data})
-                //res.redirect('/sair')
+                
+                res.redirect('/sair')
             }
         })})
     
