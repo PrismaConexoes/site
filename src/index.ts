@@ -381,7 +381,7 @@ AppDataSource.initialize().then(async () => {
                                             sessionController.validatingEndSess(req)
                                             res.render('cadastroValidado.hbs')
                                         }
-                                        }) 
+                                    }) 
                                     }
                             }else{
                                 res.redirect('/sair')
