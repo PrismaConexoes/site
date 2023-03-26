@@ -18,13 +18,14 @@ export class SessionController {
         request.session.relogin = false  
     }
     async sairSess(request : Request){
-        request.session.login = false
+        /* request.session.login = false
         request.session.email = ''
         request.session.relogin = false
         request.session.user = ''
         request.session.validating = false
         request.session.administrador = false
-        request.session.secret = ''   
+        request.session.secret = '' */ 
+        request.session.destroy  
     }
     async loginSess(request : Request, user: any, relogin: boolean){
         request.session.email = request.body.email 
