@@ -54,13 +54,13 @@ AppDataSource.initialize().then(async () => {
                 path: '/', 
                 httpOnly: true, 
                 sameSite: true, 
-                secure: true, 
+                secure:'auto' , 
                 maxAge: 360 }, 
             unset: 'destroy', 
-            secret: "53Cr3TTp1RI5waApPiNh3r0cKu",
+            secret: "53Cr3TTp1RI5waApPiNc0nT@yg3",
             store: new TypeormStore({
-                cleanupLimit: 40,
-                limitSubquery: true,
+                cleanupLimit: 2,
+                limitSubquery: false,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
                 ttl: 360
               }).connect(sessionRepository)
