@@ -356,7 +356,7 @@ AppDataSource.initialize().then(async () => {
 
     //Rota complementar para validação de conta
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
-        recaptcha.verify(req, async function (error, data) {
+        recaptcha.verify(req,  function (error, data) {
             if (!error) {
                 //let pass = req.body.password
 
@@ -364,35 +364,36 @@ AppDataSource.initialize().then(async () => {
                 //var senha = await CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
               
                 let usuario = userControler.oneBySession(req)
-
-                // Decrypt
-                let bytes  = await CryptoJS.AES.decrypt((await usuario).password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
-                let senha = bytes.toString(CryptoJS.enc.Utf8);
             
                 usuario.then((user)=>{
                 
-                
-                if(user.atualizarEmail){
-                    
-                    contaController.efetiveAtualizacao(req, res, next)
-                }
-                else if(req.session.validating){
+                // Decrypt
+                let bytes  =  CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
 
-                    if(senha == user.password){
-                        contaController.validarConta(user).then((result)=>{
-                            if(result){
-                                sessionController.validatingEndSess(req)
-                                res.render('cadastroValidado.hbs')
-                            }
-                        }) 
-                    }else{
-                        //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
-                        res.redirect('/sair')
-                    } 
-                }
-            })
-           
-                
+                bytes.then((dado) => {
+                    let senha = dado.toString(CryptoJS.enc.Utf8);
+
+                    if(user.atualizarEmail){
+                        
+                        contaController.efetiveAtualizacao(req, res, next)
+                    }
+                    else if(req.session.validating){
+    
+                        if(senha == user.password){
+                            contaController.validarConta(user).then((result)=>{
+                                if(result){
+                                    sessionController.validatingEndSess(req)
+                                    res.render('cadastroValidado.hbs')
+                                }
+                            }) 
+                        }else{
+                            //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                            res.redirect('/sair')
+                        } 
+                    }
+                })
+
+            })       
             } else {
                 
                 res.redirect('/sair')
