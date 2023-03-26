@@ -5,6 +5,7 @@ import { AcountValidatorController } from "./AcountValidatorController"
 import { TrocaEmailController } from "./TrocaEmailController"
 import { TrocaEmail } from "../entity/TrocaEmail"
 import { SessionController } from "./SessionController"
+import { Cifra } from "./Cifra"
 
 export class ContaController {
 
@@ -13,6 +14,7 @@ export class ContaController {
     private trocaEmailController = new TrocaEmailController
     private sessionCtrl = new SessionController
     private CryptoJS = require("crypto-js");
+    private cifrador = new Cifra
 
 
     async admConta(request: Request, response: Response, next: NextFunction) {
@@ -34,7 +36,10 @@ export class ContaController {
 
     async validarConta(user: Userr){
         user.valid = true
-        let result = await this.userRepository.update({ email: user.email }, user)
+
+        let refreshUser = await this.cifrador.encryptUser(user)
+
+        let result = await this.userRepository.update({ email: user.email }, refreshUser)
   
         if(result.affected == 1){
             return this.acountValidator.validarAccount(user)
