@@ -70,9 +70,8 @@ export class SessionController {
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
 
         let senha = user.password
-        
-        response.render('testepage.hbs', {d1: senha, d2: request.body.password})
-        /*if(senha == request.body.password){
+         
+        if(senha == request.body.password){
             if(user.valid == true){
 
                 this.loginSess(request, user, false)
@@ -92,7 +91,7 @@ export class SessionController {
         }else{
             request.session.relogin = true
             response.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, status: "", relogin: true});
-        }*/    
+        }   
            
     }
 
