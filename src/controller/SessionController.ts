@@ -6,6 +6,7 @@ import { AdmController } from "./AdmController"
 export class SessionController {
 
     private admController = new AdmController
+    private CryptoJS = require("crypto-js");
 
     async prismaSess(request : Request){
         if(!request.session.login){
@@ -69,7 +70,11 @@ export class SessionController {
 
     async logar(request: Request, response: Response, next: NextFunction, recaptcha: any, user: any) {
 
-        if(user.password == request.body.password){
+        // Decrypt
+        let bytes  =   this.CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
+        let senha = bytes.toString(this.CryptoJS.enc.Utf8);
+
+        if(senha == request.body.password){
             if(user.valid == true){
 
                 this.loginSess(request, user, false)

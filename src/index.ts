@@ -1,3 +1,5 @@
+//res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+
 /////////////////////////////////////IMPORTS///////////////////////////////////////
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
@@ -359,9 +361,6 @@ AppDataSource.initialize().then(async () => {
         recaptcha.verify(req,  function (error, data) {
             if (!error) {
                 let password = req.body.password
-
-                // Encrypt
-                //var senha = await CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
               
                 let usuario = userControler.oneBySession(req)
             
@@ -386,11 +385,9 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
-                        //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
                         res.redirect('/sair')
                     } 
                 }            
-
             })       
             } else {
                 
