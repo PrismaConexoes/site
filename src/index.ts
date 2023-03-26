@@ -258,19 +258,22 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Entrar
     app.post('/entrar', (req: any, res: any , next: NextFunction ) => {
-        
-        
+              
         recaptcha.verify(req, function (error, data) {
          
             if (!error) {
                 let result = userControler.one(req)
-                result.then((user)=>{
-                    if(user instanceof Userr){               
-                        sessionController.logar(req, res, next, recaptcha, user)
-                    }else{
-                        sessionController.loginSess(req, null, true)
-                        res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
-                    }   
+                result.then((usr)=>{
+                    let decryptUsr =  cifrador.dencryptUser(usr)
+                    
+                    decryptUsr.then((user) => {
+                        if(user instanceof Userr){               
+                            sessionController.logar(req, res, next, recaptcha, user)
+                        }else{
+                            sessionController.loginSess(req, null, true)
+                            res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
+                        }
+                    })
                 })  
             } else {
                 req.session.relogin = false
@@ -362,7 +365,7 @@ AppDataSource.initialize().then(async () => {
                         let dcryptUser = cifrador.dencryptUser(usr)
 
                         dcryptUser.then((user) => {
-                            
+
                             if(user.atualizarEmail){
                             
                                 contaController.efetiveAtualizacao(req, res, null, next)
