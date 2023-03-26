@@ -58,54 +58,60 @@ export class ContaController {
             }
         })
         
-        let usuario = await this.cifrador.decryptUser(usr)
-             
-        if(usuario.atualizarEmail == false){
-            usuario.phone = request.body.phone
-            usuario.password = request.body.password
-
-            let encryptUsr = await this.cifrador.encryptUser(usuario)
-
-            await this.userRepository.update({ email: request.session.email }, encryptUsr)
-
-            usuario = await this.cifrador.decryptUser(usr)
-            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
-            
-                 
-        }else{
-            this.acountValidator.oneBySessionSecret(request).then((validador)=>{
-                if(validador !== null){
-                    if(!validador.newAcount){
-                        this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
-                            if(trocaEmail instanceof TrocaEmail){
-                                this.userRepository.findOneBy({email: validador.email}).then((user)=>{
-                                    if(user instanceof Userr){
-                                        user.email = trocaEmail.emailNovo
-                                        user.phone = trocaEmail.newPhone
-                                        user.password = trocaEmail.newPassword
-                                        user.atualizarEmail = false
-                                        request.session.email = trocaEmail.emailNovo //Acompanhar
-                                        this.userRepository.update({ email: validador.email }, user)
-                                        this.acountValidator.remove(validador)
-                                        this.trocaEmailController.remove(trocaEmail)
-                                        this.sessionCtrl.sairSess(request)
-                                        response.render('atualizacaoSucess.hbs')
-                                    }else{
-                                        response.render('errSolicitacao.hbs')
-                                    }
-                                })
-                            }else{
-                                response.render('errSolicitacao.hbs')
-                            }
-                        })
+        let usuario = this.cifrador.decryptUser(usr)
+        
+        usuario.then((user) => {
+            if(user.atualizarEmail == false){
+                user.phone = request.body.phone
+                user.password = request.body.password
+    
+                let encryptUsr =  this.cifrador.encryptUser(user)
+                
+                encryptUsr.then((usrCrypty) => {
+                    this.userRepository.update({ email: request.session.email }, usrCrypty)
+                })
+                
+                response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : true})
+                
+            }else{
+                this.acountValidator.oneBySessionSecret(request).then((validador)=>{
+                    if(validador !== null){
+                        if(!validador.newAcount){
+                            this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
+                                if(trocaEmail instanceof TrocaEmail){
+                                    this.userRepository.findOneBy({email: validador.email}).then((user)=>{
+                                        if(user instanceof Userr){
+                                            user.email = trocaEmail.emailNovo
+                                            user.phone = trocaEmail.newPhone
+                                            user.password = trocaEmail.newPassword
+                                            user.atualizarEmail = false
+                                            request.session.email = trocaEmail.emailNovo //Acompanhar
+                                            this.userRepository.update({ email: validador.email }, user)
+                                            this.acountValidator.remove(validador)
+                                            this.trocaEmailController.remove(trocaEmail)
+                                            this.sessionCtrl.sairSess(request)
+                                            response.render('atualizacaoSucess.hbs')
+                                        }else{
+                                            response.render('errSolicitacao.hbs')
+                                        }
+                                    })
+                                }else{
+                                    response.render('errSolicitacao.hbs')
+                                }
+                            })
+                        }else{
+                            response.render('errSolicitacao.hbs')
+                        }
                     }else{
                         response.render('errSolicitacao.hbs')
                     }
-                }else{
-                    response.render('errSolicitacao.hbs')
-                }
-            })
-        }
+                })
+            }
+        })
+        
+            
+                 
+        
         
 
 
