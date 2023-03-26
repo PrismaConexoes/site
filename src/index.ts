@@ -59,8 +59,8 @@ AppDataSource.initialize().then(async () => {
             unset: 'destroy', 
             secret: "53Cr3TTp1RI5waApPiNh3r0cKu",
             store: new TypeormStore({
-                cleanupLimit: 0,
-                limitSubquery: true,
+                cleanupLimit: 40,
+                limitSubquery: false,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
                 ttl: 360
               }).connect(sessionRepository)
