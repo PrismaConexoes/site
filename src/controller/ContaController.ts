@@ -58,16 +58,18 @@ export class ContaController {
             }
         })
         
-        let usuario = await this.cifrador.decryptUser(usr)
+        let dcryptUser = await this.cifrador.decryptUser(usr)
              
-        if(usuario.atualizarEmail == false){
-            usuario.phone = request.body.phone
-            usuario.password = request.body.password
+        if(dcryptUser.atualizarEmail == false){
+            dcryptUser.phone = request.body.phone
+            dcryptUser.password = request.body.password
 
-            let encryptUsr = await this.cifrador.encryptUser(usuario)
+            let encryptUsr = await this.cifrador.encryptUser(dcryptUser)
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
 
+            let usuario = new Userr
+            usuario = await dcryptUser
             response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})        
                  
         }else{
