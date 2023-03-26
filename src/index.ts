@@ -390,8 +390,8 @@ AppDataSource.initialize().then(async () => {
            
                 
             } else {
-                
-                res.redirect('/sair')
+                res.render('testepage.hbs', {ciph1: error, ciph2: data})
+                //res.redirect('/sair')
             }
         })})
     
