@@ -82,21 +82,27 @@ export class ContaController {
 
                                         let decryptUser = this.cifrador.decryptUser(usr)
                                         decryptUser.then((user) => {
+                                            
+                                            let decryptTrocaEmail = this.cifrador.decryptTrocaEmail(trocaEmail)
+                                            decryptTrocaEmail.then((te) =>{
 
-                                            user.email = trocaEmail.emailNovo
-                                            user.phone = trocaEmail.newPhone
-                                            user.password = trocaEmail.newPassword
-                                            user.atualizarEmail = false
-                                            request.session.email = trocaEmail.emailNovo 
+                                                user.email = te.emailNovo
+                                                user.phone = te.newPhone
+                                                user.password = te.newPassword
+                                                user.atualizarEmail = false
+                                                request.session.email = te.emailNovo 
+    
+                                                let encryptUser = this.cifrador.encryptUser(user)
+                                                encryptUser.then((saveUser) => {
+                                                    this.userRepository.update({ email: validador.email }, saveUser)
+                                                    this.acountValidator.remove(validador)
+                                                    this.trocaEmailController.remove(trocaEmail)
+                                                    this.sessionCtrl.sairSess(request)
+                                                    response.render('atualizacaoSucess.hbs')
+                                                })
 
-                                            let encryptUser = this.cifrador.encryptUser(user)
-                                            encryptUser.then((saveUser) => {
-                                                this.userRepository.update({ email: validador.email }, saveUser)
-                                                this.acountValidator.remove(validador)
-                                                this.trocaEmailController.remove(trocaEmail)
-                                                this.sessionCtrl.sairSess(request)
-                                                response.render('atualizacaoSucess.hbs')
                                             })
+
   
 
                                         })
