@@ -54,7 +54,7 @@ AppDataSource.initialize().then(async () => {
                 path: '/', 
                 httpOnly: true, 
                 sameSite: true, 
-                secure: true, 
+                secure:'auto' , 
                 maxAge: 86400000 }, 
             unset: 'destroy', 
             secret: "53Cr3TTp1RI5waApPiNc0nT@yg3",
