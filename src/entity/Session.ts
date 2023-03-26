@@ -14,5 +14,5 @@ export class Session implements ISession {
     public json = "";
 
     @DeleteDateColumn()
-    public destroyedAt? :  Date ;
+    public destroyedAt :  Date ;
 }
