@@ -6,6 +6,7 @@ import { TrocaEmailController } from "./TrocaEmailController"
 import { TrocaEmail } from "../entity/TrocaEmail"
 import { SessionController } from "./SessionController"
 import { Cifra } from "./Cifra"
+import getFeed from "../feed"
 
 export class ContaController {
 
@@ -27,8 +28,11 @@ export class ContaController {
             
             let user = await this.cifrador.decryptUser(usr)
 
-            response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : false})
-            
+            let feed  = getFeed();
+            feed.then((feed)=>{
+                response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : false, rss : feed})
+            })
+
         }else{
             response.render("errSolicitacao.hbs")
         }
