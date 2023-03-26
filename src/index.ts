@@ -266,7 +266,7 @@ AppDataSource.initialize().then(async () => {
                 result.then((usr)=>{
 
                         if(usr instanceof Userr){ 
-                            let decryptUsr =  cifrador.dencryptUser(usr)
+                            let decryptUsr =  cifrador.decryptUser(usr)
                     
                             decryptUsr.then((user) => {              
                                 sessionController.logar(req, res, next, recaptcha, user)
@@ -364,7 +364,7 @@ AppDataSource.initialize().then(async () => {
             
                 usuario.then((usr)=>{
 
-                        let dcryptUser = cifrador.dencryptUser(usr)
+                        let dcryptUser = cifrador.decryptUser(usr)
 
                         dcryptUser.then((user) => {
 
