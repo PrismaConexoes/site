@@ -54,6 +54,7 @@ export class ContaController {
             usuario.phone = request.body.phone
             usuario.password = pass
             this.userRepository.update({ email: request.session.email }, usuario)
+            usuario.password = request.body.password
             response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
                  
         }else{

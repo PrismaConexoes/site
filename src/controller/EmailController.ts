@@ -39,6 +39,7 @@ export class EmailController {
 
         let msg = 'atualização'
         if(newAcount){ msg = 'cadastro'}
+        
         let link = 'https://prismaconexoes.com/validarUsuario/'+secret+'/'+newAcount
         
         let htmlMessage = email(link, msg)
