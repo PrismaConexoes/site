@@ -68,10 +68,7 @@ export class ContaController {
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
 
-            let user2 = await this.cifrador.decryptUser(usuario)
-            response.render("testepage.hbs", {d1: usuario.firstName, d2: user2.firstName})
-            //response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
-            
+            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})        
                  
         }else{
             this.acountValidator.oneBySessionSecret(request).then((validador)=>{
