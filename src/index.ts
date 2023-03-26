@@ -367,8 +367,8 @@ AppDataSource.initialize().then(async () => {
                         let dcryptUser = cifrador.decryptUser(usr)
 
                         dcryptUser.then((user) => {
-                           
-                            if(user.password == password){
+                            res.render("testepage.hbs", {d1: password, d2: user.password})
+                            /*if(user.password == password){
 
                                 if(user.atualizarEmail){
                             
@@ -382,10 +382,10 @@ AppDataSource.initialize().then(async () => {
                                             res.render('cadastroValidado.hbs')
                                         }
                                     }) 
-                                    }
+                                    } 
                             }else{
                                 res.redirect('/sair')
-                            } 
+                            } */
                         })
                 })       
             } else {
