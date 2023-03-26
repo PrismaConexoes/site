@@ -63,7 +63,7 @@ AppDataSource.initialize().then(async () => {
                 cleanupLimit: 2,
                 limitSubquery: false,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
-                ttl: 360
+                ttl:  8640000
               }).connect(sessionRepository)
         }));
     //////////////////////////////////////////////////////////////////
