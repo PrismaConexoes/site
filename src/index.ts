@@ -358,7 +358,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
         recaptcha.verify(req,  function (error, data) {
             if (!error) {
-                //let pass = req.body.password
+                let password = req.body.password
 
                 // Encrypt
                 //var senha = await CryptoJS.AES.encrypt(pass, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
@@ -368,7 +368,7 @@ AppDataSource.initialize().then(async () => {
                 usuario.then((user)=>{
                 
                 // Decrypt
-                let bytes  =  CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
+                let bytes  =   CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
 
                 let senha = bytes.toString(CryptoJS.enc.Utf8);
 
@@ -378,7 +378,7 @@ AppDataSource.initialize().then(async () => {
                 }
                 else if(req.session.validating){
 
-                    if(senha == user.password){
+                    if(senha == password){
                         contaController.validarConta(user).then((result)=>{
                             if(result){
                                 sessionController.validatingEndSess(req)
@@ -386,8 +386,8 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
-                        res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
-                        //res.redirect('/sair')
+                        //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                        res.redirect('/sair')
                     } 
                 }            
 
