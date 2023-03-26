@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express"
 import { Userr } from "../entity/Userr"
 import { Adm } from "../entity/Adm"
 import { AcountValidatorController } from "./AcountValidatorController"
+import { Cifra } from "./Cifra"
 
 
 export class UserController {
@@ -11,6 +12,7 @@ export class UserController {
     private admRepository = AppDataSource.getRepository(Adm)
     private acountValidator = new AcountValidatorController
     private AES = require("crypto-js/aes");
+    private cifrador = new Cifra
 
     async one(request: Request) {
         return this.userRepository.findOne({
@@ -41,14 +43,13 @@ export class UserController {
             usuario.atualizarEmail = false  
 
             // Encrypt
-            var ciphertext = this.AES.encrypt(usuario.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
-            usuario.password = ciphertext
+            let newUser = await this.cifrador.encryptUser(usuario)
 
-            const result = await this.userRepository.save(usuario)
+            const result = await this.userRepository.save(newUser)
       
             if(result !== null && result !== undefined){
                 
-                this.acountValidator.saveSecret(usuario, request, response, true)
+                this.acountValidator.saveSecret(newUser, request, response, true)
 
             }else{
                 response.render("cadastrar.hbs", {captcha: recaptcha.render(), captchaErr : false})

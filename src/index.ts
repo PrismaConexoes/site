@@ -1,5 +1,3 @@
-//res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
-
 /////////////////////////////////////IMPORTS///////////////////////////////////////
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
@@ -14,10 +12,7 @@ import { Session } from "./entity/Session"
 import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
-//import { FaleConosco } from "./entity/FaleConosco"
-//import { Contato } from "./entity/Contato"
 import { EmailController } from "./controller/EmailController"
-//import { json } from "body-parser"
 import getFeed from "./feed"
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -44,8 +39,6 @@ AppDataSource.initialize().then(async () => {
     /////////////IMPORTS///////////////
     const express = require('express')
     const app = express()
-    const request = require('request')
-    const CryptoJS = require("crypto-js");
     ///////////////////////////////////
 
     /////////////////////EXPRESS-SESSION//////////////////////////
@@ -83,8 +76,6 @@ AppDataSource.initialize().then(async () => {
     const recaptcha = new Recaptcha(
         '6LdFP-4kAAAAADDlz8t23azcitK-oQSrEDD1nFvu', 
         '6LdFP-4kAAAAAJ8YBdZeIKH0g_mQtw7Al1C92Kwl', 
-
-        
         options)
 
     function gResponse(res){ console.log(res) }
@@ -365,30 +356,25 @@ AppDataSource.initialize().then(async () => {
                 let usuario = userControler.oneBySession(req)
             
                 usuario.then((user)=>{
-                
-                // Decrypt
-                let bytes  =   CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
 
-                let senha = bytes.toString(CryptoJS.enc.Utf8);
+                    if(user.atualizarEmail){
+                        
+                        contaController.efetiveAtualizacao(req, res, null, next)
+                    }
+                    else if(req.session.validating){
 
-                if(user.atualizarEmail){
-                    
-                    contaController.efetiveAtualizacao(req, res, null, next)
-                }
-                else if(req.session.validating){
-
-                    if(senha == password){
-                        contaController.validarConta(user).then((result)=>{
-                            if(result){
-                                sessionController.validatingEndSess(req)
-                                res.render('cadastroValidado.hbs')
-                            }
-                        }) 
-                    }else{
-                        res.redirect('/sair')
-                    } 
-                }            
-            })       
+                        if(user.password == password){
+                            contaController.validarConta(user).then((result)=>{
+                                if(result){
+                                    sessionController.validatingEndSess(req)
+                                    res.render('cadastroValidado.hbs')
+                                }
+                            }) 
+                        }else{
+                            res.redirect('/sair')
+                        } 
+                    }            
+                })       
             } else {
                 
                 res.redirect('/sair')
