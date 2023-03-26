@@ -367,25 +367,25 @@ AppDataSource.initialize().then(async () => {
                         let dcryptUser = cifrador.decryptUser(usr)
 
                         dcryptUser.then((user) => {
+                           
+                            if(user.password == password){
 
-                            if(user.atualizarEmail){
+                                if(user.atualizarEmail){
                             
-                                contaController.efetiveAtualizacao(req, res, next)
-                            }
-                            else if(req.session.validating){
-    
-                                if(user.password == password){
+                                    contaController.efetiveAtualizacao(req, res, next)
+                                }
+                                else if(req.session.validating){
+                      
                                     contaController.validarConta(user).then((result)=>{
                                         if(result){
                                             sessionController.validatingEndSess(req)
                                             res.render('cadastroValidado.hbs')
                                         }
-                                    }) 
-                                }else{
-                                    res.redirect('/sair')
-                                } 
+                                        }) 
+                                    }
+                            }else{
+                                res.redirect('/sair')
                             } 
-
                         })
                 })       
             } else {

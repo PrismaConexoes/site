@@ -67,7 +67,7 @@ export class ContaController {
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
 
-             response.render("conta.hbs", {usuario : await usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
+            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
             
                  
         }else{
