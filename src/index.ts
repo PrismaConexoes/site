@@ -13,6 +13,7 @@ import { Userr } from "./entity/Userr"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
 import { EmailController } from "./controller/EmailController"
+import { Cifra } from "./controller/Cifra"
 import getFeed from "./feed"
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -107,6 +108,7 @@ AppDataSource.initialize().then(async () => {
     const emailController = new EmailController
     const fcController = new FaleConoscoController
     const contatoController = new ContatoController
+    const cifrador = new Cifra
     //////////////////////////////////////////////////////////////////
    
     
@@ -355,25 +357,31 @@ AppDataSource.initialize().then(async () => {
               
                 let usuario = userControler.oneBySession(req)
             
-                usuario.then((user)=>{
+                usuario.then((usr)=>{
 
-                    if(user.atualizarEmail){
-                        
-                        contaController.efetiveAtualizacao(req, res, null, next)
-                    }
-                    else if(req.session.validating){
+                        let dcryptUser = cifrador.dencryptUser(usr)
 
-                        if(user.password == password){
-                            contaController.validarConta(user).then((result)=>{
-                                if(result){
-                                    sessionController.validatingEndSess(req)
-                                    res.render('cadastroValidado.hbs')
-                                }
-                            }) 
-                        }else{
-                            res.redirect('/sair')
-                        } 
-                    }            
+                        dcryptUser.then((user) => {
+                            
+                            if(user.atualizarEmail){
+                            
+                                contaController.efetiveAtualizacao(req, res, null, next)
+                            }
+                            else if(req.session.validating){
+    
+                                if(user.password == password){
+                                    contaController.validarConta(user).then((result)=>{
+                                        if(result){
+                                            sessionController.validatingEndSess(req)
+                                            res.render('cadastroValidado.hbs')
+                                        }
+                                    }) 
+                                }else{
+                                    res.redirect('/sair')
+                                } 
+                            } 
+
+                        })
                 })       
             } else {
                 
