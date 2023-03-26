@@ -8,22 +8,6 @@ export class EmailController {
 
     async enviar(userEmail: string, secret: string, newAcount: boolean){
 
-      /*  let mailTransporter = this.nodemailer.createTransport({
-
-            host: 'smtp.mail.yahoo.com',
-            port: 465,
-            service:'yahoo',
-            secure: true,
-            auth: {
-               user: 'silvaproto@yahoo.com.br',
-               pass: 'uqomckcujuibfpzk'
-            },
-            debug: false,
-            logger: true ,
-            tls: {
-                rejectUnauthorized: false,
-            }
-        });*/
 
         let mailTransport = this.nodemailer.createTransport({  
             service: 'Godaddy',  
@@ -32,7 +16,7 @@ export class EmailController {
             tls: { rejectUnauthorized: false },
             port: 465,
             auth: {
-                user: "sou@prismaconexoes.com",
+                user: "souprisma@prismaconexoes.com",
                 pass: "PrismaCNL" 
             }
         });
@@ -45,7 +29,7 @@ export class EmailController {
         let htmlMessage = email(link, msg)
         
         let sendEmail = {
-            from: 'sou@prismaconexoes.com',
+            from: 'souprisma@prismaconexoes.com',
             to: userEmail,
             subject: "Cadastro Prisma Conexão",
             html: htmlMessage
