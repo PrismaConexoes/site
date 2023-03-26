@@ -45,7 +45,7 @@ export class ContaController {
         let result = await this.userRepository.update({ email: user.email }, refreshUser)
   
         if(result.affected == 1){
-            
+
             return this.acountValidator.validarAccount(refreshUser)
         }
         return false
@@ -68,6 +68,7 @@ export class ContaController {
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
 
+            usuario = await this.cifrador.decryptUser(usr)
             response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
             
                  
