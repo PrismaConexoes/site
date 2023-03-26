@@ -61,9 +61,9 @@ AppDataSource.initialize().then(async () => {
             secret: "53Cr3TTp1RI5waApPiNh3r0cKu",
             store: new TypeormStore({
                 cleanupLimit: 2,
-                limitSubquery: false,
+                limitSubquery: true,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
-                ttl: 8640000
+                ttl: 360
               }).connect(sessionRepository)
         }));
     //////////////////////////////////////////////////////////////////
