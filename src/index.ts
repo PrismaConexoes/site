@@ -59,7 +59,7 @@ AppDataSource.initialize().then(async () => {
             unset: 'destroy', 
             secret: "53Cr3TTp1RI5waApPiNc0nT@yg3",
             store: new TypeormStore({
-                cleanupLimit: 100,
+                cleanupLimit: 0,
                 limitSubquery: true,
                 onError: (s: TypeormStore, e: Error) => console.log(e),
                 ttl: 8640000
