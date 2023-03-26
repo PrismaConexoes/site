@@ -98,7 +98,7 @@ export class ContaController {
         let dados = request.body
 
         // Encrypt
-        var ciphertext = await this.AES.encrypt(dados.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+        var ciphertext = await this.CryptoJS.AES.encrypt(dados.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
 
         if(dados !== null && dados !== undefined){
            
