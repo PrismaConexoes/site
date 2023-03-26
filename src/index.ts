@@ -55,7 +55,8 @@ AppDataSource.initialize().then(async () => {
                 httpOnly: true, 
                 sameSite: true, 
                 secure: true , 
-                maxAge: 86400000 }, 
+                expires:  86400000,
+             }, 
             unset: 'destroy', 
             secret: "53Cr3TTp1RI5waApPiNh3r0cKu",
             store: new TypeormStore({
