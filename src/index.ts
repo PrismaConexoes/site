@@ -370,28 +370,26 @@ AppDataSource.initialize().then(async () => {
                 // Decrypt
                 let bytes  =  CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i');
 
-                bytes.then((dado) => {
-                    let senha = dado.toString(CryptoJS.enc.Utf8);
+                let senha = bytes.toString(CryptoJS.enc.Utf8);
 
-                    if(user.atualizarEmail){
-                        
-                        contaController.efetiveAtualizacao(req, res, next)
-                    }
-                    else if(req.session.validating){
-    
-                        if(senha == user.password){
-                            contaController.validarConta(user).then((result)=>{
-                                if(result){
-                                    sessionController.validatingEndSess(req)
-                                    res.render('cadastroValidado.hbs')
-                                }
-                            }) 
-                        }else{
-                            //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
-                            res.redirect('/sair')
-                        } 
-                    }
-                })
+                if(user.atualizarEmail){
+                    
+                    contaController.efetiveAtualizacao(req, res, next)
+                }
+                else if(req.session.validating){
+
+                    if(senha == user.password){
+                        contaController.validarConta(user).then((result)=>{
+                            if(result){
+                                sessionController.validatingEndSess(req)
+                                res.render('cadastroValidado.hbs')
+                            }
+                        }) 
+                    }else{
+                        //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                        res.redirect('/sair')
+                    } 
+                }            
 
             })       
             } else {
