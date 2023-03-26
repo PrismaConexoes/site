@@ -13,6 +13,6 @@ export class Session implements ISession {
     @Column("text")
     public json = "";
 
-    @DeleteDateColumn({nullable: false} )
+    @DeleteDateColumn()
     public destroyedAt? :  Date;
 }
