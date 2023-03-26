@@ -11,7 +11,6 @@ export class UserController {
     private userRepository = AppDataSource.getRepository(Userr)
     private admRepository = AppDataSource.getRepository(Adm)
     private acountValidator = new AcountValidatorController
-    private AES = require("crypto-js/aes");
     private cifrador = new Cifra
 
     async one(request: Request) {
