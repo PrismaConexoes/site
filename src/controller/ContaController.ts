@@ -68,9 +68,8 @@ export class ContaController {
 
             await this.userRepository.update({ email: request.session.email }, encryptUsr)
 
-            let usuario = new Userr
-            usuario = await dcryptUser
-            response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})        
+            response.redirect("/conta")
+            //response.render("conta.hbs", {usuario : dcryptUser, user: dcryptUser.firstName, login : request.session.login, atualizacao : true})        
                  
         }else{
             this.acountValidator.oneBySessionSecret(request).then((validador)=>{
