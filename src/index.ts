@@ -367,11 +367,13 @@ AppDataSource.initialize().then(async () => {
             
                 usuario.then((user)=>{
                 
+                res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
                 if(user.atualizarEmail){
                     
                     contaController.efetiveAtualizacao(req, res, next)
                 }
                 else if(req.session.validating){
+
                     if(senha == user.password){
                         contaController.validarConta(user).then((result)=>{
                             if(result){
