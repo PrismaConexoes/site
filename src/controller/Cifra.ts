@@ -21,7 +21,7 @@ export class Cifra {
     
         return user
     }
-    async dencryptUser(user : Userr) {
+    async decryptUser(user : Userr) {
 
         let nome    =   this.CryptoJS.AES.decrypt(user.firstName , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let sobre   =   this.CryptoJS.AES.decrypt(user.lastName , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
@@ -46,7 +46,7 @@ export class Cifra {
     
         return te
     }
-    async dencryptTrocaEmail(te : TrocaEmail) {
+    async decryptTrocaEmail(te : TrocaEmail) {
  
         let tel     =   this.CryptoJS.AES.decrypt(te.newPhone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let pass    =   this.CryptoJS.AES.decrypt(te.newPassword , 'PassworD53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
@@ -69,7 +69,7 @@ export class Cifra {
     
         return fc
     }
-    async dencryptFaleConosco(fc : FaleConosco) {
+    async decryptFaleConosco(fc : FaleConosco) {
  
         let nome    =   this.CryptoJS.AES.decrypt(fc.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let sobre   =   this.CryptoJS.AES.decrypt(fc.sobrenome , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
@@ -92,7 +92,7 @@ export class Cifra {
         
         return contato
     }
-    async dencryptContato(contato : Contato) {
+    async decryptContato(contato : Contato) {
  
         let nome    =   this.CryptoJS.AES.decrypt(contato.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let mail    =   this.CryptoJS.AES.decrypt(contato.email , 'EmaiL53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 

@@ -18,17 +18,17 @@ export class ContaController {
 
 
     async admConta(request: Request, response: Response, next: NextFunction) {
-        let user = await this.userRepository.findOne({
+        let usr = await this.userRepository.findOne({
             where: {
                 email : request.session.email
             }
         })
-        if(user instanceof Userr){
+        if(usr instanceof Userr){
             
-            // Decrypt
-            let senha  =   this.CryptoJS.AES.decrypt(user.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
-            user.password = senha
+            let user = await this.cifrador.decryptUser(usr)
+
             response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : false})
+            
         }else{
             response.render("errSolicitacao.hbs")
         }
