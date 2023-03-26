@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { AcountValidator } from "../entity/AcountValidator"
-import { Userr } from "../entity/Userr"
 import { AdmController } from "./AdmController"
+import getFeed from "../feed"
 
 export class SessionController {
 
@@ -81,7 +81,11 @@ export class SessionController {
                             if(request.session.email == adm.email){ this.admSess(request) }
                         })
                 }).then(()=>{
-                    response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador})
+                    let feed  = getFeed();
+                    feed.then((feed)=>{
+                        response.render('prisma.hbs', {login: request.session.login, user: request.session.user, adm: request.session.administrador,
+                            rss: feed})
+                    })
                 })
             }else{
 
