@@ -386,8 +386,8 @@ AppDataSource.initialize().then(async () => {
                             }
                         }) 
                     }else{
-                        //res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
-                        res.redirect('/sair')
+                        res.render('testepage.hbs', {ciph1: senha, ciph2: user.password})
+                        //res.redirect('/sair')
                     } 
                 }            
 
