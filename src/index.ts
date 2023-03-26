@@ -264,16 +264,18 @@ AppDataSource.initialize().then(async () => {
             if (!error) {
                 let result = userControler.one(req)
                 result.then((usr)=>{
-                    let decryptUsr =  cifrador.dencryptUser(usr)
+
+                        if(usr instanceof Userr){ 
+                            let decryptUsr =  cifrador.dencryptUser(usr)
                     
-                    decryptUsr.then((user) => {
-                        if(user instanceof Userr){               
-                            sessionController.logar(req, res, next, recaptcha, user)
+                            decryptUsr.then((user) => {              
+                                sessionController.logar(req, res, next, recaptcha, user)
+                        })
                         }else{
                             sessionController.loginSess(req, null, true)
                             res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: true});
                         }
-                    })
+                    
                 })  
             } else {
                 req.session.relogin = false
