@@ -14,7 +14,6 @@ export class ContaController {
     private acountValidator = new AcountValidatorController
     private trocaEmailController = new TrocaEmailController
     private sessionCtrl = new SessionController
-    private CryptoJS = require("crypto-js");
     private cifrador = new Cifra
 
 
@@ -51,19 +50,23 @@ export class ContaController {
         return false
     }
     
-    async efetiveAtualizacao(request: Request, response: Response, pass: any, next: NextFunction) {
-        let usuario = await this.userRepository.findOne({
+    async efetiveAtualizacao(request: Request, response: Response, next: NextFunction) {
+        let usr = await this.userRepository.findOne({
             where: {
                 email : request.session.email
             }
         })
         
+        let usuario = await this.cifrador.decryptUser(usr)
              
         if(usuario.atualizarEmail == false){
             usuario.phone = request.body.phone
-            usuario.password = pass
-            this.userRepository.update({ email: request.session.email }, usuario)
             usuario.password = request.body.password
+
+            let encryptUsr = await this.cifrador.encryptUser(usuario)
+
+            this.userRepository.update({ email: request.session.email }, encryptUsr)
+    
             response.render("conta.hbs", {usuario : usuario, user: usuario.firstName, login : request.session.login, atualizacao : true})
                  
         }else{
@@ -107,14 +110,12 @@ export class ContaController {
     async atualizarConta(request: Request, response: Response, next: NextFunction) {
         let dados = request.body
 
-        // Encrypt
-        var ciphertext = await this.CryptoJS.AES.encrypt(dados.password, '53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
 
         if(dados !== null && dados !== undefined){
            
             if(request.session.email == request.body.email){
               
-                this.efetiveAtualizacao(request, response, ciphertext, next)
+                this.efetiveAtualizacao(request, response, next)
             }else{
 
                 //Salvando um objeto do tipo TrocaEmail
@@ -122,8 +123,12 @@ export class ContaController {
                 trocaEmail.emailAtual = request.session.email
                 trocaEmail.emailNovo = request.body.email
                 trocaEmail.newPhone = request.body.phone
-                trocaEmail.newPassword = ciphertext
-                await this.trocaEmailController.save(trocaEmail)
+                trocaEmail.newPassword = request.body.password
+
+                let encryptTe = await this.cifrador.encryptTrocaEmail(trocaEmail)
+
+
+                await this.trocaEmailController.save(encryptTe)
 
                 //Recuperar usuário
                 let usuario = await this.userRepository.findOne({
