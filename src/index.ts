@@ -373,7 +373,7 @@ AppDataSource.initialize().then(async () => {
 
                 if(user.atualizarEmail){
                     
-                    contaController.efetiveAtualizacao(req, res, next)
+                    contaController.efetiveAtualizacao(req, res, null, next)
                 }
                 else if(req.session.validating){
 
