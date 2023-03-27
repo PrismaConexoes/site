@@ -205,7 +205,7 @@ AppDataSource.initialize().then(async () => {
 
         let result = fcController.save(req, res);
         result.then((save)=>{
-            if(save){
+            if(save == true){
                 let feed  = getFeed();
                 feed.then((feed)=>{          
                     res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
