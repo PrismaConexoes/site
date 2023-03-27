@@ -205,16 +205,16 @@ AppDataSource.initialize().then(async () => {
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {  
 
         let result = fcController.save(req, res);
-        /*result.then((fc)=>{
-            if(fc instanceof FaleConosco ){
-                let feed  = getFeed();
-                feed.then((feed)=>{          
-                    res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-                }) 
-            }else{
-                res.redirect("/")
-            }
-        })*/   
+
+        if(result){
+            let feed  = getFeed();
+            feed.then((feed)=>{          
+                res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+            }) 
+        }else{
+            res.redirect("/")
+        }
+       
     }) 
 
     //Rota Contato
