@@ -22,11 +22,11 @@ export class FaleConoscoController {
             let fc = request.body
 
             let encryptFc = await this.cifrador.encryptFaleConosco(fc)
-
+            
             const result = await this.FCRepository.save(encryptFc)
       
-            if(result instanceof FaleConosco){
-                return true;
+            if(result !== null && result !== undefined){
+                return result;
             }else{
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
