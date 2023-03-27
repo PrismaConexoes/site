@@ -25,8 +25,8 @@ export class FaleConoscoController {
             
             const result = await this.FCRepository.save(encryptFc)
       
-            if(result !== null && result !== undefined){
-                response.render("testepage", {d1: result, d2: null})
+            if(result instanceof FaleConosco){
+                response.render("testepage", {d1: true, d2: null})
                 //return result;
             }else{
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
