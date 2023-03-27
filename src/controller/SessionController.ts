@@ -2,10 +2,12 @@ import { NextFunction, Request, Response } from "express"
 import { AcountValidator } from "../entity/AcountValidator"
 import { AdmController } from "./AdmController"
 import getFeed from "../feed"
+import { Cifra } from "./Cifra"
 
 export class SessionController {
 
     private admController = new AdmController
+    private cifrador = new Cifra
 
     async prismaSess(request : Request){
         if(!request.session.login){
@@ -79,7 +81,11 @@ export class SessionController {
                 this.admController.all(request, response, next)
                 .then((adms)=>{
                     adms.forEach((adm) => {
-                            if(request.session.email == adm.email){ this.admSess(request) }
+                            let decryptAdm = this.cifrador.decryptAdm(adm)
+                            decryptAdm.then((dcAdm)=> {
+                                if(request.session.email == dcAdm.email){ this.admSess(request) }
+                            })
+                            
                         })
                 }).then(()=>{
                     let feed  = getFeed();

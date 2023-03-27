@@ -15,7 +15,8 @@ import { AcountValidator } from "./entity/AcountValidator"
 import { EmailController } from "./controller/EmailController"
 import { Cifra } from "./controller/Cifra"
 import getFeed from "./feed"
-import { FaleConosco } from "./entity/FaleConosco"
+import { Adm } from "./entity/Adm"
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 declare module "express-session" {
@@ -117,6 +118,22 @@ AppDataSource.initialize().then(async () => {
     //////////////////////////ROTAS DE NAVEGAÇÃO/////////////////////////////
     /////////////////////////////////////////////////////////////////////////
 
+    
+   /* //Rota Prisma
+    app.get('/hash', (req: Request, res: Response, next: NextFunction ) => {
+       
+        let adm = new Adm
+        adm.email = "ecpsproto@gmail.com"
+        let cifadm =  cifrador.encryptAdm(adm)
+
+        cifadm.then((ad) => {
+            console.log(ad)
+        })
+       
+      
+       })
+
+    */  
 
     //Rota Prisma
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
