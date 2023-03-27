@@ -205,7 +205,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {  
 
         let result = fcController.save(req, res);
-        result.then((fc)=>{
+        /*result.then((fc)=>{
             if(fc instanceof FaleConosco ){
                 let feed  = getFeed();
                 feed.then((feed)=>{          
@@ -214,7 +214,7 @@ AppDataSource.initialize().then(async () => {
             }else{
                 res.redirect("/")
             }
-        })   
+        })*/   
     }) 
 
     //Rota Contato
