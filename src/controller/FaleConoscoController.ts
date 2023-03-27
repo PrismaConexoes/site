@@ -1,11 +1,13 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
 import { FaleConosco } from "../entity/FaleConosco"
+import { Cifra } from "./Cifra"
 
 
 export class FaleConoscoController {
 
     private FCRepository = AppDataSource.getRepository(FaleConosco)
+    private cifrador = new Cifra
 
     async one(request: Request) {
         return this.FCRepository.findOne({
@@ -17,12 +19,14 @@ export class FaleConoscoController {
 
     async save(request: Request, response: Response) {  
 
-            let fconosco = request.body
+            let fc = request.body
 
-            const result = await this.FCRepository.save(fconosco)
+            let encryptFc = await this.cifrador.encryptFaleConosco(fc)
+
+            const result = await this.FCRepository.save(encryptFc)
       
-            if(result !== null && result !== undefined){
-                return result;
+            if(result instanceof FaleConosco){
+                return true;
             }else{
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }

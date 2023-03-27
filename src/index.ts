@@ -201,15 +201,18 @@ AppDataSource.initialize().then(async () => {
     })
 
     //Rota FaleConosco
-    app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {
-    
+    app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {  
 
         let result = fcController.save(req, res);
-        result.then((fc)=>{ 
-            let feed  = getFeed();
-            feed.then((feed)=>{          
-                res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-            }) 
+        result.then((save)=>{
+            if(save){
+                let feed  = getFeed();
+                feed.then((feed)=>{          
+                    res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                }) 
+            }else{
+                res.redirect("/")
+            }
         })   
     }) 
 
