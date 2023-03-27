@@ -211,10 +211,7 @@ AppDataSource.initialize().then(async () => {
             feed.then((feed)=>{          
                 res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
             }) 
-        }else{
-            res.redirect("/")
-        }
-       
+        } 
     }) 
 
     //Rota Contato
