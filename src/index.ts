@@ -218,12 +218,13 @@ AppDataSource.initialize().then(async () => {
     app.post('/Contato', (req: any, res: any , next: NextFunction) => {
     
         let result = contatoController.save(req, res);
-        result.then((contato)=>{ 
+
+        if(result){
             let feed  = getFeed();
             feed.then((feed)=>{          
-                res.render("fcFeedback.hbs", {login: req.session.login, user: req.session.user, mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
             }) 
-        })   
+        }
     })
 
     //Rota Contactar   

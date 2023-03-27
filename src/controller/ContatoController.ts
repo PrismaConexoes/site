@@ -1,11 +1,13 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
 import { Contato } from "../entity/Contato"
+import { Cifra } from "./Cifra"
 
 
 export class ContatoController {
 
     private ContatoRepository = AppDataSource.getRepository(Contato)
+    private cifrador = new Cifra
 
     async one(request: Request) {
         return this.ContatoRepository.findOne({
@@ -19,10 +21,12 @@ export class ContatoController {
 
             let contato = request.body
 
-            const result = await this.ContatoRepository.save(contato)
+            let encryptCto =  await this.cifrador.encryptContato(contato)
+
+            const result = await this.ContatoRepository.save(encryptCto)
       
             if(result !== null && result !== undefined){
-                return result;
+                return true;
             }else{
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }

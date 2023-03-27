@@ -84,21 +84,25 @@ export class Cifra {
 
     async encryptContato(contato : Contato) {
 
-        let nome    =   this.CryptoJS.AES.encrypt(contato.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
-        let mail    =   this.CryptoJS.AES.encrypt(contato.email , 'EmaiL53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+        let mail        =   this.CryptoJS.AES.encrypt(contato.email , 'EmaiL53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+        let assunto     =   this.CryptoJS.AES.encrypt(contato.assunto , 'AssUnTo53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+        let mensagem    =   this.CryptoJS.AES.encrypt(contato.mensagem , 'MeNSagEm53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
 
-        contato.nome    = nome
-        contato.email   = mail
+        contato.email       = mail
+        contato.assunto     = assunto
+        contato.mensagem    = mensagem
         
         return contato
     }
     async decryptContato(contato : Contato) {
  
-        let nome    =   this.CryptoJS.AES.decrypt(contato.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
-        let mail    =   this.CryptoJS.AES.decrypt(contato.email , 'EmaiL53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
+        let mail        =   this.CryptoJS.AES.decrypt(contato.email , 'EmaiL53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
+        let assunto     =   this.CryptoJS.AES.decrypt(contato.assunto , 'AssUnTo53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
+        let mensagem    =   this.CryptoJS.AES.decrypt(contato.mensagem , 'MeNSagEm53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
 
-        contato.nome    = nome
-        contato.email   = mail
+        contato.email       = mail
+        contato.assunto     = assunto
+        contato.mensagem    = mensagem
 
         return contato
     }
