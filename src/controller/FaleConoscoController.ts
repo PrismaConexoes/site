@@ -25,7 +25,7 @@ export class FaleConoscoController {
             
             const result = await this.FCRepository.save(encryptFc)
       
-            if(result instanceof FaleConosco){
+            if(result !== null && result !== undefined){
                 response.render("testepage", {d1: true, d2: null})
                 //return result;
             }else{

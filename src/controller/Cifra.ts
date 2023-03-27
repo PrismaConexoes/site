@@ -58,26 +58,26 @@ export class Cifra {
     }
 
     async encryptFaleConosco(fc : FaleConosco) {
-
-        let nome    =   this.CryptoJS.AES.encrypt(fc.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
-        let sobre   =   this.CryptoJS.AES.encrypt(fc.sobrenome , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(); 
-        let tel     =   this.CryptoJS.AES.encrypt(fc.telefone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
-
-        fc.nome         = nome
+   
+        let sobre       =   this.CryptoJS.AES.encrypt(fc.sobrenome , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(); 
+        let tel         =   this.CryptoJS.AES.encrypt(fc.telefone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+        let mensagem    =   this.CryptoJS.AES.encrypt(fc.mensagem , 'MeNSagEm53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
+ 
         fc.sobrenome    = sobre
         fc.telefone     = tel
+        fc.mensagem     = mensagem
     
         return fc
     }
     async decryptFaleConosco(fc : FaleConosco) {
  
-        let nome    =   this.CryptoJS.AES.decrypt(fc.nome , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
-        let sobre   =   this.CryptoJS.AES.decrypt(fc.sobrenome , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
-        let tel     =   this.CryptoJS.AES.decrypt(fc.telefone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
+        let sobre       =   this.CryptoJS.AES.decrypt(fc.sobrenome , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
+        let tel         =   this.CryptoJS.AES.decrypt(fc.telefone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
+        let mensagem     =   this.CryptoJS.AES.decrypt(fc.mensagem , 'MeNSagEm53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
 
-        fc.nome         = nome
         fc.sobrenome    = sobre
         fc.telefone     = tel
+        fc.mensagem     = mensagem
 
         return fc
     }
