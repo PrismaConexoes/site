@@ -13,7 +13,6 @@ export class Cifra {
         let nome    =   this.CryptoJS.AES.encrypt(user.firstName , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
         let sobre   =   this.CryptoJS.AES.encrypt(user.lastName , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(); 
         let tel     =   this.CryptoJS.AES.encrypt(user.phone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
-        let age     =   this.CryptoJS.AES.encrypt(user.age , 'AgE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
         let gender  =   this.CryptoJS.AES.encrypt(user.gender , 'GenDeR53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
         let pass    =   this.CryptoJS.AES.encrypt(user.password , 'PassworD53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
        
@@ -21,7 +20,6 @@ export class Cifra {
         user.lastName   = sobre
         user.phone      = tel
         user.password   = pass
-        user.age        = age
         user.gender     = gender
     
         return user
@@ -31,7 +29,6 @@ export class Cifra {
         let nome    =   this.CryptoJS.AES.decrypt(user.firstName , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let sobre   =   this.CryptoJS.AES.decrypt(user.lastName , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 
         let tel     =   this.CryptoJS.AES.decrypt(user.phone , 'PhonE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
-        let age     =   this.CryptoJS.AES.decrypt(user.age , 'AgE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let gender  =   this.CryptoJS.AES.decrypt(user.gender , 'GenDeR53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let pass    =   this.CryptoJS.AES.decrypt(user.password , 'PassworD53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
        
@@ -39,7 +36,6 @@ export class Cifra {
         user.lastName   = sobre
         user.phone      = tel
         user.password   = pass
-        user.age        = age
         user.gender     = gender
 
         return user
