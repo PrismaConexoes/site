@@ -103,7 +103,6 @@ AppDataSource.initialize().then(async () => {
 
     /////////////////////////CONTROLADORES/////////////////////////////
     const userControler = new UserController
-    const publicacaoController = new PublicacaoController
     const acountValidatorController = new AcountValidatorController
     const sessionController = new SessionController
     const contaController = new ContaController
@@ -139,29 +138,19 @@ AppDataSource.initialize().then(async () => {
     app.get('/', (req: Request, res: Response, next: NextFunction ) => {
        
         sessionController.prismaSess(req)
-        
-        let carrossel = publicacaoController.allPrisma()
-        
-        if(carrossel instanceof Promise){
-            carrossel.then((car)=>{
-                let car1 = car[0];
-                delete car[0];
 
-                let feed  = getFeed();
-                feed.then((feed)=>{
-                    res.render("prisma.hbs" , {
-                        login: req.session.login, 
-                        user: req.session.user, 
-                        adm: req.session.administrador,
-                        ativo: car1,
-                        carousel: car,
-                        rss: feed
-                       }) 
-                })  
-                })
-            }})
-
-        
+        let feed  = getFeed();
+        feed.then((feed)=>{
+            res.render("prisma.hbs" , {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
+        })  
+     })
+           
+   
     //Rota PrismaInfo
     app.get('/prismaInfo', (req, res) => {
         let feed  = getFeed();
@@ -457,26 +446,7 @@ AppDataSource.initialize().then(async () => {
     //Página Pricipal de atualização
     app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
-            publicacaoController.all(req, res, next)
-        }else{
             res.redirect('/')
-        }
-    })
-
-    //Salvar nova publicação
-    app.post('/newPublicacao', (req: any, res: any , next: NextFunction ) => {
-        if(req.session.administrador == true){
-           publicacaoController.save(req, res, next);
-        }else{
-            res.redirect('/')
-        }
-    })
-
-    //Deletar publicação
-    app.post('/removePublicacao', (req: any, res: any , next: NextFunction ) => {
-        
-        if(req.session.administrador == true){
-           publicacaoController.remove(req, res, next);
         }else{
             res.redirect('/')
         }
