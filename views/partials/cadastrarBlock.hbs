@@ -1,5 +1,6 @@
   <div class="flex-column ">
     <div class="d-flex justify-content-around border-bottom border-1">
+      
       <form class="m-5 " action="/newUser" method="post" id="formulario">
         {{#if captchaErr}}
             <div class="alert alert-danger" role="alert" id="alerta">
@@ -18,8 +19,11 @@
         {{/if}}
         <div class="d-flex flex-column">
           <div class="mb-3">
+          </div>
+          <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="form-control" id="name" name="firstName" placeholder="Maria" required>
+          </div>
           <div class="mb-3">
             <label for="sobrenome" class="form-label">Sobrenome</label>
             <input type="text" class="form-control" id="sobrenome" name="lastName" placeholder="Pereira da Silva" required>
