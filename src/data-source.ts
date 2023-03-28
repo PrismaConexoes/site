@@ -3,7 +3,6 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { Userr } from "./entity/Userr"
 import { Session } from "./entity/Session"
-import { Publicacao } from "./entity/Publicacao"
 import { AcountValidator } from "./entity/AcountValidator"
 import { Adm } from "./entity/Adm"
 import { TrocaEmail } from "./entity/TrocaEmail"
@@ -20,7 +19,7 @@ export const AppDataSource = new DataSource({
     
     synchronize: true,
     logging: false,
-    entities: [Userr, Session, Publicacao, AcountValidator, Adm, TrocaEmail, FaleConosco, Contato],
+    entities: [Userr, Session, AcountValidator, Adm, TrocaEmail, FaleConosco, Contato],
     migrations: [],
     subscribers: [],
 })
