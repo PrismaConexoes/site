@@ -47,8 +47,7 @@ div#navSup {
     justify-content: center;
     align-items: center;
     text-align: center;
-    top: 85%;
-    transform: translateY(-50%);
+    top: 60%;
     bottom: initial;
 }
 
@@ -123,3 +122,4 @@ div#navSup {
     height: 50px;
     width: 350px;
 }
+
