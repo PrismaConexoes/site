@@ -190,14 +190,6 @@ AppDataSource.initialize().then(async () => {
         })
     })
 
-    //Rota MCI
-    app.get('/mci', (req, res) => {
-        let feed  = getFeed();
-        feed.then((feed)=>{
-            res.render("mci.hbs", {login: req.session.login, user: req.session.user, rss: feed})
-        })
-    })
-
     //Rota F&F
     app.get('/next', (req, res) => {
         let feed  = getFeed();
@@ -418,6 +410,7 @@ AppDataSource.initialize().then(async () => {
     app.get('/reenviarEmail', (req, res, next) => {
 
         //Remover acValidador vencidos aqui
+        
         let validador = acountValidatorController.oneBySession(req)
         validador.then((acValidador)=>{
             if(acValidador instanceof AcountValidator){
