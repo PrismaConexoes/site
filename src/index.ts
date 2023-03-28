@@ -1,7 +1,6 @@
 /////////////////////////////////////IMPORTS///////////////////////////////////////
 import { AppDataSource } from "./data-source"
 import { UserController } from "./controller/UserController"
-import { PublicacaoController } from "./controller/PublicacaoController"
 import { FaleConoscoController } from "./controller/FaleConoscoController"
 import { ContatoController } from "./controller/ContatoController"
 import { AcountValidatorController } from "./controller/AcountValidatorController"
