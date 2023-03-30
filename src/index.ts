@@ -435,10 +435,10 @@ AppDataSource.initialize().then(async () => {
     ///////////////////ROTAS RELACIONADAS A ADMINISTRAÇÃO DO SITE///////////////////
     ////////////////////////////////////////////////////////////////////////////////
 
-    //Página Pricipal de atualização
-    app.get('/atualizarSite', (req: any, res: any , next: NextFunction ) => {
+    //Página Pricipal de administracao
+    app.get('/administrarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
-            res.redirect('/')
+            res.redirect('adm.hbs')
         }else{
             res.redirect('/')
         }

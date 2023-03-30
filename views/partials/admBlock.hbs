@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-around">
+    <button type="button" class="btn border bg-success" onclick="adms()" id="btn_adms">Administradores</button>
+    <button type="button" class="btn border bg-success" onclick="clientes()" id="btn_clientes">Clientes</button> 
+    <button type="button" class="btn border bg-success" onclick="mensagens()" id="btn_mensagens">Mensagens</button>
+</div>
+
+<div type="hidden" id="administradores" name="administradores">
+    <p>administradores</p>
+</div>
+
+<div type="hidden" id="clientes" name="clientes">
+    <p>clientes</p>
+</div>
+
+<div type="hidden" class="" id="mensagens" name="mensagens">
+    <p>mensagens</p>
+</div>
+
+
+
+<script>
+    let mens = document.getElementById("mensagens")
+    let cli =  document.getElementById("clientes")
+    let adm = document.getElementById("administradores")
+    
+    function adms(){
+
+        mens.hidden = true
+        cli.hidden = true
+        adm.hidden = false
+
+    }
+    function clientes(){
+
+        mens.hidden = true
+        cli.hidden = false
+        adm.hidden = true
+
+    }
+    function mensagens(){
+
+        mens.hidden = false
+        cli.hidden = true
+        adm.hidden = true
+    }
+</script>
