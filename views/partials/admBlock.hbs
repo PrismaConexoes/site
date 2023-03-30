@@ -4,13 +4,13 @@
     <button type="button" class="btn border bg-secondary" onclick="mensagens()" id="btn_mensagens">Mensagens</button>
 </div>
 <hr/>
-<div class="d-flex flex-row w-25 visually-hidden justify-content-center align-items-start m-5" id="administradores" name="administradores">
-    <div class="d-flex flex-column">
+<div class="d-flex flex-row visually-hidden justify-content-center align-items-start m-5" id="administradores" name="administradores">
+    <div class="d-flex flex-column w-25 ">
         <input type="text" class="form-control w-100" placeholder="E-mail de administrador" aria-label="E-mail de administrador"/>
         <button type="button" class="btn border bg-secondary w-100" onclick="newAdm()" id="btn_newadm">Incluir Administrador</button>
         <button type="button" class="btn border bg-secondary w-100" onclick="getadms()" id="btn_adms">Consultar Adms</button> 
     </div>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column w-25 ">
         <div id="adms_cadastrados m-5">emails aparecerão aqui</div>
     </div>
     
