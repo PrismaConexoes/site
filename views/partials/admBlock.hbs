@@ -4,15 +4,15 @@
     <button type="button" class="btn border bg-secondary" onclick="mensagens()" id="btn_mensagens">Mensagens</button>
 </div>
 
-<div type="hidden" id="administradores" name="administradores">
+<div class="visually-hidden" id="administradores" name="administradores">
     <p>administradores</p>
 </div>
 
-<div type="hidden" id="clientes" name="clientes">
+<div class="visually-hidden"  id="clientes" name="clientes">
     <p>clientes</p>
 </div>
 
-<div type="hidden" class="" id="mensagens" name="mensagens">
+<div class="visually-hidden"  class="" id="mensagens" name="mensagens">
     <p>mensagens</p>
 </div>
 
@@ -25,22 +25,22 @@
     
     function adms(){
 
-        mens.hidden = true
-        cli.hidden = true
-        adm.hidden = false
+        mens.classList.add("visually-hidden")
+        cli.classList.add("visually-hidden")
+        adm.classList.remove("visually-hidden")
 
     }
     function clientes(){
 
-        mens.hidden = true
-        cli.hidden = false
-        adm.hidden = true
+        mens.classList.add("visually-hidden")
+        cli.classList.remove("visually-hidden")
+        adm.classList.add("visually-hidden")
 
     }
     function mensagens(){
 
-        mens.hidden = false
-        cli.hidden = true
-        adm.hidden = true
+        mens.classList.remove("visually-hidden")
+        cli.classList.add("visually-hidden")
+        adm.classList.add("visually-hidden")
     }
 </script>
