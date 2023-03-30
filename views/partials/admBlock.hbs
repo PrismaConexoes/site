@@ -3,16 +3,25 @@
     <button type="button" class="btn border bg-secondary" onclick="clientes()" id="btn_clientes">Clientes</button> 
     <button type="button" class="btn border bg-secondary" onclick="mensagens()" id="btn_mensagens">Mensagens</button>
 </div>
-
-<div class="visually-hidden" id="administradores" name="administradores">
-    <p>administradores</p>
+<hr/>
+<div class="d-flex visually-hidden justify-content-center align-items-start m-5" id="administradores" name="administradores">
+    <div class="row">
+         <input type="text" class="form-control" placeholder="E-mail de administrador" aria-label="E-mail de administrador"/>
+         <button type="button" class="btn border bg-secondary" onclick="newAdm()" id="btn_newadm">Incluir Administrador</button>
+    </div>
+    <button type="button" class="btn border bg-secondary" onclick="getadms()" id="btn_adms">Consultar Adms</button>
+    <div id="adms_cadastrados"></div>
 </div>
 
-<div class="visually-hidden"  id="clientes" name="clientes">
-    <p>clientes</p>
+<div class="d-flex visually-hidden justify-content-center align-items-start m-5"  id="clientes" name="clientes">
+    <div class="row">
+        <input type="text" class="form-control" placeholder="Primeiro nome" aria-label="Primeiro nome"/>
+        <button type="button" class="btn border bg-secondary" onclick="getclient()" id="btn_adms">Consultar Cliente</button>
+    </div>
+     
 </div>
 
-<div class="visually-hidden"  class="" id="mensagens" name="mensagens">
+<div class="d-flex visually-hidden justify-content-center align-items-start m-5"  class="" id="mensagens" name="mensagens">
     <p>mensagens</p>
 </div>
 
@@ -43,4 +52,9 @@
         cli.classList.add("visually-hidden")
         adm.classList.add("visually-hidden")
     }
+    function getadms(){
+
+    }
+    function newAdm(){}
+    function getclient(){}
 </script>
