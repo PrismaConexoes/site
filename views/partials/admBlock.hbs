@@ -22,7 +22,12 @@
         
     </div>   
 </div>
-
+<form class="m-5 " action="/getMensagens" method="post" id="formMens">
+    <div class="d-flex visually-hidden justify-content-center align-items-start m-5"  class="" id="mensagens" name="mensagens">
+        <input type="text" class="form-control  m-2 w-75" placeholder="Nome ou Vazio" id="nome_mens" name="nome_mens" aria-label="Primeiro Nome"/>
+        <button type="submit" class="btn btn-secondary m-2" style="width: 300px;" >Verificar Mensagens</button>
+    </div>
+</form>
 <div class="d-flex visually-hidden justify-content-center align-items-start m-5"  id="clientes" name="clientes">
     <div class="row">
         <input type="text" class="form-control" placeholder="Primeiro nome" aria-label="Primeiro nome"/>
@@ -31,14 +36,12 @@
      
 </div>
 
-<div class="d-flex visually-hidden justify-content-center align-items-start m-5"  class="" id="mensagens" name="mensagens">
-    <p>mensagens</p>
-</div>
+
 
 
 
 <script>
-    let mens = document.getElementById("mensagens")
+    let mens = document.getElementById("formMens")
     let cli =  document.getElementById("clientes")
     let adm = document.getElementById("administradores")
     

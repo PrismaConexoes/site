@@ -31,8 +31,20 @@ export class ContatoController {
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
     }
-        
-    async removefaleConosco(request: Request, response: Response, next: NextFunction) {
+    async all() {
+        let find_cont = await this.ContatoRepository.find()
+        let cont_arr = []
+       
+        find_cont.forEach((ctt) => {
+            let decryptCtt = this.cifrador.decryptContato(ctt)
+            decryptCtt.then((dcCtt)=> {
+                cont_arr.push(dcCtt)
+            })
+        })
+              
+        return cont_arr
+    }     
+    async removeContato(request: Request, response: Response, next: NextFunction) {
         let contatoToRemove = await this.ContatoRepository.findOneBy({ id: request.body.id })
         let contato  = await this.ContatoRepository.remove(contatoToRemove)
         if(contato instanceof Contato){

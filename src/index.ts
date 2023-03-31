@@ -565,6 +565,31 @@ AppDataSource.initialize().then(async () => {
         }
     })
 
+    //getMensagens
+    app.get('/getMensagens', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+
+            let nome = req.body.nome_mens
+
+            if(nome == ""){
+                let allCont =  contatoController.all()
+                let allFc   =   fcController.all()
+                let talk_ctt = []
+                let talk_fc =   []
+
+                allCont.then((ctts) => {
+                    talk_ctt = ctts
+                })
+                allFc.then((fcs) => {
+                    talk_fc = fcs
+                })
+                res.render("mensagens.hbs", {contatos: talk_ctt, fConosco: talk_fc})
+            }   
+        }else{
+            res.redirect('/')
+        }
+    })
+
     //Rota de créditos
     app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
         let feed  = getFeed();

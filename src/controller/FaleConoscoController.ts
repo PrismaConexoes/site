@@ -31,7 +31,20 @@ export class FaleConoscoController {
                 response.render("fcFeedback.hbs", {mensagem: "Tente novamente mais tarde."})
             }
     }
-        
+
+    async all() {
+        let find_fc = await this.FCRepository.find()
+        let fc_arr = []
+       
+        find_fc.forEach((fc) => {
+            let decryptFc = this.cifrador.decryptFaleConosco(fc)
+            decryptFc.then((dcFc)=> {
+                fc_arr.push(dcFc)
+            })
+        })           
+        return fc_arr
+    }  
+    
     async removefaleConosco(request: Request, response: Response, next: NextFunction) {
         let FCToRemove = await this.FCRepository.findOneBy({ id: request.body.id })
         let fc  = await this.FCRepository.remove(FCToRemove)
