@@ -11,7 +11,7 @@
         <button type="button" class="btn border bg-secondary w-75 m-2" onclick="newAdm()" id="btn_newadm">Incluir Administrador</button>
     </div>
     <div class="d-flex justify-content-center align-items-center border border-1 mt-3 w-100">
-        <button type="button" class="btn border bg-secondary w-75 m-2" onclick="getadms()" id="btn_adms">Consultar Adms</button>
+        <button type="button" class="btn border bg-secondary w-75 m-2" action="/getAdms" id="btn_adms">Consultar Adms</button>
     </div> 
     <div id="adms_cadastrados" class="m-3 border border-1 d-flex justify-content-center align-items-center w-100">
         
@@ -58,21 +58,7 @@
         adm.classList.add("visually-hidden")
     }
     function getadms(){
-        fetch("https://www.prismaconexoes.com/getAdms")
-        .then((data) =>{
-            let dado = Object.keys(data)
-            //data.then((dt)=>{
-                //let string = ""
-                //string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
-                //string += '<p>'+JSON.stringify(dt)+'</p>'
-            console.log(dado)
-                //let painel  = document.getElementById("adms_cadastrados")
-                //painel.innerHTML = JSON.stringify(dt)
-            //})
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+       
     }
     function newAdm(){
 
