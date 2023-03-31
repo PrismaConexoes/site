@@ -464,8 +464,8 @@ AppDataSource.initialize().then(async () => {
         if(req.session.administrador == true){
             let adms = admController.all()
 
-            adms.then(() =>{
-                res.render('administradores.hbs', {data : adms, logado : req.session.email})
+            adms.then((ad) =>{
+                res.render('administradores.hbs', {data : ad, logado : req.session.email})
             })
             
         }else{
@@ -486,8 +486,8 @@ AppDataSource.initialize().then(async () => {
                         if(del){
 
                             let adms = admController.all()
-                            adms.then(() =>{
-                                res.render('administradores.hbs', {data : adms, logado : req.session.email})
+                            adms.then((ad) =>{
+                                res.render('administradores.hbs', {data : ad, logado : req.session.email})
                             })
                         }
                     })
@@ -506,8 +506,8 @@ AppDataSource.initialize().then(async () => {
             save.then((result) => {
                 if(result){
                     let adms = admController.all()
-                    adms.then(() =>{
-                        res.render('administradores.hbs', {data : adms, logado : req.session.email})
+                    adms.then((ad) =>{
+                        res.render('administradores.hbs', {data : ad, logado : req.session.email})
                     }) 
                 }
             })
