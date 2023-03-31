@@ -1,38 +1,38 @@
 <div class="d-flex flex-column justify-content-start align-items-start m-5">
     {{#each contatos}}
-        <div class="d-flex flex-row border border-1 justify-content-center align-items-center m-2">
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+        <div class="d-flex flex-col border border-1 justify-content-center align-items-center m-2">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.nome}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.email}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.assunto}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.mensagem}}
             </div>
-            <div class="col">
+            <div class="d-dlex justify-content-center align-items-center m-2">
                 <a href="/delMens/ctt/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Apagar" ></a>    
             </div>
         </div>
     {{/each}}
     {{#each fConosco}}
-        <div class="d-flex flex-row border border-1 justify-content-center align-items-center m-2">
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+        <div class="d-flex flex-col border border-1 justify-content-center align-items-center m-2">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.nome}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.sobrenome}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.telefone}}
             </div>
-            <div class="col d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
+            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
                 {{this.mensagem}}
             </div>
-            <div class="col">
+            <div class="d-dlex justify-content-center align-items-center m-2">
                 <a href="/delMens/fc/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Apagar" ></a>    
             </div>
         </div>
