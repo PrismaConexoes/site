@@ -1,9 +1,12 @@
-import { Entity, PrimaryColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity()
 export class Adm {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id: number 
+
+    @Column()
     email: string
 
 }
