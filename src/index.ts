@@ -458,23 +458,60 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
+
     //getAdms
     app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-            let ads = admController.all()
-            let adms_arr = []
-            ads.then((adms)=>{
-                adms.forEach((adm) => {
-                        let decryptAdm = cifrador.decryptAdm(adm)
-                        decryptAdm.then((dcAdm)=> {
-                            adms_arr.push(dcAdm)
-                        })
-                    })
+            let adms = admController.all()
 
-            }).then(() =>{
-                res.render('administradores.hbs', {data : adms_arr})
+            adms.then(() =>{
+                res.render('administradores.hbs', {data : adms, logado : req.session.email})
             })
             
+        }else{
+            res.redirect('/')
+        }
+    })
+
+    //delAdm
+    app.get('/delAdm/:id', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+            let admForId = admController.oneForId(req)
+            admForId.then((adm) => {
+
+                if(adm instanceof Adm){
+                    let result = admController.removeAdm(adm)
+                    result.then((del) => {
+
+                        if(del){
+
+                            let adms = admController.all()
+                            adms.then(() =>{
+                                res.render('administradores.hbs', {data : adms, logado : req.session.email})
+                            })
+                        }
+                    })
+            }
+            })
+        }else{
+            res.redirect('/')
+        }
+    })
+    
+    //addAdm
+    app.get('/addAdm', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+            let adm = req.body
+            let save =  admController.save(adm)
+            save.then((result) => {
+                if(result){
+                    let adms = admController.all()
+                    adms.then(() =>{
+                        res.render('administradores.hbs', {data : adms, logado : req.session.email})
+                    }) 
+                }
+            })
+  
         }else{
             res.redirect('/')
         }

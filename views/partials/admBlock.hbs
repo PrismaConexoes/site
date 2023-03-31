@@ -7,8 +7,10 @@
 <hr/>
 <div class="d-flex flex-column visually-hidden justify-content-center align-items-center m-5" style="width: 400px;" id="administradores" name="administradores">
     <div class="d-flex flex-column justify-content-center align-items-center border border-1 w-100">
-        <input type="text" class="form-control  m-2 w-75" placeholder="E-mail de administrador" aria-label="E-mail de administrador"/>
-        <a href="/" ><input type="button"  class="btn btn-secondary m-2" style="width: 300px;" value="Incluir Administrador" /></a>
+        <form class="m-5 " action="/addAdm" method="post" id="formulario"></form>
+            <input type="text" class="form-control  m-2 w-75" placeholder="E-mail de administrador" id="email" name="email" aria-label="E-mail de administrador"/>
+            <button type="button"  class="btn btn-secondary m-2" style="width: 300px;" action="submit">Incluir Administrador</button>
+        </form>
     </div>
     <div class="d-flex justify-content-center align-items-center border border-1 mt-3 w-100">
         <a href="/getAdms" ><input type="button"  class="btn btn-secondary m-2" style="width: 300px;" value="Consultar Adms" /></a>
