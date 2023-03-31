@@ -62,7 +62,7 @@
         .then((data) =>{
             let string = ""
             string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
-            string += '<p>'+data.dado+'</p>'
+            string += '<p>'+JSON.stringify(data)+'</p>'
             let painel  = document.getElementById("adms_cadastrados")
             painel.innerHTML = string
 
