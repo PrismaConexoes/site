@@ -46,7 +46,7 @@ AppDataSource.initialize().then(async () => {
 
     /////////////CORS-CONFIG///////////
     var corsOptions = {
-        origin: 'https://prismaconexoes.com/administrarSite',
+        origin: 'https://prismaconexoes.com',
         optionsSuccessStatus: 200 
       }
     //////////////////////////////////
