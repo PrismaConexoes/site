@@ -531,7 +531,9 @@ AppDataSource.initialize().then(async () => {
                             });
                             res.redirect('/getAdms')
                         })
-                    }
+                    }else{
+                        res.redirect('/getAdms')  
+                    }   
                 })
             })
         }else{
@@ -554,9 +556,10 @@ AppDataSource.initialize().then(async () => {
                         });
                         res.render('administradores.hbs', {data : ad2})
                     }) 
+                }else{
+                    res.redirect('/administrarSite')
                 }
             })
-  
         }else{
             res.redirect('/')
         }
