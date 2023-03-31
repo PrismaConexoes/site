@@ -1,42 +1,42 @@
 <div class="d-flex flex-column justify-content-start align-items-start m-5">
+    <table class="table">  
+        <thead>
+            <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Assunto</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">mensagem</th>
+            <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
     {{#each contatos}}
-        <div class="d-flex flex-col border border-1 justify-content-center align-items-center m-2">
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.nome}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.email}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.assunto}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.mensagem}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2">
-                <a href="/delMens/ctt/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Apagar" ></a>    
-            </div>
-        </div>
+                <tr>
+                    <td>{{this.nome}}</td>
+                    <td></td>
+                    <td>{{this.assunto}}</td>
+                    <td></td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.mensagem}}</td>
+                    <td><a href="/delMens/ctt/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 30px;" ><img src="icons/lixeira.png" alt="Apagar" /></a></td>
+                </tr>
+
     {{/each}}
     {{#each fConosco}}
-        <div class="d-flex flex-col border border-1 justify-content-center align-items-center m-2">
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.nome}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.sobrenome}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.telefone}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2" style="width: 300px;">
-                {{this.mensagem}}
-            </div>
-            <div class="d-dlex justify-content-center align-items-center m-2">
-                <a href="/delMens/fc/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Apagar" ></a>    
-            </div>
-        </div>
+                <tr>
+                    <td>{{this.nome}}</td>
+                    <td>{{this.sobrenome}}</td>
+                    <td></td>
+                    <td>{{this.telefone}}</td>
+                    <td></td>
+                    <td>{{this.mensagem}}</td>
+                    <td><a href="/delMens/fc/{{this.id}}" ><input type="button"  class="btn btn-secondary m-2" style="width: 30px;" value="Apagar" ><img src="icons/lixeira.png" alt="Apagar" /></a></td>
+                </tr>
     {{/each}}
+            </tbody>
+    </table>
     <div class="d-flex justify-content-start align-items-start">
         <a href="/administrarSite" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Voltar" /></a>
     </div>    
