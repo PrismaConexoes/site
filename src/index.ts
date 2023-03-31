@@ -465,8 +465,11 @@ AppDataSource.initialize().then(async () => {
             let adms = admController.all()
 
             adms.then((ad) =>{
-
-                res.render('administradores.hbs', {data : ad})
+                let ad2 = []
+                ad.forEach(el => {
+                    if(el.email != req.session.email){ad2.push(el)}
+                });
+                res.render('administradores.hbs', {data : ad2, log: req.session.email})
             })
             
         }else{
@@ -484,7 +487,11 @@ AppDataSource.initialize().then(async () => {
                     if(del){
                         let adms = admController.all()
                         adms.then((ad) =>{
-                            res.render('administradores.hbs', {data : ad})
+                            let ad2 = []
+                            ad.forEach(el => {
+                                if(el.email != req.session.email){ad2.push(el)}
+                            });
+                            res.render('administradores.hbs', {data : ad2, log: req.session.email})
                         })
                     }
                 })
@@ -503,7 +510,11 @@ AppDataSource.initialize().then(async () => {
                 if(result){
                     let adms = admController.all()
                     adms.then((ad) =>{
-                        res.render('administradores.hbs', {data : ad})
+                        let ad2 = []
+                        ad.forEach(el => {
+                            if(el.email != req.session.email){ad2.push(el)}
+                        });
+                        res.render('administradores.hbs', {data : ad2, log: req.session.email})
                     }) 
                 }
             })
