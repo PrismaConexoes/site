@@ -470,8 +470,9 @@ AppDataSource.initialize().then(async () => {
                             adms_arr.push(dcAdm)
                         })
                     })
+                res.render('administradores.hbs', {data : adms_arr})
             })
-            res.render('administradores.hbs', {data : adms_arr})
+            
         }else{
             res.redirect('/')
         }
