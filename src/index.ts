@@ -76,11 +76,11 @@ AppDataSource.initialize().then(async () => {
         }));
     //////////////////////////////////////////////////////////////////
 
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-      });
+    //app.use((req, res, next) => {
+    //    res.header("Access-Control-Allow-Origin", "*");
+    //    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      //  next();
+     // });
 
     ///////////////////GOOGLE-RECAPTCHA////////////////////////
     const Recaptcha = require('express-recaptcha').RecaptchaV3
@@ -458,7 +458,9 @@ AppDataSource.initialize().then(async () => {
     })
     //getAdms
     app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
-        if(req.session.administrador == true){    
+        if(req.session.administrador == true){
+            res.header("Access-Control-Allow-Origin", "/administrarSite");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
             res.json({dado : 'Olá'})
         }else{
             res.redirect('/')
