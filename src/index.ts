@@ -176,8 +176,9 @@ AppDataSource.initialize().then(async () => {
                 adm: req.session.administrador,
                 rss: feed
                 }) 
-    })
+        })
 
+    })
     //Rota F&F
     app.get('/fef', (req, res) => {
         let feed  = getFeed();
