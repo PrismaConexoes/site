@@ -60,15 +60,15 @@
     function getadms(){
         fetch("https://www.prismaconexoes.com/getAdms")
         .then((data) =>{
-  
-            data.then((dt)=>{
+            let dado = Object.keys(data)
+            //data.then((dt)=>{
                 //let string = ""
                 //string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
                 //string += '<p>'+JSON.stringify(dt)+'</p>'
-                console.log(dt)
+            console.log(dado)
                 //let painel  = document.getElementById("adms_cadastrados")
                 //painel.innerHTML = JSON.stringify(dt)
-            })
+            //})
         })
         .catch((err)=>{
             console.log(err)
