@@ -14,7 +14,7 @@
         <button type="button" class="btn border bg-secondary w-75 m-2" onclick="getadms()" id="btn_adms">Consultar Adms</button>
     </div> 
     <div id="adms_cadastrados" class="m-3 border border-1 d-flex justify-content-center align-items-center w-100">
-        <p style="font-size: 20px;"><b>Emails Cadastrados</b></p>
+        
     </div>   
 </div>
 
@@ -58,8 +58,15 @@
         adm.classList.add("visually-hidden")
     }
     function getadms(){
+        fetch("https://www.prismaconexoes.com/getAdms")
+        .then((dado) =>{
+            let string = ""
+            string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
+            string += dado
+        })
+    }
+    function newAdm(){
 
     }
-    function newAdm(){}
     function getclient(){}
 </script>

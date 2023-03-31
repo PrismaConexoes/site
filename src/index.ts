@@ -443,6 +443,14 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
+    //getAdms
+    app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){    
+            res.json({dado : "Olá"})
+        }else{
+            res.redirect('/')
+        }
+    })
 
     //Rota de créditos
     app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
