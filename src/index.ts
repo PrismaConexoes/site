@@ -459,7 +459,7 @@ AppDataSource.initialize().then(async () => {
     //getAdms
     app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
-            res.json({dado : "Olá"})
+            res.json({"dado" : "Olá"})
         }else{
             res.redirect('/')
         }
