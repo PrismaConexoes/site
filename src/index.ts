@@ -566,7 +566,7 @@ AppDataSource.initialize().then(async () => {
     })
 
     //getMensagens
-    app.get('/getMensagens', (req: any, res: any , next: NextFunction ) => {
+    app.post('/getMensagens', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
 
             let nome = req.body.nome_mens
