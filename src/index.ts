@@ -16,6 +16,7 @@ import { Cifra } from "./controller/Cifra"
 import getFeed from "./feed"
 import { Adm } from "./entity/Adm"
 import { AdmController } from "./controller/AdmController"
+import { Any } from "typeorm"
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -469,7 +470,7 @@ AppDataSource.initialize().then(async () => {
                 ad.forEach(el => {
                     if(el.email != req.session.email){ad2.push(el)}
                 });
-                res.render('administradores.hbs', {data : ad2, log: req.session.email})
+                res.render('administradores.hbs', {data : ad2})
             })
             
         }else{
@@ -488,15 +489,12 @@ AppDataSource.initialize().then(async () => {
                         let adms = admController.all()
                         adms.then((ad) =>{
                             let ad2 = []
-                            let user = new Adm
                             ad.forEach(el => {
                                 if(el.email != req.session.email){
                                     ad2.push(el)
-                                }else{
-                                    user = el
                                 }
                             });
-                            res.render('administradores.hbs', {data : ad2, log: user.email})
+                            res.render('administradores.hbs', {data : ad2})
                         })
                     }
                 })
@@ -519,7 +517,7 @@ AppDataSource.initialize().then(async () => {
                         ad.forEach(el => {
                             if(el.email != req.session.email){ad2.push(el)}
                         });
-                        res.render('administradores.hbs', {data : ad2, log: req.session.email})
+                        res.render('administradores.hbs', {data : ad2})
                     }) 
                 }
             })
