@@ -40,15 +40,15 @@ AppDataSource.initialize().then(async () => {
 
     /////////////IMPORTS///////////////
     const express = require('express')
-    const cors = require('cors')
+   // const cors = require('cors')
     const app = express()  
     ///////////////////////////////////
 
     /////////////CORS-CONFIG///////////
-    var corsOptions = {
-        origin: 'https://prismaconexoes.com/',
-        optionsSuccessStatus: 200 
-      }
+   // var corsOptions = {
+    //    origin: 'https://prismaconexoes.com/',
+     //   optionsSuccessStatus: 200 
+     // }
     //////////////////////////////////
 
     /////////////////////EXPRESS-SESSION//////////////////////////
@@ -76,6 +76,11 @@ AppDataSource.initialize().then(async () => {
         }));
     //////////////////////////////////////////////////////////////////
 
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+      });
 
     ///////////////////GOOGLE-RECAPTCHA////////////////////////
     const Recaptcha = require('express-recaptcha').RecaptchaV3
@@ -452,7 +457,7 @@ AppDataSource.initialize().then(async () => {
         }
     })
     //getAdms
-    app.get('/getAdms', cors(corsOptions), (req: any, res: any , next: NextFunction ) => {
+    app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             res.json({dado : "Olá"})
         }else{
