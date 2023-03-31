@@ -496,7 +496,7 @@ AppDataSource.initialize().then(async () => {
                                     user = el
                                 }
                             });
-                            res.render('administradores.hbs', {data : ad2, log: user})
+                            res.render('administradores.hbs', {data : ad2, log: user.email})
                         })
                     }
                 })
