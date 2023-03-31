@@ -573,17 +573,12 @@ AppDataSource.initialize().then(async () => {
 
             if(nome == ""){
                 let allCont =  contatoController.all()
-                let allFc   =   fcController.all()
-                let talk_ctt = []
-                let talk_fc =   []
-
                 allCont.then((ctts) => {
-                    talk_ctt = ctts
+                    let allFc   =   fcController.all()
+                    allFc.then((fcs) => {
+                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    })
                 })
-                allFc.then((fcs) => {
-                    talk_fc = fcs
-                })
-                res.render("mensagens.hbs", {contatos: talk_ctt, fConosco: talk_fc})
             }   
         }else{
             res.redirect('/')
