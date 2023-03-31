@@ -494,7 +494,7 @@ AppDataSource.initialize().then(async () => {
                                     ad2.push(el)
                                 }
                             });
-                            res.render('administradores.hbs', {data : ad2})
+                            res.redirect('/getAdms')
                         })
                     }
                 })
