@@ -470,6 +470,8 @@ AppDataSource.initialize().then(async () => {
                             adms_arr.push(dcAdm)
                         })
                     })
+
+            }).then(() =>{
                 let admins = JSON.stringify(adms_arr)
                 res.render('administradores.hbs', {data : admins})
             })
