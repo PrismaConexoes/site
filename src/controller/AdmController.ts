@@ -4,7 +4,7 @@ import { Adm } from "../entity/Adm"
 
 export class AdmController {
     private admsRepository = AppDataSource.getRepository(Adm)
-    async all(request: Request, response: Response, next: NextFunction) {
+    async all() {
         return this.admsRepository.find()
     }
     async save(adm: Adm) {

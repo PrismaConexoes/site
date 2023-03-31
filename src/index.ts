@@ -15,6 +15,7 @@ import { EmailController } from "./controller/EmailController"
 import { Cifra } from "./controller/Cifra"
 import getFeed from "./feed"
 import { Adm } from "./entity/Adm"
+import { AdmController } from "./controller/AdmController"
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -122,6 +123,7 @@ AppDataSource.initialize().then(async () => {
     const fcController = new FaleConoscoController
     const contatoController = new ContatoController
     const cifrador = new Cifra
+    const admController = new AdmController
     //////////////////////////////////////////////////////////////////
    
     
@@ -459,9 +461,17 @@ AppDataSource.initialize().then(async () => {
     //getAdms
     app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
-            res.json({dado : 'Olá'})
+            let ads = admController.all()
+            let adms_arr = []
+            ads.then((adms)=>{
+                adms.forEach((adm) => {
+                        let decryptAdm = cifrador.decryptAdm(adm)
+                        decryptAdm.then((dcAdm)=> {
+                            adms_arr.push(dcAdm)
+                        })
+                    })
+            })
+            res.render('administradores.hbs', {data : adms_arr})
         }else{
             res.redirect('/')
         }

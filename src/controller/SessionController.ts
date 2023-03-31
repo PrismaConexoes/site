@@ -78,7 +78,7 @@ export class SessionController {
             if(user.valid == true){
 
                 this.loginSess(request, user, false)
-                this.admController.all(request, response, next)
+                this.admController.all()
                 .then((adms)=>{
                     adms.forEach((adm) => {
                             let decryptAdm = this.cifrador.decryptAdm(adm)
