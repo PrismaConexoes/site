@@ -59,10 +59,10 @@
     }
     function getadms(){
         fetch("https://www.prismaconexoes.com/getAdms")
-        .then((dado) =>{
+        .then((data) =>{
             let string = ""
             string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
-            string += '<p>'+dado+'</p>'
+            string += '<p>'+data.dado+'</p>'
             let painel  = document.getElementById("adms_cadastrados")
             painel.innerHTML = string
 
