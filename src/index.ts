@@ -473,7 +473,7 @@ AppDataSource.initialize().then(async () => {
 
             }).then(() =>{
                 let admins = JSON.stringify(adms_arr)
-                res.render('administradores.hbs', {data : adms_arr})
+                res.render('administradores.hbs', {data : admins})
             })
             
         }else{
