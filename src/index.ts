@@ -497,9 +497,9 @@ AppDataSource.initialize().then(async () => {
             res.redirect('/')
         }
     })
-    
+
     //addAdm
-    app.get('/addAdm', (req: any, res: any , next: NextFunction ) => {
+    app.post('/addAdm', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
             let adm = req.body
             let save =  admController.save(adm)
