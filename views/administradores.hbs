@@ -1,6 +1,13 @@
 <div class="d-flex justify-content-start align-items-start m-5">
     {{#each data}}
-        <div>{{this.email}}</div>
+        <div class="d-flex flex-row">
+            <div class="col">
+                {{this.email}}
+            </div>
+            <div class="col">
+                <a href="/delAdm" ><input type="button"  class="btn btn-secondary m-2" style="width: 300px;" value="Apagar" /></a>
+            </div>
+        </div>
     {{/each}}
-    
+    <a href="/administrarSite" ><input type="button"  class="btn btn-secondary m-2" style="width: 300px;" value="Voltar" /></a>
 </div>
