@@ -41,7 +41,15 @@ AppDataSource.initialize().then(async () => {
     /////////////IMPORTS///////////////
     const express = require('express')
     const app = express()
+    const cors = require('cors')
     ///////////////////////////////////
+
+    /////////////CORS-CONFIG///////////
+    var corsOptions = {
+        origin: 'https://prismaconexoes.com/administrarSite',
+        optionsSuccessStatus: 200 
+      }
+    //////////////////////////////////
 
     /////////////////////EXPRESS-SESSION//////////////////////////
     let sessionRepository = AppDataSource.getRepository(Session)
@@ -436,7 +444,7 @@ AppDataSource.initialize().then(async () => {
     ////////////////////////////////////////////////////////////////////////////////
 
     //Página Pricipal de administracao
-    app.get('/administrarSite', (req: any, res: any , next: NextFunction ) => {
+    app.get('/administrarSite', cors(corsOptions), (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             res.render('adm.hbs')
         }else{
