@@ -489,11 +489,7 @@ AppDataSource.initialize().then(async () => {
     //Página Pricipal de administracao
     app.get('/administrarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
-            res.render('adm.hbs' , {
-                login: req.session.login, 
-                user: req.session.user, 
-                adm: req.session.administrador
-                }) 
+            res.render('adm.hbs') 
         }else{
             res.redirect('/')
         }
