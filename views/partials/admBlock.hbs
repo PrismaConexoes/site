@@ -62,11 +62,11 @@
         .then((data) =>{
             let dado = data.json();
             dado.then((dt)=>{
-                let string = ""
-                string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
-                string += '<p>'+JSON.stringify(dt)+'</p>'
+                //let string = ""
+                //string += '<p style="font-size: 20px;"><b>Emails Cadastrados</b></p>'
+                //string += '<p>'+JSON.stringify(dt)+'</p>'
                 let painel  = document.getElementById("adms_cadastrados")
-                painel.innerHTML = string
+                painel.innerHTML = dt
             })
         })
         .catch((err)=>{
