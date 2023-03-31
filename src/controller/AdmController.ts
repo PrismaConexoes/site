@@ -25,7 +25,7 @@ export class AdmController {
     async oneForId(request: Request) {
         let adm = await this.admsRepository.findOne({
             where: {
-                id : parseInt(request.session.id)
+                id : parseInt(request.params.id)
             }
         })
 
