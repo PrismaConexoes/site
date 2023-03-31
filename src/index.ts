@@ -478,13 +478,16 @@ AppDataSource.initialize().then(async () => {
     app.get('/delAdm/:id', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
             let admForId = admController.oneForId(req)
-            admForId.then((del) => {
-                if(del){
-                    let adms = admController.all()
-                    adms.then((ad) =>{
-                        res.render('administradores.hbs', {data : ad})
-                    })
-                }
+            admForId.then((adm) => {
+                let result = admController.removeAdm(adm)
+                result.then((del) => {
+                    if(del){
+                        let adms = admController.all()
+                        adms.then((ad) =>{
+                            res.render('administradores.hbs', {data : ad})
+                        })
+                    }
+                })
             })
         }else{
             res.redirect('/')
