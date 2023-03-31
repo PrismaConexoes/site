@@ -465,9 +465,8 @@ AppDataSource.initialize().then(async () => {
             let adms = admController.all()
 
             adms.then((ad) =>{
-                
-                //ad.splice(ad.indexOf(req.session.email), 1)
-                res.render('administradores.hbs', {data : ad, logado : req.session.email})
+
+                res.render('administradores.hbs', {data : ad})
             })
             
         }else{
@@ -479,21 +478,13 @@ AppDataSource.initialize().then(async () => {
     app.get('/delAdm/:id', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
             let admForId = admController.oneForId(req)
-            admForId.then((adm) => {
-
-                if(adm instanceof Adm){
-                    let result = admController.removeAdm(adm)
-                    result.then((del) => {
-
-                        if(del){
-
-                            let adms = admController.all()
-                            adms.then((ad) =>{
-                                res.render('administradores.hbs', {data : ad, logado : req.session.email})
-                            })
-                        }
+            admForId.then((del) => {
+                if(del){
+                    let adms = admController.all()
+                    adms.then((ad) =>{
+                        res.render('administradores.hbs', {data : ad})
                     })
-            }
+                }
             })
         }else{
             res.redirect('/')
@@ -509,7 +500,7 @@ AppDataSource.initialize().then(async () => {
                 if(result){
                     let adms = admController.all()
                     adms.then((ad) =>{
-                        res.render('administradores.hbs', {data : ad, logado : req.session.email})
+                        res.render('administradores.hbs', {data : ad})
                     }) 
                 }
             })
