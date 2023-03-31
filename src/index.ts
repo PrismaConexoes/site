@@ -170,15 +170,24 @@ AppDataSource.initialize().then(async () => {
     app.get('/prismaInfo', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("prismaPage.hbs", {login: req.session.login, user: req.session.user, rss: feed})
-        })
+            res.render("prismaPage.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
     })
 
     //Rota F&F
     app.get('/fef', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("fef.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("fef.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     })
 
@@ -186,7 +195,12 @@ AppDataSource.initialize().then(async () => {
     app.get('/dsop', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("dsop.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("dsop.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     })
 
@@ -194,7 +208,12 @@ AppDataSource.initialize().then(async () => {
     app.get('/futurum', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("futurum.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("futurum.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     })
 
@@ -202,7 +221,12 @@ AppDataSource.initialize().then(async () => {
     app.get('/luz', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("luz.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("luz.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     })
 
@@ -210,7 +234,12 @@ AppDataSource.initialize().then(async () => {
     app.get('/next', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("next.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("next.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     })
 
@@ -244,7 +273,12 @@ AppDataSource.initialize().then(async () => {
     app.get('/contactar', (req: Request, res: Response , next: NextFunction ) => {
         let feed  = getFeed();
         feed.then((feed)=>{
-            res.render("contato.hbs", {login: req.session.login, user: req.session.user, rss: feed})
+            res.render("contato.hbs", {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador,
+                rss: feed
+                }) 
         })
     } )
 
@@ -454,7 +488,11 @@ AppDataSource.initialize().then(async () => {
     //Página Pricipal de administracao
     app.get('/administrarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
-            res.render('adm.hbs')
+            res.render('adm.hbs' , {
+                login: req.session.login, 
+                user: req.session.user, 
+                adm: req.session.administrador
+                }) 
         }else{
             res.redirect('/')
         }
@@ -546,6 +584,3 @@ AppDataSource.initialize().then(async () => {
     /////////////////////////////////////////////
    
 }).catch(error => console.log(error))
-
-
-
