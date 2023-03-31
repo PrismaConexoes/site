@@ -1,7 +1,7 @@
 <div class="d-flex flex-column justify-content-start align-items-start m-5">
     {{#each data}}
-        <div class="d-flex flex-row border border-1">
-            <div class="col d-dlex justify-content-center align-items-center">
+        <div class="d-flex flex-row border border-1 justify-content-center align-items-center">
+            <div class="col d-dlex justify-content-center align-items-center m-2">
                 {{this.email}}
             </div>
             <div class="col">
@@ -9,8 +9,8 @@
             </div>
         </div>
     {{/each}}
-    <div>
-        <a href="/administrarSite" ><input type="button"  class="btn btn-secondary m-2" style="width: 300px;" value="Voltar" /></a>
+    <div class="d-flex justify-content-start align-items-start">
+        <a href="/administrarSite" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Voltar" /></a>
     </div>
     
 </div>
