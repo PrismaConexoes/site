@@ -459,7 +459,7 @@ AppDataSource.initialize().then(async () => {
     //getAdms
     app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-            res.header("Access-Control-Allow-Origin", "https://prismaconexoes.com");
+            res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");    
             res.json({dado : 'Olá'})
         }else{
