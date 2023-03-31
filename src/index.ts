@@ -466,7 +466,7 @@ AppDataSource.initialize().then(async () => {
 
             adms.then((ad) =>{
 
-                ad.splice(ad.indexOf(req.session.email), 1)
+                ad.splice(ad.indexOf(JSON.stringify(req.session.email)), 1)
                 res.render('administradores.hbs', {data : ad, logado : req.session.email})
             })
             
