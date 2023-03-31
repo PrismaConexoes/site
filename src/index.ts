@@ -465,6 +465,8 @@ AppDataSource.initialize().then(async () => {
             let adms = admController.all()
 
             adms.then((ad) =>{
+
+                ad.splice(ad.indexOf(req.session.email))
                 res.render('administradores.hbs', {data : ad, logado : req.session.email})
             })
             
