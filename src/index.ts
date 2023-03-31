@@ -444,7 +444,7 @@ AppDataSource.initialize().then(async () => {
     ////////////////////////////////////////////////////////////////////////////////
 
     //Página Pricipal de administracao
-    app.get('/administrarSite', cors(corsOptions), (req: any, res: any , next: NextFunction ) => {
+    app.get('/administrarSite', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             res.render('adm.hbs')
         }else{
@@ -452,7 +452,7 @@ AppDataSource.initialize().then(async () => {
         }
     })
     //getAdms
-    app.get('/getAdms', (req: any, res: any , next: NextFunction ) => {
+    app.get('/getAdms', cors(corsOptions), (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){    
             res.json({dado : "Olá"})
         }else{
