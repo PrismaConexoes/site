@@ -81,11 +81,9 @@ export class SessionController {
                 this.admController.all()
                 .then((adms)=>{
                     adms.forEach((adm) => {
-                            let decryptAdm = this.cifrador.decryptAdm(adm)
-                            decryptAdm.then((dcAdm)=> {
-                                if(request.session.email == dcAdm.email){ this.admSess(request) }
-                            })
-                            
+                        
+                        if(request.session.email == adm.email){ this.admSess(request) }
+                                        
                         })
                 }).then(()=>{
                     let feed  = getFeed();
