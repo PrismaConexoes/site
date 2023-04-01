@@ -51,7 +51,7 @@ export class UserController {
         let sel_user = []
        
         find_user.forEach((user) => {
-            if(user.firstName = name){
+            if(user.firstName == name){
                 sel_user.push(user)
             }
         })
