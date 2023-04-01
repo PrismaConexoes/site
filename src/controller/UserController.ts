@@ -69,6 +69,7 @@ export class UserController {
 
             let usuario = request.body
             usuario.firstName =usuario.firstName.trim()
+            usuario.email = usuario.email.trim()
             delete usuario['g-recaptcha-response']
             usuario.valid = false
             usuario.atualizarEmail = false  
