@@ -16,7 +16,6 @@ export class ContaController {
     private sessionCtrl = new SessionController
     private cifrador = new Cifra
 
-
     async admConta(request: Request, response: Response, next: NextFunction) {
         let usr = await this.userRepository.findOne({
             where: {

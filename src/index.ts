@@ -568,9 +568,7 @@ AppDataSource.initialize().then(async () => {
     //getMensagens
     app.post('/getMensagens', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-
             let nome = req.body.nome_mens
-
             if(nome == ""){
                 let allCont =  contatoController.all()
                 allCont.then((ctts) => {
@@ -579,6 +577,15 @@ AppDataSource.initialize().then(async () => {
                         res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
                     })
                 })
+            }else{
+                let nome = req.body.nome_mens
+                let allCont = contatoController.allselected(nome) 
+                allCont.then((ctts) => {
+                    let allFc   =   fcController.allselected(nome)
+                    allFc.then((fcs) => {
+                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    })
+                }) 
             }   
         }else{
             res.redirect('/')

@@ -16,6 +16,23 @@ export class ContatoController {
             }
         })
     }
+    async allselected(name: any) {
+        let find_cont = await this.ContatoRepository.find({
+            where: {
+                nome : name
+            }
+        })
+        let cont_arr = []
+       
+        find_cont.forEach((ctt) => {
+            let decryptCtt = this.cifrador.decryptContato(ctt)
+            decryptCtt.then((dcCtt)=> {
+                cont_arr.push(dcCtt)
+            })
+        })
+              
+        return cont_arr
+    }
 
     async save(request: Request, response: Response) {  
 

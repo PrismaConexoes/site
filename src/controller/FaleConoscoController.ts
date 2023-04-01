@@ -43,7 +43,23 @@ export class FaleConoscoController {
             })
         })           
         return fc_arr
-    }  
+    }
+    async allselected(name : any) {
+        let find_fc = await this.FCRepository.find({
+            where : {
+                nome : name
+            }
+        })
+        let fc_arr = []
+       
+        find_fc.forEach((fc) => {
+            let decryptFc = this.cifrador.decryptFaleConosco(fc)
+            decryptFc.then((dcFc)=> {
+                fc_arr.push(dcFc)
+            })
+        })           
+        return fc_arr
+    }   
     
     async removefaleConosco(request: Request, response: Response, next: NextFunction) {
         let FCToRemove = await this.FCRepository.findOneBy({ id: request.body.id })
