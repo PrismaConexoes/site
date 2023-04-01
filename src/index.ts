@@ -425,7 +425,10 @@ AppDataSource.initialize().then(async () => {
                     }   
                 }
             }).then(()=>{
-                res.render("avisoDeChecagem.hbs")
+                let feed  = getFeed();
+                feed.then((feed)=>{
+                    res.render("avisoDeChecagem.hbs", {rss : feed} )
+                }
             })
         })
     })
