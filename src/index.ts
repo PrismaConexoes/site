@@ -594,18 +594,17 @@ AppDataSource.initialize().then(async () => {
                     let result = contatoController.removeContato(talk)
                     result.then((removed)=>{
                         if(removed){
-                            res.redirect("/getMensagens")
+                            res.redirect("/administrarSite")
                         }
                     })
                 })
-
             }else if(tipo == "fc"){
                 let fc =  fcController.oneById(id)
                 fc.then((talk)=>{
                     let result = fcController.removefaleConosco(talk)
                     result.then((removed)=>{
                         if(removed){
-                            res.redirect("/getMensagens")
+                            res.redirect("/administrarSite")
                         }
                     })
                 })
