@@ -569,6 +569,7 @@ AppDataSource.initialize().then(async () => {
     app.post('/getMensagens', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
             let nome = req.body.nome_mens
+            nome = nome.trim()
             if(nome == ""){
                 let allCont =  contatoController.all()
                 allCont.then((ctts) => {
@@ -579,6 +580,7 @@ AppDataSource.initialize().then(async () => {
                 })
             }else{
                 let nome = req.body.nome_mens
+                nome = nome.trim()
                 let allCont = contatoController.allselected(nome) 
                 allCont.then((ctts) => {
                     let allFc   =   fcController.allselected(nome)
