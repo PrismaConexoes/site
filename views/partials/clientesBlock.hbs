@@ -1,0 +1,32 @@
+<div class="d-flex flex-column justify-content-start align-items-start m-5">
+    <table class="table">  
+        <thead>
+            <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Genero</th>
+            <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+    {{#each users}}
+                <tr>
+                    <td>{{this.firstName}}</td>
+                    <td>{{this.lastName}}</td>
+                    <td>{{this.age}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.gender}}</td>
+                    <td><a href="/delCli/{{this.email}}" ><img src="icons/lixeira.png"  alt="Apagar" ></img></a></td>
+                </tr>
+
+    {{/each}}
+            </tbody>
+    </table>
+    <div class="d-flex justify-content-start align-items-start">
+        <a href="/administrarSite" ><input type="button"  class="btn btn-secondary m-2" style="width: 150px;" value="Voltar" /></a>
+    </div>    
+</div>

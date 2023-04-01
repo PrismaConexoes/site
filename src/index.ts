@@ -597,19 +597,19 @@ AppDataSource.initialize().then(async () => {
     //getClientes
     app.post('/getClientes', (req: any, res: any , next: NextFunction ) => {
         if(req.session.administrador == true){
-            let nome = req.body.nome_mens
+            let nome = req.body.nome_cli
             nome = nome.trim()
             if(nome == ""){
                 let allUser =  userControler.all()
                 allUser.then((users) => {
-                    res.redirect("/")
-                    //res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    
+                    res.render("clientes.hbs", {users: users})
                 })
             }else{
                 let selUser =  userControler.allselected(nome)
                 selUser.then((users) => {
-                    res.redirect("/")
-                    //res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    
+                    res.render("clientes.hbs", {users: users})
                 }) 
             }   
         }else{
