@@ -1,7 +1,6 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
 import { User } from "../entity/User"
-import { Adm } from "../entity/Adm"
 import { AcountValidatorController } from "./AcountValidatorController"
 import { Cifra } from "./Cifra"
 
@@ -27,14 +26,15 @@ export class UserController {
         })
         return user
     }
-    async oneBySession(request: Request) {
+    async oneByEmail(email: any) {
         let user = await this.userRepository.findOne({
             where: {
-                email : request.session.email
+                email : email
             }
         })
         return user
     }
+ 
     async all() {
         let users = await this.userRepository.find()
         let dcryptUsers = []
