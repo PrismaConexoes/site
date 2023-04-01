@@ -625,8 +625,7 @@ AppDataSource.initialize().then(async () => {
             nome = nome.trim()
             if(nome == ""){
                 let allUser =  userControler.all()
-                allUser.then((users) => {
-                    
+                allUser.then((users) => {     
                     res.render("clientes.hbs", {users: users})
                 })
             }else{
