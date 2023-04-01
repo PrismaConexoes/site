@@ -358,11 +358,16 @@ AppDataSource.initialize().then(async () => {
         let vencidos =  acountValidatorController.remVencidos()
         vencidos.then((arr)=>{
             arr.forEach(email => {
-                let userToRemove =  userControler.oneByEmail(email)
-                userToRemove.then((user)=>{
-                    userControler.removeUser(user)
-                })          
-                contaController.remTE(email) 
+                let resutTe = contaController.remTE(email)
+                
+                resutTe.then((atualizacao)=>{
+                    if(!atualizacao){
+                        let userToRemove =  userControler.oneByEmail(email)
+                        userToRemove.then((user)=>{
+                            userControler.removeUser(user)
+                         }) 
+                    }
+                })
             })
         }).then(()=>{
             sessionController.secretSess(req)
@@ -386,11 +391,16 @@ AppDataSource.initialize().then(async () => {
         let vencidos =  acountValidatorController.remVencidos()
         vencidos.then((arr)=>{
             arr.forEach(email => {
-                let userToRemove =  userControler.oneByEmail(email)
-                userToRemove.then((user)=>{
-                    userControler.removeUser(user)
-                })          
-                contaController.remTE(email) 
+                let resutTe = contaController.remTE(email)
+                
+                resutTe.then((atualizacao)=>{
+                    if(!atualizacao){
+                        let userToRemove =  userControler.oneByEmail(email)
+                        userToRemove.then((user)=>{
+                            userControler.removeUser(user)
+                         }) 
+                    }
+                })
             })
         }).then(()=>{
     

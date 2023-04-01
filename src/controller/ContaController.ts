@@ -20,7 +20,9 @@ export class ContaController {
 
         let te =  await this.trocaEmailController.one(email)
 
-        return await this.trocaEmailController.remove(te)    
+        
+        return  await this.trocaEmailController.remove(te) 
+  
     }
     async admConta(request: Request, response: Response, next: NextFunction) {
         let usr = await this.userRepository.findOne({
