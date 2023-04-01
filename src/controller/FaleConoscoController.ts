@@ -9,12 +9,13 @@ export class FaleConoscoController {
     private FCRepository = AppDataSource.getRepository(FaleConosco)
     private cifrador = new Cifra
 
-    async one(request: Request) {
-        return this.FCRepository.findOne({
+    async oneById(id : any) {
+        let fc = await this.FCRepository.findOne({
             where: {
-                id : request.body.id
+                id : parseInt(id)
             }
         })
+        return fc
     }
 
     async save(request: Request, response: Response) {  
@@ -63,9 +64,8 @@ export class FaleConoscoController {
         return fc_arr
     }   
     
-    async removefaleConosco(request: Request, response: Response, next: NextFunction) {
-        let FCToRemove = await this.FCRepository.findOneBy({ id: request.body.id })
-        let fc  = await this.FCRepository.remove(FCToRemove)
+    async removefaleConosco(fcon : FaleConosco) {
+        let fc  = await this.FCRepository.remove(fcon)
         if(fc instanceof FaleConosco){
             return true
         }

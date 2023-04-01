@@ -9,12 +9,13 @@ export class ContatoController {
     private ContatoRepository = AppDataSource.getRepository(Contato)
     private cifrador = new Cifra
 
-    async one(request: Request) {
-        return this.ContatoRepository.findOne({
+    async oneById(id : any) {
+        let ctt = await this.ContatoRepository.findOne({
             where: {
-                id : request.body.id
+                id : parseInt(id)
             }
         })
+        return ctt
     }
     async allselected(name: any) {
         let find_cont = await this.ContatoRepository.find({
@@ -62,9 +63,8 @@ export class ContatoController {
               
         return cont_arr
     }     
-    async removeContato(request: Request, response: Response, next: NextFunction) {
-        let contatoToRemove = await this.ContatoRepository.findOneBy({ id: request.body.id })
-        let contato  = await this.ContatoRepository.remove(contatoToRemove)
+    async removeContato(ctt : Contato) {
+        let contato  = await this.ContatoRepository.remove(ctt)
         if(contato instanceof Contato){
             return true
         }

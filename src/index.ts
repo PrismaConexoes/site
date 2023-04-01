@@ -71,11 +71,6 @@ AppDataSource.initialize().then(async () => {
         }));
     //////////////////////////////////////////////////////////////////
 
-    //app.use((req, res, next) => {
-    //    res.header("Access-Control-Allow-Origin", "*");
-    //    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      //  next();
-     // });
 
     ///////////////////GOOGLE-RECAPTCHA////////////////////////
     const Recaptcha = require('express-recaptcha').RecaptchaV3
@@ -582,6 +577,39 @@ AppDataSource.initialize().then(async () => {
                     })
                 }) 
             }   
+        }else{
+            res.redirect('/')
+        }
+    })
+
+    //delMens
+    app.get('/delMens/:tipo/:id', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+            let tipo = req.params.tipo
+            let id   = req.params.id
+
+            if(tipo  == "ctt" ){
+                let ctt =  contatoController.oneById(id)
+                ctt.then((talk)=>{
+                    let result = contatoController.removeContato(talk)
+                    result.then((removed)=>{
+                        if(removed){
+                            res.redirect("/getMensagens")
+                        }
+                    })
+                })
+
+            }else if(tipo == "fc"){
+                let fc =  fcController.oneById(id)
+                fc.then((talk)=>{
+                    let result = fcController.removefaleConosco(talk)
+                    result.then((removed)=>{
+                        if(removed){
+                            res.redirect("/getMensagens")
+                        }
+                    })
+                })
+            }
         }else{
             res.redirect('/')
         }
