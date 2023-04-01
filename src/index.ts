@@ -360,13 +360,18 @@ AppDataSource.initialize().then(async () => {
             arr.forEach(email => {
                 let resutTe = contaController.remTE(email)
                 
-                resutTe.then((atualizacao)=>{
-                    if(!atualizacao){
-                        let userToRemove =  userControler.oneByEmail(email)
-                        userToRemove.then((user)=>{
+                resutTe.then((atualizacao)=>{  
+                      
+                    let userToRemove =  userControler.oneByEmail(email)     
+                    userToRemove.then((user)=>{
+                        if(atualizacao){ 
+                            user.atualizarEmail = false
+                            userControler.atualizar(user)
+                        }else{
                             userControler.removeUser(user)
-                         }) 
-                    }
+                        }
+                        }) 
+                    
                 })
             })
         }).then(()=>{
@@ -394,12 +399,16 @@ AppDataSource.initialize().then(async () => {
                 let resutTe = contaController.remTE(email)
                 
                 resutTe.then((atualizacao)=>{
-                    if(!atualizacao){
-                        let userToRemove =  userControler.oneByEmail(email)
-                        userToRemove.then((user)=>{
+
+                    let userToRemove =  userControler.oneByEmail(email)     
+                    userToRemove.then((user)=>{
+                        if(atualizacao){ 
+                            user.atualizarEmail = false
+                            userControler.atualizar(user)
+                        }else{
                             userControler.removeUser(user)
-                         }) 
-                    }
+                        }
+                    }) 
                 })
             })
         }).then(()=>{

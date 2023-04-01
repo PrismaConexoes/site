@@ -99,5 +99,15 @@ export class UserController {
         }
         return false
     }
+    async atualizar(user: User){
+
+        let result = await this.userRepository.update({ email: user.email }, user)
+  
+        if(result.affected == 1){
+
+            return true
+        }
+        return false
+    }
 
 }
