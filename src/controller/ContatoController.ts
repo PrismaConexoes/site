@@ -37,6 +37,7 @@ export class ContatoController {
     async save(request: Request, response: Response) {  
 
             let contato = request.body
+            contato.nome = contato.nome.trim()
 
             let encryptCto =  await this.cifrador.encryptContato(contato)
 

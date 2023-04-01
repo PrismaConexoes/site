@@ -20,7 +20,8 @@ export class FaleConoscoController {
     async save(request: Request, response: Response) {  
 
             let fc = request.body
-
+            fc.nome = fc.nome.trim()
+            
             let encryptFc = await this.cifrador.encryptFaleConosco(fc)
             
             const result = await this.FCRepository.save(encryptFc)
