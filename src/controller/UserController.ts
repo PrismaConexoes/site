@@ -9,7 +9,6 @@ import { Cifra } from "./Cifra"
 export class UserController {
 
     private userRepository = AppDataSource.getRepository(Userr)
-    private admRepository = AppDataSource.getRepository(Adm)
     private acountValidator = new AcountValidatorController
     private cifrador = new Cifra
 
@@ -27,6 +26,29 @@ export class UserController {
             }
         })
     }
+    async all() {
+        let users = await this.userRepository.find()
+        let dcryptUsers = []
+        users.forEach((user)=>{
+            let decryptUser = this.cifrador.decryptUser(user)
+            decryptUser.then((dcUser)=>{
+                dcryptUsers.push(dcUser)
+            })
+        })
+        return dcryptUsers
+    }
+    async allselected(name: any) {
+        let find_user = await this.all()
+        let sel_user = []
+       
+        find_user.forEach((user) => {
+            if(user.firstName = name){
+                sel_user.push(user)
+            }
+        })
+              
+        return sel_user
+    }
     async save(request: Request, response: Response, next: NextFunction, recaptcha: any) {
         let user = await this.userRepository.findOne({
             where: {
@@ -37,6 +59,7 @@ export class UserController {
         if(user == null){    
 
             let usuario = request.body
+            usuario.firstName =usuario.firstName.trim()
             delete usuario['g-recaptcha-response']
             usuario.valid = false
             usuario.atualizarEmail = false  
@@ -60,9 +83,7 @@ export class UserController {
         
     async removeUser(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.userRepository.findOneBy({ email: request.session.email })
-        let admToRemove = await this.admRepository.findOneBy({ email: request.session.email })
         let user  = await this.userRepository.remove(userToRemove)
-        let adm  = await this.admRepository.remove(admToRemove)
         if(user instanceof Userr){
             return true
         }

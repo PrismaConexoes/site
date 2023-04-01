@@ -594,6 +594,35 @@ AppDataSource.initialize().then(async () => {
         }
     })
 
+    //getClientes
+    app.post('/getClientes', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+            let nome = req.body.nome_mens
+            nome = nome.trim()
+            if(nome == ""){
+                let allUser =  userControler.all()
+                allCont.then((ctts) => {
+                    let allFc   =   fcController.all()
+                    allFc.then((fcs) => {
+                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    })
+                })
+            }else{
+                let nome = req.body.nome_mens
+                nome = nome.trim()
+                let allCont = contatoController.allselected(nome) 
+                allCont.then((ctts) => {
+                    let allFc   =   fcController.allselected(nome)
+                    allFc.then((fcs) => {
+                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
+                    })
+                }) 
+            }   
+        }else{
+            res.redirect('/')
+        }
+    })
+
     //Rota de créditos
     app.get('/copyrights', (req: Request, res: Response , next: NextFunction ) => {
         let feed  = getFeed();

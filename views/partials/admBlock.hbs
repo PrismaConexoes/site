@@ -23,18 +23,17 @@
     </div>   
 </div>
 <form class="m-5 visually-hidden" action="/getMensagens" method="post" id="formMens">
-    <div class="d-flex  justify-content-center align-items-start m-5"  class="" id="mensagens" name="mensagens">
+    <div class="d-flex  justify-content-center align-items-start m-5"  id="mensagens" name="mensagens">
         <input type="text" class="form-control  m-2 w-75" placeholder="Primeiro nome ou vazio para todas " id="nome_mens" name="nome_mens" aria-label="Primeiro Nome"/>
         <button type="submit" class="btn btn-secondary m-2" style="width: 300px;" >Verificar Mensagens</button>
     </div>
 </form>
-<div class="d-flex visually-hidden justify-content-center align-items-start m-5"  id="clientes" name="clientes">
-    <div class="row">
-        <input type="text" class="form-control" placeholder="Primeiro nome" aria-label="Primeiro nome"/>
-        <button type="button" class="btn border bg-secondary" onclick="getclient()" id="btn_adms">Consultar Cliente</button>
+<form class="m-5 visually-hidden" action="/getClientes" method="post" id="formCli">
+    <div class="d-flex  justify-content-center align-items-start m-5"  id="clientes" name="clientes">    
+        <input type="text" class="form-control m-2 w-75" placeholder="Primeiro nome ou vazio para todos " id="nome_cli" name="nome_cli" aria-label="Primeiro nome"/>
+        <button type="submit" class="btn border bg-secondary m-2" style="width: 300px;">Consultar Cliente</button>      
     </div>
-     
-</div>
+</form>
 
 
 
@@ -42,7 +41,7 @@
 
 <script>
     let mens = document.getElementById("formMens")
-    let cli =  document.getElementById("clientes")
+    let cli =  document.getElementById("formCli")
     let adm = document.getElementById("administradores")
     
     function adms(){
