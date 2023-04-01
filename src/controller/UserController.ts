@@ -1,6 +1,6 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
-import { Userr } from "../entity/Userr"
+import { User } from "../entity/User"
 import { Adm } from "../entity/Adm"
 import { AcountValidatorController } from "./AcountValidatorController"
 import { Cifra } from "./Cifra"
@@ -8,7 +8,7 @@ import { Cifra } from "./Cifra"
 
 export class UserController {
 
-    private userRepository = AppDataSource.getRepository(Userr)
+    private userRepository = AppDataSource.getRepository(User)
     private acountValidator = new AcountValidatorController
     private cifrador = new Cifra
 
@@ -84,7 +84,7 @@ export class UserController {
     async removeUser(request: Request, response: Response, next: NextFunction) {
         let userToRemove = await this.userRepository.findOneBy({ email: request.session.email })
         let user  = await this.userRepository.remove(userToRemove)
-        if(user instanceof Userr){
+        if(user instanceof User){
             return true
         }
         return false

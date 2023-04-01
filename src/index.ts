@@ -8,7 +8,7 @@ import { SessionController } from "./controller/SessionController"
 import { ContaController } from "./controller/ContaController"
 import { NextFunction, Request, Response } from "express"
 import { Session } from "./entity/Session"
-import { Userr } from "./entity/Userr"
+import { User } from "./entity/User"
 import { TypeormStore } from "connect-typeorm"
 import { AcountValidator } from "./entity/AcountValidator"
 import { EmailController } from "./controller/EmailController"
@@ -42,16 +42,9 @@ AppDataSource.initialize().then(async () => {
 
     /////////////IMPORTS///////////////
     const express = require('express')
-   // const cors = require('cors')
     const app = express()  
     ///////////////////////////////////
 
-    /////////////CORS-CONFIG///////////
-   // var corsOptions = {
-    //    origin: 'https://prismaconexoes.com/',
-     //   optionsSuccessStatus: 200 
-     // }
-    //////////////////////////////////
 
     /////////////////////EXPRESS-SESSION//////////////////////////
     let sessionRepository = AppDataSource.getRepository(Session)
@@ -315,7 +308,7 @@ AppDataSource.initialize().then(async () => {
                 let result = userControler.one(req)
                 result.then((usr)=>{
 
-                        if(usr instanceof Userr){ 
+                        if(usr instanceof User){ 
                             let decryptUsr =  cifrador.decryptUser(usr)
                     
                             decryptUsr.then((user) => {              
@@ -608,7 +601,7 @@ AppDataSource.initialize().then(async () => {
             }else{
                 let selUser =  userControler.allselected(nome)
                 selUser.then((users) => {
-                    
+
                     res.render("clientes.hbs", {users: users})
                 }) 
             }   

@@ -1,7 +1,7 @@
 import { Entity, Column, Generated, PrimaryColumn } from "typeorm"
 
 @Entity()
-export class Userr {
+export class User {
 
     @Column()
     @Generated("increment")
@@ -25,7 +25,6 @@ export class Userr {
     @Column()
     phone: string
 
-//Criar entity Conta??
     @Column()
     password: string
 

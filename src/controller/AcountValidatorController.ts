@@ -2,7 +2,7 @@ import { AppDataSource } from "../data-source"
 import { Request, Response, NextFunction } from "express"
 import { v4 as uuidv4 } from 'uuid';
 import { AcountValidator } from "../entity/AcountValidator"
-import { Userr } from "../entity/Userr"
+import { User } from "../entity/User"
 import { EmailController } from "../controller/EmailController"
 
 
@@ -48,7 +48,7 @@ export class AcountValidatorController {
         return null    
     }
 
-    async validarAccount(user: Userr){
+    async validarAccount(user: User){
        
         let validator = await this.validatorRepository.findOneBy({ email : user.email })
         let result = await this.validatorRepository.remove(validator)
@@ -58,7 +58,7 @@ export class AcountValidatorController {
         return false
     }
 
-    async saveSecret(user: Userr, request: Request, response: Response, novaConta: boolean){
+    async saveSecret(user: User, request: Request, response: Response, novaConta: boolean){
         let previous = await this.validatorRepository.findOne({
             where:{
                 email: user.email,

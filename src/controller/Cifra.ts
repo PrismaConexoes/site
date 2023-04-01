@@ -1,4 +1,4 @@
-import { Userr } from "../entity/Userr"
+import { User } from "../entity/User"
 import { TrocaEmail } from "../entity/TrocaEmail";
 import { FaleConosco } from "../entity/FaleConosco";
 import { Contato } from "../entity/Contato";
@@ -8,7 +8,7 @@ export class Cifra {
    
     private CryptoJS = require("crypto-js");
 
-    async encryptUser(user : Userr) {
+    async encryptUser(user : User) {
 
         let nome    =   this.CryptoJS.AES.encrypt(user.firstName , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString();
         let sobre   =   this.CryptoJS.AES.encrypt(user.lastName , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(); 
@@ -24,7 +24,7 @@ export class Cifra {
     
         return user
     }
-    async decryptUser(user : Userr) {
+    async decryptUser(user : User) {
 
         let nome    =   this.CryptoJS.AES.decrypt(user.firstName , 'NomE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8);
         let sobre   =   this.CryptoJS.AES.decrypt(user.lastName , 'SobrE53Cr3TTp1RI5waApPiNc0nT@yg33NcR1p7i').toString(this.CryptoJS.enc.Utf8); 

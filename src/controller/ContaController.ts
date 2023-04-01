@@ -1,6 +1,6 @@
 import { AppDataSource } from "../data-source" 
 import { NextFunction, Request, Response } from "express"
-import { Userr } from "../entity/Userr"
+import { User } from "../entity/User"
 import { AcountValidatorController } from "./AcountValidatorController"
 import { TrocaEmailController } from "./TrocaEmailController"
 import { TrocaEmail } from "../entity/TrocaEmail"
@@ -10,7 +10,7 @@ import getFeed from "../feed"
 
 export class ContaController {
 
-    private userRepository = AppDataSource.getRepository(Userr) //Centralizar no userController??
+    private userRepository = AppDataSource.getRepository(User) //Centralizar no userController??
     private acountValidator = new AcountValidatorController
     private trocaEmailController = new TrocaEmailController
     private sessionCtrl = new SessionController
@@ -22,7 +22,7 @@ export class ContaController {
                 email : request.session.email
             }
         })
-        if(usr instanceof Userr){
+        if(usr instanceof User){
             
             let user = await this.cifrador.decryptUser(usr)
 
@@ -36,7 +36,7 @@ export class ContaController {
         }
     }
 
-    async validarConta(user: Userr){
+    async validarConta(user: User){
         user.valid = true
 
         let refreshUser = await this.cifrador.encryptUser(user)
@@ -77,7 +77,7 @@ export class ContaController {
                         this.trocaEmailController.one((validador.email)).then((trocaEmail)=>{
                             if(trocaEmail instanceof TrocaEmail){
                                 this.userRepository.findOneBy({email: validador.email}).then((usr)=>{
-                                    if(usr instanceof Userr){
+                                    if(usr instanceof User){
 
                                         let decryptUser = this.cifrador.decryptUser(usr)
                                         decryptUser.then((user) => {
