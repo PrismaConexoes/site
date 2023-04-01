@@ -354,37 +354,60 @@ AppDataSource.initialize().then(async () => {
 
     //Rota para validação de conta
     app.get('/validarUsuario/:secret/:newAcount',  (req: any, res: any , next: NextFunction ) => {
-        
-        sessionController.secretSess(req)
-        let validador = acountValidatorController.oneBySessionSecret(req)
-        
-        validador.then((validador)=>{
-           
-            if(validador !== null){
-                sessionController.validatingSess(req, validador)
-                res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
-            }else{
-              
-                res.redirect('/sair')
-            }
+
+        let vencidos =  acountValidatorController.remVencidos()
+        vencidos.then((arr)=>{
+            arr.forEach(email => {
+                let userToRemove =  userControler.oneByEmail(email)
+                userToRemove.then((user)=>{
+                    userControler.removeUser(user)
+                })          
+                contaController.remTE(email) 
+            })
+        }).then(()=>{
+            sessionController.secretSess(req)
+            let validador = acountValidatorController.oneBySessionSecret(req)
+            validador.then((validador)=>{ 
+               
+                if(validador !== null){
+                    sessionController.validatingSess(req, validador)
+                    res.render("validarSecret.hbs", {captcha : recaptcha.render()}) 
+                }else{
+                  
+                    res.redirect('/sair')
+                }
+            })
         })
+       
     })
 
     app.get('/reenviarEmail', (req, res, next) => {
         
-        let validador = acountValidatorController.oneBySession(req)
-        validador.then((acValidador)=>{
-            if(acValidador instanceof AcountValidator){
-                
-                sessionController.validatingSess(req, acValidador)
-                if(acValidador.newAcount){
-                    emailController.enviar(acValidador.email, acValidador.parameter, acValidador.newAcount)
-                }else{
-                    emailController.enviar(acValidador.newEmail, acValidador.parameter, acValidador.newAcount)
-                }   
-            }
+        let vencidos =  acountValidatorController.remVencidos()
+        vencidos.then((arr)=>{
+            arr.forEach(email => {
+                let userToRemove =  userControler.oneByEmail(email)
+                userToRemove.then((user)=>{
+                    userControler.removeUser(user)
+                })          
+                contaController.remTE(email) 
+            })
         }).then(()=>{
-            res.render("avisoDeChecagem.hbs")
+    
+            let validador = acountValidatorController.oneBySession(req)
+            validador.then((acValidador)=>{
+                if(acValidador instanceof AcountValidator){
+                    
+                    sessionController.validatingSess(req, acValidador)
+                    if(acValidador.newAcount){
+                        emailController.enviar(acValidador.email, acValidador.parameter, acValidador.newAcount)
+                    }else{
+                        emailController.enviar(acValidador.newEmail, acValidador.parameter, acValidador.newAcount)
+                    }   
+                }
+            }).then(()=>{
+                res.render("avisoDeChecagem.hbs")
+            })
         })
     })
 
