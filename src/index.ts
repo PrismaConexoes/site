@@ -648,14 +648,15 @@ AppDataSource.initialize().then(async () => {
             let user =  userControler.oneById(id)
 
             user.then((usr)=>{
-                let result = userControler.removeUser(usr)
-                result.then((removed)=>{
-                    if(removed){
-                        res.redirect("/administrarSite")
-                    }
-                })
+                if(usr.email != req.session.email){
+                    let result = userControler.removeUser(usr)
+                    result.then((removed)=>{
+                        if(removed){
+                            res.redirect("/administrarSite")
+                        }
+                    })
+                }
             })
-        
         }else{
             res.redirect('/')
         }
