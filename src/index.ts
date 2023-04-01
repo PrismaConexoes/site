@@ -655,6 +655,8 @@ AppDataSource.initialize().then(async () => {
                             res.redirect("/administrarSite")
                         }
                     })
+                }else{
+                    res.redirect("/administrarSite")
                 }
             })
         }else{
