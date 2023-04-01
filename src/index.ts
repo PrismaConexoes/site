@@ -434,13 +434,17 @@ AppDataSource.initialize().then(async () => {
     
     app.post('/removerConta', (req: any, res: any , next: NextFunction ) => {
         if(req.session.login == true){
-            let remove = userControler.removeUser(req, res, next)
-            if(remove){
-                
-                res.redirect('/sair')
-            }else{
-                res.send("Usuário não removido")
-            }
+            let user = userControler.oneBySession(req)
+            user.then((usr)=>{
+                let result = userControler.removeUser(usr)
+                result.then((removed)=>{
+                    if(removed){
+                        res.redirect('/sair')
+                    }else{
+                        res.send("Usuário não removido")
+                    }
+                })
+            })
          }else{
              res.redirect('/sair')
          }
@@ -632,6 +636,27 @@ AppDataSource.initialize().then(async () => {
                     res.render("clientes.hbs", {users: users})
                 }) 
             }   
+        }else{
+            res.redirect('/')
+        }
+    })
+
+    //delCli
+    app.get('/delCli/:id', (req: any, res: any , next: NextFunction ) => {
+        if(req.session.administrador == true){
+
+            let id   = req.params.id
+            let user =  userControler.oneById(id)
+
+            user.then((usr)=>{
+                let result = userControler.removeUser(usr)
+                result.then((removed)=>{
+                    if(removed){
+                        res.redirect("/administrarSite")
+                    }
+                })
+            })
+        
         }else{
             res.redirect('/')
         }

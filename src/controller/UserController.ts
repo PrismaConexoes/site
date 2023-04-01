@@ -19,12 +19,21 @@ export class UserController {
             }
         })
     }
+    async oneById(id : any) {
+        let user = await this.userRepository.findOne({
+            where: {
+                id : parseInt(id)
+            }
+        })
+        return user
+    }
     async oneBySession(request: Request) {
-        return this.userRepository.findOne({
+        let user = await this.userRepository.findOne({
             where: {
                 email : request.session.email
             }
         })
+        return user
     }
     async all() {
         let users = await this.userRepository.find()
@@ -81,10 +90,10 @@ export class UserController {
         }
     }
         
-    async removeUser(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.userRepository.findOneBy({ email: request.session.email })
-        let user  = await this.userRepository.remove(userToRemove)
-        if(user instanceof User){
+    async removeUser(user : User) {
+
+        let usr  = await this.userRepository.remove(user)
+        if(usr instanceof User){
             return true
         }
         return false
