@@ -425,14 +425,13 @@ AppDataSource.initialize().then(async () => {
                     }   
                 }
             }).then(()=>{
-                let feed  = getFeed();
+                let feed  = getFeed()
                 feed.then((feed)=>{
                     res.render("avisoDeChecagem.hbs", {rss : feed} )
-                }
+                })
             })
         })
     })
-
 
     //Rota complementar para validação de conta
     app.post('/validarSecret',  (req: any, res: any , next: NextFunction ) => {
