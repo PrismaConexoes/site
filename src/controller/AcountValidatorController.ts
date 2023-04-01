@@ -12,6 +12,18 @@ export class AcountValidatorController {
     private validatorRepository = AppDataSource.getRepository(AcountValidator)
     private emailController = new EmailController
 
+    async oneByEmail(email : any) {
+        let val = await this.validatorRepository.findOne({
+            where: {
+                email : email
+            }
+        })
+        if(val instanceof AcountValidator){
+            return val
+        }else{
+            return null
+        }
+    }
     async remove(validador: AcountValidator){
         await this.validatorRepository.remove(validador) 
     }

@@ -661,12 +661,26 @@ AppDataSource.initialize().then(async () => {
 
             user.then((usr)=>{
                 if(usr.email != req.session.email){
+                    if(!usr.valid){
+                        let val = acountValidatorController.oneByEmail(usr.email)
+                        val.then((vld)=>{
+                            acountValidatorController.remove(vld)
+                        })
+                    }
+                    if(usr.atualizarEmail){
+                        let val = acountValidatorController.oneByEmail(usr.email)
+                        val.then((vld)=>{
+                            acountValidatorController.remove(vld)
+                        }) 
+                        contaController.remTE(usr.email)   
+                    }
                     let result = userControler.removeUser(usr)
                     result.then((removed)=>{
                         if(removed){
                             res.redirect("/administrarSite")
                         }
                     })
+
                 }else{
                     res.redirect("/administrarSite")
                 }
