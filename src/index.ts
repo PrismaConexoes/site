@@ -601,21 +601,15 @@ AppDataSource.initialize().then(async () => {
             nome = nome.trim()
             if(nome == ""){
                 let allUser =  userControler.all()
-                allCont.then((ctts) => {
-                    let allFc   =   fcController.all()
-                    allFc.then((fcs) => {
-                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
-                    })
+                allUser.then((users) => {
+                    res.redirect("/")
+                    //res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
                 })
             }else{
-                let nome = req.body.nome_mens
-                nome = nome.trim()
-                let allCont = contatoController.allselected(nome) 
-                allCont.then((ctts) => {
-                    let allFc   =   fcController.allselected(nome)
-                    allFc.then((fcs) => {
-                        res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
-                    })
+                let selUser =  userControler.allselected(nome)
+                selUser.then((users) => {
+                    res.redirect("/")
+                    //res.render("mensagens.hbs", {contatos: ctts, fConosco: fcs})
                 }) 
             }   
         }else{
