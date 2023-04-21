@@ -230,7 +230,7 @@ AppDataSource.initialize().then(async () => {
                 adm: req.session.administrador,
                 rss: feed,
                 instagram: process.env.INS_NEX,
-                facebook: process.env.FAC_NEX,
+                facebook: process.env.FAC_PRI,
                 linkedin: process.env.LIN_PRI
                 }) 
         })
