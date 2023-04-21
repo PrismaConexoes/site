@@ -36,7 +36,16 @@ export class ContaController {
 
             let feed  = getFeed();
             feed.then((feed)=>{
-                response.render("conta.hbs", {usuario : user, user: user.firstName, login : request.session.login, atualizacao : false, rss : feed})
+                response.render("conta.hbs", {
+                    usuario : user,
+                    user: user.firstName, 
+                    login : request.session.login, 
+                    atualizacao : false, 
+                    rss : feed,
+                    instagram: process.env.INS_PRI,
+                    facebook: process.env.FAC_PRI,
+                    linkedin: process.env.LIN_PRI    
+                })
             })
 
         }else{
