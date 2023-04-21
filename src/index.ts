@@ -40,7 +40,8 @@ AppDataSource.initialize().then(async () => {
 
     /////////////IMPORTS///////////////
     const express = require('express')
-    const app = express()  
+    const app = express()
+    require('dotenv').config()  
     ///////////////////////////////////
 
 
@@ -130,7 +131,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_PRI,
+                facebook: process.env.FAC_PRI,
+                linkedin: process.env.LIN_PRI
                 }) 
         })  
      })
@@ -144,7 +148,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_PRI,
+                facebook: process.env.FAC_PRI,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
 
@@ -157,7 +164,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_FEF,
+                facebook: process.env.FAC_FEF,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     })
@@ -170,7 +180,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_DSO,
+                facebook: process.env.FAC_DSO,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     })
@@ -183,7 +196,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_FUT,
+                facebook: process.env.FAC_FUT,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     })
@@ -196,12 +212,15 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram : process.env.INS_LUZ,
+                facebook: process.env.FAC_LUZ,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     })
 
-    //Rota F&F
+    //Rota Next
     app.get('/next', (req, res) => {
         let feed  = getFeed();
         feed.then((feed)=>{
@@ -209,7 +228,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_NEX,
+                facebook: process.env.FAC_NEX,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     })
@@ -248,7 +270,10 @@ AppDataSource.initialize().then(async () => {
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
-                rss: feed
+                rss: feed,
+                instagram: process.env.INS_PRI,
+                facebook: process.env.FAC_PRI,
+                linkedin: process.env.LIN_PRI
                 }) 
         })
     } )
@@ -272,7 +297,12 @@ AppDataSource.initialize().then(async () => {
         if(login == false){
             res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) 
         }else{
-            res.render("userLogadoErr", {user: req.session.user})
+            if(req.session.user === ""){
+                sessionController.sairSess(req)
+                res.redirect('/login')
+            }else{
+                res.render("userLogadoErr", {user: req.session.user})
+            }   
         }           
     })
 
@@ -311,7 +341,16 @@ AppDataSource.initialize().then(async () => {
         sessionController.cadastrarSess(req)
 
         if(req.session.login == true){
-            res.render("userLogadoErr", {user: req.session.user})
+            if(req.session.user === ""){
+
+                sessionController.sairSess(req)
+                res.redirect('/login')
+
+            }else{
+
+                res.render("userLogadoErr", {user: req.session.user})
+
+            }
         }else{
             let feed  = getFeed();
             feed.then((feed)=>{
