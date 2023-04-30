@@ -297,7 +297,7 @@ AppDataSource.initialize().then(async () => {
         if(login == false){
             res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin}) 
         }else{
-            if(req.session.user.trim() === ""){
+            if(req.session.user === "" || req.session.user == undefined){
                 sessionController.sairSess(req)
                 res.redirect('/login')
             }else{
@@ -341,7 +341,7 @@ AppDataSource.initialize().then(async () => {
         sessionController.cadastrarSess(req)
 
         if(req.session.login == true){
-            if(req.session.user.trim() === ""){
+            if(req.session.user === "" || req.session.user == undefined){
 
                 sessionController.sairSess(req)
                 res.redirect('/login')
