@@ -299,7 +299,7 @@ AppDataSource.initialize().then(async () => {
         }else{
             if(req.session.user === "" || req.session.user == undefined){
                 sessionController.sairSess(req)
-                res.redirect('/login')
+                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : false, relogin: req.session.relogin});
             }else{
                 res.render("userLogadoErr", {user: req.session.user})
             }   
@@ -328,7 +328,7 @@ AppDataSource.initialize().then(async () => {
                     
                 })  
             } else {
-                
+
                 res.redirect('/')
                 //req.session.relogin = false
                 //res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
