@@ -328,8 +328,10 @@ AppDataSource.initialize().then(async () => {
                     
                 })  
             } else {
-                req.session.relogin = false
-                res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
+                
+                res.redirect('/')
+                //req.session.relogin = false
+                //res.render("login.hbs", {captcha: recaptcha.render(), captchaErr : true, status: "Falha no captcha", relogin: false});
             }
         })
     });
