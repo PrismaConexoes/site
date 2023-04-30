@@ -34,10 +34,14 @@ export class SessionController {
         if(relogin){
             request.session.relogin = true
         }else{
-            request.session.login = true
-            request.session.user =  user.firstName +" "+ user.lastName
+            if(user == null){
+                request.session.login = false
+                request.session.user =  ''
+            }else{
+                request.session.login = true
+                request.session.user =  user.firstName +" "+ user.lastName
+            }
         }
-
        
     }
     async admSess(request: Request){
