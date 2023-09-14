@@ -1,5 +1,5 @@
 <div class="faleConoscoPrisma mb-5 pred_margin">
-  <form  action="/faleConosco" method="post" >
+  <form  action="/faleConosco" method="post" id="formulario">
     <div class="d-flex justify-content-center m-3 text-white"><p class="m-5" style="font-size: 30px;">Fale Conosco</p></div>
     <div class="row d-flex flex-row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-3">
       <div class="col ">
@@ -17,7 +17,7 @@
     </div>
     <div class="row ">
       <div class="d-flex flex-column justify-content-center align-items-center mb-5">
-          <input type="submit" class="btn_fale_conosco" value="ENVIAR" />
+          <button class="g-recaptcha btn btn_fale_conosco" data-sitekey="6LdFP-4kAAAAADDlz8t23azcitK-oQSrEDD1nFvu" data-callback='onSubmit' data-action='submit'>Enviar</button>
       </div>
     </div>
   </form>

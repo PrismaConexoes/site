@@ -128,6 +128,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("prisma.hbs" , {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -239,14 +240,22 @@ AppDataSource.initialize().then(async () => {
     //Rota FaleConosco
     app.post('/faleConosco', (req: any, res: any , next: NextFunction) => {  
 
-        let result = fcController.save(req, res);
-
-        if(result){
-            let feed  = getFeed();
-            feed.then((feed)=>{          
-                res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-            }) 
-        } 
+        recaptcha.verify(req, function (error, data) {
+            
+            if (!error) {
+                let result = fcController.save(req, res);
+                if(result){
+                    let feed  = getFeed();
+                    feed.then((feed)=>{          
+                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                    }) 
+                }  
+            } else {
+                console.log(error)
+                res.redirect('/')
+            }
+        })
+ 
     }) 
 
     //Rota Contato
