@@ -256,7 +256,6 @@ AppDataSource.initialize().then(async () => {
                     }) 
                 }  
             } else {
-                console.log(error)
                 res.redirect('/')
             }
         })
@@ -265,15 +264,29 @@ AppDataSource.initialize().then(async () => {
 
     //Rota Contato
     app.post('/Contato', (req: any, res: any , next: NextFunction) => {
-    
-        let result = contatoController.save(req, res);
 
-        if(result){
-            let feed  = getFeed();
-            feed.then((feed)=>{          
-                res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
-            }) 
-        }
+        recaptcha.verify(req, function (error, data) {
+            
+            if (!error) {
+                let result = contatoController.save(req, res);
+
+                if(result){
+                    let feed  = getFeed();
+                    feed.then((feed)=>{          
+                        res.render("fcFeedback.hbs", {
+                            login: req.session.login, 
+                            user: req.session.user, 
+                            adm: req.session.administrador,
+                            mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", 
+                            rss: feed})
+                    }) 
+                } 
+            } else {
+                res.redirect('/')
+            }
+        })
+    
+
     })
 
     //Rota Contactar   
