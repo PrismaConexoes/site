@@ -2,7 +2,13 @@
  <script>
    
     function onSubmit(token) {
-      document.getElementById("formulario").submit();
+      form = document.getElementById("formulario");
+      validity = form.checkValidity();
+      if(validity){
+        form.submit();
+      }else{
+            console.log("Formulário inválido")
+      }
     }
 
  </script>

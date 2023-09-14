@@ -4,11 +4,24 @@
 
     function onSubmit(token) {
         console.log("entrou na função 1")
-        document.getElementById("formulario").submit();
+        document.getElementById("formulario");
+        form = document.getElementById("formulario");
+        validity = form.checkValidity();
+        if(validity){
+            form.submit();
+        }else{
+            console.log("Formulário inválido")
+        }
     }
     function onSubmit1(token) {
         console.log("entrou na função 2")
-        document.getElementById("formulario2").submit();
+        form = document.getElementById("formulario2");
+        validity = form.checkValidity();
+        if(validity){
+            form.submit();
+        }else{
+            console.log("Formulário inválido")
+        }
     }
 
  </script>
