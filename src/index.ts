@@ -146,6 +146,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("prismaPage.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -162,6 +163,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("fef.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -178,6 +180,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("dsop.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -194,6 +197,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("futurum.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -210,6 +214,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("luz.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -226,6 +231,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("next.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
@@ -294,6 +300,7 @@ AppDataSource.initialize().then(async () => {
         let feed  = getFeed();
         feed.then((feed)=>{
             res.render("contato.hbs", {
+                captcha: recaptcha.render(),
                 login: req.session.login, 
                 user: req.session.user, 
                 adm: req.session.administrador,
