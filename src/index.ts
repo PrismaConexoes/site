@@ -411,7 +411,27 @@ AppDataSource.initialize().then(async () => {
     app.get('/conta', (req: any, res: any , next: NextFunction ) => {
         
         if(req.session.login == true){
-           contaController.admConta(req, res, next)
+            let usr = contaController.admConta(req, res, next)
+            usr.then((usr) => {
+            let user = cifrador.decryptUser(usr)
+            user.then((user) => {
+                let feed  = getFeed();
+                feed.then((feed)=>{
+                    res.render("conta.hbs", {
+                        captcha: recaptcha.render(),
+                        usuario : user,
+                        user: user.firstName, 
+                        login : req.session.login, 
+                        atualizacao : false, 
+                        rss : feed,
+                        instagram: process.env.INS_PRI,
+                        facebook: process.env.FAC_PRI,
+                        linkedin: process.env.LIN_PRI    
+                    })
+                })
+            })     
+           })
+           
         }else{
             res.redirect('/login')
         }
