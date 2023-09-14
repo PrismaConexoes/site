@@ -247,7 +247,12 @@ AppDataSource.initialize().then(async () => {
                 if(result){
                     let feed  = getFeed();
                     feed.then((feed)=>{          
-                        res.render("fcFeedback.hbs", {mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ", rss: feed})
+                        res.render("fcFeedback.hbs", {
+                            login: req.session.login, 
+                            user: req.session.user, 
+                            adm: req.session.administrador,
+                            mensagem: "Agradecemos a sua mensagem! Em breve entraremos em contato. ",
+                            rss: feed})
                     }) 
                 }  
             } else {
