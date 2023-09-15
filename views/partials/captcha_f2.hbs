@@ -2,7 +2,7 @@
  <script>
     let alerta = document.getElementById("form_erro")
     function purgeAlert(){
-        this.alerta.style="display:none"
+        alerta.style="display:none"
     }
     function onSubmit(token) {
         console.log("entrou na função 1")
@@ -13,7 +13,7 @@
             form.submit();
         }else{
            
-            this.alerta.style="display:flex"
+            alerta.style="display:block"
             
             console.log("Formulário inválido")
         }
