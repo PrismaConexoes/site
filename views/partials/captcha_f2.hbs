@@ -13,12 +13,12 @@
             form.submit();
         }else{
            
-            alerta.style="display:block"
+            alerta.style="display:block; position:fixed; height: 50%; width: 50%;"
             setTimeout(purgeAlert, 3000);
             console.log("Formulário inválido")
         }
     }
-    
+
     function onSubmit1(token) {
         console.log("entrou na função 2")
         form = document.getElementById("formulario2");
