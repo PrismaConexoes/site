@@ -10,7 +10,9 @@
         if(validity){
             form.submit();
         }else{
-            modal = document.getElementById("erromodal").animate()
+            $('#erromodal').on('shown.bs.modal', function () {
+                $('#meuInput').trigger('focus')
+            })
             console.log("Formulário inválido")
         }
     }
