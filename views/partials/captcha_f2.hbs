@@ -12,10 +12,8 @@
         if(validity){
             form.submit();
         }else{
-           
             alerta.style="display:block; position:fixed; top:45%; left:45%;"
-            setTimeout(purgeAlert, 3000);
-            console.log("Formulário inválido")
+            setTimeout(purgeAlert, 3000);    
         }
     }
 
@@ -26,7 +24,8 @@
         if(validity){
             form.submit();
         }else{
-            console.log("Formulário inválido")
+            alerta.style="display:block; position:fixed; top:45%; left:45%;"
+            setTimeout(purgeAlert, 3000); 
         }
     }
 
