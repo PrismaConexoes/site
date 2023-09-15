@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="telefone" class="form-label">Celular</label>
-                    <input type="text" class="form-control" id="telefone" name="phone"  pattern="[0-9()-]{14}$" value="{{usuario.phone}}">
+                    <input type="text" class="form-control" id="telefone" name="phone"  pattern="[(]{1}[0-9]{2}[)]{1}[0-9]{5}[-]{1}[0-9]{4}$"  value="{{usuario.phone}}">
                     <div id="telefoneHelpBlock" class="form-text">
                     Digite apenas números
                     </div>
@@ -36,7 +36,7 @@
                 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{usuario.email}}">
+                    <input type="email" class="form-control" id="email" name="email" value="{{usuario.email}}" pattern="^[a-zA-Z0-9._-]+[@]{1}[a-zA-Z0-9.]+$" />
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
@@ -65,7 +65,7 @@
                      <form class="m-5 " action="/removerConta" method="post" id="formulario">
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="8-20 caracteres" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}$" required> 
+                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpBlock" minlength="8" maxlength="20" placeholder="8-20 caracteres" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$%&*+-/])[a-zA-Z0-9#$%&*+-/]{8,20}?" required="required"> 
                          </div>
                         <button type="submit" class="btn btn-secondary">Apagar Conta</button>
                      </form>
