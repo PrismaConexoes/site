@@ -10,9 +10,7 @@
         if(validity){
             form.submit();
         }else{
-            $("#erromodal").modal({
-                show: true
-            });
+            modal = document.getElementById("erromodal").animate()
             console.log("Formulário inválido")
         }
     }
