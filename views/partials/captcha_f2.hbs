@@ -1,7 +1,9 @@
  <script src="https://www.google.com/recaptcha/api.js"></script>
  <script>
-
-
+    let alerta = document.getElementById("form_erro")
+    function purgeAlert(){
+        this.alerta.style="display:none"
+    }
     function onSubmit(token) {
         console.log("entrou na função 1")
         document.getElementById("formulario");
@@ -10,8 +12,9 @@
         if(validity){
             form.submit();
         }else{
-            modal = document.getElementById("erromodal")
-            modal.style="display:block"
+           
+            this.alerta.style="display:flex"
+            setTimeout(purgeAlert, 3000);
             console.log("Formulário inválido")
         }
     }
