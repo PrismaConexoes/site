@@ -12,7 +12,7 @@ export default function email(link, msg){
                     '<div style="margin-top: 50px;"><spam>Caso tenha recebido esta mensagem por engano, por favor desconsidere.</spam></div>'+
                     '</div>'+
                     '</body>'+
-                    '</html>'+
+                    '</html>'
 
     return mensagem
 }
