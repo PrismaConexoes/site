@@ -9,7 +9,8 @@ export class EmailController {
     async enviar(userEmail: string, secret: string, newAcount: boolean){
 
 
-        let mailTransport = this.nodemailer.createTransport({  
+        let mailTransport = this.nodemailer.createTransport({ 
+            name: 'prismaconexoes.com', 
             service: 'Godaddy',  
             host: "smtpout.secureserver.net",
             secureConnection: true,  
