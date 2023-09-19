@@ -15,7 +15,7 @@ export class EmailController {
             host: "smtpout.secureserver.net",
             secureConnection: true,  
             tls: { rejectUnauthorized: false },
-            port: 465,
+            port: 587,
             auth: {
                 user: "souprisma@prismaconexoes.com",
                 pass: "PrismaCNL" 
