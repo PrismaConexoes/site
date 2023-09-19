@@ -12,7 +12,7 @@ export class EmailController {
         if(newAcount){ msg = 'cadastro'}
         let link = 'https://prismaconexoes.com/validarUsuario/'+secret+'/'+newAcount  
         let htmlMessage = email(link, msg)
-        let provedor = userEmail.split('@')[1].toString()
+        //let provedor = userEmail.split('@')[1].toString()
         
         let nameC = null
         let serviceC = null
@@ -21,19 +21,19 @@ export class EmailController {
         let senha = null
 
  
-        if(provedor === "gmail.com"){
-            nameC = "Eduardo Proto"
-            serviceC = 'yahoo'
-            hostC = 'smtp.mail.yahoo.com'
-            usuario = "silvaproto@yahoo.com.br"  
-            senha = "qklmlcgkrginqnzq"
-        }else{
-            nameC = 'prismaconexoes.com'
-            serviceC = 'Godaddy'
-            hostC = "smtpout.secureserver.net"
-            usuario = "souprisma@prismaconexoes.com" 
-            senha = "PrismaCNL" 
-        }
+        //if(provedor === "gmail.com"){
+        //    nameC = "Eduardo Proto"
+        //    serviceC = 'yahoo'
+        //    hostC = 'smtp.mail.yahoo.com'
+        //    usuario = "silvaproto@yahoo.com.br"  
+        //    senha = "qklmlcgkrginqnzq"
+        //}else{
+        nameC = 'prismaconexoes.com'
+        serviceC = 'Godaddy'
+        hostC = "smtpout.secureserver.net"
+        usuario = "souprisma@prismaconexoes.com" 
+        senha = "PrismaCNL" 
+        //}
 
         let mailTransport = this.nodemailer.createTransport({ 
             
