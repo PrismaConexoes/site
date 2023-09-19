@@ -14,33 +14,43 @@ export class EmailController {
         let htmlMessage = email(link, msg)
         let provedor = userEmail.split('@')[1].toString()
         
-        let name = null
-        let service = null
-        let host = null
-        let user = null
-        let pass = null
+        let nameC = null
+        let serviceC = null
+        let hostC = null
+        let usuario = null
+        let senha = null
+
  
         if(provedor === "gmail.com"){
-
-
+            nameC = "Eduardo Proto"
+            serviceC = 'yahoo'
+            hostC = 'smtp.mail.yahoo.com'
+            usuario = "silvaproto@yahoo.com.br"  
+            senha = "qklmlcgkrginqnzq"
+        }else{
+            nameC = 'prismaconexoes.com'
+            serviceC = 'Godaddy'
+            hostC = "smtpout.secureserver.net"
+            usuario = "souprisma@prismaconexoes.com" 
+            senha = "PrismaCNL" 
         }
 
         let mailTransport = this.nodemailer.createTransport({ 
-            name: 'prismaconexoes.com', 
-            service: 'Godaddy',  
-            host: "smtpout.secureserver.net",
+            name: nameC, 
+            service: serviceC,  
+            host: hostC,
             secureConnection: true,  
             tls: { rejectUnauthorized: false },
             port: 587,
             auth: {
-                user: "souprisma@prismaconexoes.com",
-                pass: "PrismaCNL" 
+                user: usuario,
+                pass: senha
             },
             logger: true
         });
         
         let sendEmail = {
-            from: 'souprisma@prismaconexoes.com',
+            from: usuario,
             to: userEmail,
             subject: "Cadastro Prisma Conexão",
             html: htmlMessage
