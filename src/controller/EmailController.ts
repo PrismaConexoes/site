@@ -22,13 +22,13 @@ export class EmailController {
 
  
         if(provedor === "gmail.com"){
-            nameC = "Eduardo Proto"
+        
             serviceC = 'yahoo'
             hostC = 'smtp.mail.yahoo.com'
             usuario = "silvaproto@yahoo.com.br"  
             senha = "qklmlcgkrginqnzq"
         }else{
-            nameC = 'prismaconexoes.com'
+            
             serviceC = 'Godaddy'
             hostC = "smtpout.secureserver.net"
             usuario = "souprisma@prismaconexoes.com" 
@@ -36,7 +36,7 @@ export class EmailController {
         }
 
         let mailTransport = this.nodemailer.createTransport({ 
-            name: nameC, 
+            
             service: serviceC,  
             host: hostC,
             secureConnection: true,  
