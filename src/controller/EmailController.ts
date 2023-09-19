@@ -8,6 +8,24 @@ export class EmailController {
 
     async enviar(userEmail: string, secret: string, newAcount: boolean){
 
+        let msg = 'atualização'
+        if(newAcount){ msg = 'cadastro'}
+        let link = 'https://prismaconexoes.com/validarUsuario/'+secret+'/'+newAcount  
+        let htmlMessage = email(link, msg)
+        let provedor = userEmail.split('@')[1].toString()
+        
+        let name = null
+        let service = null
+        let host = null
+        let user = null
+        let pass = null
+ 
+        if(provedor === "gmail.com"){
+            console.log("entrou na verificação gmail")
+            console.log(provedor)
+            console.log("...")
+
+        }
 
         let mailTransport = this.nodemailer.createTransport({ 
             name: 'prismaconexoes.com', 
@@ -21,13 +39,6 @@ export class EmailController {
                 pass: "PrismaCNL" 
             }
         });
-
-        let msg = 'atualização'
-        if(newAcount){ msg = 'cadastro'}
-        
-        let link = 'https://prismaconexoes.com/validarUsuario/'+secret+'/'+newAcount
-        
-        let htmlMessage = email(link, msg)
         
         let sendEmail = {
             from: 'souprisma@prismaconexoes.com',
