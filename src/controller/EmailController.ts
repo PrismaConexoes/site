@@ -50,10 +50,10 @@ export class EmailController {
         });
         
         let sendEmail = {
-            from: usuario,
-            to: userEmail,
-            subject: "Cadastro Prisma Conexão",
-            html: htmlMessage
+            'from': usuario,
+            'to': userEmail,
+            'subject': "Cadastro Prisma Conexão",
+            'html': htmlMessage
         };
         
         mailTransport.sendMail(sendEmail, await function(err, data) {
