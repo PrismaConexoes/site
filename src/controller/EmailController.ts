@@ -22,13 +22,13 @@ export class EmailController {
 
  
         if(provedor === "gmail.com"){
-        
+            nameC = "Eduardo Proto"
             serviceC = 'yahoo'
             hostC = 'smtp.mail.yahoo.com'
             usuario = "silvaproto@yahoo.com.br"  
             senha = "qklmlcgkrginqnzq"
         }else{
-            
+            nameC = 'prismaconexoes.com'
             serviceC = 'Godaddy'
             hostC = "smtpout.secureserver.net"
             usuario = "souprisma@prismaconexoes.com" 
@@ -57,6 +57,7 @@ export class EmailController {
         };
         
         mailTransport.sendMail(sendEmail, await function(err, data) {
+            console.log(sendEmail)
             if(err){
                 console.log("err: "+err)
             }else if(data){
