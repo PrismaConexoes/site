@@ -50,14 +50,14 @@ export class EmailController {
         });
         
         let sendEmail = {
-            'from': usuario,
-            'to': userEmail,
-            'subject': "Cadastro Prisma Conexão",
-            'html': htmlMessage
+            from: usuario,
+            to: userEmail,
+            subject: "Cadastro Prisma Conexão",
+            html: htmlMessage
         };
         
         mailTransport.sendMail(sendEmail, await function(err, data) {
-            console.log(sendEmail)
+            console.log(data)
             if(err){
                 console.log("err: "+err)
             }else if(data){
