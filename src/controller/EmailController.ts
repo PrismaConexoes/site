@@ -21,9 +21,7 @@ export class EmailController {
         let pass = null
  
         if(provedor === "gmail.com"){
-            console.log("entrou na verificação gmail")
-            console.log(provedor)
-            console.log("...")
+
 
         }
 
@@ -37,7 +35,8 @@ export class EmailController {
             auth: {
                 user: "souprisma@prismaconexoes.com",
                 pass: "PrismaCNL" 
-            }
+            },
+            logger: true
         });
         
         let sendEmail = {
