@@ -24,6 +24,7 @@
         "express-handlebars": "^6.0.3",
         "express-recaptcha": "^5.1.0",
         "express-session": "^1.17.3",
+        "mysql2": "^2.3.3",
         "nodemailer": "^6.7.5",
         "pg": "^8.4.0",
         "reflect-metadata": "^0.1.13",
